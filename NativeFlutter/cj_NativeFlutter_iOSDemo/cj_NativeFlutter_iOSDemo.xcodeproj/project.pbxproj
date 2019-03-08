@@ -1,0 +1,881 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A81DE23BBD5F0CC98A83B7E /* libPods-cj_NativeFlutter_iOSDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ECF865BBFBD1C5C524688FD /* libPods-cj_NativeFlutter_iOSDemo.a */; };
+		7825553B222A7F5F0091127A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825553A222A7F5F0091127A /* AppDelegate.m */; };
+		78255541222A7F5F0091127A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7825553F222A7F5F0091127A /* Main.storyboard */; };
+		78255546222A7F600091127A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78255544222A7F600091127A /* LaunchScreen.storyboard */; };
+		78255549222A7F600091127A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255548222A7F600091127A /* main.m */; };
+		78255553222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255552222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.m */; };
+		7825555E222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825555D222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.m */; };
+		78255583222A81C70091127A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825556C222A81C70091127A /* ViewController.m */; };
+		78255584222A81C70091127A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825556D222A81C70091127A /* MainViewController.m */; };
+		78255585222A81C70091127A /* LoginChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255571222A81C70091127A /* LoginChannelModel.m */; };
+		78255586222A81C70091127A /* Login.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78255573222A81C70091127A /* Login.bundle */; };
+		78255587222A81C70091127A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255575222A81C70091127A /* LoginViewController.m */; };
+		78255588222A81C70091127A /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255577222A81C70091127A /* ForgetPasswordViewController.m */; };
+		78255589222A81C70091127A /* LoginAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78255579222A81C70091127A /* LoginAsset.xcassets */; };
+		7825558A222A81C70091127A /* LoginVCFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825557B222A81C70091127A /* LoginVCFactory.m */; };
+		7825558B222A81C70091127A /* LoginRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825557D222A81C70091127A /* LoginRouter.m */; };
+		7825558C222A81C70091127A /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78255581222A81C70091127A /* AppAssets.xcassets */; };
+		78255596222A82F00091127A /* CJUIKitBaseHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */; };
+		78255597222A82F00091127A /* CJUIKitBaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */; };
+		78255598222A82F00091127A /* CJUIKitBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255595222A82F00091127A /* CJUIKitBaseViewController.m */; };
+		78F3B7F8222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3B7F3222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m */; };
+		78F3B7F9222CBF11008C18DE /* CJDemoMethodChannelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3B7F4222CBF11008C18DE /* CJDemoMethodChannelFactory.m */; };
+		78F3B7FA222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3B7F6222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7825554F222A7F600091127A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7825552E222A7F5F0091127A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78255535222A7F5F0091127A;
+			remoteInfo = cj_NativeFlutter_iOSDemo;
+		};
+		7825555A222A7F600091127A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7825552E222A7F5F0091127A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78255535222A7F5F0091127A;
+			remoteInfo = cj_NativeFlutter_iOSDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7457D285B935C22EE903836E /* Pods-cj_NativeFlutter_iOSDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cj_NativeFlutter_iOSDemo.debug.xcconfig"; path = "Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		78255536222A7F5F0091127A /* cj_NativeFlutter_iOSDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cj_NativeFlutter_iOSDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78255539222A7F5F0091127A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7825553A222A7F5F0091127A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		78255540222A7F5F0091127A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		78255545222A7F600091127A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		78255547222A7F600091127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78255548222A7F600091127A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7825554E222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cj_NativeFlutter_iOSDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		78255552222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cj_NativeFlutter_iOSDemoTests.m; sourceTree = "<group>"; };
+		78255554222A7F600091127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78255559222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cj_NativeFlutter_iOSDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7825555D222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cj_NativeFlutter_iOSDemoUITests.m; sourceTree = "<group>"; };
+		7825555F222A7F600091127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7825556C222A81C70091127A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7825556D222A81C70091127A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		7825556E222A81C70091127A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		78255571222A81C70091127A /* LoginChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginChannelModel.m; sourceTree = "<group>"; };
+		78255572222A81C70091127A /* LoginChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginChannelModel.h; sourceTree = "<group>"; };
+		78255573222A81C70091127A /* Login.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Login.bundle; sourceTree = "<group>"; };
+		78255575222A81C70091127A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		78255576222A81C70091127A /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		78255577222A81C70091127A /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		78255578222A81C70091127A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		78255579222A81C70091127A /* LoginAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAsset.xcassets; sourceTree = "<group>"; };
+		7825557B222A81C70091127A /* LoginVCFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVCFactory.m; sourceTree = "<group>"; };
+		7825557C222A81C70091127A /* LoginRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRouter.h; sourceTree = "<group>"; };
+		7825557D222A81C70091127A /* LoginRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRouter.m; sourceTree = "<group>"; };
+		7825557E222A81C70091127A /* LoginVCFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVCFactory.h; sourceTree = "<group>"; };
+		7825557F222A81C70091127A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		78255581222A81C70091127A /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppAssets.xcassets; sourceTree = "<group>"; };
+		78255582222A81C70091127A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7825558F222A82F00091127A /* CJUIKitBaseScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseScrollViewController.h; sourceTree = "<group>"; };
+		78255590222A82F00091127A /* CJUIKitBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseViewController.h; sourceTree = "<group>"; };
+		78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseHomeViewController.m; sourceTree = "<group>"; };
+		78255592222A82F00091127A /* DemoConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoConstant.h; sourceTree = "<group>"; };
+		78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseScrollViewController.m; sourceTree = "<group>"; };
+		78255594222A82F00091127A /* CJUIKitBaseHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseHomeViewController.h; sourceTree = "<group>"; };
+		78255595222A82F00091127A /* CJUIKitBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseViewController.m; sourceTree = "<group>"; };
+		78F3B7F2222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlutterMethodChannel+CJDemoCallNative.h"; sourceTree = "<group>"; };
+		78F3B7F3222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlutterMethodChannel+CJDemoCallFlutter.m"; sourceTree = "<group>"; };
+		78F3B7F4222CBF11008C18DE /* CJDemoMethodChannelFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJDemoMethodChannelFactory.m; sourceTree = "<group>"; };
+		78F3B7F5222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlutterMethodChannel+CJDemoCallFlutter.h"; sourceTree = "<group>"; };
+		78F3B7F6222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlutterMethodChannel+CJDemoCallNative.m"; sourceTree = "<group>"; };
+		78F3B7F7222CBF11008C18DE /* CJDemoMethodChannelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJDemoMethodChannelFactory.h; sourceTree = "<group>"; };
+		7ECF865BBFBD1C5C524688FD /* libPods-cj_NativeFlutter_iOSDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cj_NativeFlutter_iOSDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B62C5C734915B3B2A85DB839 /* Pods-cj_NativeFlutter_iOSDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cj_NativeFlutter_iOSDemo.release.xcconfig"; path = "Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78255533222A7F5F0091127A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A81DE23BBD5F0CC98A83B7E /* libPods-cj_NativeFlutter_iOSDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7825554B222A7F600091127A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78255556222A7F600091127A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42C37875B230E9398F885E48 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7457D285B935C22EE903836E /* Pods-cj_NativeFlutter_iOSDemo.debug.xcconfig */,
+				B62C5C734915B3B2A85DB839 /* Pods-cj_NativeFlutter_iOSDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4E91D1BAFF25A95638D20278 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7ECF865BBFBD1C5C524688FD /* libPods-cj_NativeFlutter_iOSDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7825552D222A7F5F0091127A = {
+			isa = PBXGroup;
+			children = (
+				78255538222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */,
+				78255551222A7F600091127A /* cj_NativeFlutter_iOSDemoTests */,
+				7825555C222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests */,
+				78255537222A7F5F0091127A /* Products */,
+				42C37875B230E9398F885E48 /* Pods */,
+				4E91D1BAFF25A95638D20278 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		78255537222A7F5F0091127A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78255536222A7F5F0091127A /* cj_NativeFlutter_iOSDemo.app */,
+				7825554E222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.xctest */,
+				78255559222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78255538222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */ = {
+			isa = PBXGroup;
+			children = (
+				78255539222A7F5F0091127A /* AppDelegate.h */,
+				7825553A222A7F5F0091127A /* AppDelegate.m */,
+				78F3B7F0222CBEE9008C18DE /* Common */,
+				7825558E222A82F00091127A /* CJUIKitBase */,
+				7825556B222A81C70091127A /* Modules */,
+				78255580222A81C70091127A /* Resource */,
+				7825558D222A82000091127A /* Supporting Files */,
+			);
+			path = cj_NativeFlutter_iOSDemo;
+			sourceTree = "<group>";
+		};
+		78255551222A7F600091127A /* cj_NativeFlutter_iOSDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				78255552222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.m */,
+				78255554222A7F600091127A /* Info.plist */,
+			);
+			path = cj_NativeFlutter_iOSDemoTests;
+			sourceTree = "<group>";
+		};
+		7825555C222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7825555D222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.m */,
+				7825555F222A7F600091127A /* Info.plist */,
+			);
+			path = cj_NativeFlutter_iOSDemoUITests;
+			sourceTree = "<group>";
+		};
+		7825556B222A81C70091127A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7825556F222A81C70091127A /* Login */,
+				7825556E222A81C70091127A /* MainViewController.h */,
+				7825556D222A81C70091127A /* MainViewController.m */,
+				7825557F222A81C70091127A /* ViewController.h */,
+				7825556C222A81C70091127A /* ViewController.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7825556F222A81C70091127A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				78255570222A81C70091127A /* ChannelModel */,
+				78255573222A81C70091127A /* Login.bundle */,
+				78255574222A81C70091127A /* Controller */,
+				78255579222A81C70091127A /* LoginAsset.xcassets */,
+				7825557A222A81C70091127A /* Router */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		78255570222A81C70091127A /* ChannelModel */ = {
+			isa = PBXGroup;
+			children = (
+				78255572222A81C70091127A /* LoginChannelModel.h */,
+				78255571222A81C70091127A /* LoginChannelModel.m */,
+			);
+			path = ChannelModel;
+			sourceTree = "<group>";
+		};
+		78255574222A81C70091127A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				78255576222A81C70091127A /* ForgetPasswordViewController.h */,
+				78255577222A81C70091127A /* ForgetPasswordViewController.m */,
+				78255578222A81C70091127A /* LoginViewController.h */,
+				78255575222A81C70091127A /* LoginViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7825557A222A81C70091127A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7825557B222A81C70091127A /* LoginVCFactory.m */,
+				7825557C222A81C70091127A /* LoginRouter.h */,
+				7825557D222A81C70091127A /* LoginRouter.m */,
+				7825557E222A81C70091127A /* LoginVCFactory.h */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		78255580222A81C70091127A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				78255581222A81C70091127A /* AppAssets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		7825558D222A82000091127A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				78255582222A81C70091127A /* PrefixHeader.pch */,
+				7825553F222A7F5F0091127A /* Main.storyboard */,
+				78255544222A7F600091127A /* LaunchScreen.storyboard */,
+				78255547222A7F600091127A /* Info.plist */,
+				78255548222A7F600091127A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7825558E222A82F00091127A /* CJUIKitBase */ = {
+			isa = PBXGroup;
+			children = (
+				78255594222A82F00091127A /* CJUIKitBaseHomeViewController.h */,
+				78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */,
+				7825558F222A82F00091127A /* CJUIKitBaseScrollViewController.h */,
+				78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */,
+				78255590222A82F00091127A /* CJUIKitBaseViewController.h */,
+				78255595222A82F00091127A /* CJUIKitBaseViewController.m */,
+				78255592222A82F00091127A /* DemoConstant.h */,
+			);
+			name = CJUIKitBase;
+			path = ../../../CJUIKitBase;
+			sourceTree = "<group>";
+		};
+		78F3B7F0222CBEE9008C18DE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				78F3B7F1222CBF11008C18DE /* FlutterChannel */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		78F3B7F1222CBF11008C18DE /* FlutterChannel */ = {
+			isa = PBXGroup;
+			children = (
+				78F3B7F5222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.h */,
+				78F3B7F3222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m */,
+				78F3B7F2222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.h */,
+				78F3B7F6222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m */,
+				78F3B7F7222CBF11008C18DE /* CJDemoMethodChannelFactory.h */,
+				78F3B7F4222CBF11008C18DE /* CJDemoMethodChannelFactory.m */,
+			);
+			path = FlutterChannel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78255535222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78255562222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemo" */;
+			buildPhases = (
+				DA0BC0B665CB22785033819B /* [CP] Check Pods Manifest.lock */,
+				78255532222A7F5F0091127A /* Sources */,
+				78255533222A7F5F0091127A /* Frameworks */,
+				78255534222A7F5F0091127A /* Resources */,
+				78255599222A843B0091127A /* ShellScript */,
+				EA6599D921364BCF391ACFA9 /* [CP] Embed Pods Frameworks */,
+				46305EC1213A0134B974D122 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cj_NativeFlutter_iOSDemo;
+			productName = cj_NativeFlutter_iOSDemo;
+			productReference = 78255536222A7F5F0091127A /* cj_NativeFlutter_iOSDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7825554D222A7F600091127A /* cj_NativeFlutter_iOSDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78255565222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemoTests" */;
+			buildPhases = (
+				7825554A222A7F600091127A /* Sources */,
+				7825554B222A7F600091127A /* Frameworks */,
+				7825554C222A7F600091127A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				78255550222A7F600091127A /* PBXTargetDependency */,
+			);
+			name = cj_NativeFlutter_iOSDemoTests;
+			productName = cj_NativeFlutter_iOSDemoTests;
+			productReference = 7825554E222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		78255558222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78255568222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemoUITests" */;
+			buildPhases = (
+				78255555222A7F600091127A /* Sources */,
+				78255556222A7F600091127A /* Frameworks */,
+				78255557222A7F600091127A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7825555B222A7F600091127A /* PBXTargetDependency */,
+			);
+			name = cj_NativeFlutter_iOSDemoUITests;
+			productName = cj_NativeFlutter_iOSDemoUITests;
+			productReference = 78255559222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7825552E222A7F5F0091127A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = dvlproad;
+				TargetAttributes = {
+					78255535222A7F5F0091127A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					7825554D222A7F600091127A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 78255535222A7F5F0091127A;
+					};
+					78255558222A7F600091127A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 78255535222A7F5F0091127A;
+					};
+				};
+			};
+			buildConfigurationList = 78255531222A7F5F0091127A /* Build configuration list for PBXProject "cj_NativeFlutter_iOSDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7825552D222A7F5F0091127A;
+			productRefGroup = 78255537222A7F5F0091127A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78255535222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */,
+				7825554D222A7F600091127A /* cj_NativeFlutter_iOSDemoTests */,
+				78255558222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78255534222A7F5F0091127A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7825558C222A81C70091127A /* AppAssets.xcassets in Resources */,
+				78255546222A7F600091127A /* LaunchScreen.storyboard in Resources */,
+				78255586222A81C70091127A /* Login.bundle in Resources */,
+				78255589222A81C70091127A /* LoginAsset.xcassets in Resources */,
+				78255541222A7F5F0091127A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7825554C222A7F600091127A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78255557222A7F600091127A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		46305EC1213A0134B974D122 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources.sh",
+				"${PODS_ROOT}/CJBaseEffectKit/CJBaseEffectKit/CJMJRefreshComponent/Resources/cjRefreshArrowDown@2x.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error@2x.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error@3x.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success@2x.png",
+				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success@3x.png",
+				"${PODS_ROOT}/CJFile/CJFile/CJFMDBFileManager/demofmdb.db",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/cjRefreshArrowDown@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/demofmdb.db",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78255599222A843B0091127A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed\n";
+		};
+		DA0BC0B665CB22785033819B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cj_NativeFlutter_iOSDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA6599D921364BCF391ACFA9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks.sh",
+				"${PODS_ROOT}/../../cj_nativeflutter_fluttermodule/.ios/Flutter/engine/Flutter.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		78255532222A7F5F0091127A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78F3B7F8222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m in Sources */,
+				78255596222A82F00091127A /* CJUIKitBaseHomeViewController.m in Sources */,
+				78255585222A81C70091127A /* LoginChannelModel.m in Sources */,
+				78F3B7FA222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m in Sources */,
+				78255588222A81C70091127A /* ForgetPasswordViewController.m in Sources */,
+				78255549222A7F600091127A /* main.m in Sources */,
+				78255583222A81C70091127A /* ViewController.m in Sources */,
+				7825558A222A81C70091127A /* LoginVCFactory.m in Sources */,
+				78255597222A82F00091127A /* CJUIKitBaseScrollViewController.m in Sources */,
+				78255598222A82F00091127A /* CJUIKitBaseViewController.m in Sources */,
+				78255587222A81C70091127A /* LoginViewController.m in Sources */,
+				78255584222A81C70091127A /* MainViewController.m in Sources */,
+				78F3B7F9222CBF11008C18DE /* CJDemoMethodChannelFactory.m in Sources */,
+				7825558B222A81C70091127A /* LoginRouter.m in Sources */,
+				7825553B222A7F5F0091127A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7825554A222A7F600091127A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78255553222A7F600091127A /* cj_NativeFlutter_iOSDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78255555222A7F600091127A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7825555E222A7F600091127A /* cj_NativeFlutter_iOSDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		78255550222A7F600091127A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78255535222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */;
+			targetProxy = 7825554F222A7F600091127A /* PBXContainerItemProxy */;
+		};
+		7825555B222A7F600091127A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78255535222A7F5F0091127A /* cj_NativeFlutter_iOSDemo */;
+			targetProxy = 7825555A222A7F600091127A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7825553F222A7F5F0091127A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78255540222A7F5F0091127A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		78255544222A7F600091127A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78255545222A7F600091127A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		78255560222A7F600091127A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		78255561222A7F600091127A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		78255563222A7F600091127A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7457D285B935C22EE903836E /* Pods-cj_NativeFlutter_iOSDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = cj_NativeFlutter_iOSDemo/PrefixHeader.pch;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		78255564222A7F600091127A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B62C5C734915B3B2A85DB839 /* Pods-cj_NativeFlutter_iOSDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREFIX_HEADER = cj_NativeFlutter_iOSDemo/PrefixHeader.pch;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		78255566222A7F600091127A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cj_NativeFlutter_iOSDemo.app/cj_NativeFlutter_iOSDemo";
+			};
+			name = Debug;
+		};
+		78255567222A7F600091127A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cj_NativeFlutter_iOSDemo.app/cj_NativeFlutter_iOSDemo";
+			};
+			name = Release;
+		};
+		78255569222A7F600091127A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = cj_NativeFlutter_iOSDemo;
+			};
+			name = Debug;
+		};
+		7825556A222A7F600091127A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = cj_NativeFlutter_iOSDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dvlproad.cj-NativeFlutter-iOSDemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = cj_NativeFlutter_iOSDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78255531222A7F5F0091127A /* Build configuration list for PBXProject "cj_NativeFlutter_iOSDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78255560222A7F600091127A /* Debug */,
+				78255561222A7F600091127A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78255562222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78255563222A7F600091127A /* Debug */,
+				78255564222A7F600091127A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78255565222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78255566222A7F600091127A /* Debug */,
+				78255567222A7F600091127A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78255568222A7F600091127A /* Build configuration list for PBXNativeTarget "cj_NativeFlutter_iOSDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78255569222A7F600091127A /* Debug */,
+				7825556A222A7F600091127A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7825552E222A7F5F0091127A /* Project object */;
+}

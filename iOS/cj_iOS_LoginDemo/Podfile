@@ -1,0 +1,49 @@
+platform :ios, '8.0'
+#use_frameworks!
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitee.com/dvlproad/dvlproadSpecs'
+
+post_install do |installer|
+  
+  puts 'Determining pod project minimal deployment target'
+  
+  pods_project = installer.pods_project
+  deployment_target_key = 'IPHONEOS_DEPLOYMENT_TARGET'
+  deployment_targets = pods_project.build_configurations.map{ |config| config.build_settings[deployment_target_key] }
+  minimal_deployment_target = deployment_targets.min_by{ |version| Gem::Version.new(version) }
+  
+  puts 'Minimal deployment target is ' + minimal_deployment_target
+  puts 'Setting each pod deployment target to ' + minimal_deployment_target
+  
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings[deployment_target_key] = minimal_deployment_target
+    end
+  end
+end
+
+target 'cj_iOS_LoginDemo' do
+  # 1、Mediator
+  # 模块化需要依赖的库
+  pod 'CTMediator'
+  
+  
+  # 2、UI
+  # 2.1、UI①Logic--本模块的逻辑需要依赖的库
+  pod 'CJDemoService/User',   '~> 0.0.1'
+  # 2.2、UI②Router--跳转到其他模块的时候需要的(用于获取其他模块的视图控制器)
+  pod 'CJDemoModuleMainMediator', :path => '~/Project/Gitee/AppMainCollect’
+  # 2.3、UI③View--本模块需要的UI库
+  pod 'CJDemoCommon',             :path => '~/Project/Gitee/AppCommonUICollect’
+  pod 'EAIntroView'
+  
+  
+  # 3、Test
+  # 不需要依赖，但Demo演示时候需要用到的其他库
+  pod 'CJDemoModuleMainUI',     :path => '~/Project/Gitee/AppMainCollect’
+end
+
+target 'cj_iOS_LoginDemoTests' do
+    
+end

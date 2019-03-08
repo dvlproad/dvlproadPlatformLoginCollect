@@ -1,0 +1,91 @@
+{
+  "name": "CJDemoCommon",
+  "version": "0.0.1",
+  "summary": "个人Demo组件化开发 -- 共同基础部分",
+  "homepage": "https://gitee.com/dvlproad/AppCommonUICollect.git",
+  "license": {
+    "type": "Copyright",
+    "text": "              © 2008-2016 dvlproad. All rights reserved.\n"
+  },
+  "authors": {
+    "dvlproad": ""
+  },
+  "description": "*、UIBuilder：基本UI构建起组件\n\n A longer description of CJDemoCommon in Markdown format.\n\n * Think: Why did you write this? What is the focus? What does it do?\n * CocoaPods will be using this to generate tags, and improve search results.\n * Try to keep it short, snappy and to the point.\n * Finally, don't worry about the indent, CocoaPods strips it!",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://gitee.com/dvlproad/AppCommonUICollect.git",
+    "tag": "CJDemoCommon_0.0.1"
+  },
+  "frameworks": "UIKit",
+  "requires_arc": true,
+  "subspecs": [
+    {
+      "name": "CommonUI",
+      "source_files": "CJDemoCommon/CommonUI/**/**.{h,m}",
+      "dependencies": {
+        "Masonry": [
+
+        ],
+        "SVProgressHUD": [
+
+        ],
+        "CJBaseUIKit/UIColor": [
+
+        ],
+        "CJBaseUIKit/UIImage": [
+
+        ],
+        "CJBaseUIKit/UIButton": [
+
+        ],
+        "CJBaseUIKit/UITextField": [
+
+        ],
+        "CJBaseUIKit/CJTextView": [
+
+        ],
+        "CJBaseUIKit/CJToast": [
+
+        ],
+        "CJBaseUIKit/CJAlert": [
+
+        ],
+        "CJBaseUIKit/UIView/CJPopupAction": [
+
+        ],
+        "CJBaseUIKit/UINavigationBar": [
+
+        ],
+        "CJBaseUIKit/UIToolbar": [
+
+        ],
+        "CJFoundation/NSString": [
+
+        ],
+        "CJBaseHelper/NSObjectCJHelper": [
+
+        ],
+        "CJBaseHelper/AuthorizationCJHelper": [
+
+        ],
+        "CJBaseEffectKit/CJMJRefreshComponent": [
+
+        ]
+      }
+    },
+    {
+      "name": "DemoDatePicker",
+      "source_files": "CJDemoCommon/DemoDatePicker/**/**.{h,m}",
+      "dependencies": {
+        "CJPicker": [
+
+        ],
+        "CJBaseUIKit/UIToolbar": [
+
+        ]
+      }
+    }
+  ]
+}

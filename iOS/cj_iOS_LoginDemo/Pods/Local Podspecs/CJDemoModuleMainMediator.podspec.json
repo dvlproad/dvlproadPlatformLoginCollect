@@ -1,0 +1,29 @@
+{
+  "name": "CJDemoModuleMainMediator",
+  "version": "0.0.1",
+  "summary": "个人Demo模块化开发--主页模块",
+  "homepage": "https://gitee.com/dvlproad/AppMainCollect.git",
+  "license": {
+    "type": "Copyright",
+    "text": "              © 2008-2016 dvlproad. All rights reserved.\n"
+  },
+  "authors": {
+    "dvlproad": ""
+  },
+  "description": "A longer description of CJDemoModuleMainMediator in Markdown format.\n\n* Think: Why did you write this? What is the focus? What does it do?\n* CocoaPods will be using this to generate tags, and improve search results.\n* Try to keep it short, snappy and to the point.\n* Finally, don't worry about the indent, CocoaPods strips it!",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://gitee.com/dvlproad/AppMainCollect.git",
+    "tag": "CJDemoModuleMainMediator_0.0.1"
+  },
+  "frameworks": "UIKit",
+  "requires_arc": true,
+  "source_files": "CJDemoModuleMainMediator/**/*.{h,m}",
+  "dependencies": {
+    "CTMediator": [
+
+    ]
+  }
+}
