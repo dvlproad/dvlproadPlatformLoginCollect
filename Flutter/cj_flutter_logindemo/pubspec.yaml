@@ -23,6 +23,14 @@ dependencies:
   color: any
   adapt_cjhelper:
       path: /Users/lichaoqian/Project/Github/CJFlutterPackages/adapt_cjhelper/
+  cjdemo_commonwidget:
+#      写法1:
+#      path: /Users/lichaoqian/Project/Github/CJFlutterPackages/cjdemo_commonwidget/
+#      写法2:
+      git:
+            url: git://github.com/dvlproad/CJFlutterPackages.git
+            path: cjdemo_commonwidget
+
 
 dev_dependencies:
   flutter_test:

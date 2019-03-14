@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 import 'dart:ui';
-import 'package:cj_flutter_logindemo/CommonUI/TextField/CommonUI.dart';
-import 'package:cj_flutter_logindemo/CommonUI/TextField/ButtonFactory.dart';
-import 'package:cj_flutter_logindemo/CommonUI/TextField/LoginTextField.dart';
-import 'package:cj_flutter_logindemo/CommonUI/TextField/TextFieldFactory.dart';
-import 'package:cj_flutter_logindemo/Util/ChannelUtil.dart';
-import 'package:cj_flutter_logindemo/Service/Channel/NativeCallChannelModel.dart';
+import 'package:cjdemo_commonwidget/CJDemoButtonFactory.dart';
+import 'package:cjdemo_commonwidget/CJDemoTextFieldFactory.dart';
 import 'ForgetPassword.dart';
 
 class MyLoginPage extends StatefulWidget {
@@ -41,8 +36,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
     super.initState();
     print("Login Page initState");
 
-    //eventChannel.receiveBroadcastStream("UserNameAutofocus").listen(_onLisentEventAutofocus, onError: _onErrorAutofocus);
-
     //监听文本变化方式②设置controller并实现监听
     _usernameController.addListener(() {
       userName = _usernameController.text;
@@ -57,31 +50,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
     });
 
     _getDefaultLoginAccountAction();
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-
-    print("Login Page didChangeDependencies");
-  }
-
-  @override
-  void didUpdateWidget(MyLoginPage oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-
-    print("Login Page didUpdateWidget");
-  }
-
-  void _onLisentEventAutofocus(Object event) {
-    print("_onLisentEventAutofocus:" + event);
-    _updateAutofocus(event);
-  }
-
-  void _onErrorAutofocus(Object error) {
-    setState(() {});
   }
 
 
@@ -114,7 +82,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
       }
     });
   }
-
 
   void _updateAllViewState() {
     userNameValid = userName.length > 0;
@@ -197,7 +164,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
       ),
       Padding(
         padding: EdgeInsets.only(top: loginIconBottom, left: 25, right: 25),
-        child: userNameTextField2(),
+        child: userNameTextField(),
       ),
       Padding(
         padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
@@ -230,98 +197,52 @@ class _MyLoginPageState extends State<MyLoginPage> {
   // 登录页Icon
   Image loginIconImage() {
     return Image(
-        image: AssetImage(
-            "lib/Resources/login/login_icon.png"),
+        image: AssetImage("lib/Resources/login/login_icon.png"),
         width: 113.0,
         height: 113.0);
   }
 
-
-
   // 用户名文本框
-  LoginTextField userNameTextField2() {
+  LoginTextField userNameTextField() {
     return LoginTextField(
         placeholder: "用户名",
-        prefixIconImageName: userNameValid
-            ? 'lib/Resources/login/login_username_blue.png'
-            : 'lib/Resources/login/login_username_gray.png',
+        prefixIconSelected: userNameValid,
+        prefixIconNormalImageName: 'lib/Resources/login/login_username_gray.png',
+        prefixIconSelectedImageName: 'lib/Resources/login/login_username_blue.png',
         autofocus: shouldAutofocusUserNameTextField,
         keyboardType: TextInputType.text,
         controller: _usernameController,
         textInputAction: TextInputAction.next,
-        focusNode: usernameFocusNode, //usernameFocusNode
+        focusNode: usernameFocusNode,
         onSubmitted: (text) {
           print("current userName:" + text);
           if (null == currentFocusNode) {
             currentFocusNode = FocusScope.of(context);
           }
           currentFocusNode.requestFocus(passwordFocusNode);
-        }
-    );
-  }
-
-  TextField userNameTextField() {
-    return  TextField(
-        autofocus: shouldAutofocusUserNameTextField,
-        style: TextStyle(color: Colors.black, fontSize: 17.0),
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          //labelText: "用户名",
-          hintText: "用户名",
-          //prefixIcon: Icon(Icons.person),
-          prefixIcon: new Image.asset(
-            userNameValid ? 'lib/Resources/login/login_username_blue.png' : 'lib/Resources/login/login_username_gray.png',
-            width: 14.0,
-            height: 15.0,
-          ),
-          enabledBorder: loginTextFieldDecorationBorder(),
-          focusedBorder: loginTextFieldDecorationBorder(),
-        ),
-        keyboardType: TextInputType.text,
-        controller: _usernameController,
-        textInputAction: TextInputAction.next,
-        focusNode: usernameFocusNode, //usernameFocusNode
-        onSubmitted: (text) {
-          print("current userName:" + text);
-          if (null == currentFocusNode) {
-            currentFocusNode = FocusScope.of(context);
-          }
-          currentFocusNode.requestFocus(passwordFocusNode);
-        }
-        );
+        });
   }
 
   // 密码文本框
-  TextField passwordTextField() {
-    return TextField(
-        controller:
-        _passwordController, //监听文本变化方式②设置controller并实现监听
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
-          //labelText: "密码",
-          hintText: "密码",
-          //prefixIcon: Icon(Icons.lock),
-          prefixIcon: new Image.asset(
-            passwordValid ? 'lib/Resources/login/login_password_blue.png' : 'lib/Resources/login/login_password_gray.png',
-            width: 14.0,
-            height: 15.0,
-          ),
-          suffixIcon: !passwordClearValid ? null : clearButtonWithOnPressed(_passwordController.clear),
-          enabledBorder: loginTextFieldDecorationBorder(),
-          focusedBorder: loginTextFieldDecorationBorder(),
-        ),
-        obscureText: true, //是否隐藏正在编辑的文本
+  LoginTextField passwordTextField() {
+    return LoginTextField(
+        placeholder: "密码",
+        prefixIconSelected: passwordValid,
+        prefixIconNormalImageName: 'lib/Resources/login/login_password_gray.png',
+        prefixIconSelectedImageName: 'lib/Resources/login/login_password_blue.png',
+        controller: _passwordController,
+        showClear: passwordClearValid,
         textInputAction: TextInputAction.done,
+        obscureText: true, //是否隐藏正在编辑的文本
         focusNode: passwordFocusNode,
         onSubmitted: (text) {
           print("current password:" + text);
           passwordFocusNode.unfocus();
-          if(loginValid){
+          if (loginValid) {
             _login();
           }
         });
   }
-
 
   // 忘记密码按钮
   FlatButton forgetPassword() {
@@ -336,6 +257,10 @@ class _MyLoginPageState extends State<MyLoginPage> {
 
   // 登录按钮
   FlatButton loginButton() {
-    return blueButton("登录", loginValid, _login);
+    return BlueButton(
+      text: "登录", 
+      enable: loginValid, 
+      enableOnPressed: _login
+    );
   }
 }
