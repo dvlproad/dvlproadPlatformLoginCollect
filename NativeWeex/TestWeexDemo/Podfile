@@ -1,0 +1,17 @@
+platform :ios, '8.0'
+#use_frameworks!
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitee.com/dvlproad/dvlproadSpecs'
+
+target 'TestWeexDemo' do
+    pod 'WeexSDK'
+    pod 'WXDevtool'
+    pod 'WeexPluginLoader'
+    pod 'SDWebImage'
+    pod 'CJBaseUIKit', :subspecs => ['UIColor', 'UIButton', 'UITextField', 'CJToast', 'CJAlert']
+end
+
+target 'TestWeexDemoTests' do
+   
+end
