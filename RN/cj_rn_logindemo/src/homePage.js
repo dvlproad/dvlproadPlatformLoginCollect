@@ -49,6 +49,18 @@ export default class HomePage extends Component <Props> {
                         title="进入测试右上角按钮"
                 >进入测试右上角按钮</Button>
 
+
+                <Button type="primary"
+                        onPress={() => {
+                            navigate('Movie',{ name: 'dvlproad' });
+                        }}
+                >电影</Button>
+                <Button type="primary"
+                        onPress={() => {
+                            navigate('HelathCer',{ name: 'dvlproad' });
+                        }}
+                >健康证</Button>
+
             </View>
         );
     }

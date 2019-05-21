@@ -6,6 +6,8 @@ import HomePage from "./homePage";
 import Page1 from './page1';
 import Page2 from './page2';
 import Page3 from './page3';
+import HelathCerApp from "../helathCerApp/HealthCerApp";
+import SampleAppMovies from "../movieApp/App";
 
 export default createAppContainer(createStackNavigator(
     {
@@ -56,6 +58,19 @@ export default createAppContainer(createStackNavigator(
                 }
             },
         },
+        Movie: {
+            screen: SampleAppMovies,
+            navigationOptions: () => ({
+                title: `MovieApp`,
+            }),
+        },
+        HelathCer: {
+            screen: HelathCerApp,
+            navigationOptions: () => ({
+                title: `HelathCerApp`,
+            }),
+        },
+
     },
     {
         initialRouteName: 'Home'
