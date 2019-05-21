@@ -1,0 +1,14 @@
+platform :ios, '8.0'
+#use_frameworks!
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitee.com/dvlproad/dvlproadSpecs'
+
+target 'cj_rn_logindemo' do
+
+
+end
+
+target 'cj_rn_logindemoTests' do
+    
+end
