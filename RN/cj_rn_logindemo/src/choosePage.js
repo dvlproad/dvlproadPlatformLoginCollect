@@ -67,13 +67,13 @@ export default createAppContainer(createStackNavigator(
         HelathCer: {
             screen: HelathCerApp,
             navigationOptions: () => ({
-                title: `HelathCerApp`,
+                title: `个人健康证`,
             }),
         },
 
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'HelathCer'
     }
     )
 );
