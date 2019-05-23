@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, Text, StyleSheet } from 'react-native';
-import DatePicker from 'react-native-datepicker'
-
+import {View, ScrollView, Image, Text, Button, StyleSheet, Alert} from 'react-native';
+import PropTypes from 'prop-types'
 import CJDemoDateBeginEnd from './cjdemoDateBeginEnd'
+import ButtonFactory from './cjdemobuttonfactory'
 
 var healthCardDetail = {
     "status": 1,
@@ -74,6 +74,22 @@ export default class HealthCerApp extends Component {
                     <CJDemoDateBeginEnd/>
                 </View>
 
+                <Button
+                    onPress={() => {
+                        Alert.alert("你点击了按钮！");
+                    }}
+                    title="normal:里面的title"
+                />
+
+                <Button
+                    style={{background: "#01ADFE"}}
+                    onPress={() => {
+                        Alert.alert("你点击了按钮！");
+                    }}
+                    title="提交"
+                    color="#841584"
+
+                >dd</Button>
 
 
             </ScrollView>
