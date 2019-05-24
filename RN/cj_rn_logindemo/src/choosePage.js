@@ -8,6 +8,7 @@ import Page2 from './page2';
 import Page3 from './page3';
 import HelathCerApp from "../helathCerApp/HealthCerApp";
 import SampleAppMovies from "../movieApp/App";
+import ButtonHome from "../uihome/buttonHome"
 
 export default createAppContainer(createStackNavigator(
     {
@@ -70,7 +71,12 @@ export default createAppContainer(createStackNavigator(
                 title: `个人健康证`,
             }),
         },
-
+        Buttons: {
+            screen: ButtonHome,
+            navigationOptions: () => ({
+                title: `按钮首页`,
+            }),
+        }
     },
     {
         initialRouteName: 'HelathCer'

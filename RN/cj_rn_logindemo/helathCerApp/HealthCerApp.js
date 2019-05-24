@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {View, ScrollView, Image, Text, Button, StyleSheet, Alert} from 'react-native';
+import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
 import PropTypes from 'prop-types'
 import CJDemoDateBeginEnd from './cjdemoDateBeginEnd'
-import ButtonFactory from './cjdemobuttonfactory'
+import { SubmitButton } from './cjdemobuttonfactory'
 
 var healthCardDetail = {
     "status": 1,
@@ -53,6 +53,10 @@ export default class HealthCerApp extends Component {
         }, 1000);
     }
 
+    renderSeparator(){
+        return <Separator />;
+    }
+
     render() {
         return (
             <ScrollView style={{backgroundColor:"#62ffaa", paddingHorizontal: 15}}>
@@ -74,23 +78,20 @@ export default class HealthCerApp extends Component {
                     <CJDemoDateBeginEnd/>
                 </View>
 
-                <Button
-                    onPress={() => {
-                        Alert.alert("你点击了按钮！");
-                    }}
-                    title="normal:里面的title"
-                />
 
-                <Button
-                    style={{background: "#01ADFE"}}
-                    onPress={() => {
-                        Alert.alert("你点击了按钮！");
-                    }}
-                    title="提交"
-                    color="#841584"
-
-                >dd</Button>
-
+                <View style={{marginTop: 40}}>
+                    <FlatList
+                        keyExtractor={(item, index) => index.toString()}
+                        data={[
+                            {isShowEditTitle: true, isDisabled: false},
+                            {isShowEditTitle: true, isDisabled: true},
+                            {isShowEditTitle: false, isDisabled: false},
+                            {isShowEditTitle: false, isDisabled: true},
+                        ]}
+                        renderItem={({item}) => <HealthSubmitButton isShowEditTitle={item.isShowEditTitle} isDisabled={item.isDisabled} /> }
+                        ItemSeparatorComponent={this.renderSeparator}
+                    />
+                </View>
 
             </ScrollView>
         );
@@ -98,7 +99,35 @@ export default class HealthCerApp extends Component {
 }
 
 
+class Separator extends Component{
+    render(){
+        return (
+            <Text>   ---</Text>
+        );
+    }
+}
 
+
+
+class HealthSubmitButton extends SubmitButton {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         ...this.state
+    //     };
+    // }
+
+    render() {
+        return <SubmitButton isShowEditTitle={this.props.isShowEditTitle} isDisabled={this.props.isDisabled}
+                             clickEditTitleHandle={() => {
+                                 Alert.alert("你点击了编辑按钮！");
+                             }}
+                             clickSubmitTitleHandle={() => {
+                                 Alert.alert("你点击了提交按钮！");
+                             }}
+        />
+    }
+}
 
 
 
