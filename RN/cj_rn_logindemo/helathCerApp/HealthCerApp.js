@@ -54,7 +54,7 @@ export default class HealthCerApp extends Component {
     }
 
     renderSeparator(){
-        return <Separator />;
+        return <LineSeparator />;
     }
 
     render() {
@@ -99,10 +99,11 @@ export default class HealthCerApp extends Component {
 }
 
 
-class Separator extends Component{
+class LineSeparator extends Component{
     render(){
+        const { style } = this.props
         return (
-            <Text>   ---</Text>
+            <View style={{backgroundColor: "#E5E5E5", height: 10}} />
         );
     }
 }

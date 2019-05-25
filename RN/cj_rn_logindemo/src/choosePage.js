@@ -8,7 +8,9 @@ import Page2 from './page2';
 import Page3 from './page3';
 import HelathCerApp from "../helathCerApp/HealthCerApp";
 import SampleAppMovies from "../movieApp/App";
+import UiHomePage from "../uihome/uiHomePage"
 import ButtonHome from "../uihome/buttonHome"
+import UIChoosePage from "../uihome/uiChoosePage"
 
 export default createAppContainer(createStackNavigator(
     {
@@ -71,12 +73,15 @@ export default createAppContainer(createStackNavigator(
                 title: `个人健康证`,
             }),
         },
-        Buttons: {
-            screen: ButtonHome,
+        UI: {
+            screen: UIChoosePage,
             navigationOptions: () => ({
-                title: `按钮首页`,
+                title: `UI首页`,
+                header: null,       //隐藏顶部导航栏
+                tabBarVisible: true // 隐藏底部导航栏
             }),
-        }
+        },
+
     },
     {
         initialRouteName: 'HelathCer'
