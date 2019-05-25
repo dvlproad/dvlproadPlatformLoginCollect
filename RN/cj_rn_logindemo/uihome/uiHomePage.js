@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { StyleSheet, Alert, Text, View, SectionList, TouchableOpacity, Image } from 'react-native';
 import { SubmitButton } from "../helathCerApp/cjdemobuttonfactory";
+import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
-class UIButtonHomePage extends Component {
+type Props = {};
+class UIButtonHomePage extends Component <Props> {
     render() {
         return (
 
@@ -34,9 +36,15 @@ export default class UIHomePage extends React.Component {
         super(props);
     }
 
+    _onPressButton = (item, index) => {
+        let nextPageName = "Buttons"
+        this.props.navigation.navigate(nextPageName)
+        // Alert.alert('You tapped the button!')
+    }
+
     _renderItem = (info) => {
         let txt = info.item.title;
-        return <ItemComponent showTitle={txt} />
+        return <ItemComponent showTitle={txt} clickAction={() => (this._onPressButton(1, 2))} />
     }
 
     _sectionComp = (info) => {
@@ -47,7 +55,7 @@ export default class UIHomePage extends React.Component {
 
     render() {
         let sections = [
-            { key: "A", data: [{ title: "阿童木" }, { title: "阿玛尼" }, { title: "爱多多" }] },
+            { key: "A", data: [{ title: "Buttons" }, { title: "阿同步" }, { title: "爱多多" }] },
             { key: "B", data: [{ title: "表哥" }, { title: "贝贝" }, { title: "表弟" }, { title: "表姐" }, { title: "表叔" }] },
             { key: "C", data: [{ title: "成吉思汗" }, { title: "超市快递" }] },
             { key: "W", data: [{ title: "王磊" }, { title: "王者荣耀" }, { title: "往事不能回味" },{ title: "王小磊" }, { title: "王中磊" }, { title: "王大磊" }] },
@@ -75,15 +83,9 @@ class ItemComponent extends React.Component {
         super(props);
         this.state = {
             ...this.state,
-            showTitle: "标题"
+            showTitle: "",
+            clickAction: (event?: PressEvent) => mixed
         };
-    }
-
-
-
-    _onPressButton() {
-        //this.state.navigation.navigate("B")
-        //Alert.alert('You tapped the button!')
     }
 
 
@@ -91,7 +93,7 @@ class ItemComponent extends React.Component {
         //const {navigate} = this.props.navigation;
 
         return (
-            <TouchableOpacity style={styles.cell} onPress={this._onPressButton.bind(this)} underlayColor="white" >
+            <TouchableOpacity style={styles.cell} onPress={this.props.clickAction} underlayColor="white" >
                 <Text style={{
                     flex: 1,
                     height: 44,
