@@ -6,7 +6,7 @@ import { Button } from '@ant-design/react-native'
 type Props = {};
 export default class HomePage extends Component <Props> {
     render() {
-        const {navigate} = this.props.navigation;
+        const {navigate} = this.props.navigation;   //TODO:怎么判断导航栏是否为空
 
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

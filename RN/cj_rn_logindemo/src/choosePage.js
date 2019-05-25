@@ -12,7 +12,7 @@ import UiHomePage from "../uihome/uiHomePage"
 import ButtonHome from "../uihome/buttonHome"
 import UIChoosePage from "../uihome/uiChoosePage"
 
-export default createAppContainer(createStackNavigator(
+const AppStackNavigator = createStackNavigator(
     {
         Home: {
             screen: HomePage,
@@ -71,6 +71,9 @@ export default createAppContainer(createStackNavigator(
             screen: HelathCerApp,
             navigationOptions: () => ({
                 title: `个人健康证`,
+                headerStyle:{                                 //导航栏样式设置
+                    backgroundColor:'#8bc9ff',
+                },
             }),
         },
         UI: {
@@ -86,8 +89,9 @@ export default createAppContainer(createStackNavigator(
     {
         initialRouteName: 'HelathCer'
     }
-    )
 );
+
+export default createAppContainer(AppStackNavigator);
 
 
 
