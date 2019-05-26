@@ -1,6 +1,6 @@
 //UIHomePage.js
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image, Alert } from 'react-native';
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
 
@@ -12,14 +12,19 @@ export default class UIHomePage extends React.Component {
 
     _onPressButton = (nextPageName) => {
         console.log(nextPageName);
-        this.props.navigation.navigate(nextPageName)
-        // Alert.alert('You tapped the button!')
+
+        if (nextPageName) {
+            this.props.navigation.navigate(nextPageName)
+        } else  {
+            //nextPageName = "Button";
+            Alert.alert(nextPageName)
+        }
     }
 
     _renderItem = (info) => {
         let txt = info.item.title;
-        let pageName = info.item.page > 0 ? info.item.page : "Buttons";
-        return <ItemComponent showTitle={txt} clickAction={() => (this._onPressButton(pageName))} />
+        let nextPageName = info.item.page;
+        return <ItemComponent showTitle={txt} clickAction={() => (this._onPressButton(nextPageName))} />
     }
 
     _sectionComp = (info) => {
@@ -32,17 +37,20 @@ export default class UIHomePage extends React.Component {
         let sections = [
             { key: "A",
                 data: [
-                    { title: "Buttons", page: "Buttons" },
-                    { title: "阿同步", page: "Navigation" },
-                    { title: "爱多多" }
+                    { title: "Layout", page: "LayoutHome" },
+                    { title: "Button", page: "ButtonHome" },
+                    { title: "Navigation", page: "NavigationHome" },
+                    { title: "Text", page: "TextHome" },
                     ]
             },
             { key: "B",
-                data: [{ title: "表哥" },
+                data: [
+                    { title: "宝宝" },
                     { title: "贝贝" },
                     { title: "表弟" },
-                    { title: "表姐" },
-                    { title: "表叔" }] },
+                    { title: "表姐" }
+                    ]
+            },
             { key: "C",
                 data: [
                     { title: "成吉思汗" },

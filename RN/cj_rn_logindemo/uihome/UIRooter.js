@@ -8,6 +8,9 @@ import { Button, Alert } from "react-native";
 import UIHomePage from "./UIHomePage"
 
 
+//layout
+import LayoutHomePage from "./layout/LayoutHomePage"
+
 //navigation
 import NavigationHomePage from "./navigation/NavigationHomePage";
 import Page1 from './navigation/page1';
@@ -17,32 +20,24 @@ import Page3 from './navigation/page3';
 //button
 import ButtonHomePage from "./button/ButtonHomePage"
 
+//text
+import TextHomePage from "./text/TextHomePage"
 
 
 
 
 //NavigationNavigation
 const NavigationNavigation = createStackNavigator({
-    Home: {
+    NavigationHome: {
         screen: NavigationHomePage,
-        navigationOptions: (props) => ({
+        navigationOptions: () => ({
             title: `NavigationHome`,
-            headerRight: (
-                <Button
-                    onPress={() => {
-                        Alert.alert("你点击了提交按钮！");
-                    }}
-                    title="提交"
-                >提交</Button>
-            )
         }),
     },
     A: {
         screen: Page1,
         navigationOptions: () => ({
             title: `A(react-native)`,
-            headerBackTitle: 'A much too long text for back button from B to A',
-            headerTruncatedBackTitle: `to A`
         }),
     },
     B: {
@@ -76,27 +71,41 @@ const NavigationNavigation = createStackNavigator({
 //UIHomeNavigation
 const UIHomeNavigation = createStackNavigator(
     {
-        UI: {
+        UIHome: {
             screen: UIHomePage,
             navigationOptions: () => ({
                 title: `UI首页`,
             }),
         },
-        Navigation: {
-            screen: NavigationNavigation,
+        LayoutHome: {
+            screen: LayoutHomePage,
             navigationOptions: () => ({
-                title: `导航首页`,
+                title: `Layout首页`,
             }),
         },
-        Buttons: {
+        NavigationHome: {
+            //screen: NavigationNavigation, //会多一个导航栏
+            screen: NavigationHomePage, //TODO:怎么传递导航栏
+            navigationOptions: () => ({
+                title: `Navigation首页`,
+                header: null,
+            }),
+        },
+        ButtonHome: {
             screen: ButtonHomePage,
             navigationOptions: () => ({
-                title: `按钮首页`,
+                title: `Button首页`,
+            }),
+        },
+        TextHome: {
+            screen: TextHomePage,
+            navigationOptions: () => ({
+                title: `Text首页`,
             }),
         },
     },
     {
-        initialRouteName: 'UI'
+        initialRouteName: 'UIHome'
     }
 );
 

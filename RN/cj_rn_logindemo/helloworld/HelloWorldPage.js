@@ -18,15 +18,14 @@ export default class HelloWorldPage extends Component <Props> {
                     onPress={() => {
                         Alert.alert("你点击了按钮！");
                     }}
-                    title="normal:里面的title"
+                    title="reactnative里面的title"
                 />
 
-                <Button disabled
-                        onPress={() => {
+                <Button onPress={() => {
                             Alert.alert("你点击了按钮！");
                         }}
-                        title="disabled:里面的title"
-                >disabled:外面的title</Button>
+                        title="antd里面的title"
+                >antd外面的title</Button>
 
 
             </View>
