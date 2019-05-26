@@ -2,15 +2,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 
-export default class TextHomePage extends Component {
+import { EnableBlueButton } from '../../commonUI/cjdemobuttonfactory'
+
+export default class LayoutHomePageHomePage extends Component {
     render() {
         return (
-            <View style={{ backgroundColor: "#6600ff", flex: 1, flexDirection: "column", justifyContent: "center" }}>
-                <Text style={[styles.text, {backgroundColor: "red"}]}>1</Text>
-                <Text style={[styles.text, {backgroundColor: "blue"}]}>2</Text>
-                <Text style={[styles.text, {backgroundColor: "green"}]}>3</Text>
-                <Text style={[styles.text, {backgroundColor: "orange"}]}>4</Text>
-                <Text style={[styles.text, {backgroundColor: "purple"}]}>5</Text>
+            <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-start"}}>
+                <View style={{backgroundColor: "#ff88ee", height: 150 }}>
+                    <EnableBlueButton style={styles.button} submitTitle={"column"} />
+                </View>
+                <View style={{backgroundColor: "#6600ff", flex: 5, flexDirection: "column", justifyContent: "center" }}>
+                    <Text style={[styles.text, {backgroundColor: "red"}]}>1</Text>
+                    <Text style={[styles.text, {backgroundColor: "blue"}]}>2</Text>
+                    <Text style={[styles.text, {backgroundColor: "green"}]}>3</Text>
+                    <Text style={[styles.text, {backgroundColor: "orange"}]}>4</Text>
+                    <Text style={[styles.text, {backgroundColor: "purple"}]}>5</Text>
+                </View>
             </View>
         );
     }
@@ -19,6 +26,10 @@ export default class TextHomePage extends Component {
 var styles = StyleSheet.create({
     background: {
         backgroundColor: "#6600ff",
+    },
+    button: {
+        backgroundColor: "orange",
+        flex: 1,
     },
     text: {
         backgroundColor: "#dd8822",

@@ -64,7 +64,7 @@ class EnableBlueButton extends React.Component {
 
         return (
             <View style={styles.submitEnable} >
-                <Button title={this.state.submitTitle} color="#FFFFFF" >外标题</Button>
+                <Button title={this.props.submitTitle} color="#FFFFFF" >外标题</Button>
             </View>
         )
     }
