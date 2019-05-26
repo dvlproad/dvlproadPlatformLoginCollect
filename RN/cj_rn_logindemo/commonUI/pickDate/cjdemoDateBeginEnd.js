@@ -1,7 +1,8 @@
+//cjdemoDateBeginEnd.js
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, StyleSheet, Dimensions } from 'react-native'
 import DatePicker from 'react-native-datepicker'
-import DateUtil from "./DateUtil";
+import DateUtil from "../../commonUtil/DateUtil";
 
 // const {width, height} = Dimensions.get('window')
 

@@ -1,8 +1,9 @@
+//HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
 import PropTypes from 'prop-types'
-import CJDemoDateBeginEnd from './cjdemoDateBeginEnd'
-import { SubmitButton } from './cjdemobuttonfactory'
+import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd'
+import { SubmitButton } from '../commonUI/cjdemobuttonfactory'
 
 var healthCardDetail = {
     "status": 1,
@@ -37,7 +38,7 @@ var healthCardDetail_notupload = {
 }
 
 
-export default class HealthCerApp extends Component {
+export default class HealthCerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +68,7 @@ export default class HealthCerApp extends Component {
 
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: "space-between", paddingTop: 12}}>
                     <Image style={{ width: 164, height: 108}} source={{uri: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"}} />
-                    <Image style={{ width: 164, height: 108}} source={require('./resources/imageLook.png')} />
+                    <Image style={{ width: 164, height: 108}} source={require('../commonUI/pickImage/resources/imageLook.png')} />
                 </View>
 
                 <View style={{flexDirection: 'row', marginTop: 40}}>

@@ -1,3 +1,4 @@
+//MovieHomePage.js
 import React, { Component } from "react";
 
 import { Image, FlatList, StyleSheet, Text, View } from "react-native";
@@ -5,7 +6,7 @@ import { Image, FlatList, StyleSheet, Text, View } from "react-native";
 var REQUEST_URL =
     "https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json";
 
-export default class w extends Component {
+export default class MovieHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {

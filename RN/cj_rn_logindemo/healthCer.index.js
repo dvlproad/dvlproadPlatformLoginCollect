@@ -3,6 +3,6 @@
  */
 
 import {AppRegistry} from 'react-native';
-import HelathCerApp from './helathCerApp/HealthCerApp';
+import HealthCerHomePage from './helathCerApp/HealthCerHomePage';
 
-AppRegistry.registerComponent("main", () => HelathCerApp);
+AppRegistry.registerComponent("main", () => HealthCerHomePage);

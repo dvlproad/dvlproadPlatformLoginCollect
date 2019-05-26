@@ -1,34 +1,8 @@
+//UIHomePage.js
 import React, {Component} from 'react';
-import { StyleSheet, Alert, Text, View, SectionList, TouchableOpacity, Image } from 'react-native';
-import { SubmitButton } from "../helathCerApp/cjdemobuttonfactory";
+import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image } from 'react-native';
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
-type Props = {};
-class UIButtonHomePage extends Component <Props> {
-    render() {
-        return (
-
-            <ScrollView style={{backgroundColor: "#62ffaa", paddingHorizontal: 15}}>
-                <View style={{marginTop: 40}}>
-                    <FlatList
-                        keyExtractor={(item, index) => index.toString()}
-                        data={[
-                            {isShowEditTitle: true, isDisabled: false},
-                            {isShowEditTitle: true, isDisabled: true},
-                            {isShowEditTitle: false, isDisabled: false},
-                            {isShowEditTitle: false, isDisabled: true},
-                        ]}
-                        renderItem={({item}) => <TestSubmitButton isShowEditTitle={item.isShowEditTitle}
-                                                                  isDisabled={item.isDisabled}/>}
-                        //ItemSeparatorComponent={this.renderSeparator} //写法1
-                        ItemSeparatorComponent={() => (<Separator/>)} //写法2
-                    />
-                </View>
-            </ScrollView>
-
-        );
-    }
-}
 
 export default class UIHomePage extends React.Component {
 
@@ -36,15 +10,16 @@ export default class UIHomePage extends React.Component {
         super(props);
     }
 
-    _onPressButton = (item, index) => {
-        let nextPageName = "Buttons"
+    _onPressButton = (nextPageName) => {
+        console.log(nextPageName);
         this.props.navigation.navigate(nextPageName)
         // Alert.alert('You tapped the button!')
     }
 
     _renderItem = (info) => {
         let txt = info.item.title;
-        return <ItemComponent showTitle={txt} clickAction={() => (this._onPressButton(1, 2))} />
+        let pageName = info.item.page > 0 ? info.item.page : "Buttons";
+        return <ItemComponent showTitle={txt} clickAction={() => (this._onPressButton(pageName))} />
     }
 
     _sectionComp = (info) => {
@@ -55,10 +30,35 @@ export default class UIHomePage extends React.Component {
 
     render() {
         let sections = [
-            { key: "A", data: [{ title: "Buttons" }, { title: "阿同步" }, { title: "爱多多" }] },
-            { key: "B", data: [{ title: "表哥" }, { title: "贝贝" }, { title: "表弟" }, { title: "表姐" }, { title: "表叔" }] },
-            { key: "C", data: [{ title: "成吉思汗" }, { title: "超市快递" }] },
-            { key: "W", data: [{ title: "王磊" }, { title: "王者荣耀" }, { title: "往事不能回味" },{ title: "王小磊" }, { title: "王中磊" }, { title: "王大磊" }] },
+            { key: "A",
+                data: [
+                    { title: "Buttons", page: "Buttons" },
+                    { title: "阿同步", page: "Navigation" },
+                    { title: "爱多多" }
+                    ]
+            },
+            { key: "B",
+                data: [{ title: "表哥" },
+                    { title: "贝贝" },
+                    { title: "表弟" },
+                    { title: "表姐" },
+                    { title: "表叔" }] },
+            { key: "C",
+                data: [
+                    { title: "成吉思汗" },
+                    { title: "超市快递" }
+                    ]
+            },
+            { key: "W",
+                data: [
+                    { title: "王磊" },
+                    { title: "王者荣耀" },
+                    { title: "往事不能回味" },
+                    { title: "王小磊" },
+                    { title: "王中磊" },
+                    { title: "王大磊" }
+                    ]
+            },
         ];
 
         return (
