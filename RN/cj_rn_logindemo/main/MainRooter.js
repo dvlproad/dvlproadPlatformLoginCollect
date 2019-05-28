@@ -27,13 +27,13 @@ const AppStackNavigator = createStackNavigator(
 
 
 
-const LuckinTabBarScreen = createBottomTabNavigator({
-        HelathCerHome: {
+const TabBarNavigator = createBottomTabNavigator({
+        HealthCerHome: {
             screen: HealthCerRooter,
             navigationOptions: ({ navigation }) => ({
                 title: '健康证',
                 tabBarIcon: ({ focused, tintColor }) => (
-                    <LuckinTabBarItem
+                    <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
                         normalImage={require('./image/home_n.png')}
@@ -47,7 +47,7 @@ const LuckinTabBarScreen = createBottomTabNavigator({
             navigationOptions: ({ navigation }) => ({
                 title: '电影',
                 tabBarIcon: ({ focused, tintColor }) => (
-                    <LuckinTabBarItem
+                    <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
                         normalImage={require('./image/home_n.png')}
@@ -61,7 +61,7 @@ const LuckinTabBarScreen = createBottomTabNavigator({
             navigationOptions: ({ navigation }) => ({
                 title: 'BaseUI',
                 tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <LuckinTabBarItem
+                    return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
                         normalImage={require('./image/home_n.png')}
@@ -75,7 +75,7 @@ const LuckinTabBarScreen = createBottomTabNavigator({
             navigationOptions: ({ navigation }) => ({
                 title: 'HelloWorld',
                 tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <LuckinTabBarItem
+                    return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
                         normalImage={require('./image/home_n.png')}
@@ -113,7 +113,7 @@ const LuckinTabBarScreen = createBottomTabNavigator({
         },
     });
 
-class LuckinTabBarItem extends React.Component {
+class TabBarItem extends React.Component {
     render() {
         return (
             <Image source={this.props.focused ? this.props.selectedImage : this.props.normalImage}
@@ -123,7 +123,7 @@ class LuckinTabBarItem extends React.Component {
 
 }
 
-export default createAppContainer(LuckinTabBarScreen);
+export default createAppContainer(TabBarNavigator);
 
 // export default createAppContainer(AppStackNavigator);
 

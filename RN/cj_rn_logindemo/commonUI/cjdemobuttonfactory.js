@@ -1,6 +1,6 @@
 //cjdemobuttonfactory.js
-import React from 'react'
-import { Button, View, StyleSheet } from 'react-native'
+import React, { Component } from 'react'
+import {Button, View, StyleSheet, Text, TouchableWithoutFeedback, TouchableOpacity} from 'react-native'
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
 class ButtonFactory {
@@ -9,44 +9,63 @@ class ButtonFactory {
     }
 }
 
-class SubmitButton extends React.Component {
+class SubmitButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
             submitTitle: "提交",
             editTitle:  "修改",
+            fontSize: 17,
             isShowEditTitle: false,
             isDisabled: false,
             clickEditTitleHandle: (event?: PressEvent) => mixed,
             clickSubmitTitleHandle: (event?: PressEvent) => mixed
-
         };
     }
 
     render() {
         const { style } = this.props
 
-        let isShowEditTitle = this.props.isShowEditTitle
-        let submitTitle = this.props.submitTitle ? this.props.submitTitle : this.state.submitTitle
-        let editTitle = this.props.editTitle ? this.props.editTitle : this.state.editTitle
-        let showTitle = isShowEditTitle ? editTitle : submitTitle
+        let isShowEditTitle = this.props.isShowEditTitle;
+        let submitTitle = this.props.submitTitle ? this.props.submitTitle : this.state.submitTitle;
+        let editTitle = this.props.editTitle ? this.props.editTitle : this.state.editTitle;
+        let showTitle = isShowEditTitle ? editTitle : submitTitle;
 
-        let isDisable = this.props.isDisabled
-        let showStyle = isShowEditTitle ? (isDisable?styles.editDisable:styles.editEnable) : (isDisable?styles.submitDisable:styles.submitEnable)
+        let isDisable = this.props.isDisabled;
+        let enableStateStyle = isShowEditTitle ? (isDisable?styles.editDisable:styles.editEnable) : (isDisable?styles.submitDisable:styles.submitEnable)
 
-        let showColor = isShowEditTitle ? "#01ADFE" : "#FFFFFF"
+        let showTextColor = isShowEditTitle ? (isDisable?"#01ADFE4C":"#01ADFE") : "#FFFFFF";
+        let showTextFont = this.props.fontSize;
 
         let currentOnPress = isShowEditTitle ? this.props.clickEditTitleHandle : this.props.clickSubmitTitleHandle
 
+        // return (
+        //     <View style={[{flex:1}, enableStateStyle, style]} >
+        //         <Button
+        //             title={showTitle}
+        //             color={showTextColor}
+        //             disabled={isDisable}
+        //             onPress={currentOnPress}
+        //         />
+        //     </View>
+        // )
         return (
-            <View style={showStyle} >
-                <Button
-                    title={showTitle}
-                    color={showColor}
-                    disabled={isDisable}
-                    onPress={currentOnPress}
-                />
-            </View>
+            <TouchableOpacity
+                onPress={currentOnPress}
+                disabled={isDisable}
+                //activeOpacity={0.4}
+            >
+                <View style={[{justifyContent: "center", height: 44}, enableStateStyle, style]} >
+                    <Text
+                        style={{textAlign:'center',
+                            color: showTextColor,
+                            //backgroundColor:'red',
+                            fontSize:showTextFont}}
+                    >
+                        {showTitle}
+                    </Text>
+                </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -72,32 +91,27 @@ class EnableBlueButton extends React.Component {
 
 const styles = StyleSheet.create({
     submitEnable: {
-        flex: 1,
         borderRadius: 4,
         backgroundColor: "#01ADFEFF",
         borderWidth: 0
     },
     submitDisable: {
-        flex: 1,
         borderRadius: 4,
         backgroundColor: "#01ADFE4C",
         borderWidth: 0
     },
 
     editEnable: {
-        flex: 1,
         borderRadius: 4,
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
         borderColor: "#01ADFE"
     },
-
     editDisable: {
-        flex: 1,
         borderRadius: 4,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#FFFFFF4C",
         borderWidth: 1,
-        borderColor: "#01ADFE"
+        borderColor: "#01ADFE4C"
     }
 });
 
