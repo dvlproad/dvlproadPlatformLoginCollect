@@ -39,6 +39,7 @@ class SubmitButton extends Component {
 
         let currentOnPress = isShowEditTitle ? this.props.clickEditTitleHandle : this.props.clickSubmitTitleHandle
 
+        // 使用Button组件，无法处理disabled时候的文字颜色问题
         // return (
         //     <View style={[{flex:1}, enableStateStyle, style]} >
         //         <Button

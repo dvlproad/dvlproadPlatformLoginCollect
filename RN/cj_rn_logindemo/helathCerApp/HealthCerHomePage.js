@@ -1,65 +1,62 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
-import PropTypes from 'prop-types'
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd'
 import { SubmitButton } from '../commonUI/cjdemobuttonfactory'
 
-var healthCardDetail = {
-    "status": 1,
-    "message": "成功",
-    "result": {
-        "healthCardStateCode": 2,
-        "healthCardStateMessage": "健康证审核未通过",
-        "healthCardApprovalCode": 1,
-        "healthCardApprovalMessage": "健康证已提交，待审核中",
-        "healthCard1Url": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg",
-        "healthCard2Url": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554202630803&di=84fad580a2f1e780fc28b447b4906520&imgtype=0&src=http%3A%2F%2Fmedia.putibaby.com%2Fmedia%2Fimage-8bfbfc5c9c91179b45b8c6c5163b8f06.jpg",
-        "healthCardStartTime": "2019-03-03",
-        "healthCardEndTime": "2020-03-03",
-        "approvalTips": "未通过原因：证件模糊，不够清晰！@请重新上传！"
-    }
-}
 
-var healthCardDetail_notupload = {
-    "status": 1,
-    "message": "成功",
-    "result": {
-        "healthCardStateCode": 2,
-        "healthCardStateMessage": "健康证未提交",
-        "healthCardApprovalCode": 0,
-        "healthCardApprovalMessage": "未提交",
-        "healthCard1Url": "",
-        "healthCard2Url": "",
-        "healthCardStartTime": "",
-        "healthCardEndTime": "",
-        "approvalTips": "未通过原因：证件模糊，不够清晰！@请重新上传！"
-    }
-}
+/// 健康证状态
+var HealthCardStateCode = {
+    Abnormal: 0,    /**< 异常 */
+    Normal: 1,      /**< 正常 */
+    Advance: 2,     /**< 临期 */
+    Expired: 3,     /**< 过期 */
+};
 
-var healthCerInfo = healthCardDetail
+/// 健康证审核状态
+var HealthCardApproveCode = {
+    NotUpload: 0,     /**< 未上传--获取照片时候,没有任何健康证照片 */
+    PendingReview: 1, /**< 待审核--获取照片时候,得到健康证正修改的照片 */
+    InForce: 2,       /**< 已生效--获取照片时候,得到健康证已通过的照片 */
+    NotPass: 3,       /**< 未通过--获取照片时候,得到健康证正修改的照片 */
+};
 
-var isUpdatingInfo = true
-var submitEditButtonEnable = true
 
 export default class HealthCerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date:"2016-05-15",
-            isShowingText: true
+            isUpdatingInfo: false,
+            submitEditButtonEnable: true,
+            healthCerInfoResult: {approvalTips:"第11@第22"},
         };
-
-        // 每1000毫秒对showText状态做一次取反操作
-        setInterval(() => {
-            this.setState(previousState => {
-                return { isShowingText: !previousState.isShowingText };
-            });
-        }, 1000);
     }
 
+    componentDidMount() {
+         this.fetchData();
+    }
+
+    fetchData = () => {
+        fetch("http://localhost/simulateApi/healthCerApiJSON/healthCardDetail")
+            .then(response => response.json())
+            .then(responseData => {
+                // 注意，这里使用了this关键字，为了保证this在调用时仍然指向当前组件，我们需要对其进行“绑定”操作
+                this.setState({
+                    healthCerInfoResult: responseData.content,
+                    loaded: true,
+                    isUpdatingInfo: responseData.content.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false
+                });
+            }).catch(
+            (error) => {
+                console.log("错误：" + error);
+            }
+        );
+    }
+
+
+
     render() {
-        let submitButtonStyle = isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
+        let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
@@ -81,14 +78,13 @@ export default class HealthCerHomePage extends Component {
                     <CJDemoDateBeginEnd/>
                 </View>
 
-                <HealthCerApproveResultCell style={{marginTop: 40}} />
+                <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
 
                 <HealthSubmitButton
                     style={[{marginTop: 40, height:44}, submitButtonStyle]}
-                    isShowEditTitle={!isUpdatingInfo}
-                    isDisabled={!submitEditButtonEnable}
+                    isShowEditTitle={!this.state.isUpdatingInfo}
+                    isDisabled={!this.state.submitEditButtonEnable}
                 />
-
 
 
             </ScrollView>
@@ -99,10 +95,15 @@ export default class HealthCerHomePage extends Component {
 
 
 class HealthCerApproveResultCell extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            approvalTips:"第一行@第二行！",
+        };
+    }
 
     render() {
-        let approvalTips = healthCerInfo.result.approvalTips;
+        let approvalTips = this.props.approvalTips;
         let tips = approvalTips.split("@");
 
         let text1 = "";
