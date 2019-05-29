@@ -17,17 +17,36 @@ class DateUtil{
         }
     }
 
-    static today() {
-        return this.yyyyMMdd_hhmmss(new Date());
+    static addDataTime(thisTime, num, kind) {
+        const newTime = thisTime;
+        if(kind =='year') {
+            newTime.setFullYear(thisTime.getFullYear()+num);
+        }else{
+            newTime.setDate(thisTime.getDate()+num);
+        }
+        return newTime;
+    }
+
+    static todayString() {
+        return this.yyyyMMdd_hhmmssString(new Date());
     };
 
-    static yyyyMMdd_hhmmss(date) {
+    static yyyyMMddString(date) {
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
         m = m < 10 ? ('0' + m) : m;
         let d = date.getDate();
         d = d < 10 ? ('0' + d) : d;
-        var h = date.getHours();
+        return y + '-' + m + '-' + d;
+    };
+
+    static yyyyMMdd_hhmmssString(date) {
+        let y = date.getFullYear();
+        let m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        let d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        let h = date.getHours();
         h = h < 10 ? ('0' + h) : h;
         let minute = date.getMinutes();
         let second = date.getSeconds();

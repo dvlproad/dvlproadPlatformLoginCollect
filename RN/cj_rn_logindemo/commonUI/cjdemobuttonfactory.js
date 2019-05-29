@@ -51,12 +51,13 @@ class SubmitButton extends Component {
         //     </View>
         // )
         return (
-            <TouchableOpacity
-                onPress={currentOnPress}
-                disabled={isDisable}
-                //activeOpacity={0.4}
-            >
+
                 <View style={[{justifyContent: "center", height: 44}, enableStateStyle, style]} >
+                    <TouchableOpacity
+                        onPress={currentOnPress}
+                        disabled={isDisable}
+                        //activeOpacity={0.4}
+                    >
                     <Text
                         style={{textAlign:'center',
                             color: showTextColor,
@@ -65,8 +66,9 @@ class SubmitButton extends Component {
                     >
                         {showTitle}
                     </Text>
+                    </TouchableOpacity>
                 </View>
-            </TouchableOpacity>
+
         )
     }
 }

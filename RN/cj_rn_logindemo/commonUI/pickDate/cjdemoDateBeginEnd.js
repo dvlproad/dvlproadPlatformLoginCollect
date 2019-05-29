@@ -1,6 +1,6 @@
 //cjdemoDateBeginEnd.js
-import React from 'react';
-import { View, Image, StyleSheet, Dimensions } from 'react-native'
+import React, { Component } from 'react';
+import { View, Image, StyleSheet, Dimensions, Alert } from 'react-native'
 import DatePicker from 'react-native-datepicker'
 import DateUtil from "../../commonUtil/DateUtil";
 
@@ -15,24 +15,25 @@ class CJDemoDatePicker extends React.Component {
         super(props);
 
         this.state = {
-            date: DateUtil.today(),
-            allowPickDate: true,
-            datePickerWidth: 50
+            allowPickDate: props.allowPickDate,
+            chooseDateString: props.chooseDateString,
+            onDateChange: props.onDateChange,
         };
     }
 
 
     render() {
-        const { style } = this.props
+        const { style } = this.props;
+        let showDateString = this.state.chooseDateString;
+
         return (
             <DatePicker
-                //style={{width: this.props.datePickerWidth}}
                 style={[{flex: 1}, style]}
                 disabled={!this.props.allowPickDate}
-                placeholder= {this.state.allowPickDate?"选择日期":"自动填写"}
-                date={this.state.date}
+                placeholder= {this.props.placeholder}
+                date={showDateString}
                 minDate="1900-01-01"
-                maxDate="2016-06-01"
+                maxDate="2300-01-01"
 
                 mode="date"
                 format="YYYY-MM-DD"
@@ -50,7 +51,14 @@ class CJDemoDatePicker extends React.Component {
                     // ... You can check the source to find the other keys.
                 }}
 
-                //onDateChange={(datetime) => {this.setState({datetime: datetime});}}
+                //onDateChange={this.state.onDateChange}
+                onDateChange={(date) => { //
+                    if(date.constructor===String) {
+                        let dateString = date;
+                        this.setState({chooseDateString: dateString})
+                        this.state.onDateChange(dateString);
+                    }
+                }}
             />
         )
     }
@@ -80,7 +88,6 @@ class DateConnectView extends React.Component {
         return (
             <View
                 style={[{
-                    backgroundColor: "red",
                     flexDirection: 'row',
                     justifyContent: "center",
                     alignItems: "center",
@@ -95,39 +102,50 @@ class DateConnectView extends React.Component {
 
 
 
-export default class CJDemoDateBeginEnd extends React.Component {
-    _onLayout(event) {
-        let { x, y, width2, height2 } = event.nativeEvent.layout;
-        console.log('通过onLayout得到的宽度：' + width2);
-        console.log('通过onLayout得到的高度：' + height2);
-
-        // this.props.curWidth = width2
-
-        // let { screenWidth, screenHeight } = Dimensions.get('window');
-        // console.log('通过Dimensions得到的宽度：' + screenWidth);
-        // console.log('通过Dimensions得到的高度：' + screenHeight);
-    }
-
+export default class CJDemoDateBeginEnd extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            curWidth: 100
+            isEditing: false,
+            beginDateString: props.beginDateString,
+            ///endDateString: null,
+            onBeginDateChange: props.onBeginDateChange,
         };
     }
 
     render() {
-        const { style } = this.props
+        const { style } = this.props;
 
-        const screenWidth = Dimensions.get('window').width
-        const datePickerWidth = screenWidth/5- 40  //TODO:改为取本视图的宽度来计算
-        //const datePickerWidth = this.props.curWidth/3
+        let beginDateString = "2000-02-29";
+        //let beginDateString = this.state.beginDateString;
+
+        let beginDate = DateUtil.parserDateString(beginDateString);
+        let endDate = DateUtil.addDataTime(beginDate, 1, 'year');
+        let endDateString = DateUtil.yyyyMMdd_hhmmssString(endDate);
+        //let endDateString = "5050-05-05";
 
         return (
-
-            <View onLayout = {this._onLayout} style={{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"}}>
-                <CJDemoDatePicker style={{flex: 1}} datePickerWidth={datePickerWidth} allowPickDate={true} />
-                <DateConnectView style={{width: 20, marginHorizontal: 10}} showWave={false} />
-                <CJDemoDatePicker style={{flex: 1}} datePickerWidth={datePickerWidth} allowPickDate={false} />
+            <View style={[
+                {flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
+                style]
+            }>
+                <CJDemoDatePicker style={{flex: 1}}
+                                  placeholder= {"选择日期"}
+                                  chooseDateString={beginDateString}
+                                  allowPickDate={this.props.isEditing}
+                                  // onDateChange={ (date) => {
+                                  //     this.setState({beginDate: date})
+                                  // }}
+                                  onDateChange={this.state.onBeginDateChange}
+                />
+                <DateConnectView style={{width: 20, marginHorizontal: 10}}
+                                 showWave={this.props.isEditing}
+                />
+                <CJDemoDatePicker style={{flex: 1}}
+                                  placeholder= {"自动填写"}
+                                  chooseDateString={endDateString}
+                                  allowPickDate={false}
+                />
             </View>
         )
     }

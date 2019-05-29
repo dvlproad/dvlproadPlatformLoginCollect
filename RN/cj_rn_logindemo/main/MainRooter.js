@@ -1,31 +1,14 @@
 // MainRooter.js
 import React from 'react';
 import {Alert, Button, Image} from 'react-native';
-import {createStackNavigator, createAppContainer, createBottomTabNavigator} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 
 import HealthCerRooter from '../helathCerApp/HealthCerRooter';
 import SampleAppMovies from "../movieApp/MovieHomePage";
-import UIChoosePage from "../uihome/UIRooter"
-import HelloWorldPage from '../helloworld/HelloWorldPage'
-
-const AppStackNavigator = createStackNavigator(
-    {
-        UI: {
-            screen: UIChoosePage,
-            navigationOptions: () => ({
-                title: `UI首页`,
-                header: null,       //隐藏顶部导航栏
-                tabBarVisible: true // 隐藏底部导航栏
-            }),
-        },
-
-    },
-    {
-        initialRouteName: 'HealthCer'
-    }
-);
-
-
+import UIRooter from "../uihome/UIRooter";
+import UtilRooter from "../utilhome/UtilRooter";
+import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
+import HelloWorldPage from '../helloworld/HelloWorldPage';
 
 const TabBarNavigator = createBottomTabNavigator({
         HealthCerHome: {
@@ -57,9 +40,37 @@ const TabBarNavigator = createBottomTabNavigator({
             }),
         },
         BaseUI: {
-            screen: UIChoosePage,
+            screen: UIRooter,
             navigationOptions: ({ navigation }) => ({
                 title: 'BaseUI',
+                tabBarIcon: ({ focused, horizontal, tintColor }) => {
+                    return <TabBarItem
+                        tintColor={tintColor}
+                        focused={focused}
+                        normalImage={require('./image/home_n.png')}
+                        selectedImage={require('./image/home_n.png')}
+                    />;
+                }
+            }),
+        },
+        BaseUtil: {
+            screen: UtilRooter,
+            navigationOptions: ({ navigation }) => ({
+                title: 'BaseUtil',
+                tabBarIcon: ({ focused, horizontal, tintColor }) => {
+                    return <TabBarItem
+                        tintColor={tintColor}
+                        focused={focused}
+                        normalImage={require('./image/home_n.png')}
+                        selectedImage={require('./image/home_n.png')}
+                    />;
+                }
+            }),
+        },
+        Lifecycle: {
+            screen: LifecycleRooter,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Lifecycle',
                 tabBarIcon: ({ focused, horizontal, tintColor }) => {
                     return <TabBarItem
                         tintColor={tintColor}
@@ -124,8 +135,6 @@ class TabBarItem extends React.Component {
 }
 
 export default createAppContainer(TabBarNavigator);
-
-// export default createAppContainer(AppStackNavigator);
 
 
 

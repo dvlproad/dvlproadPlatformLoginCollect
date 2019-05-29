@@ -1,10 +1,10 @@
-//UIHomePage.js
+//LifecycleHomePage.js
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image, Alert } from 'react-native';
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
 
-export default class UIHomePage extends React.Component {
+export default class LifecycleHomePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -35,36 +35,17 @@ export default class UIHomePage extends React.Component {
 
     render() {
         let sections = [
-            { key: "A",
+            { key: "State",
                 data: [
-                    { title: "Layout", page: "LayoutHome" },
-                    { title: "Button", page: "ButtonHome" },
-                    { title: "Navigation", page: "NavigationHome" },
-                    { title: "Text", page: "TextHome" },
+                    { title: "StateEasy：最基本的使用",   page: "StateEasyPage" },
+                    { title: "StateNormal：正常使用", page: "StateNormalPage" },
                     ]
             },
-            { key: "B",
+            { key: "Props",
                 data: [
-                    { title: "宝宝" },
-                    { title: "贝贝" },
-                    { title: "表弟" },
-                    { title: "表姐" }
-                    ]
-            },
-            { key: "C",
-                data: [
-                    { title: "成吉思汗" },
-                    { title: "超市快递" }
-                    ]
-            },
-            { key: "W",
-                data: [
-                    { title: "王磊" },
-                    { title: "王者荣耀" },
-                    { title: "往事不能回味" },
-                    { title: "王小磊" },
-                    { title: "王中磊" },
-                    { title: "王大磊" }
+                    { title: "PropsEasyPage：没使用默认值",   page: "PropsEasyPage" },
+                    { title: "PropsNormalPage：使用默认值，但没进行类型检查", page: "PropsNormalPage" },
+                    { title: "PropsPerfectPage：使用默认值，且进行类型检查)", page: "PropsPerfectPage" },
                     ]
             },
         ];
@@ -77,8 +58,6 @@ export default class UIHomePage extends React.Component {
                     renderItem={this._renderItem}
                     sections={sections}
                     ItemSeparatorComponent={() => <View style={{backgroundColor: "#E5E5E5", height: 1}} />}
-                    ListHeaderComponent={() => <View style={{ backgroundColor: '#25B960', alignItems: 'center', height: 30 }}><Text style={{ fontSize: 18, color: '#ffffff' }}>通讯录</Text></View>}
-                    ListFooterComponent={() => <View style={{ backgroundColor: '#25B960', alignItems: 'center', height: 30 }}><Text style={{ fontSize: 18, color: '#ffffff' }}>通讯录尾部</Text></View>}
                 />
             </View>
         );

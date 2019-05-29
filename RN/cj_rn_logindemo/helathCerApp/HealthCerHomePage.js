@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd'
 import { SubmitButton } from '../commonUI/cjdemobuttonfactory'
+import DateUtil from "../commonUtil/DateUtil";
+// import { } from 'moment'
 
 
 /// 健康证状态
@@ -28,7 +30,8 @@ export default class HealthCerHomePage extends Component {
         this.state = {
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
-            healthCerInfoResult: {approvalTips:"第11@第22"},
+            healthCerInfoResult: {approvalTips:"第11@第22", healthCardEndTime:"2088-08-08"},
+            beginDateString: "2000-01-01",
         };
     }
 
@@ -53,10 +56,23 @@ export default class HealthCerHomePage extends Component {
         );
     }
 
+    clickEditTitleHandle= () => {
+        //Alert.alert("你点击了编辑按钮！");
+        this.setState({
+            isUpdatingInfo: false
+        });
+    }
+
 
 
     render() {
         let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
+        let approveResultCell = !this.state.isUpdatingInfo?
+            <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
+            : null;
+        //let beginDateString = this.state.healthCerInfoResult.healthCardEndTime;
+        // let beginDateString = '2018-08-08'; //TODO:日期从服务器取
+        let beginDateString = this.state.beginDateString;
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
@@ -70,21 +86,37 @@ export default class HealthCerHomePage extends Component {
                     <Image style={{ width: 164, height: 108}} source={require('../commonUI/pickImage/resources/imageLook.png')} />
                 </View>
 
-                <View style={{flexDirection: 'row', marginTop: 40}}>
-                    <Text style={{fontSize:15, color: "#333333"}}>健康证有效期</Text>
-                </View>
+                <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
+                <CJDemoDateBeginEnd style={{marginTop: 22}}
+                                    isEditing={this.state.isUpdatingInfo}
+                                    beginDateString={beginDateString}
+                                    onBeginDateChange={ (date)=> {
+                                        this.setState({
+                                                beginDateString: date
+                                        })
+                                        //Alert.alert(newBeginDateString);
+                                    }}
+                />
 
-                <View style={{marginTop: 22}}>
-                    <CJDemoDateBeginEnd/>
-                </View>
+                {approveResultCell}
 
-                <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
-
-                <HealthSubmitButton
-                    style={[{marginTop: 40, height:44}, submitButtonStyle]}
+                <SubmitButton
+                    style={[{flex:1, marginTop: 40, height:44}, submitButtonStyle]}
+                    fontSize={17}
                     isShowEditTitle={!this.state.isUpdatingInfo}
                     isDisabled={!this.state.submitEditButtonEnable}
+                    clickEditTitleHandle={() => {
+                        this.setState({
+                            isUpdatingInfo: true
+                        });
+                    }}
+                    clickSubmitTitleHandle={() => {
+                        this.setState({
+                            isUpdatingInfo: false
+                        });
+                    }}
                 />
+
 
 
             </ScrollView>
@@ -128,36 +160,10 @@ class HealthCerApproveResultCell extends Component {
 
 class LineSeparator extends Component{
     render(){
-        const { style } = this.props
+        const { style } = this.props;
         return (
             <View style={[{backgroundColor: "#E5E5E5", height: 1}, style]} />
         );
-    }
-}
-
-
-class HealthSubmitButton extends SubmitButton {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         ...this.state
-    //     };
-    // }
-
-    render() {
-        const { style } = this.props
-
-        return <SubmitButton style={[{flex:1}, style]}
-                             fontSize={17}
-                             isShowEditTitle={this.props.isShowEditTitle}
-                             isDisabled={this.props.isDisabled}
-                             clickEditTitleHandle={() => {
-                                 Alert.alert("你点击了编辑按钮！");
-                             }}
-                             clickSubmitTitleHandle={() => {
-                                 Alert.alert("你点击了提交按钮！");
-                             }}
-        />
     }
 }
 

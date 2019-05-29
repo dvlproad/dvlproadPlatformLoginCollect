@@ -87,7 +87,7 @@ export default class ButtonHomePage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
 
-                <View style={{ height: 64, width: 64,borderRadius: 12,backgroundColor:'#ff0000',justifyContent:'center'}}>
+                <View style={{ height: 64, width: 64, borderRadius: 12, backgroundColor:'#ff0000', justifyContent:'center'}}>
                     <Text style={{color:'#fff', fontSize:24, textAlign:'center', backgroundColor:"green"}}>1</Text>
                 </View>
             </ScrollView>
