@@ -1,8 +1,9 @@
 //cjdemoDateBeginEnd.js
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Dimensions, Alert } from 'react-native'
+import {View, Image, StyleSheet, Dimensions, Alert, Text} from 'react-native'
 import DatePicker from 'react-native-datepicker'
 import DateUtil from "../../commonUtil/DateUtil";
+import PropTypes from "prop-types";
 
 // const {width, height} = Dimensions.get('window')
 
@@ -11,27 +12,26 @@ import DateUtil from "../../commonUtil/DateUtil";
 
 
 class CJDemoDatePicker extends React.Component {
-    constructor(props) {
-        super(props);
+    static propTypes = {
+        allowPickDate: PropTypes.bool,
+        chooseDateString: PropTypes.string.isRequired,
+        onDateChange: PropTypes.func,
+    };
 
-        this.state = {
-            allowPickDate: props.allowPickDate,
-            chooseDateString: props.chooseDateString,
-            onDateChange: props.onDateChange,
-        };
-    }
+    static defaultProps = {
+        allowPickDate: false,
+    };
 
 
     render() {
         const { style } = this.props;
-        let showDateString = this.state.chooseDateString;
 
         return (
             <DatePicker
                 style={[{flex: 1}, style]}
                 disabled={!this.props.allowPickDate}
                 placeholder= {this.props.placeholder}
-                date={showDateString}
+                date={this.props.chooseDateString}
                 minDate="1900-01-01"
                 maxDate="2300-01-01"
 
@@ -46,17 +46,15 @@ class CJDemoDatePicker extends React.Component {
                         borderWidth: this.props.allowPickDate ? 1 : 0,
                         borderColor: "#CCCCCC",
                         backgroundColor: this.props.allowPickDate ? "white" : "#F9F9F9"
-
                     }
                     // ... You can check the source to find the other keys.
                 }}
 
-                //onDateChange={this.state.onDateChange}
                 onDateChange={(date) => { //
                     if(date.constructor===String) {
                         let dateString = date;
-                        this.setState({chooseDateString: dateString})
-                        this.state.onDateChange(dateString);
+                        // this.setState({chooseDateString: dateString})
+                        this.props.onDateChange(dateString);
                     }
                 }}
             />
@@ -103,26 +101,25 @@ class DateConnectView extends React.Component {
 
 
 export default class CJDemoDateBeginEnd extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEditing: false,
-            beginDateString: props.beginDateString,
-            ///endDateString: null,
-            onBeginDateChange: props.onBeginDateChange,
-        };
-    }
+    static propTypes = {
+        isEditing: PropTypes.bool,
+        beginDateString: PropTypes.string.isRequired,
+        onBeginDateChange: PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+        isEditing: false,
+    };
+
 
     render() {
         const { style } = this.props;
 
-        let beginDateString = "2000-02-29";
-        //let beginDateString = this.state.beginDateString;
+        let beginDateString = this.props.beginDateString;
 
         let beginDate = DateUtil.parserDateString(beginDateString);
         let endDate = DateUtil.addDataTime(beginDate, 1, 'year');
-        let endDateString = DateUtil.yyyyMMdd_hhmmssString(endDate);
-        //let endDateString = "5050-05-05";
+        let endDateString = DateUtil.yyyyMMddString(endDate);
 
         return (
             <View style={[
@@ -133,10 +130,9 @@ export default class CJDemoDateBeginEnd extends Component {
                                   placeholder= {"选择日期"}
                                   chooseDateString={beginDateString}
                                   allowPickDate={this.props.isEditing}
-                                  // onDateChange={ (date) => {
-                                  //     this.setState({beginDate: date})
-                                  // }}
-                                  onDateChange={this.state.onBeginDateChange}
+                                  onDateChange={ (date) => {
+                                      this.props.onBeginDateChange(date)
+                                  }}
                 />
                 <DateConnectView style={{width: 20, marginHorizontal: 10}}
                                  showWave={this.props.isEditing}

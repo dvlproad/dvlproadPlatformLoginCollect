@@ -4,6 +4,7 @@ import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd'
 import { SubmitButton } from '../commonUI/cjdemobuttonfactory'
 import DateUtil from "../commonUtil/DateUtil";
+import PropTypes from "prop-types";
 // import { } from 'moment'
 
 
@@ -30,8 +31,8 @@ export default class HealthCerHomePage extends Component {
         this.state = {
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
-            healthCerInfoResult: {approvalTips:"第11@第22", healthCardEndTime:"2088-08-08"},
-            beginDateString: "2000-01-01",
+            healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
+            //beginDateString: "2000-01-01",
         };
     }
 
@@ -56,12 +57,12 @@ export default class HealthCerHomePage extends Component {
         );
     }
 
-    clickEditTitleHandle= () => {
-        //Alert.alert("你点击了编辑按钮！");
-        this.setState({
-            isUpdatingInfo: false
-        });
-    }
+    // clickEditTitleHandle= () => {
+    //     //Alert.alert("你点击了编辑按钮！");
+    //     this.setState({
+    //         isUpdatingInfo: false
+    //     });
+    // }
 
 
 
@@ -70,9 +71,11 @@ export default class HealthCerHomePage extends Component {
         let approveResultCell = !this.state.isUpdatingInfo?
             <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
             : null;
-        //let beginDateString = this.state.healthCerInfoResult.healthCardEndTime;
-        // let beginDateString = '2018-08-08'; //TODO:日期从服务器取
-        let beginDateString = this.state.beginDateString;
+        let beginDateString = this.state.healthCerInfoResult.healthCardStartTime;
+        //let beginDateString = this.state.beginDateString;
+        if ( beginDateString == null) {
+            beginDateString = DateUtil.parserDateString(new Date());
+        }
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
@@ -91,10 +94,11 @@ export default class HealthCerHomePage extends Component {
                                     isEditing={this.state.isUpdatingInfo}
                                     beginDateString={beginDateString}
                                     onBeginDateChange={ (date)=> {
+                                        let healthCerInfoResult = this.state.healthCerInfoResult
+                                        healthCerInfoResult.healthCardStartTime = date;
                                         this.setState({
-                                                beginDateString: date
+                                            healthCerInfoResult: healthCerInfoResult
                                         })
-                                        //Alert.alert(newBeginDateString);
                                     }}
                 />
 

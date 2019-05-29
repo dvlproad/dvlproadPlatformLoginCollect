@@ -23,6 +23,9 @@ import ButtonHomePage from "./button/ButtonHomePage"
 //text
 import TextHomePage from "./text/TextHomePage"
 
+//pickDate
+import PickDatePage from './pickDate/PickDatePage'
+
 
 
 
@@ -103,9 +106,15 @@ const UIHomeNavigation = createStackNavigator(
                 title: `Text首页`,
             }),
         },
+        PickDatePage: {
+            screen: PickDatePage,
+            navigationOptions: () => ({
+                title: `日期选择`,
+            }),
+        },
     },
     {
-        initialRouteName: 'UIHome'
+        initialRouteName: 'PickDatePage'
     }
 );
 

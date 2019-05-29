@@ -1,6 +1,6 @@
 // MainRooter.js
 import React from 'react';
-import {Alert, Button, Image} from 'react-native';
+import { Button, Image } from 'react-native';
 import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 
 import HealthCerRooter from '../helathCerApp/HealthCerRooter';
@@ -10,6 +10,7 @@ import UtilRooter from "../utilhome/UtilRooter";
 import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
 import HelloWorldPage from '../helloworld/HelloWorldPage';
 
+// 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
         HealthCerHome: {
             screen: HealthCerRooter,
@@ -100,12 +101,12 @@ const TabBarNavigator = createBottomTabNavigator({
         tabBarPosition: 'bottom',
         lazy: true, // 是否懒加载
         tabBarOptions: {
-            // activeTintColor: LuckinColors.themeColor,
-            // inactiveTintColor: LuckinColors.textColor999,
+            // activeTintColor: Colors.themeColor,
+            // inactiveTintColor: Colors.textColor999,
             showIcon: true,
             style: {
                 height: 49,
-                // backgroundColor: LuckinColors.whiteColor,
+                // backgroundColor: Colors.whiteColor,
                 zIndex: 0,
                 position: 'relative',
             },
@@ -122,6 +123,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
+        initialRouteName: 'HealthCerHome'
     });
 
 class TabBarItem extends React.Component {

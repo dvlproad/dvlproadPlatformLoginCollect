@@ -35,7 +35,7 @@ export default class UIHomePage extends React.Component {
 
     render() {
         let sections = [
-            { key: "A",
+            { key: "Base",
                 data: [
                     { title: "Layout", page: "LayoutHome" },
                     { title: "Button", page: "ButtonHome" },
@@ -43,12 +43,9 @@ export default class UIHomePage extends React.Component {
                     { title: "Text", page: "TextHome" },
                     ]
             },
-            { key: "B",
+            { key: "Pick",
                 data: [
-                    { title: "宝宝" },
-                    { title: "贝贝" },
-                    { title: "表弟" },
-                    { title: "表姐" }
+                    { title: "PickDatePage", page: "PickDatePage" },
                     ]
             },
             { key: "C",
