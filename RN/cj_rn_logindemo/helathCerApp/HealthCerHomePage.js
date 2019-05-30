@@ -1,11 +1,9 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
-import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd'
-import { SubmitButton } from '../commonUI/cjdemobuttonfactory'
-import DateUtil from "../commonUtil/DateUtil";
-import PropTypes from "prop-types";
-// import { } from 'moment'
+import { SubmitButton } from '../commonUI/cjdemobuttonfactory';
+import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
+import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
 
 
 /// 健康证状态
@@ -32,7 +30,7 @@ export default class HealthCerHomePage extends Component {
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
             healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
-            //beginDateString: "2000-01-01",
+            //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
         };
     }
 
@@ -73,9 +71,6 @@ export default class HealthCerHomePage extends Component {
             : null;
         let beginDateString = this.state.healthCerInfoResult.healthCardStartTime;
         //let beginDateString = this.state.beginDateString;
-        if ( beginDateString == null) {
-            beginDateString = DateUtil.parserDateString(new Date());
-        }
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
@@ -84,10 +79,7 @@ export default class HealthCerHomePage extends Component {
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
                 </View>
 
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: "space-between", paddingTop: 12}}>
-                    <Image style={{ width: 164, height: 108}} source={{uri: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"}} />
-                    <Image style={{ width: 164, height: 108}} source={require('../commonUI/pickImage/resources/imageLook.png')} />
-                </View>
+                <CJDemoPickerImageFlatList style={{flex: 1}} />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
                 <CJDemoDateBeginEnd style={{marginTop: 22}}

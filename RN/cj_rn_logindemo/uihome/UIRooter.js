@@ -25,6 +25,8 @@ import TextHomePage from "./text/TextHomePage"
 
 //pickDate
 import PickDatePage from './pickDate/PickDatePage'
+//pickImage
+import PickImagePage from './pickImage/PickImagePage'
 
 
 
@@ -112,9 +114,15 @@ const UIHomeNavigation = createStackNavigator(
                 title: `日期选择`,
             }),
         },
+        PickImagePage: {
+            screen: PickImagePage,
+            navigationOptions: () => ({
+                title: `图片选择`,
+            }),
+        },
     },
     {
-        initialRouteName: 'PickDatePage'
+        initialRouteName: 'PickImagePage'
     }
 );
 

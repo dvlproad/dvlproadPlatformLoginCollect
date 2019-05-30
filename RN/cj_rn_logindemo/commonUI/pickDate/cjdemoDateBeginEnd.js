@@ -118,7 +118,7 @@ export default class CJDemoDateBeginEnd extends Component {
         let beginDateString = this.props.beginDateString;
 
         let beginDate = DateUtil.parserDateString(beginDateString);
-        let endDate = DateUtil.addDataTime(beginDate, 1, 'year');
+        let endDate = DateUtil.addYears(beginDate, 1);
         let endDateString = DateUtil.yyyyMMddString(endDate);
 
         return (

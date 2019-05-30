@@ -17,14 +17,11 @@ class DateUtil{
         }
     }
 
-    static addDataTime(thisTime, num, kind) {
-        const newTime = thisTime;
-        if(kind =='year') {
-            newTime.setFullYear(thisTime.getFullYear()+num);
-        }else{
-            newTime.setDate(thisTime.getDate()+num);
-        }
-        return newTime;
+    /// 指定日期的加上 yearsToBeAdded 后的年
+    static addYears(sinceDate, yearsToBeAdded) {
+        const newDate = sinceDate;
+        newDate.setFullYear(sinceDate.getFullYear()+yearsToBeAdded);
+        return newDate;
     }
 
     static todayString() {

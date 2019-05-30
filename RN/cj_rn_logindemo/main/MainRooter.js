@@ -1,7 +1,7 @@
 // MainRooter.js
 import React from 'react';
-import { Button, Image } from 'react-native';
-import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
+import { Image } from 'react-native';
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
 
 import HealthCerRooter from '../helathCerApp/HealthCerRooter';
 import SampleAppMovies from "../movieApp/MovieHomePage";
@@ -12,7 +12,7 @@ import HelloWorldPage from '../helloworld/HelloWorldPage';
 
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
-        HealthCerHome: {
+        HealthCerRooter: {
             screen: HealthCerRooter,
             navigationOptions: ({ navigation }) => ({
                 title: '健康证',
@@ -40,7 +40,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 ),
             }),
         },
-        BaseUI: {
+        UIRooter: {
             screen: UIRooter,
             navigationOptions: ({ navigation }) => ({
                 title: 'BaseUI',
@@ -123,7 +123,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'HealthCerHome'
+        initialRouteName: 'HealthCerRooter'
     });
 
 class TabBarItem extends React.Component {
