@@ -1,78 +1,78 @@
 //cjdemoPickerImageCell.js
 
 import React, { Component } from 'react';
-import {View, Image, StyleSheet, Dimensions, Alert, Text, TouchableOpacity, FlatList} from 'react-native';
+import {View, Alert} from 'react-native';
 import ImageChooseButton, { ImageSourceType } from '../../commonUI/button/ImageChooseButton'
+import PropTypes from "prop-types";
 
-
-// export default class CJDemoPickerImageFlatList extends Component {
-//     render() {
-//         const { style } = this.props;
-//         return (
-//             <View style={[{flexDirection: 'row', justifyContent: "space-between", paddingTop: 12}, style]}>
-//                 <ImageButton style={{ width: 164, height: 108, backgroundColor:'red'}}
-//                              imageSourceType={ImageSourceType.Network}
-//                              imageUrl='/resources/healthCerImage1.png'
-//                              pickImageHandle={() => {
-//                                  Alert.alert("点击选择图片1");
-//                              }}
-//                              deleteImageHandle={() => {
-//                                  Alert.alert("点击删除图片1");
-//                              }}
-//                 />
-//                 <ImageButton style={{ width: 164, height: 108, backgroundColor:'green'}}
-//                              imageSourceType={ImageSourceType.Local}
-//                              imageUrl="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"
-//                              pickImageHandle={() => {
-//                                  Alert.alert("点击选择图片2");
-//                              }}
-//                              deleteImageHandle={() => {
-//                                  Alert.alert("点击删除图片2");
-//                              }}
-//                 />
-//             </View>
-//         );
-//     }
-// }
 
 export default class CJDemoPickerImageFlatList extends Component {
+    static propTypes = {
+        boxHorizontalInterval: PropTypes.number,      // 水平方向上box之间的间隔
+        listWidth: PropTypes.number.isRequired,
+        numColumns: PropTypes.number,
+        widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
+
+        images: PropTypes.array,
+        // imageSourceType: PropTypes.number.isRequired,
+        // imageUrl: PropTypes.string.isRequired,
+
+        pickImageHandle: PropTypes.func,
+        deleteImageHandle: PropTypes.func,
+
+        isEditing: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        boxHorizontalInterval: 5,
+        listWidth: 0,
+        numColumns: 2,
+        widthHeightRatio: 1.0,  //宽高的比例
+
+        images:[],
+        // imageSourceType: ImageSourceType.Default,
+        // imageUrl: null,
+
+        pickImageHandle: (buttonIndex)=>{},
+        deleteImageHandle: (buttonIndex)=>{},
+
+        isEditing: false,
+    };
+
     render() {
         const { style } = this.props;
 
-        const screenWidth = Dimensions.get('window').width;
-        //const imageWidth = 164;
-        //const imageHeight = 108;
-        const imageWidth = screenWidth/2 - 50;
-        const imageHeight = imageWidth*0.7;
+        const numColumns = this.props.numColumns;
+        const boxHorizontalInterval = this.props.boxHorizontalInterval;
+        const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
+        const boxWidth = boxTotalWidth/numColumns;
+        const boxHeight = boxWidth / this.props.widthHeightRatio;
 
         return (
-            <View style={[{paddingTop: 12}, style]}>
-                <FlatList
-                    keyExtractor={(item, index) => index.toString()}
-                    // horizontal={true}
-                    // showsHorizontalScrollIndicator={false}
-                    numColumns={2}
-                    data={[
-                        {key: 'Devin'},
-                        {key: 'Jackson'},
-                        {key: 'James'},
-                    ]}
-                    renderItem={({item}) => {
-                        return (
-                            <ImageChooseButton style={{backgroundColor:'green'}}
-                                         imageWidth={imageWidth}
-                                         imageHeight={imageHeight}
-                                         imageSourceType={ImageSourceType.Local}
-                                         imageUrl="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"
-                                         pickImageHandle={() => {
-                                             Alert.alert("点击选择图片2");
-                                         }}
-                                         deleteImageHandle={() => {
-                                             Alert.alert("点击删除图片2");
-                                         }}
-                            />
-                        )
-                    }}
+            <View style={[{flexDirection: 'row', justifyContent: "space-between"}, style]}>
+                <ImageChooseButton style={{ width: boxWidth, height: boxHeight, backgroundColor:'red'}}
+                                   imageWidth={boxWidth}
+                                   imageHeight={boxHeight}
+                             imageSourceType={ImageSourceType.Network}
+                             imageUrl='/resources/healthCerImage1.png'
+                             pickImageHandle={() => {
+                                 Alert.alert("点击选择图片1");
+                             }}
+                             deleteImageHandle={() => {
+                                 Alert.alert("点击删除图片1");
+                             }}
+                />
+                <ImageChooseButton style={{ width: boxWidth, height: boxHeight, backgroundColor:'purple'}}
+                                   imageWidth={boxWidth}
+                                   imageHeight={boxHeight}
+                             imageSourceType={ImageSourceType.Local}
+                             imageUrl="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"
+                             pickImageHandle={() => {
+                                 Alert.alert("点击选择图片2");
+                             }}
+                             deleteImageHandle={() => {
+                                 Alert.alert("点击删除图片2");
+                             }}
                 />
             </View>
         );

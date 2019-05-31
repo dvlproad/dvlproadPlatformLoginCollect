@@ -2,79 +2,42 @@
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Alert, FlatList, Image, Text, TouchableOpacity, View} from "react-native";
-import ImageChooseButton, {ImageSourceType} from '../button/ImageChooseButton'
-
-export class ImageItem extends Component {
-    static propTypes = {
-        imageWidth: PropTypes.number.isRequired,
-        imageHeight: PropTypes.number.isRequired,
-        goodTitle: PropTypes.string.isRequired,
-        goodPrice: PropTypes.string.isRequired,
-        goodDescribe: PropTypes.string.isRequired,
-    };
-
-    static defaultProps = {
-        goodTitle: "商品标题",
-        goodPrice: "168",
-        goodDescribe: "商品描述",
-    };
-
-    render() {
-        const imageWidth = this.props.imageWidth;
-        const imageHeight = this.props.imageHeight;
-
-        return (
-            <TouchableOpacity style={{ width:imageWidth, marginLeft:5, marginRight:5, marginBottom:15 }}>
-                <Image style={{ width:imageWidth,  height:imageHeight, backgroundColor:'#f4f4f4'}}
-                       source={require('./goods.png')}
-                />
-
-                <Text style={{ backgroundColor:'#F1ECE2', color:'#9F8A60', paddingTop:8, paddingBottom:8, paddingLeft:4, paddingRight:4}}
-                      numberOfLines={1}
-                >
-                    {this.props.goodDescribe}
-                </Text>
-
-                <View style={{flex:1}}>
-                    <Text style={{ fontSize:14, color:'#666', marginTop:8, marginBottom:4 }} numberOfLines={2} >
-                        {this.props.goodTitle}
-                    </Text>
-                    <Text style={{ fontSize:14, color:'#b4282d' }}>
-                        ￥{this.props.goodPrice}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-        )
-    }
-}
+import { FlatList } from "react-native";
+import ImageChooseButton from '../button/ImageChooseButton'
 
 export default class ImagesChooseList extends Component {
     static propTypes = {
         boxHorizontalInterval: PropTypes.number,      // 水平方向上box之间的间隔
         listWidth: PropTypes.number.isRequired,
         numColumns: PropTypes.number,
+        widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
 
-        images: PropTypes.array,
-        // imageSourceType: PropTypes.number.isRequired,
-        // imageUrl: PropTypes.string.isRequired,
+        imageSources: PropTypes.array,
 
-        pickImageHandle: PropTypes.func,
-        deleteImageHandle: PropTypes.func
+        browseImageHandle: PropTypes.func,
+        addImageHandle: PropTypes.func,
+        deleteImageHandle: PropTypes.func,
+
+        isEditing: PropTypes.bool,
+        hasAddIconWhenEditing: PropTypes.bool,  //在编辑时候是否显示添加图片的按钮
     };
 
     static defaultProps = {
         boxHorizontalInterval: 5,
         listWidth: 0,
         numColumns: 2,
+        widthHeightRatio: 1.0,  //宽高的比例
 
-        images:[],
-        // imageSourceType: ImageSourceType.Default,
-        // imageUrl: null,
-        //
-        pickImageHandle: (buttonIndex)=>{},
+        imageSources: [],
+
+        browseImageHandle: (buttonIndex)=>{},
+        addImageHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
+
+        isEditing: false,
+        hasAddIconWhenEditing: true,
     };
+
 
 
     render() {
@@ -82,13 +45,53 @@ export default class ImagesChooseList extends Component {
         const boxHorizontalInterval = this.props.boxHorizontalInterval;
         const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
         const boxWidth = boxTotalWidth/numColumns;
-        const boxHeight = boxWidth * 108/164;
+        const boxHeight = boxWidth / this.props.widthHeightRatio;
+
+        const isAddIconShow = this.props.isEditing && this.props.hasAddIconWhenEditing;
+
+        let imageSources = this.props.imageSources;
+        if (isAddIconShow) {
+            // if (this.previousState.isEditing != this.state.isEditing) { //TODO:怎么判断旧状态
+                let imageSource = {imageSource: require('./images/pickImage_blue.png')};
+                imageSources.splice(imageSources.length, 0, imageSource);
+            // }
+        }
+
+        let isAddIcon = (index)=> {
+            let imageCount = 0;
+            if (isAddIconShow) {
+                imageCount = imageSources.length;
+
+                if (index==imageCount-1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        let clickButtonHandle = (index)=> {
+            let imageCount = 0;
+            if (isAddIconShow) {
+                imageCount = imageSources.length;
+
+                if (index==imageCount-1) {
+                    this.props.addImageHandle(index);
+                } else {
+                    this.props.browseImageHandle(index);
+                }
+            } else {
+                this.props.browseImageHandle(index);
+            }
+        }
 
 
         return (
             <FlatList
                 style={this.props.style}
-                data={this.props.images}
+                data={imageSources}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     return (
@@ -96,12 +99,14 @@ export default class ImagesChooseList extends Component {
                             style={{marginRight:boxHorizontalInterval}}
                             imageWidth={boxWidth}
                             imageHeight={boxHeight}
-                            imageSourceType={item.imageSourceType}
-                            imageUrl={item.imageUrl}
+                            imageSource={item.imageSource}
 
                             buttonIndex={index}
-                            pickImageHandle={this.props.pickImageHandle}
+                            clickButtonHandle={clickButtonHandle}
                             deleteImageHandle={this.props.deleteImageHandle}
+
+                            isEditing={this.props.isEditing}
+                            isAddIcon={isAddIcon(index)}
                         />
                     )
                 }}

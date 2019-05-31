@@ -15,21 +15,27 @@ export default class ImageChooseButton extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        imageSourceType: PropTypes.number.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-        isEditing: PropTypes.bool,
-        pickImageHandle: PropTypes.func,
+        // imageSource: PropTypes.object.isRequired,
+
+        clickButtonHandle: PropTypes.func,
         deleteImageHandle: PropTypes.func,
         buttonIndex: PropTypes.number,
+
+        isEditing: PropTypes.bool,
+        isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
     };
 
     static defaultProps = {
-        imageSourceType: ImageSourceType.Default,
-        imageUrl: null,
-        isEditing: false,
-        pickImageHandle: (buttonIndex)=>{},
+        imageWidth: 0,
+        imageHeight: 0,
+        imageSource: require('./resources/healthCerImage1.png'),
+
+        clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
-        buttonIndex: 0
+        buttonIndex: 0,
+
+        isEditing: false,
+        isAddIcon: false,
     };
 
 
@@ -40,17 +46,7 @@ export default class ImageChooseButton extends Component {
         const boxWidth = this.props.imageWidth;
         const boxHeight = this.props.imageHeight;
 
-        let imageSource = null;
-        if ( this.props.imageSourceType == ImageSourceType.Local) {
-            imageSource = require('./resources/healthCerImage1.png');
-
-        } else if (this.props.imageSourceType == ImageSourceType.Network) {
-            imageSource = {uri:this.props.imageUrl};
-        } else {
-            imageSource = require('./resources/imageLook.png');
-        }
-
-        imageSource = require('./resources/healthCerImage1.png');
+        let imageSource = this.props.imageSource;
 
         const deleteButtonWidth = 22;
         const imageWidth = boxWidth-deleteButtonWidth/2;
@@ -59,11 +55,18 @@ export default class ImageChooseButton extends Component {
 
         let buttonIndex = this.props.buttonIndex;
 
+        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <DeleteImageButton
+            style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
+            deleteImageHandle={()=> {
+                this.props.deleteImageHandle(buttonIndex);
+            }}
+        /> : null;
+
         return (
             <TouchableOpacity
                 style={[{width:boxWidth, backgroundColor:'red'}, style]}
                 onPress={()=> {
-                    this.props.pickImageHandle(buttonIndex);
+                    this.props.clickButtonHandle(buttonIndex);
                 }}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
@@ -73,12 +76,9 @@ export default class ImageChooseButton extends Component {
                            defaultSource={require('./resources/imageLook.png')}
                     />
 
-                    <DeleteImageButton
-                        style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
-                        deleteImageHandle={()=> {
-                            this.props.deleteImageHandle(buttonIndex);
-                        }}
-                    />
+                    {deleteImageButton}
+
+
                 </View>
             </TouchableOpacity>
         );

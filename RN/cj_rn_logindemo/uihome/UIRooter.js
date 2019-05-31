@@ -165,7 +165,7 @@ const UIHomeNavigation = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'ImagesChoosePage'
+        initialRouteName: 'UIHome'
     }
 );
 

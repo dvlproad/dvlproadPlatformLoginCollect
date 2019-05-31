@@ -1,7 +1,7 @@
 //ImagesChoosePage.js
 
 import React, { Component } from 'react';
-import { View, Text, Dimensions, ScrollView } from 'react-native';
+import {View, Text, Dimensions, ScrollView, Alert} from 'react-native';
 
 import ImagesChooseList  from '../../commonUI/list/ImagesChooseList'
 
@@ -13,12 +13,38 @@ export default class ImagesChoosePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            healthCerImages:[
-                {imageSourceType: 1, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+            imageSources: [
+                {imageSource: require('./img/1.jpg')},
+                {imageSource: require('./img/2.jpg')},
+                {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}},
             ]
         };
+    }
+
+    browseImageHandle=(index) => {
+        Alert.alert("浏览图片" + index);
+    }
+
+    addImageHandle=(index) => {
+        Alert.alert("添加图片" + index);
+        let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
+
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index-1, 0, healthCerImage);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+    }
+
+    deleteImageHandle=(index) => {
+        // Alert.alert("删除图片" + index);
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index,1);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
     }
 
     // 健康证图片选择(一行2个)
@@ -28,9 +54,14 @@ export default class ImagesChoosePage extends Component {
             <View style={{backgroundColor: 'green'}}>
                 <ImagesChooseList style={{backgroundColor: 'green'}}
                                   listWidth={listWidth}
+                                  numColumns={2}
+                                  widthHeightRatio={164/108}
                                   boxHorizontalInterval={30}
-                                  images={this.state.healthCerImages}
-                                  numColumns={2} />
+                                  imageSources={this.state.imageSources}
+                                  browseImageHandle={this.browseImageHandle}
+                                  addImageHandle={this.addImageHandle}
+                                  deleteImageHandle={this.deleteImageHandle}
+                />
             </View>
         )
     }

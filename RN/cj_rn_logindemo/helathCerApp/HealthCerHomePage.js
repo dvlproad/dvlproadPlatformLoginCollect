@@ -35,9 +35,9 @@ export default class HealthCerHomePage extends Component {
             //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
 
             healthCerImages:[
-                {imageSourceType: 1, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                {imageSource: require('./resource/goods.png')},
+                {imageSource: require('./resource/healthCerImage1.png')},
+                {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}},
             ]
         };
     }
@@ -71,6 +71,33 @@ export default class HealthCerHomePage extends Component {
     // }
 
 
+    browseImageHandle=(index) => {
+        Alert.alert("浏览图片" + index);
+    }
+
+    addImageHandle=(index) => {
+        Alert.alert("添加图片" + index);
+        let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
+
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index-1, 0, healthCerImage);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+    }
+
+    deleteImageHandle=(index) => {
+        // Alert.alert("删除图片" + index);
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index,1);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+    }
+
+
 
     render() {
         const paddingHorizontal = 15;
@@ -84,6 +111,8 @@ export default class HealthCerHomePage extends Component {
         let beginDateString = this.state.healthCerInfoResult.healthCardStartTime;
         //let beginDateString = this.state.beginDateString;
 
+        let imageSources = this.state.healthCerImages;
+
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
                 <View style={{flexDirection: 'row', marginTop: 30}}>
@@ -91,19 +120,24 @@ export default class HealthCerHomePage extends Component {
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
                 </View>
 
-                <CJDemoPickerImageFlatList style={{flex: 1}} />
-                <ImagesChooseList
-                    style={{backgroundColor: 'green'}}
+                <CJDemoPickerImageFlatList
+                    style={{paddingTop: 12, backgroundColor: 'cyan'}}
                     listWidth={listWidth}
-                    boxHorizontalInterval={30}
-                    images={this.state.healthCerImages}
                     numColumns={2}
-                    pickImageHandle={(index) => {
-                        Alert.alert("点击选择图片" + index);
-                    }}
-                    deleteImageHandle={(index) => {
-                        Alert.alert("点击删除图片" + index);
-                    }}
+                    widthHeightRatio={164/108}
+                    boxHorizontalInterval={30}
+                />
+                <ImagesChooseList
+                    style={{paddingTop: 12, backgroundColor: 'green'}}
+                    listWidth={listWidth}
+                    numColumns={2}
+                    widthHeightRatio={164/108}
+                    boxHorizontalInterval={30}
+                    imageSources={imageSources}
+                    browseImageHandle={this.browseImageHandle}
+                    addImageHandle={this.addImageHandle}
+                    deleteImageHandle={this.deleteImageHandle}
+                    isEditing={this.state.isUpdatingInfo}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
@@ -137,8 +171,6 @@ export default class HealthCerHomePage extends Component {
                         });
                     }}
                 />
-
-
 
             </ScrollView>
         );
