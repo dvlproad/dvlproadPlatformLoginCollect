@@ -11,6 +11,7 @@ import {
     ScrollView,
     FlatList,
 } from 'react-native';
+import GoodsHorizontalList, { GoodItem } from './component/GoodsHorizontalList'
 
 //引用插件
 import Swiper from 'react-native-swiper';

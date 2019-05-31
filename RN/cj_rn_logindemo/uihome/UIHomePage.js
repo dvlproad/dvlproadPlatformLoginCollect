@@ -53,7 +53,7 @@ export default class UIHomePage extends React.Component {
                 data: [
                     { title: "FlatListEasyPage", page: "FlatListEasyPage" },
                     { title: "FlatListHorizontalEasyPage", page: "FlatListHorizontalEasyPage" },
-                    { title: "FlatListHorizontalPage", page: "FlatListHorizontalPage" },
+                    { title: "FlatListHorizontalNormalPage", page: "FlatListHorizontalNormalPage" },
                     { title: "ListExamplePage", page: "ListExamplePage" },
                     ]
             },
