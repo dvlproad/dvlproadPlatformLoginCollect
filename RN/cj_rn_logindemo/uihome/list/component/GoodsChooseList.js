@@ -1,6 +1,4 @@
-//GoodsHorizontalList.js
-//商品水平展示视图
-
+//GoodsChooseList//商品水平展示视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
@@ -50,7 +48,7 @@ export class GoodItem extends Component {
     }
 }
 
-export default class GoodsHorizontalList extends Component {
+export default class GoodsChooseList extends Component {
     static propTypes = {
         listWidth: PropTypes.number.isRequired,
         numColumns: PropTypes.number,

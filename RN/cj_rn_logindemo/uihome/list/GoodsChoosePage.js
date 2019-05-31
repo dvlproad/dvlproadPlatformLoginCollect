@@ -1,5 +1,4 @@
-//FlatListHorizontalNormalPage.js
-
+//GoodsChoosePage.js
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -9,12 +8,12 @@ import {
     ScrollView,
 } from 'react-native';
 
-import GoodsHorizontalList  from './component/GoodsHorizontalList'
+import GoodsChooseList  from './component/GoodsChooseList'
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
 
-export default class FlatListHorizontalNormalPage extends Component {
+export default class GoodsChoosePage extends Component {
 
     constructor(props) {
         super(props);
@@ -35,7 +34,7 @@ export default class FlatListHorizontalNormalPage extends Component {
         return (
             <View style={styles.moduleBox}>
                 <Text style={{fontSize:16, color:'#666', padding:15}}>私人订制</Text>
-                <GoodsHorizontalList listWidth={width} goods={this.state.special} numColumns={3} />
+                <GoodsChooseList listWidth={width} goods={this.state.special} numColumns={3} />
             </View>
         )
     }
@@ -45,7 +44,7 @@ export default class FlatListHorizontalNormalPage extends Component {
         return (
             <View style={styles.moduleBox}>
                 <Text style={{fontSize:16, color:'#666', padding:15}}>猜你喜欢</Text>
-                <GoodsHorizontalList listWidth={width} goods={this.state.special} numColumns={2} />
+                <GoodsChooseList listWidth={width} goods={this.state.special} numColumns={2} />
             </View>
         )
     }

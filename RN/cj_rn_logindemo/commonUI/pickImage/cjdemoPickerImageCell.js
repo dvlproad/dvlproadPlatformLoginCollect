@@ -2,15 +2,8 @@
 
 import React, { Component } from 'react';
 import {View, Image, StyleSheet, Dimensions, Alert, Text, TouchableOpacity, FlatList} from 'react-native';
-import PropTypes from "prop-types";
-import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
+import ImageChooseButton, { ImageSourceType } from '../../commonUI/button/ImageChooseButton'
 
-/// 图片位置
-var ImageSourceType = {
-    Default: 0,     /**< 无, 使用默认图片 */
-    Local: 1,       /**< 本地 */
-    Network: 2      /**< 网络 */
-}
 
 // export default class CJDemoPickerImageFlatList extends Component {
 //     render() {
@@ -45,26 +38,30 @@ var ImageSourceType = {
 export default class CJDemoPickerImageFlatList extends Component {
     render() {
         const { style } = this.props;
+
+        const screenWidth = Dimensions.get('window').width;
+        //const imageWidth = 164;
+        //const imageHeight = 108;
+        const imageWidth = screenWidth/2 - 50;
+        const imageHeight = imageWidth*0.7;
+
         return (
-            <View style={[{flexDirection: 'row', justifyContent: "space-between", paddingTop: 12}, style]}>
+            <View style={[{paddingTop: 12}, style]}>
                 <FlatList
                     keyExtractor={(item, index) => index.toString()}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    //numColumns={2}
+                    // horizontal={true}
+                    // showsHorizontalScrollIndicator={false}
+                    numColumns={2}
                     data={[
                         {key: 'Devin'},
                         {key: 'Jackson'},
                         {key: 'James'},
                     ]}
                     renderItem={({item}) => {
-                        const screenWidth = Dimensions.get('window').width;
-                        //const imageWidth = 164;
-                        //const imageHeight = 108;
-                        const imageWidth = screenWidth/2 - 50;
-                        const imageHeight = imageWidth*0.7;
                         return (
-                            <ImageButton style={{ width: imageWidth, height: imageHeight, backgroundColor:'green'}}
+                            <ImageChooseButton style={{backgroundColor:'green'}}
+                                         imageWidth={imageWidth}
+                                         imageHeight={imageHeight}
                                          imageSourceType={ImageSourceType.Local}
                                          imageUrl="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg"
                                          pickImageHandle={() => {
@@ -79,78 +76,5 @@ export default class CJDemoPickerImageFlatList extends Component {
                 />
             </View>
         );
-    }
-}
-
-
-
-export class ImageButton extends Component {
-    static propTypes = {
-        isEditing: PropTypes.bool,
-        imageSourceType: PropTypes.number.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-        pickImageHandle: PropTypes.func,
-        deleteImageHandle: PropTypes.func
-    };
-
-    static defaultProps = {
-        isEditing: false,
-        imageSourceType: ImageSourceType.Default,
-        imageUrl: null,
-        pickImageHandle: null,
-        deleteImageHandle: null
-    };
-
-
-
-    render() {
-        const { style } = this.props;
-
-        let imageSource = null;
-        if ( this.props.imageSourceType == ImageSourceType.Local) {
-            imageSource = require('./resources/healthCerImage1.png');
-
-        } else if (this.props.imageSourceType == ImageSourceType.Network) {
-            imageSource = {uri:this.props.imageUrl};
-        } else {
-            imageSource = require('./resources/imageLook.png');
-        }
-
-        imageSource = require('./resources/healthCerImage1.png');
-
-        return (
-            <TouchableOpacity onPress={this.props.pickImageHandle} >
-                <View style={[{flex:1, flexDirection:"row-reverse"}, style]} >
-
-                        <Image style={{ flex:1, width: 164-10, height: 108-10, marginTop: 10, marginRight:10 }} source={imageSource} defaultSource={require('./resources/imageLook.png')} />
-
-                        <DeleteImageButton
-                            style={{ position:'absolute', width: 22, height: 22}}
-                            deleteImageHandle={this.props.deleteImageHandle}
-                        />
-                </View>
-            </TouchableOpacity>
-        );
-    }
-}
-
-export class DeleteImageButton extends Component {
-    static propTypes = {
-        deleteImageHandle: PropTypes.func
-    };
-
-    static defaultProps = {
-        deleteImageHandle: null,
-    };
-
-
-    render() {
-        return (
-            <View style={this.props.style} >
-                <TouchableOpacity onPress={this.props.deleteImageHandle} >
-                    <Image source={require('./resources/healthCer_delete_blue.png') } />
-                </TouchableOpacity>
-            </View>
-        )
     }
 }

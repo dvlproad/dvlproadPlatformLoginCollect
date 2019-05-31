@@ -1,9 +1,10 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
-import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList} from 'react-native';
+import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList, Dimensions} from 'react-native';
 import { SubmitButton } from '../commonUI/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
+import ImagesChooseList from '../commonUI/list/ImagesChooseList'
 
 
 /// 健康证状态
@@ -31,6 +32,12 @@ export default class HealthCerHomePage extends Component {
             submitEditButtonEnable: true,
             healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
             //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
+
+            healthCerImages:[
+                {imageSourceType: 1, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                {imageSourceType: 2, imageUrl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+            ]
         };
     }
 
@@ -65,6 +72,9 @@ export default class HealthCerHomePage extends Component {
 
 
     render() {
+        const screenWidth = Dimensions.get('window').width;
+        const listWidth = screenWidth - 2*20;
+
         let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
         let approveResultCell = !this.state.isUpdatingInfo?
             <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
@@ -80,6 +90,11 @@ export default class HealthCerHomePage extends Component {
                 </View>
 
                 <CJDemoPickerImageFlatList style={{flex: 1}} />
+                <ImagesChooseList
+                    listWidth={listWidth}
+                    images={this.state.healthCerImages}
+                    numColumns={2}
+                />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
                 <CJDemoDateBeginEnd style={{marginTop: 22}}

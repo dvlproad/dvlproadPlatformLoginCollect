@@ -31,8 +31,9 @@ import PickImagePage from './pickImage/PickImagePage'
 //list
 import FlatListEasyPage from './list/FlatListEasyPage'
 import FlatListHorizontalEasyPage from './list/FlatListHorizontalEasyPage'
-import FlatListHorizontalNormalPage from './list/FlatListHorizontalNormalPage'
+import GoodsChoosePage from './list/GoodsChoosePage'
 import ListExamplePage from './list/ListExamplePage'
+import ImagesChoosePage from './list/ImagesChoosePage'
 import SectionListEasyPage from './list/SectionListEasyPage'
 
 
@@ -132,8 +133,8 @@ const UIHomeNavigation = createStackNavigator(
                 title: `列表的简单使用`,
             }),
         },
-        FlatListHorizontalNormalPage: {
-            screen: FlatListHorizontalNormalPage,
+        GoodsChoosePage: {
+            screen: GoodsChoosePage,
             navigationOptions: () => ({
                 title: `水平列表的简单使用`,
             }),
@@ -148,6 +149,12 @@ const UIHomeNavigation = createStackNavigator(
             screen: ListExamplePage,
             navigationOptions: () => ({
                 title: `列表的使用示例`,
+            }),
+        },
+        ImagesChoosePage: {
+            screen: ImagesChoosePage,
+            navigationOptions: () => ({
+                title: `一系列图片的选择`,
             }),
         },
         SectionListEasyPage: {
