@@ -57,7 +57,7 @@ export default class ImageChooseButton extends Component {
 
         return (
             <TouchableOpacity
-                style={[{width:boxWidth, backgroundColor:'red', marginHorizontal:5, marginBottom:35}, style]}
+                style={[{width:boxWidth, backgroundColor:'red'}, style]}
                 onPress={this.props.pickImageHandle}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >

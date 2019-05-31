@@ -72,8 +72,9 @@ export default class HealthCerHomePage extends Component {
 
 
     render() {
+        const paddingHorizontal = 15;
         const screenWidth = Dimensions.get('window').width;
-        const listWidth = screenWidth - 2*20;
+        const listWidth = screenWidth - 2*paddingHorizontal;
 
         let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
         let approveResultCell = !this.state.isUpdatingInfo?
@@ -83,7 +84,7 @@ export default class HealthCerHomePage extends Component {
         //let beginDateString = this.state.beginDateString;
 
         return (
-            <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
+            <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
                 <View style={{flexDirection: 'row', marginTop: 30}}>
                     <Text style={{fontSize:15, color: "#333333"}}>上传健康证</Text>
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
@@ -91,7 +92,9 @@ export default class HealthCerHomePage extends Component {
 
                 <CJDemoPickerImageFlatList style={{flex: 1}} />
                 <ImagesChooseList
+                    style={{backgroundColor: 'green'}}
                     listWidth={listWidth}
+                    boxHorizontalInterval={30}
                     images={this.state.healthCerImages}
                     numColumns={2}
                 />

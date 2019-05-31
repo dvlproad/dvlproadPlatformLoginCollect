@@ -51,6 +51,7 @@ export class ImageItem extends Component {
 
 export default class ImagesChooseList extends Component {
     static propTypes = {
+        boxHorizontalInterval: PropTypes.number,      // 水平方向上box之间的间隔
         listWidth: PropTypes.number.isRequired,
         numColumns: PropTypes.number,
 
@@ -60,6 +61,7 @@ export default class ImagesChooseList extends Component {
     };
 
     static defaultProps = {
+        boxHorizontalInterval: 5,
         listWidth: 0,
         numColumns: 2,
 
@@ -71,18 +73,23 @@ export default class ImagesChooseList extends Component {
 
     render() {
         const numColumns = this.props.numColumns;
-        const imageWidth = this.props.listWidth/numColumns-15;
-        const imageHeight = imageWidth * 108/164;
+        const boxHorizontalInterval = this.props.boxHorizontalInterval;
+        const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
+        const boxWidth = boxTotalWidth/numColumns;
+        const boxHeight = boxWidth * 108/164;
+
 
         return (
             <FlatList
+                style={this.props.style}
                 data={this.props.images}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => {
                     return (
                         <ImageChooseButton
-                            imageWidth={imageWidth}
-                            imageHeight={imageHeight}
+                            style={{marginRight:boxHorizontalInterval}}
+                            imageWidth={boxWidth}
+                            imageHeight={boxHeight}
                             imageSourceType={item.imageSourceType}
                             imageUrl={item.imageUrl}
                         />

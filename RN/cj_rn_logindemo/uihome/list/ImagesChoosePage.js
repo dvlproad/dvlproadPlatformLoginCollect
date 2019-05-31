@@ -23,10 +23,14 @@ export default class ImagesChoosePage extends Component {
 
     // 健康证图片选择(一行2个)
     renderHealthCerImages(){
+        let listWidth = width;
         return (
-            <View style={{backgroundColor: '#fff'}}>
-                <Text style={{fontSize:16, color:'#666', padding:15}}>健康证图片选择</Text>
-                <ImagesChooseList listWidth={width} images={this.state.healthCerImages} numColumns={2} />
+            <View style={{backgroundColor: 'green'}}>
+                <ImagesChooseList style={{backgroundColor: 'green'}}
+                                  listWidth={listWidth}
+                                  boxHorizontalInterval={30}
+                                  images={this.state.healthCerImages}
+                                  numColumns={2} />
             </View>
         )
     }
@@ -34,7 +38,12 @@ export default class ImagesChoosePage extends Component {
     render() {
         return (
             <ScrollView>
+                <View style={{ flex: 1, alignItems: 'flex-start', backgroundColor: '#efefef'}}>
+                    <Text style={{fontSize:16, color:'#666', backgroundColor: 'orange'}}>健康证图片选择 flex-start </Text>
+                    {this.renderHealthCerImages()}
+                </View>
                 <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#efefef'}}>
+                    <Text style={{fontSize:16, color:'#666', backgroundColor: 'orange'}}>健康证图片选择 center</Text>
                     {this.renderHealthCerImages()}
                 </View>
             </ScrollView>
