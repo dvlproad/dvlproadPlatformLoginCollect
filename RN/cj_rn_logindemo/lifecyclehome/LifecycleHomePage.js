@@ -94,7 +94,7 @@ class ItemComponent extends React.Component {
                 >
                     {this.props.showTitle}
                 </Text>
-                <Image style={{ marginRight: 10 }} source={require("../commonResourse/item_arrow_right.png")} />
+                <Image style={{ marginRight: 10 }} source={require("../commonResource/item_arrow_right.png")} />
             </TouchableOpacity>
         );
     }

@@ -28,6 +28,12 @@ import PickDatePage from './pickDate/PickDatePage'
 //pickImage
 import PickImagePage from './pickImage/PickImagePage'
 
+//list
+import FlatListEasyPage from './list/FlatListEasyPage'
+import FlatListHorizontalEasyPage from './list/FlatListHorizontalEasyPage'
+import FlatListHorizontalPage from './list/FlatListHorizontalPage'
+import ListExamplePage from './list/ListExamplePage'
+import SectionListEasyPage from './list/SectionListEasyPage'
 
 
 
@@ -120,9 +126,39 @@ const UIHomeNavigation = createStackNavigator(
                 title: `图片选择`,
             }),
         },
+        FlatListEasyPage: {
+            screen: FlatListEasyPage,
+            navigationOptions: () => ({
+                title: `列表的简单使用`,
+            }),
+        },
+        FlatListHorizontalPage: {
+            screen: FlatListHorizontalPage,
+            navigationOptions: () => ({
+                title: `水平列表的简单使用`,
+            }),
+        },
+        FlatListHorizontalEasyPage: {
+            screen: FlatListHorizontalEasyPage,
+            navigationOptions: () => ({
+                title: `水平列表的简单使用`,
+            }),
+        },
+        ListExamplePage: {
+            screen: ListExamplePage,
+            navigationOptions: () => ({
+                title: `列表的使用示例`,
+            }),
+        },
+        SectionListEasyPage: {
+            screen: SectionListEasyPage,
+            navigationOptions: () => ({
+                title: `分区列表的简单使用`,
+            }),
+        },
     },
     {
-        initialRouteName: 'PickImagePage'
+        initialRouteName: 'UIHome'
     }
 );
 

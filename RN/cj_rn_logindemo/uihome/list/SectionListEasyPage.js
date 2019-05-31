@@ -1,11 +1,10 @@
-//UIHomePage.js
+//SectionListEasyPage.js
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image, Alert } from 'react-native';
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
-import ListExamplePage from "./list/ListExamplePage";
 
 
-export default class UIHomePage extends React.Component {
+export default class SectionListEasyPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,13 +12,6 @@ export default class UIHomePage extends React.Component {
 
     _onPressButton = (nextPageName) => {
         console.log(nextPageName);
-
-        if (nextPageName) {
-            this.props.navigation.navigate(nextPageName)
-        } else  {
-            //nextPageName = "Button";
-            Alert.alert(nextPageName)
-        }
     }
 
     _renderItem = (info) => {
@@ -42,20 +34,18 @@ export default class UIHomePage extends React.Component {
                     { title: "Button", page: "ButtonHome" },
                     { title: "Navigation", page: "NavigationHome" },
                     { title: "Text", page: "TextHome" },
-                    ]
+                ]
             },
             { key: "Pick",
                 data: [
                     { title: "PickDatePage", page: "PickDatePage" },
-                    ]
+                ]
             },
             { key: "List",
                 data: [
                     { title: "FlatListEasyPage", page: "FlatListEasyPage" },
-                    { title: "FlatListHorizontalEasyPage", page: "FlatListHorizontalEasyPage" },
-                    { title: "FlatListHorizontalPage", page: "FlatListHorizontalPage" },
-                    { title: "ListExamplePage", page: "ListExamplePage" },
-                    ]
+                    { title: "超市快递" }
+                ]
             },
             { key: "W",
                 data: [
@@ -65,7 +55,7 @@ export default class UIHomePage extends React.Component {
                     { title: "王小磊" },
                     { title: "王中磊" },
                     { title: "王大磊" }
-                    ]
+                ]
             },
         ];
 
@@ -115,7 +105,6 @@ class ItemComponent extends React.Component {
                 >
                     {this.props.showTitle}
                 </Text>
-                <Image style={{ marginRight: 10 }} source={require("../commonResource/item_arrow_right.png")} />
             </TouchableOpacity>
         );
     }
