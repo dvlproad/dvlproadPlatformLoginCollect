@@ -2,7 +2,7 @@
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
+import {Alert, FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import ImageChooseButton, {ImageSourceType} from '../button/ImageChooseButton'
 
 export class ImageItem extends Component {
@@ -58,6 +58,9 @@ export default class ImagesChooseList extends Component {
         images: PropTypes.array,
         // imageSourceType: PropTypes.number.isRequired,
         // imageUrl: PropTypes.string.isRequired,
+
+        pickImageHandle: PropTypes.func,
+        deleteImageHandle: PropTypes.func
     };
 
     static defaultProps = {
@@ -68,6 +71,9 @@ export default class ImagesChooseList extends Component {
         images:[],
         // imageSourceType: ImageSourceType.Default,
         // imageUrl: null,
+        //
+        pickImageHandle: (buttonIndex)=>{},
+        deleteImageHandle: (buttonIndex)=>{},
     };
 
 
@@ -84,7 +90,7 @@ export default class ImagesChooseList extends Component {
                 style={this.props.style}
                 data={this.props.images}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     return (
                         <ImageChooseButton
                             style={{marginRight:boxHorizontalInterval}}
@@ -92,6 +98,10 @@ export default class ImagesChooseList extends Component {
                             imageHeight={boxHeight}
                             imageSourceType={item.imageSourceType}
                             imageUrl={item.imageUrl}
+
+                            buttonIndex={index}
+                            pickImageHandle={this.props.pickImageHandle}
+                            deleteImageHandle={this.props.deleteImageHandle}
                         />
                     )
                 }}

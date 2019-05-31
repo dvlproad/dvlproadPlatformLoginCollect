@@ -5,6 +5,7 @@ import { SubmitButton } from '../commonUI/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList'
+import ImageChooseButton from "../commonUI/button/ImageChooseButton";
 
 
 /// 健康证状态
@@ -97,6 +98,12 @@ export default class HealthCerHomePage extends Component {
                     boxHorizontalInterval={30}
                     images={this.state.healthCerImages}
                     numColumns={2}
+                    pickImageHandle={(index) => {
+                        Alert.alert("点击选择图片" + index);
+                    }}
+                    deleteImageHandle={(index) => {
+                        Alert.alert("点击删除图片" + index);
+                    }}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>

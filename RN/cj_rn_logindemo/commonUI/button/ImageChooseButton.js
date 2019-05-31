@@ -19,15 +19,17 @@ export default class ImageChooseButton extends Component {
         imageUrl: PropTypes.string.isRequired,
         isEditing: PropTypes.bool,
         pickImageHandle: PropTypes.func,
-        deleteImageHandle: PropTypes.func
+        deleteImageHandle: PropTypes.func,
+        buttonIndex: PropTypes.number,
     };
 
     static defaultProps = {
         imageSourceType: ImageSourceType.Default,
         imageUrl: null,
         isEditing: false,
-        pickImageHandle: null,
-        deleteImageHandle: null
+        pickImageHandle: (buttonIndex)=>{},
+        deleteImageHandle: (buttonIndex)=>{},
+        buttonIndex: 0
     };
 
 
@@ -55,10 +57,14 @@ export default class ImageChooseButton extends Component {
         const imageHeight = boxHeight-deleteButtonWidth/2;
         const imageTopRightPadding = deleteButtonWidth/2;
 
+        let buttonIndex = this.props.buttonIndex;
+
         return (
             <TouchableOpacity
                 style={[{width:boxWidth, backgroundColor:'red'}, style]}
-                onPress={this.props.pickImageHandle}
+                onPress={()=> {
+                    this.props.pickImageHandle(buttonIndex);
+                }}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
 
@@ -69,7 +75,9 @@ export default class ImageChooseButton extends Component {
 
                     <DeleteImageButton
                         style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
-                        deleteImageHandle={this.props.deleteImageHandle}
+                        deleteImageHandle={()=> {
+                            this.props.deleteImageHandle(buttonIndex);
+                        }}
                     />
                 </View>
             </TouchableOpacity>
