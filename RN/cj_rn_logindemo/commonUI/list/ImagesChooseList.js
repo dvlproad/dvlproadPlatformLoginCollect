@@ -19,7 +19,8 @@ export default class ImagesChooseList extends Component {
         deleteImageHandle: PropTypes.func,
 
         isEditing: PropTypes.bool,
-        hasAddIconWhenEditing: PropTypes.bool,  //在编辑时候是否显示添加图片的按钮
+        hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
+        addIconBeginHideCount: PropTypes.number,    //当达到指定图片量后，添加图片按钮不在显示
     };
 
     static defaultProps = {
@@ -36,6 +37,7 @@ export default class ImagesChooseList extends Component {
 
         isEditing: false,
         hasAddIconWhenEditing: true,
+        addIconBeginHideCount: 10000,
     };
 
 
@@ -47,11 +49,14 @@ export default class ImagesChooseList extends Component {
         const boxWidth = boxTotalWidth/numColumns;
         const boxHeight = boxWidth / this.props.widthHeightRatio;
 
-        const isAddIconShow = this.props.isEditing && this.props.hasAddIconWhenEditing;
+        const isAddIconShowing = this.props.isEditing &&
+            this.props.hasAddIconWhenEditing &&
+            this.props.imageSources.length < this.props.addIconBeginHideCount;
 
         let imageSources = this.props.imageSources;
-        if (isAddIconShow) {
+        if (isAddIconShowing) {
             // if (this.previousState.isEditing != this.state.isEditing) { //TODO:怎么判断旧状态
+            //TODO Error:这里多操作了好多次
                 let imageSource = {imageSource: require('./images/pickImage_blue.png')};
                 imageSources.splice(imageSources.length, 0, imageSource);
             // }
@@ -59,7 +64,7 @@ export default class ImagesChooseList extends Component {
 
         let isAddIcon = (index)=> {
             let imageCount = 0;
-            if (isAddIconShow) {
+            if (isAddIconShowing) {
                 imageCount = imageSources.length;
 
                 if (index==imageCount-1) {
@@ -74,7 +79,7 @@ export default class ImagesChooseList extends Component {
 
         let clickButtonHandle = (index)=> {
             let imageCount = 0;
-            if (isAddIconShow) {
+            if (isAddIconShowing) {
                 imageCount = imageSources.length;
 
                 if (index==imageCount-1) {

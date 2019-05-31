@@ -4,8 +4,7 @@ import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList, Dime
 import { SubmitButton } from '../commonUI/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
-import ImagesChooseList from '../commonUI/list/ImagesChooseList'
-import ImageChooseButton from "../commonUI/button/ImageChooseButton";
+import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 
 
 /// 健康证状态
@@ -29,13 +28,13 @@ export default class HealthCerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loaded: false,
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
             healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
             //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
 
             healthCerImages:[
-                {imageSource: require('./resource/goods.png')},
                 {imageSource: require('./resource/healthCerImage1.png')},
                 {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}},
             ]
@@ -63,12 +62,17 @@ export default class HealthCerHomePage extends Component {
         );
     }
 
-    // clickEditTitleHandle= () => {
-    //     //Alert.alert("你点击了编辑按钮！");
-    //     this.setState({
-    //         isUpdatingInfo: false
-    //     });
-    // }
+    clickEditTitleHandle= () => {
+        this.setState({
+            isUpdatingInfo: true
+        });
+    }
+
+    clickSubmitTitleHandle= () => {
+        this.setState({
+            isUpdatingInfo: false
+        });
+    }
 
 
     browseImageHandle=(index) => {
@@ -138,6 +142,7 @@ export default class HealthCerHomePage extends Component {
                     addImageHandle={this.addImageHandle}
                     deleteImageHandle={this.deleteImageHandle}
                     isEditing={this.state.isUpdatingInfo}
+                    addIconBeginHideCount={2}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
@@ -156,20 +161,12 @@ export default class HealthCerHomePage extends Component {
                 {approveResultCell}
 
                 <SubmitButton
-                    style={[{flex:1, marginTop: 40, height:44}, submitButtonStyle]}
+                    style={[{flex:1, marginTop: 40, height:44, marginBottom: 34}, submitButtonStyle]}
                     fontSize={17}
                     isShowEditTitle={!this.state.isUpdatingInfo}
                     isDisabled={!this.state.submitEditButtonEnable}
-                    clickEditTitleHandle={() => {
-                        this.setState({
-                            isUpdatingInfo: true
-                        });
-                    }}
-                    clickSubmitTitleHandle={() => {
-                        this.setState({
-                            isUpdatingInfo: false
-                        });
-                    }}
+                    clickEditTitleHandle={this.clickEditTitleHandle}
+                    clickSubmitTitleHandle={this.clickSubmitTitleHandle}
                 />
 
             </ScrollView>
