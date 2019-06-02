@@ -27,6 +27,7 @@ import TextHomePage from "./text/TextHomePage"
 import PickDatePage from './pickDate/PickDatePage'
 //pickImage
 import PickImagePage from './pickImage/PickImagePage'
+import PickImagesPage from './pickImage/PickImagesPage'
 
 //list
 import FlatListEasyPage from './list/FlatListEasyPage'
@@ -125,7 +126,13 @@ const UIHomeNavigation = createStackNavigator(
         PickImagePage: {
             screen: PickImagePage,
             navigationOptions: () => ({
-                title: `图片选择`,
+                title: `单个图片选择`,
+            }),
+        },
+        PickImagesPage: {
+            screen: PickImagesPage,
+            navigationOptions: () => ({
+                title: `多个图片选择`,
             }),
         },
 
