@@ -79,7 +79,8 @@ export default class ImagesChooseList extends Component {
                     this.state.addIconCurIndex = renderImageSources.length-1;
                 }
             } else {
-                let shouldDeleteAddIcon = this.props.imageSources.length >= this.props.imageMaxCount;
+                this.state.addIconCurIndex = renderImageSources.length-1; //特别注意:如果addIcon已经显示，则外面会将包含addIcon的数组传进来传进来，所以需要重新获取
+                let shouldDeleteAddIcon = this.props.imageSources.length > this.props.imageMaxCount;
                 if (shouldDeleteAddIcon) {
                     renderImageSources.splice(this.state.addIconCurIndex, 1);
                     this.state.addIconCurIndex = -1;
@@ -88,15 +89,6 @@ export default class ImagesChooseList extends Component {
                 }
             }
 
-            // let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount && this.state.addIconCurIndex == -1;
-            // if (shouldAddAddIcon) {
-            //     let addImage = {imageSource: require('./images/pickImage_blue.png')};
-            //     renderImageSources.splice(renderImageSources.length, 0, addImage);
-            //     this.state.addIconCurIndex = renderImageSources.length-1;
-            // } else if (this.props.imageSources.length >= this.props.imageMaxCount && this.state.addIconCurIndex != -1) {
-            //     // renderImageSources.splice(this.state.addIconCurIndex, 1);
-            //     // this.state.addIconCurIndex = -1;
-            // }
             Alert.alert('addIconCurIndex='+this.state.addIconCurIndex);
         }
 

@@ -88,7 +88,7 @@ export default class HealthCerHomePage extends Component {
 
         let healthCerImages = this.state.healthCerImages;
         addLogSting += '\n添加前的图片个数' + healthCerImages.length;
-        healthCerImages.splice(index-1, 0, healthCerImage);
+        healthCerImages.splice(index, 0, healthCerImage);
         addLogSting += '\n添加后的图片个数' + healthCerImages.length;
         Alert.alert(addLogSting);
         this.setState({
@@ -151,7 +151,7 @@ export default class HealthCerHomePage extends Component {
                     addImageHandle={this.addImageHandle}
                     deleteImageHandle={this.deleteImageHandle}
                     isEditing={this.state.isUpdatingInfo}
-                    //imageMaxCount={2}
+                    imageMaxCount={2}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
