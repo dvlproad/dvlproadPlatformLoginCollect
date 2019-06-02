@@ -20,8 +20,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/home.png')}
+                        selectedImage={require('./image/home.png')}
                     />
                 ),
             }),
@@ -34,8 +34,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/category.png')}
+                        selectedImage={require('./image/category.png')}
                     />
                 ),
             }),
@@ -48,8 +48,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/remind.png')}
+                        selectedImage={require('./image/remind.png')}
                     />;
                 }
             }),
@@ -62,8 +62,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/mine.png')}
+                        selectedImage={require('./image/mine.png')}
                     />;
                 }
             }),
@@ -76,8 +76,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/scanning.png')}
+                        selectedImage={require('./image/scanning.png')}
                     />;
                 }
             }),
@@ -90,8 +90,8 @@ const TabBarNavigator = createBottomTabNavigator({
                     return <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./image/home_n.png')}
-                        selectedImage={require('./image/home_n.png')}
+                        normalImage={require('./image/search.png')}
+                        selectedImage={require('./image/search.png')}
                     />;
                 }
             }),
@@ -129,7 +129,9 @@ const TabBarNavigator = createBottomTabNavigator({
 class TabBarItem extends React.Component {
     render() {
         return (
-            <Image source={this.props.focused ? this.props.selectedImage : this.props.normalImage}
+            <Image
+                style={{width:22, height:22}}
+                source={this.props.focused ? this.props.selectedImage : this.props.normalImage}
             />
         )
     }

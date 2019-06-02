@@ -11,22 +11,25 @@ export class GoodItem extends Component {
         goodTitle: PropTypes.string.isRequired,
         goodPrice: PropTypes.string.isRequired,
         goodDescribe: PropTypes.string.isRequired,
+        //goodImage: PropTypes.object.isRequired,
     };
 
     static defaultProps = {
         goodTitle: "商品标题",
         goodPrice: "168",
         goodDescribe: "商品描述",
+        goodImage: null,
     };
 
     render() {
         const imageWidth = this.props.imageWidth;
         const imageHeight = this.props.imageHeight;
+        const goodImage = this.props.goodImage;
 
         return (
             <TouchableOpacity style={{ width:imageWidth, marginLeft:5, marginRight:5, marginBottom:15 }}>
                 <Image style={{ width:imageWidth,  height:imageHeight, backgroundColor:'#f4f4f4'}}
-                       source={require('../img/goods.png')}
+                       source={goodImage}
                 />
 
                 <Text style={{ backgroundColor:'#F1ECE2', color:'#9F8A60', paddingTop:8, paddingBottom:8, paddingLeft:4, paddingRight:4}}
@@ -78,6 +81,7 @@ export default class GoodsChooseList extends Component {
                             goodTitle={item.title}
                             goodPrice={item.price}
                             goodDescribe={item.describe}
+                            goodImage={item.image}
                         />
                     )
                 }}

@@ -36,6 +36,8 @@ export default class HealthCerHomePage extends Component {
 
             healthCerImages:[
                 {imageSource: require('./resource/healthCerImage1.png')},
+                // {imageSource: require('./resource/healthCerImage1.png')},
+                // {imageSource: require('./resource/healthCerImage1.png')},
                 {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}},
             ]
         };
@@ -63,6 +65,7 @@ export default class HealthCerHomePage extends Component {
     }
 
     clickEditTitleHandle= () => {
+        Alert.alert('currentImageCount=' + this.state.healthCerImages.length);
         this.setState({
             isUpdatingInfo: true
         });
@@ -80,11 +83,14 @@ export default class HealthCerHomePage extends Component {
     }
 
     addImageHandle=(index) => {
-        Alert.alert("添加图片" + index);
+        let addLogSting = 'addImageIndex=' + index;
         let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
 
         let healthCerImages = this.state.healthCerImages;
+        addLogSting += '\n添加前的图片个数' + healthCerImages.length;
         healthCerImages.splice(index-1, 0, healthCerImage);
+        addLogSting += '\n添加后的图片个数' + healthCerImages.length;
+        Alert.alert(addLogSting);
         this.setState({
                 healthCerImages: healthCerImages
             }
@@ -92,9 +98,12 @@ export default class HealthCerHomePage extends Component {
     }
 
     deleteImageHandle=(index) => {
-        // Alert.alert("删除图片" + index);
+        let deleteLogSting = 'deleteImageIndex=' + index;
         let healthCerImages = this.state.healthCerImages;
+        deleteLogSting += '\n删除前的图片个数' + healthCerImages.length;
         healthCerImages.splice(index,1);
+        deleteLogSting += '\n删除后的图片个数' + healthCerImages.length;
+        Alert.alert(deleteLogSting);
         this.setState({
                 healthCerImages: healthCerImages
             }
@@ -142,7 +151,7 @@ export default class HealthCerHomePage extends Component {
                     addImageHandle={this.addImageHandle}
                     deleteImageHandle={this.deleteImageHandle}
                     isEditing={this.state.isUpdatingInfo}
-                    addIconBeginHideCount={2}
+                    //imageMaxCount={2}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>

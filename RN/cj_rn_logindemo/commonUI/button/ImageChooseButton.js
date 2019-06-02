@@ -1,7 +1,7 @@
 //ImageChooseButton.js
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Image, TouchableOpacity, View} from "react-native";
+import {View, Image, Text, TouchableOpacity} from "react-native";
 
 /// 图片来源
 export var ImageSourceType = {
@@ -62,6 +62,8 @@ export default class ImageChooseButton extends Component {
             }}
         /> : null;
 
+        let imageText = 'ButtonIndex:' + buttonIndex;
+
         return (
             <TouchableOpacity
                 style={[{width:boxWidth, backgroundColor:'red'}, style]}
@@ -71,15 +73,31 @@ export default class ImageChooseButton extends Component {
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
 
-                    <Image style={{ width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
+                    <Image style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
                            source={imageSource}
                            defaultSource={require('./resources/imageLook.png')}
                     />
 
+                    <Text style={{
+                        backgroundColor: 'rgba(0,0,255,0.3)',
+                        position:'absolute',
+                        width:boxWidth,
+                        height:boxHeight,
+                        lineHeight: boxHeight,
+                        textAlign: 'center',
+                        fontSize: 26,
+                        color: '#99ff22'
+                    }}
+                    >
+                        {imageText}
+                    </Text>
+
                     {deleteImageButton}
-
-
                 </View>
+
+
+
+
             </TouchableOpacity>
         );
     }

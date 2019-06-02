@@ -14,7 +14,7 @@ export default class DateHomePage extends Component {
         let beginDateString1 = "2000-02-29";
         let beginDate = DateUtil.parserDateString(beginDateString1);
         let beginDateString2 = DateUtil.yyyyMMdd_hhmmssString(beginDate);
-        let endDate = DateUtil.addDataTime(beginDate, 1, 'year');
+        let endDate = DateUtil.addYears(beginDate, 1);
         let endDateString = DateUtil.yyyyMMdd_hhmmssString(endDate);
 
         let momentAddDay1 = moment().add(1, 'days').calendar();

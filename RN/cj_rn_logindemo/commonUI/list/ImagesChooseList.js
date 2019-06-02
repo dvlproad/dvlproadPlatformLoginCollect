@@ -2,7 +2,7 @@
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { FlatList } from "react-native";
+import { FlatList, Alert, Text } from "react-native";
 import ImageChooseButton from '../button/ImageChooseButton'
 
 export default class ImagesChooseList extends Component {
@@ -20,7 +20,7 @@ export default class ImagesChooseList extends Component {
 
         isEditing: PropTypes.bool,
         hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
-        addIconBeginHideCount: PropTypes.number,    //当达到指定图片量后，添加图片按钮不在显示
+        imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
     };
 
     static defaultProps = {
@@ -37,66 +37,93 @@ export default class ImagesChooseList extends Component {
 
         isEditing: false,
         hasAddIconWhenEditing: true,
-        addIconBeginHideCount: 10000,
+        imageMaxCount: 10000,
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            //renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
+            addIconCurIndex: -1,   //添加按钮的当前索引的值①等于-1代表没有添加显示；②大于imageMaxCount则不显示
+        }
+    }
+
+    // shouldComponentUpdate(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean {
+    //     return true;
+    // }
+    //
+    // componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+    //     lifeString = 'WillReceiveProps:' + this.props.imageSources.length + "_" + nextProps.imageSources.length;
+    // }
 
 
     render() {
+        //Alert.alert('list:render');
         const numColumns = this.props.numColumns;
         const boxHorizontalInterval = this.props.boxHorizontalInterval;
         const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
         const boxWidth = boxTotalWidth/numColumns;
         const boxHeight = boxWidth / this.props.widthHeightRatio;
 
-        const isAddIconShowing = this.props.isEditing &&
-            this.props.hasAddIconWhenEditing &&
-            this.props.imageSources.length < this.props.addIconBeginHideCount;
 
-        let imageSources = this.props.imageSources;
-        if (isAddIconShowing) {
-            // if (this.previousState.isEditing != this.state.isEditing) { //TODO:怎么判断旧状态
-            //TODO Error:这里多操作了好多次
-                let imageSource = {imageSource: require('./images/pickImage_blue.png')};
-                imageSources.splice(imageSources.length, 0, imageSource);
+        let renderImageSources = this.props.imageSources;
+
+        const allowAddIconShowing = this.props.isEditing &&
+            this.props.hasAddIconWhenEditing;
+        if (allowAddIconShowing) {
+            if (this.state.addIconCurIndex == -1) {
+                let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount;
+                if (shouldAddAddIcon) {
+                    let addImage = {imageSource: require('./images/pickImage_blue.png')};
+                    renderImageSources.splice(renderImageSources.length, 0, addImage);
+                    this.state.addIconCurIndex = renderImageSources.length-1;
+                }
+            } else {
+                let shouldDeleteAddIcon = this.props.imageSources.length >= this.props.imageMaxCount;
+                if (shouldDeleteAddIcon) {
+                    renderImageSources.splice(this.state.addIconCurIndex, 1);
+                    this.state.addIconCurIndex = -1;
+                } else {
+                    this.state.addIconCurIndex = renderImageSources.length-1;
+                }
+            }
+
+            // let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount && this.state.addIconCurIndex == -1;
+            // if (shouldAddAddIcon) {
+            //     let addImage = {imageSource: require('./images/pickImage_blue.png')};
+            //     renderImageSources.splice(renderImageSources.length, 0, addImage);
+            //     this.state.addIconCurIndex = renderImageSources.length-1;
+            // } else if (this.props.imageSources.length >= this.props.imageMaxCount && this.state.addIconCurIndex != -1) {
+            //     // renderImageSources.splice(this.state.addIconCurIndex, 1);
+            //     // this.state.addIconCurIndex = -1;
             // }
+            Alert.alert('addIconCurIndex='+this.state.addIconCurIndex);
         }
 
-        let isAddIcon = (index)=> {
-            let imageCount = 0;
-            if (isAddIconShowing) {
-                imageCount = imageSources.length;
 
-                if (index==imageCount-1) {
-                    return true;
-                } else {
-                    return false;
-                }
+        let isAddIcon = (index)=> {
+            if (index == this.state.addIconCurIndex) {
+                return true;
             } else {
                 return false;
             }
         }
 
         let clickButtonHandle = (index)=> {
-            let imageCount = 0;
-            if (isAddIconShowing) {
-                imageCount = imageSources.length;
-
-                if (index==imageCount-1) {
-                    this.props.addImageHandle(index);
-                } else {
-                    this.props.browseImageHandle(index);
-                }
+            if (index == this.state.addIconCurIndex) {
+                this.props.addImageHandle(index);
             } else {
                 this.props.browseImageHandle(index);
             }
         }
 
 
+        let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
+
         return (
             <FlatList
                 style={this.props.style}
-                data={imageSources}
+                data={renderImageSources}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     return (
@@ -113,6 +140,11 @@ export default class ImagesChooseList extends Component {
                             isEditing={this.props.isEditing}
                             isAddIcon={isAddIcon(index)}
                         />
+                    )
+                }}
+                ListHeaderComponent={()=>{
+                    return (
+                        <Text>{headerText}</Text>
                     )
                 }}
                 numColumns={numColumns}

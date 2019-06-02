@@ -53,10 +53,11 @@ export default class UIHomePage extends React.Component {
             { key: "List",
                 data: [
                     { title: "FlatListEasyPage", page: "FlatListEasyPage" },
+                    { title: "FlatListNumColumnsPage", page: "FlatListNumColumnsPage" },
                     { title: "FlatListHorizontalEasyPage", page: "FlatListHorizontalEasyPage" },
                     { title: "GoodsChoosePage", page: "GoodsChoosePage" },
-                    { title: "ListExamplePage", page: "ListExamplePage" },
                     { title: "ImagesChoosePage", page: "ImagesChoosePage" },
+                    { title: "ListExamplePage", page: "ListExamplePage" },
                     ]
             },
             { key: "W",
