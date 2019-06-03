@@ -5,7 +5,8 @@ import { SubmitButton } from '../commonUI/button/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
-
+import CJActionSheetModel from '../commonUI/alert/CJActionSheet';
+import ImagePicker from 'react-native-image-picker';
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -89,10 +90,16 @@ export default class HealthCerHomePage extends Component {
 
 
     browseImageHandle=(index) => {
+        this.chooseImageSource();
+        return;
+
         Alert.alert("浏览图片" + index);
     }
 
     addImageHandle=(index) => {
+        this.chooseImageSource();
+        return;
+
         let addLogSting = 'addImageIndex=' + index;
         let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
 
@@ -105,6 +112,46 @@ export default class HealthCerHomePage extends Component {
                 healthCerImages: healthCerImages
             }
         )
+    }
+
+    chooseImageSource=()=>{
+        // this.refs.actionSheet.show('请选择图片来源', ['拍摄', '从相册选择'], null, (item) => {
+        //     //Alert.alert(item);
+        // });
+        // More info on all the options is below in the API Reference... just some common use cases shown here
+        const options = {
+            title: 'Select Avatar',
+            customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+
+        /**
+         * The first arg is the options object for customization (it can also be null or omitted for default options),
+         * The second arg is the callback which sends object: response (more info in the API Reference)
+         */
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                const source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source,
+                });
+            }
+        });
     }
 
     deleteImageHandle=(index) => {
@@ -143,6 +190,7 @@ export default class HealthCerHomePage extends Component {
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
+                <CJActionSheetModel ref='actionSheet' />
                 <View style={{flexDirection: 'row', marginTop: 30}}>
                     <Text style={{fontSize:15, color: "#333333"}}>上传健康证</Text>
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
