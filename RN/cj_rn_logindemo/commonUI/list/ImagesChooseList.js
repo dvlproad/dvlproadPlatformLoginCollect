@@ -21,6 +21,8 @@ export default class ImagesChooseList extends Component {
         isEditing: PropTypes.bool,
         hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
         imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
+
+        imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
     };
 
     static defaultProps = {
@@ -38,6 +40,8 @@ export default class ImagesChooseList extends Component {
         isEditing: false,
         hasAddIconWhenEditing: true,
         imageMaxCount: 10000,
+
+        imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
     };
 
     constructor(props) {
@@ -45,6 +49,8 @@ export default class ImagesChooseList extends Component {
         this.state = {
             //renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
             addIconCurIndex: -1,   //添加按钮的当前索引的值①等于-1代表没有添加显示；②大于imageMaxCount则不显示
+
+            imageLoadedCount: 0//完成加载的图片个数
         }
     }
 
@@ -55,6 +61,12 @@ export default class ImagesChooseList extends Component {
     // componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
     //     lifeString = 'WillReceiveProps:' + this.props.imageSources.length + "_" + nextProps.imageSources.length;
     // }
+
+    onLoadComplete=(buttonIndex)=>{
+        this.state.imageLoadedCount++;
+        let isImageAllLoaded = this.state.imageLoadedCount >= this.props.imageSources.length ? true : false;
+        this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+    }
 
 
     render() {
@@ -131,6 +143,8 @@ export default class ImagesChooseList extends Component {
 
                             isEditing={this.props.isEditing}
                             isAddIcon={isAddIcon(index)}
+
+                            onLoadComplete={this.onLoadComplete}
                         />
                     )
                 }}

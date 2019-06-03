@@ -43,7 +43,10 @@ export default class HealthCerHomePage extends Component {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
                     loaded:false
                 },
-            ]
+            ],
+
+            isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
+
         };
     }
 
@@ -69,7 +72,10 @@ export default class HealthCerHomePage extends Component {
     }
 
     clickEditTitleHandle= () => {
-        Alert.alert('currentImageCount=' + this.state.healthCerImages.length);
+        if (!this.state.isImageAllLoaded) {
+            Alert.alert('请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length);
+            return;
+        }
         this.setState({
             isUpdatingInfo: true
         });
@@ -114,6 +120,11 @@ export default class HealthCerHomePage extends Component {
         )
     }
 
+    imageLoadedCountChange= (imageLoadedCount, isImageAllLoaded)=>{
+        //Alert.alert("完成加载的图片个数为:" + imageLoadedCount);
+        this.state.isImageAllLoaded = isImageAllLoaded;
+    }
+
 
 
     render() {
@@ -156,6 +167,7 @@ export default class HealthCerHomePage extends Component {
                     deleteImageHandle={this.deleteImageHandle}
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}
+                    imageLoadedCountChange={this.imageLoadedCountChange}
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>

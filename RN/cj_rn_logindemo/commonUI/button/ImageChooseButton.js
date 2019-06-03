@@ -31,6 +31,8 @@ export default class ImageChooseButton extends Component {
 
         isEditing: PropTypes.bool,
         isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
+
+        onLoadComplete: PropTypes.func, //图片加载结束的回调
     };
 
     static defaultProps = {
@@ -44,6 +46,8 @@ export default class ImageChooseButton extends Component {
 
         isEditing: false,
         isAddIcon: false,
+
+        onLoadComplete: (buttonIndex)=>{},
     };
 
     constructor(props) {
@@ -78,9 +82,13 @@ export default class ImageChooseButton extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        this.setState({
-            loadStatus: ImageLoadStatus.Success
-        })
+        setTimeout(()=> {
+            this.setState({
+                loadStatus: ImageLoadStatus.Success
+            });
+
+            this.props.onLoadComplete(this.props.buttonIndex);
+        }, 1000);
     }
 
     /**
@@ -91,7 +99,8 @@ export default class ImageChooseButton extends Component {
         console.log(error)
         this.setState({
             loadStatus: ImageLoadStatus.Failure
-        })
+        });
+        this.props.onLoadComplete(this.props.buttonIndex);
     }
 
 
