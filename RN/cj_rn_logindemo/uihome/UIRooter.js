@@ -20,6 +20,9 @@ import Page3 from './navigation/page3';
 //button
 import ButtonHomePage from "./button/ButtonHomePage"
 
+//image
+import LoadImagePage from "./image/LoadImagePage"
+
 //text
 import TextHomePage from "./text/TextHomePage"
 
@@ -37,6 +40,9 @@ import GoodsChoosePage from './list/GoodsChoosePage'
 import ListExamplePage from './list/ListExamplePage'
 import ImagesChoosePage from './list/ImagesChoosePage'
 import SectionListEasyPage from './list/SectionListEasyPage'
+
+//loading
+import ActivityIndicatorPage from './loading/ActivityIndicatorPage'
 
 
 
@@ -117,6 +123,14 @@ const UIHomeNavigation = createStackNavigator(
                 title: `Text首页`,
             }),
         },
+        LoadImagePage: {
+            screen: LoadImagePage,
+            navigationOptions: () => ({
+                title: `Image首页`,
+            }),
+        },
+
+
         PickDatePage: {
             screen: PickDatePage,
             navigationOptions: () => ({
@@ -181,9 +195,16 @@ const UIHomeNavigation = createStackNavigator(
                 title: `分区列表的简单使用`,
             }),
         },
+
+        ActivityIndicatorPage: {
+            screen: ActivityIndicatorPage,
+            navigationOptions: () => ({
+                title: `ActivityIndicatorPage(一个圆形的 loading 提示符号)`,
+            }),
+        },
     },
     {
-        initialRouteName: 'UIHome'
+        initialRouteName: 'LoadImagePage'
     }
 );
 

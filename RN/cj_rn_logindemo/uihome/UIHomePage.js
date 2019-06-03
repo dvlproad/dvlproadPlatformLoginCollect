@@ -44,6 +44,11 @@ export default class UIHomePage extends React.Component {
                     { title: "Text", page: "TextHome" },
                     ]
             },
+            { key: "image",
+                data: [
+                    { title: "LoadImagePage", page: "LoadImagePage" },
+                ]
+            },
             { key: "Pick",
                 data: [
                     { title: "PickDatePage", page: "PickDatePage" },
@@ -60,6 +65,11 @@ export default class UIHomePage extends React.Component {
                     { title: "ImagesChoosePage", page: "ImagesChoosePage" },
                     { title: "ListExamplePage", page: "ListExamplePage" },
                     ]
+            },
+            { key: "Loading",
+                data: [
+                    { title: "ActivityIndicatorPage", page: "ActivityIndicatorPage" },
+                ]
             },
             { key: "W",
                 data: [

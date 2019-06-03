@@ -1,7 +1,7 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Image, Text, Button, StyleSheet, Alert, FlatList, Dimensions} from 'react-native';
-import { SubmitButton } from '../commonUI/cjdemobuttonfactory';
+import { SubmitButton } from '../commonUI/button/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCell';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
@@ -35,10 +35,14 @@ export default class HealthCerHomePage extends Component {
             //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
 
             healthCerImages:[
-                {imageSource: require('./resource/healthCerImage1.png')},
-                // {imageSource: require('./resource/healthCerImage1.png')},
-                // {imageSource: require('./resource/healthCerImage1.png')},
-                {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}},
+                {
+                    imageSource: require('./resource/healthCerImage1.png'),
+                    loaded:false
+                },
+                {
+                    imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                    loaded:false
+                },
             ]
         };
     }

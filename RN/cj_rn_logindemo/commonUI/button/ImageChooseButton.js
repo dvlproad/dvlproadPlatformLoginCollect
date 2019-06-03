@@ -1,14 +1,22 @@
 //ImageChooseButton.js
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {View, Image, Text, TouchableOpacity} from "react-native";
+import {View, Image, Text, TouchableOpacity, ActivityIndicator} from "react-native";
 
 /// 图片来源
 export var ImageSourceType = {
     Default: 0,     /**< 无, 使用默认图片 */
     Local: 1,       /**< 本地 */
     Network: 2      /**< 网络 */
-}
+};
+
+/// 图片加载状态
+var ImageLoadStatus = {
+    Pending: 0,     /**< 准备加载 */
+    Loading: 1,     /**< 正在加载 */
+    Success: 2,     /**< 加载成功 */
+    Failure: 3,     /**< 加载失败 */
+};
 
 
 export default class ImageChooseButton extends Component {
@@ -38,6 +46,53 @@ export default class ImageChooseButton extends Component {
         isAddIcon: false,
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+            loadStatus: ImageLoadStatus.Pending,
+        }
+    }
+
+    /**
+     * 开始加载(当开始加载图片调用该方法)
+     */
+    onLoadStart = () => {
+        this.setState({
+            loaded: false,
+            loadStatus: ImageLoadStatus.Loading,
+        })
+    }
+
+
+    /**
+     * 加载结束(当加载完成回调该方法，不管图片加载成功还是失败都会调用该方法)
+     */
+    onLoadEnd = () => {
+        this.setState({
+            loaded: true,
+        })
+    }
+
+    /**
+     * 加载成功(当图片加载成功之后，回调该方法)
+     */
+    onLoadSuccess=() => {
+        this.setState({
+            loadStatus: ImageLoadStatus.Success
+        })
+    }
+
+    /**
+     * 加载失败(该属性要赋值一个function，当加载出错执行赋值的这个方法)
+     * @param {*} error
+     */
+    onLoadError=(error) => {
+        console.log(error)
+        this.setState({
+            loadStatus: ImageLoadStatus.Failure
+        })
+    }
 
 
     render() {
@@ -76,6 +131,10 @@ export default class ImageChooseButton extends Component {
                     <Image style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
                            source={imageSource}
                            defaultSource={require('./resources/imageLook.png')}
+                           onLoadStart={this.onLoadStart}
+                           onLoadEnd={this.onLoadEnd}
+                           onLoad={this.onLoadSuccess}
+                           onError={this.onLoadError}
                     />
 
                     <Text style={{
@@ -91,6 +150,13 @@ export default class ImageChooseButton extends Component {
                     >
                         {imageText}
                     </Text>
+
+                    <ActivityIndicator
+                        style={{position:'absolute', width:boxWidth, height:boxHeight}}
+                        size="large"
+                        color="red"
+                        animating={this.state.loadStatus == ImageLoadStatus.Loading}
+                    />
 
                     {deleteImageButton}
                 </View>
