@@ -70,7 +70,6 @@ export default class ImagesChooseList extends Component {
 
 
     render() {
-        //Alert.alert('list:render');
         const numColumns = this.props.numColumns;
         const boxHorizontalInterval = this.props.boxHorizontalInterval;
         const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
@@ -101,7 +100,7 @@ export default class ImagesChooseList extends Component {
                 }
             }
 
-            Alert.alert('addIconCurIndex='+this.state.addIconCurIndex);
+            //Alert.alert('addIconCurIndex='+this.state.addIconCurIndex);
         }
 
 

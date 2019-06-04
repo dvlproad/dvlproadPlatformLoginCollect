@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image, Alert } f
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
 
-export default class UtilHomePage extends React.Component {
+export default class UtilHomePage extends Component {
 
     constructor(props) {
         super(props);
@@ -35,10 +35,15 @@ export default class UtilHomePage extends React.Component {
 
     render() {
         let sections = [
-            { key: "A",
+            { key: "Date",
                 data: [
                     { title: "Date", page: "DateHome" },
                     ]
+            },
+            { key: "String",
+                data: [
+                    { title: "StringPage", page: "StringPage" },
+                ]
             },
             { key: "C",
                 data: [

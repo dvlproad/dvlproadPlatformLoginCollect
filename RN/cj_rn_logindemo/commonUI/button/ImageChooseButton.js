@@ -18,12 +18,13 @@ var ImageLoadStatus = {
     Failure: 3,     /**< 加载失败 */
 };
 
+var isNetworkImage = false;
 
 export default class ImageChooseButton extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        // imageSource: PropTypes.object.isRequired,
+        // imageSource: PropTypes.object.isRequired,    //图片
 
         clickButtonHandle: PropTypes.func,
         deleteImageHandle: PropTypes.func,
@@ -52,6 +53,7 @@ export default class ImageChooseButton extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             loaded: false,
             loadStatus: ImageLoadStatus.Pending,
@@ -59,12 +61,27 @@ export default class ImageChooseButton extends Component {
     }
 
     /**
+     * 是否是网络图片
+     */
+    checkIsNetworkImage= (imageSource) => {
+        let isNetworkImage = false;
+        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+            let uri = imageSource['uri'];
+            if (uri.indexOf('http:') == 0 || uri.indexOf('https:') == 0) {
+                isNetworkImage = true;
+            }
+        }
+        return isNetworkImage;
+    }
+
+    /**
      * 开始加载(当开始加载图片调用该方法)
      */
     onLoadStart = () => {
+        let loadStatus = isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
         this.setState({
             loaded: false,
-            loadStatus: ImageLoadStatus.Loading,
+            loadStatus: loadStatus,
         })
     }
 
@@ -82,13 +99,14 @@ export default class ImageChooseButton extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
+        let timeout = isNetworkImage ? 1 : 0;
         setTimeout(()=> {
             this.setState({
                 loadStatus: ImageLoadStatus.Success
             });
 
             this.props.onLoadComplete(this.props.buttonIndex);
-        }, 1000);
+        }, timeout);
     }
 
     /**
@@ -127,6 +145,11 @@ export default class ImageChooseButton extends Component {
         /> : null;
 
         let imageText = 'ButtonIndex:' + buttonIndex;
+        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        imageText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
+        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+            imageText += '\n' + imageSource['uri'];
+        }
 
         return (
             <TouchableOpacity
@@ -151,9 +174,9 @@ export default class ImageChooseButton extends Component {
                         position:'absolute',
                         width:boxWidth,
                         height:boxHeight,
-                        lineHeight: boxHeight,
+                        lineHeight: boxHeight/3,
                         textAlign: 'center',
-                        fontSize: 26,
+                        fontSize: 17,
                         color: '#99ff22'
                     }}
                     >

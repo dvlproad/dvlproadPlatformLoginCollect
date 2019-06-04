@@ -90,38 +90,32 @@ export default class HealthCerHomePage extends Component {
 
 
     browseImageHandle=(index) => {
-        this.chooseImageSource();
-        return;
-
         Alert.alert("浏览图片" + index);
     }
 
-    addImageHandle=(index) => {
-        this.chooseImageSource();
-        return;
-
+    addImageHandle=(index, imageSource) => {
         let addLogSting = 'addImageIndex=' + index;
-        let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
+        let healthCerImage = {imageSource: imageSource};
 
         let healthCerImages = this.state.healthCerImages;
         addLogSting += '\n添加前的图片个数' + healthCerImages.length;
         healthCerImages.splice(index, 0, healthCerImage);
         addLogSting += '\n添加后的图片个数' + healthCerImages.length;
-        Alert.alert(addLogSting);
+        //Alert.alert(addLogSting);
         this.setState({
                 healthCerImages: healthCerImages
             }
         )
     }
 
-    chooseImageSource=()=>{
+    chooseImageSource=(index)=>{
         // this.refs.actionSheet.show('请选择图片来源', ['拍摄', '从相册选择'], null, (item) => {
         //     //Alert.alert(item);
         // });
+
         // More info on all the options is below in the API Reference... just some common use cases shown here
         const options = {
             title: 'Select Avatar',
-            customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
             storageOptions: {
                 skipBackup: true,
                 path: 'images',
@@ -139,17 +133,14 @@ export default class HealthCerHomePage extends Component {
                 console.log('User cancelled image picker');
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
             } else {
-                const source = { uri: response.uri };
+                const imageSource = { uri: response.uri };
+                //Alert.alert(response.uri);
+                //const imageSource = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
 
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    avatarSource: source,
-                });
+                this.addImageHandle(index, imageSource);
             }
         });
     }
@@ -160,7 +151,7 @@ export default class HealthCerHomePage extends Component {
         deleteLogSting += '\n删除前的图片个数' + healthCerImages.length;
         healthCerImages.splice(index,1);
         deleteLogSting += '\n删除后的图片个数' + healthCerImages.length;
-        Alert.alert(deleteLogSting);
+        //Alert.alert(deleteLogSting);
         this.setState({
                 healthCerImages: healthCerImages
             }
@@ -211,7 +202,7 @@ export default class HealthCerHomePage extends Component {
                     boxHorizontalInterval={30}
                     imageSources={imageSources}
                     browseImageHandle={this.browseImageHandle}
-                    addImageHandle={this.addImageHandle}
+                    addImageHandle={this.chooseImageSource}
                     deleteImageHandle={this.deleteImageHandle}
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}

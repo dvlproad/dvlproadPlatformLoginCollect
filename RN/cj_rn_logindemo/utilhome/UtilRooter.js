@@ -9,6 +9,9 @@ import UtilHomePage from "./UtilHomePage"
 //date
 import DateHomePage from "./date/DateHomePage"
 
+//string
+import StringPage from "./string/StringPage"
+
 
 
 //UtilHomeNavigation
@@ -24,6 +27,12 @@ const UtilHomeNavigation = createStackNavigator(
             screen: DateHomePage,
             navigationOptions: () => ({
                 title: `Date首页`,
+            }),
+        },
+        StringPage: {
+            screen: StringPage,
+            navigationOptions: () => ({
+                title: `String首页`,
             }),
         },
     },
