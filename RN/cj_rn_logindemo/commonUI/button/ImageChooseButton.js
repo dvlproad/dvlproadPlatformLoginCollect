@@ -18,6 +18,15 @@ var ImageLoadStatus = {
     Failure: 3,     /**< 加载失败 */
 };
 
+/// 图片来源
+export var ImageUploadType = {
+    NotNeed: 0,     /**< 不需要上传 */
+    Waiting: 1,     /**< 等待上传 */
+    Uploading: 2,   /**< 正在上传 */
+    Success: 3,     /**< 上传成功 */
+    Failure: 4,     /**< 上传失败 */
+};
+
 var isNetworkImage = false;
 
 export default class ImageChooseButton extends Component {
@@ -34,6 +43,8 @@ export default class ImageChooseButton extends Component {
         isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
 
         onLoadComplete: PropTypes.func, //图片加载结束的回调
+
+        uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度
     };
 
@@ -50,6 +61,8 @@ export default class ImageChooseButton extends Component {
         isAddIcon: false,
 
         onLoadComplete: (buttonIndex)=>{},
+
+        uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
     };
 
@@ -152,7 +165,33 @@ export default class ImageChooseButton extends Component {
         // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
         //     imageText += '\n' + imageSource['uri'];
         // }
-        imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
+        switch (this.props.uploadType) {
+            case ImageUploadType.NotNeed: {
+                imageText += '\n' + '不需要上传';
+                break;
+            }
+            case ImageUploadType.Waiting: {
+                imageText += '\n' + '等待上传';
+                break;
+            }
+            case ImageUploadType.Uploading: {
+                imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
+                break;
+            }
+            case ImageUploadType.Success: {
+                imageText += '\n' + '上传成功';
+                break;
+            }
+            case ImageUploadType.Failure: {
+                imageText += '\n' + '上传失败';
+                break;
+            }
+            default: {
+                imageText += '\n' + '什么情况';
+                break;
+            }
+        }
+
 
         return (
             <TouchableOpacity
@@ -177,7 +216,7 @@ export default class ImageChooseButton extends Component {
                         position:'absolute',
                         width:boxWidth,
                         height:boxHeight,
-                        lineHeight: boxHeight/3,
+                        lineHeight: boxHeight/4,
                         textAlign: 'center',
                         fontSize: 17,
                         color: '#99ff22'

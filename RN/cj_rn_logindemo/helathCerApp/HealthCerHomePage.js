@@ -236,7 +236,7 @@ export default class HealthCerHomePage extends Component {
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}
                     imageLoadedCountChange={this.imageLoadedCountChange}
-                    
+
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>

@@ -21,19 +21,18 @@ export default class UploadImagePage extends Component {
     addImageHandle=(index) => {
         let imageSource = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
 
-        //Alert.alert(addLogSting);
         this.setState({
             isAddIcon: false,
             imageSource: imageSource,
             }
         )
 
-        this.uploadImage(null); //测试图片上传
+        this.uploadImage(imageSource); //测试图片上传
     }
 
-    uploadImage(uri){
+    uploadImage(imageSource){
         this.state.uploadProgress = 0;
-        this.startUploadImage(uri);
+        this.startUploadImage(imageSource);
     }
 
     getRandom1 = (start, end) => {
@@ -42,7 +41,7 @@ export default class UploadImagePage extends Component {
         return num;
     }
 
-    startUploadImage(uri){
+    startUploadImage(imageSource){
         let uploadProgress = this.state.uploadProgress;
         if(uploadProgress > 100){
             this._uploadTimer && clearInterval(this._uploadTimer);
@@ -58,6 +57,7 @@ export default class UploadImagePage extends Component {
 
             let curUploadProgress = this.getRandom1(10, 20);
             uploadProgress += curUploadProgress;
+            uploadProgress = uploadProgress > 100 ? 100 : uploadProgress;
             this.setState({
                 uploadProgress: uploadProgress,
             });
