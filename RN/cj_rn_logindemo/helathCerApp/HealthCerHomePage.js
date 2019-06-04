@@ -38,13 +38,12 @@ export default class HealthCerHomePage extends Component {
             healthCerImages:[
                 {
                     imageSource: require('./resource/healthCerImage1.png'),
-                    loaded:false
                 },
                 {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                    loaded:false
                 },
             ],
+            uploadProgress: 0,  //图片上传进度
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
 
@@ -93,21 +92,6 @@ export default class HealthCerHomePage extends Component {
         Alert.alert("浏览图片" + index);
     }
 
-    addImageHandle=(index, imageSource) => {
-        let addLogSting = 'addImageIndex=' + index;
-        let healthCerImage = {imageSource: imageSource};
-
-        let healthCerImages = this.state.healthCerImages;
-        addLogSting += '\n添加前的图片个数' + healthCerImages.length;
-        healthCerImages.splice(index, 0, healthCerImage);
-        addLogSting += '\n添加后的图片个数' + healthCerImages.length;
-        //Alert.alert(addLogSting);
-        this.setState({
-                healthCerImages: healthCerImages
-            }
-        )
-    }
-
     chooseImageSource=(index)=>{
         // this.refs.actionSheet.show('请选择图片来源', ['拍摄', '从相册选择'], null, (item) => {
         //     //Alert.alert(item);
@@ -143,6 +127,51 @@ export default class HealthCerHomePage extends Component {
                 this.addImageHandle(index, imageSource);
             }
         });
+    }
+
+    addImageHandle=(index, imageSource) => {
+        let addLogSting = 'addImageIndex=' + index;
+        let healthCerImage = {imageSource: imageSource};
+
+        let healthCerImages = this.state.healthCerImages;
+        addLogSting += '\n添加前的图片个数' + healthCerImages.length;
+        healthCerImages.splice(index, 0, healthCerImage);
+        addLogSting += '\n添加后的图片个数' + healthCerImages.length;
+        //Alert.alert(addLogSting);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+
+        this.uploadImage(null); //测试图片上传
+    }
+
+    uploadImage(uri){
+        this.state.uploadProgress = 0;
+        this.startUploadImage(uri);
+    }
+
+    startUploadImage(uri){
+        let uploadProgress = this.state.uploadProgress;
+        if(uploadProgress > 100){
+            this._uploadTimer && clearInterval(this._uploadTimer);
+            alert("本文件已上传结束");
+            return;
+        }
+        this._uploadTimer=setInterval(()=>{
+            if(uploadProgress > 100){
+                this._uploadTimer && clearInterval(this._uploadTimer);
+                alert("上传成功");
+                return;
+            }
+            uploadProgress++;
+            this.setState({
+                uploadProgress: uploadProgress,
+            });
+        },1000);
+    }
+    stopTime(){
+        this._uploadTimer && clearInterval(this._uploadTimer);
     }
 
     deleteImageHandle=(index) => {
@@ -207,6 +236,7 @@ export default class HealthCerHomePage extends Component {
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}
                     imageLoadedCountChange={this.imageLoadedCountChange}
+                    
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>

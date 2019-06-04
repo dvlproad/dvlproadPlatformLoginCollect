@@ -1,9 +1,9 @@
-//LoadImagePage.js
+//LoadingImagePage.js
 
 import React, { Component } from 'react'
 import LoadingImage from '../../commonUI/image/LoadingImage'
 
-export default class LoadImagePage extends Component {
+export default class LoadingImagePage extends Component {
     render() {
         return (
             <LoadingImage

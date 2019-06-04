@@ -21,7 +21,8 @@ import Page3 from './navigation/page3';
 import ButtonHomePage from "./button/ButtonHomePage"
 
 //image
-import LoadImagePage from "./image/LoadImagePage"
+import LoadingImagePage from "./image/LoadingImagePage"
+import UploadImagePage from "./image/UploadImagePage";
 
 //text
 import TextHomePage from "./text/TextHomePage"
@@ -123,13 +124,20 @@ const UIHomeNavigation = createStackNavigator(
                 title: `Text首页`,
             }),
         },
-        LoadImagePage: {
-            screen: LoadImagePage,
+
+
+        LoadingImagePage: {
+            screen: LoadingImagePage,
             navigationOptions: () => ({
-                title: `Image首页`,
+                title: `Image加载首页`,
             }),
         },
-
+        UploadImagePage: {
+            screen: UploadImagePage,
+            navigationOptions: () => ({
+                title: `Image上传首页`,
+            }),
+        },
 
         PickDatePage: {
             screen: PickDatePage,
@@ -204,7 +212,7 @@ const UIHomeNavigation = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'LoadImagePage'
+        initialRouteName: 'UploadImagePage'
     }
 );
 

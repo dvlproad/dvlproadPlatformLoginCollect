@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, SectionList, TouchableOpacity, Image, Alert } from 'react-native';
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
+import CountTimerPage from "./timer/CountTimerPage";
 
 
 export default class UtilHomePage extends Component {
@@ -43,6 +44,11 @@ export default class UtilHomePage extends Component {
             { key: "String",
                 data: [
                     { title: "StringPage", page: "StringPage" },
+                ]
+            },
+            { key: "Timer",
+                data: [
+                    { title: "CountTimerPage", page: "CountTimerPage" },
                 ]
             },
             { key: "C",

@@ -34,6 +34,7 @@ export default class ImageChooseButton extends Component {
         isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
 
         onLoadComplete: PropTypes.func, //图片加载结束的回调
+        uploadProgress: PropTypes.number,   //图片上传进度
     };
 
     static defaultProps = {
@@ -49,6 +50,7 @@ export default class ImageChooseButton extends Component {
         isAddIcon: false,
 
         onLoadComplete: (buttonIndex)=>{},
+        uploadProgress: 0,
     };
 
     constructor(props) {
@@ -99,14 +101,14 @@ export default class ImageChooseButton extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        let timeout = isNetworkImage ? 1 : 0;
+        let simulateNetworkImageLoad = isNetworkImage ? 1 : 0;
         setTimeout(()=> {
             this.setState({
                 loadStatus: ImageLoadStatus.Success
             });
 
             this.props.onLoadComplete(this.props.buttonIndex);
-        }, timeout);
+        }, simulateNetworkImageLoad);
     }
 
     /**
@@ -147,9 +149,10 @@ export default class ImageChooseButton extends Component {
         let imageText = 'ButtonIndex:' + buttonIndex;
         isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
         imageText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
-        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
-            imageText += '\n' + imageSource['uri'];
-        }
+        // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+        //     imageText += '\n' + imageSource['uri'];
+        // }
+        imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
 
         return (
             <TouchableOpacity

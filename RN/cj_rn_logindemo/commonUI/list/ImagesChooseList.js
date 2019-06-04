@@ -68,6 +68,21 @@ export default class ImagesChooseList extends Component {
         this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
     }
 
+    isAddIcon = (index)=> {
+        if (index == this.state.addIconCurIndex) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    clickButtonHandle = (index)=> {
+        if (index == this.state.addIconCurIndex) {
+            this.props.addImageHandle(index);
+        } else {
+            this.props.browseImageHandle(index);
+        }
+    }
 
     render() {
         const numColumns = this.props.numColumns;
@@ -104,23 +119,6 @@ export default class ImagesChooseList extends Component {
         }
 
 
-        let isAddIcon = (index)=> {
-            if (index == this.state.addIconCurIndex) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        let clickButtonHandle = (index)=> {
-            if (index == this.state.addIconCurIndex) {
-                this.props.addImageHandle(index);
-            } else {
-                this.props.browseImageHandle(index);
-            }
-        }
-
-
         let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
 
         return (
@@ -137,11 +135,11 @@ export default class ImagesChooseList extends Component {
                             imageSource={item.imageSource}
 
                             buttonIndex={index}
-                            clickButtonHandle={clickButtonHandle}
+                            clickButtonHandle={this.clickButtonHandle}
                             deleteImageHandle={this.props.deleteImageHandle}
 
                             isEditing={this.props.isEditing}
-                            isAddIcon={isAddIcon(index)}
+                            isAddIcon={this.isAddIcon(index)}
 
                             onLoadComplete={this.onLoadComplete}
                         />
