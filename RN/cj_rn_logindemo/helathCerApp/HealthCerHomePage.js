@@ -27,6 +27,7 @@ var HealthCardApproveCode = {
 
 
 var currentUploadMessage = '';
+var timerMessage = '';
 
 export default class HealthCerHomePage extends Component {
     constructor(props) {
@@ -43,15 +44,18 @@ export default class HealthCerHomePage extends Component {
                     imageSource: require('./resource/healthCerImage1.png'),
                     uploadType: ImageUploadType.NotNeed,
                     uploadProgress: 0,
+                    imageIndex: 0,
                 },
                 {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
                     uploadType: ImageUploadType.NotNeed,
                     uploadProgress: 0,
+                    imageIndex: 1,
                 },
             ],
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
+            timerSecondsCount: 0,   // 模拟上传的定时器执行了多少次
         };
     }
 
@@ -140,6 +144,7 @@ export default class HealthCerHomePage extends Component {
                                 imageSource: imageSource,
                                 uploadType: ImageUploadType.Waiting,
                                 uploadProgress: 0,
+                                imageIndex: index,
                             };
 
         let healthCerImages = this.state.healthCerImages;
@@ -147,6 +152,10 @@ export default class HealthCerHomePage extends Component {
         healthCerImages.splice(index, 0, healthCerImage);
         addLogSting += '\n添加后的图片个数' + healthCerImages.length;
         //Alert.alert(addLogSting);
+
+        this.updateImagesIndex(healthCerImages);
+
+
         this.setState({
                 healthCerImages: healthCerImages
             }
@@ -156,16 +165,104 @@ export default class HealthCerHomePage extends Component {
         this.uploadImage(index, healthCerImage); //测试图片上传
     }
 
-    componentDidMount() {
-        this.startSimulateUpload();
+    updateImagesIndex=(healthCerImages)=>{
+        // let message = '';
+        //
+        // let imageIndexsString = '当前imageIndexs:';
+        // message += '未修改index前的图片个数' + healthCerImages.length;
+        for(let i = 0; i < healthCerImages.length; i++) {
+            let healthCerImage = healthCerImages[i];
+            healthCerImage.imageIndex = i;
+            healthCerImages.splice(i, 1, healthCerImage);
+            // imageIndexsString += ' ' + i;
+        }
+        // message += '\n' + '修改index后的图片个数' + healthCerImages.length;
+        // message += '\n' + imageIndexsString;
+        // Alert.alert(message);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
     }
 
-    // componentWillUnmount() {
-    //     this.stopSimulateUpload();
-    // }
+    componentDidMount() {
+        //this.startSimulateUpload();
+    }
+
+    componentWillUnmount() {
+        this.stopSimulateUpload();
+    }
+
+    /**
+     * 是否是网络图片
+     */
+    checkIsNetworkImage= (imageSource) => {
+        let isNetworkImage = false;
+        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+            let uri = imageSource['uri'];
+            if (uri.indexOf('http:') == 0 || uri.indexOf('https:') == 0) {
+                isNetworkImage = true;
+            }
+        }
+        return isNetworkImage;
+    }
 
     uploadImage=(index, healthCerImage)=>{
+        setInterval(()=>{
+            let timerSecondsCount = this.state.timerSecondsCount + 1;
+            this.setState({
+                timerSecondsCount: timerSecondsCount,
+            })
 
+            timerMessage = '定时器执行次数:' + timerSecondsCount;
+
+            //healthCerImage = this.state.healthCerImages[index];
+            let imageIndex = healthCerImage.imageIndex;
+            if (this.state.healthCerImages.indexOf(healthCerImage) == -1) {
+                timerMessage += '\n' + '之前在操作的该元素被删除了' + imageIndex;
+                return;
+            }
+            if (imageIndex == -1) {
+                timerMessage += '\n' + '之前在操作的该元素被删除了' + imageIndex;
+                return;;
+            }
+
+            timerMessage += '\n' + 'imageIndex:' + imageIndex;
+            let indexUploadMessage = timerSecondsCount + 'imageIndex:' + imageIndex + '上传信息:';
+            indexUploadMessage += '\n' + this.checkIsNetworkImage(healthCerImage.imageSource) ? 'NetworkImage' : 'LocalImage';
+            if (healthCerImage.uploadType == ImageUploadType.NotNeed) {
+                indexUploadMessage += ' NotNeed';
+                return;
+            }
+            if (healthCerImage.uploadProgress >= 100) {
+                indexUploadMessage += ' 已上传成功';
+                return;
+            }
+
+            let curUploadProgress = this.getRandom1(10, 20);
+            curUploadProgress=1;
+            healthCerImage.uploadProgress += curUploadProgress;
+            if (healthCerImage.uploadProgress >= 100) {
+                healthCerImage.uploadType = ImageUploadType.Success;
+                healthCerImage.uploadProgress = 100;
+                //alert("上传成功");
+                indexUploadMessage += '上传成功';
+            }  else {
+                healthCerImage.uploadType = ImageUploadType.Uploading;
+                indexUploadMessage += healthCerImage.uploadProgress;
+            }
+
+            let healthCerImages = this.state.healthCerImages;
+            healthCerImages.splice(imageIndex, 1, healthCerImage);
+
+            currentUploadMessage = '当前图片个数' + this.state.healthCerImages.length;
+            currentUploadMessage += '\n' + indexUploadMessage;
+
+            this.setState({
+                healthCerImages: healthCerImages,
+            });
+
+        }, 1000);
     }
 
     getRandom1 = (start, end) => {
@@ -228,10 +325,15 @@ export default class HealthCerHomePage extends Component {
     deleteImageHandle=(index) => {
         let deleteLogSting = 'deleteImageIndex=' + index;
         let healthCerImages = this.state.healthCerImages;
+        healthCerImages[index].imageIndex = -1;
+
         deleteLogSting += '\n删除前的图片个数' + healthCerImages.length;
         healthCerImages.splice(index,1);
         deleteLogSting += '\n删除后的图片个数' + healthCerImages.length;
         //Alert.alert(deleteLogSting);
+
+        this.updateImagesIndex(healthCerImages);
+
         this.setState({
                 healthCerImages: healthCerImages
             }
@@ -274,6 +376,7 @@ export default class HealthCerHomePage extends Component {
                     widthHeightRatio={164/108}
                     boxHorizontalInterval={30}
                 />
+                <Text>{timerMessage}</Text>
                 <Text>{currentUploadMessage}</Text>
                 <ImagesChooseList
                     style={{paddingTop: 12, backgroundColor: 'green'}}

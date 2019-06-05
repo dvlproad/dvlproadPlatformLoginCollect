@@ -104,6 +104,7 @@ export default class ImagesChooseList extends Component {
                                         imageSource: require('./images/pickImage_blue.png'),
                                         uploadType: ImageUploadType.NotNeed,
                                         uploadProgress: 0,
+                                        imageIndex: renderImageSources.length,
                                     };
                     renderImageSources.splice(renderImageSources.length, 0, addImage);
                     this.state.addIconCurIndex = renderImageSources.length-1;
