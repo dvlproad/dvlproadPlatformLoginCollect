@@ -7,6 +7,7 @@ import CJDemoPickerImageFlatList from '../commonUI/pickImage/cjdemoPickerImageCe
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 import CJActionSheetModel from '../commonUI/alert/CJActionSheet';
 import ImagePicker from 'react-native-image-picker';
+import {ImageUploadType} from "../commonUI/button/ImageChooseButton";
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -25,6 +26,8 @@ var HealthCardApproveCode = {
 };
 
 
+var currentUploadMessage = '';
+
 export default class HealthCerHomePage extends Component {
     constructor(props) {
         super(props);
@@ -38,15 +41,17 @@ export default class HealthCerHomePage extends Component {
             healthCerImages:[
                 {
                     imageSource: require('./resource/healthCerImage1.png'),
+                    uploadType: ImageUploadType.NotNeed,
+                    uploadProgress: 0,
                 },
                 {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                    uploadType: ImageUploadType.NotNeed,
+                    uploadProgress: 0,
                 },
             ],
-            uploadProgress: 0,  //图片上传进度
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
-
         };
     }
 
@@ -131,7 +136,11 @@ export default class HealthCerHomePage extends Component {
 
     addImageHandle=(index, imageSource) => {
         let addLogSting = 'addImageIndex=' + index;
-        let healthCerImage = {imageSource: imageSource};
+        let healthCerImage = {
+                                imageSource: imageSource,
+                                uploadType: ImageUploadType.Waiting,
+                                uploadProgress: 0,
+                            };
 
         let healthCerImages = this.state.healthCerImages;
         addLogSting += '\n添加前的图片个数' + healthCerImages.length;
@@ -143,36 +152,78 @@ export default class HealthCerHomePage extends Component {
             }
         )
 
-        this.uploadImage(null); //测试图片上传
+
+        this.uploadImage(index, healthCerImage); //测试图片上传
     }
 
-    uploadImage(uri){
-        this.state.uploadProgress = 0;
-        this.startUploadImage(uri);
+    componentDidMount() {
+        this.startSimulateUpload();
     }
 
-    startUploadImage(uri){
-        let uploadProgress = this.state.uploadProgress;
-        if(uploadProgress > 100){
-            this._uploadTimer && clearInterval(this._uploadTimer);
-            alert("本文件已上传结束");
-            return;
-        }
-        this._uploadTimer=setInterval(()=>{
-            if(uploadProgress > 100){
-                this._uploadTimer && clearInterval(this._uploadTimer);
-                alert("上传成功");
-                return;
-            }
-            uploadProgress++;
-            this.setState({
-                uploadProgress: uploadProgress,
-            });
-        },1000);
+    // componentWillUnmount() {
+    //     this.stopSimulateUpload();
+    // }
+
+    uploadImage=(index, healthCerImage)=>{
+
     }
-    stopTime(){
+
+    getRandom1 = (start, end) => {
+        let length = end - start;
+        let num = parseInt(Math.random() * (length) + start);
+        return num;
+    }
+
+    stopSimulateUpload = () => {
+        Alert.alert('stopSimulateUpload');
         this._uploadTimer && clearInterval(this._uploadTimer);
     }
+
+    startSimulateUpload = () => {
+        let healthCerImages = this.state.healthCerImages;
+
+        this._uploadTimer=setInterval(()=>{
+            currentUploadMessage = '';
+
+            currentUploadMessage += '当前图片个数' + healthCerImages.length;
+
+            for(let i = 0; i < healthCerImages.length; i++) {
+                let healthCerImage = healthCerImages[i];
+
+                currentUploadMessage += '\nindex:' + i + '上传信息:';
+
+                if (healthCerImage.uploadType == ImageUploadType.NotNeed) {
+                    currentUploadMessage += ' NotNeed';
+                    continue;
+                }
+                if (healthCerImage.uploadProgress >= 100) {
+                    currentUploadMessage += ' 已上传成功';
+                    continue;
+                }
+
+                let curUploadProgress = this.getRandom1(10, 20);
+                healthCerImage.uploadProgress += curUploadProgress;
+                if (healthCerImage.uploadProgress >= 100) {
+                    healthCerImage.uploadType = ImageUploadType.Success;
+                    healthCerImage.uploadProgress = 100;
+                    //alert("上传成功");
+                    currentUploadMessage += '上传成功';
+                }  else {
+                    healthCerImage.uploadType = ImageUploadType.Uploading;
+                    currentUploadMessage += healthCerImage.uploadProgress;
+                }
+
+                healthCerImages.splice(i, 1, healthCerImage);
+            }
+
+            this.setState({
+                healthCerImages: healthCerImages,
+            });
+
+
+        },1000);
+    }
+
 
     deleteImageHandle=(index) => {
         let deleteLogSting = 'deleteImageIndex=' + index;
@@ -223,6 +274,7 @@ export default class HealthCerHomePage extends Component {
                     widthHeightRatio={164/108}
                     boxHorizontalInterval={30}
                 />
+                <Text>{currentUploadMessage}</Text>
                 <ImagesChooseList
                     style={{paddingTop: 12, backgroundColor: 'green'}}
                     listWidth={listWidth}

@@ -23,6 +23,7 @@ import ButtonHomePage from "./button/ButtonHomePage"
 //image
 import LoadingImagePage from "./image/LoadingImagePage"
 import UploadImagePage from "./image/UploadImagePage";
+import UploadImagesPage from "./image/UploadImagesPage";
 
 //text
 import TextHomePage from "./text/TextHomePage"
@@ -136,6 +137,12 @@ const UIHomeNavigation = createStackNavigator(
             screen: UploadImagePage,
             navigationOptions: () => ({
                 title: `Image上传首页`,
+            }),
+        },
+        UploadImagesPage: {
+            screen: UploadImagesPage,
+            navigationOptions: () => ({
+                title: `Image数组的上传首页`,
             }),
         },
 

@@ -48,6 +48,7 @@ export default class UIHomePage extends React.Component {
                 data: [
                     { title: "LoadingImagePage", page: "LoadingImagePage" },
                     { title: "UploadImagePage", page: "UploadImagePage" },
+                    { title: "UploadImagesPage", page: "UploadImagesPage" },
                 ]
             },
             { key: "Pick",

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { FlatList, Alert, Text } from "react-native";
-import ImageChooseButton from '../button/ImageChooseButton'
+import ImageChooseButton, {ImageUploadType} from '../button/ImageChooseButton'
 
 export default class ImagesChooseList extends Component {
     static propTypes = {
@@ -100,7 +100,11 @@ export default class ImagesChooseList extends Component {
             if (this.state.addIconCurIndex == -1) {
                 let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount;
                 if (shouldAddAddIcon) {
-                    let addImage = {imageSource: require('./images/pickImage_blue.png')};
+                    let addImage = {
+                                        imageSource: require('./images/pickImage_blue.png'),
+                                        uploadType: ImageUploadType.NotNeed,
+                                        uploadProgress: 0,
+                                    };
                     renderImageSources.splice(renderImageSources.length, 0, addImage);
                     this.state.addIconCurIndex = renderImageSources.length-1;
                 }
@@ -142,6 +146,9 @@ export default class ImagesChooseList extends Component {
                             isAddIcon={this.isAddIcon(index)}
 
                             onLoadComplete={this.onLoadComplete}
+
+                            uploadType={item.uploadType}
+                            uploadProgress={item.uploadProgress}
                         />
                     )
                 }}

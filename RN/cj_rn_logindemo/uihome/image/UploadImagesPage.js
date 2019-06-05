@@ -1,10 +1,10 @@
-//UploadImagePage.js
+//UploadImagesPage.js
 
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
 import ImageChooseButton, {ImageUploadType} from "../../commonUI/button/ImageChooseButton";
 
-export default class UploadImagePage extends Component {
+export default class UploadImagesPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
