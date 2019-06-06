@@ -42,7 +42,7 @@ export default class LoadingImage extends Component {
     static defaultProps = {
         imageWidth: 0,
         imageHeight: 0,
-        imageSource: require('./imageDefault.png'),
+        imageSource: require('./resources/imageDefault.png'),
 
         buttonIndex: 0,
 
@@ -248,7 +248,7 @@ export default class LoadingImage extends Component {
 
                 <Image style={{width: imageWidth, height: imageHeight }}
                        source={this.props.imageSource}
-                       defaultSource={require('./imageDefault.png')}
+                       defaultSource={require('./resources/imageDefault.png')}
                        onLoadStart={this.onLoadStart}
                        onLoadEnd={this.onLoadEnd}
                        onLoad={this.onLoadSuccess}

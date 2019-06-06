@@ -109,7 +109,7 @@ export default class OtherLoadingImage extends Component {
             defaultSource
                 ? <Image source={defaultSource} style={[{ position: 'absolute' }, style]} />
                 : <View style={[{ justifyContent: 'center', backgroundColor: ColorsC7, position: 'absolute', alignItems: 'center' }, style]}>
-                    <Image source={require('./imageDefault.png')} style={{width:iconSize.width, height:iconSize.height, backgroundColor:{ColorsC6}}} />
+                    <Image source={require('./resources/imageDefault.png')} style={{width:iconSize.width, height:iconSize.height, backgroundColor:{ColorsC6}}} />
                 </View>
         )
     }

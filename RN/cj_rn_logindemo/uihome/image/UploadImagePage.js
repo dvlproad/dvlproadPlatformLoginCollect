@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
-import ImageChooseButton from "../../commonUI/button/ImageChooseButton";
+import ActionLoadingImage from "../../commonUI/image/ActionLoadingImage";
 import { ImageUploadType } from '../../commonUI/image/LoadingImage';
 
 export default class UploadImagePage extends Component {
@@ -142,7 +142,7 @@ export default class UploadImagePage extends Component {
         return (
             <View>
                 <Text>{uploadStateString}</Text>
-                <ImageChooseButton
+                <ActionLoadingImage
                     imageWidth={boxWidth}
                     imageHeight={boxHeight}
                     imageSource={this.state.imageSource}

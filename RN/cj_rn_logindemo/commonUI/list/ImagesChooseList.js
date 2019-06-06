@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { FlatList, Text } from "react-native";
-import ImageChooseButton  from '../button/ImageChooseButton';
+import ActionLoadingImage  from '../image/ActionLoadingImage';
 import { ImageUploadType } from '../image/LoadingImage';
 
 export default class ImagesChooseList extends Component {
@@ -144,7 +144,7 @@ export default class ImagesChooseList extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     return (
-                        <ImageChooseButton
+                        <ActionLoadingImage
                             style={{marginRight:boxHorizontalInterval}}
                             imageWidth={boxWidth}
                             imageHeight={boxHeight}

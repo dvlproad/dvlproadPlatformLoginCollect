@@ -1,4 +1,4 @@
-//UnDecoupleImageChooseButton.js
+//UnDecoupleActionLoadingImage.js
 //未解耦的图片选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
@@ -30,7 +30,7 @@ export var ImageUploadType = {
 
 var isNetworkImage = false;
 
-export default class UnDecoupleImageChooseButton extends Component {
+export default class UnDecoupleActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
@@ -52,7 +52,7 @@ export default class UnDecoupleImageChooseButton extends Component {
     static defaultProps = {
         imageWidth: 0,
         imageHeight: 0,
-        imageSource: require('./resources/healthCerImage1.png'),
+        imageSource: require('./resources/imageDefault.png'),
 
         clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
@@ -205,7 +205,7 @@ export default class UnDecoupleImageChooseButton extends Component {
 
                     <Image style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
                            source={imageSource}
-                           defaultSource={require('./resources/imageLook.png')}
+                           defaultSource={require('./resources/imageDefault.png')}
                            onLoadStart={this.onLoadStart}
                            onLoadEnd={this.onLoadEnd}
                            onLoad={this.onLoadSuccess}

@@ -1,11 +1,11 @@
-//ImageChooseButton.js
+//ActionLoadingImage.js
 //已解耦的图片选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { StyleSheet, View, Image, TouchableOpacity} from "react-native";
-import LoadingImage, { ImageUploadType } from '../image/LoadingImage';
+import LoadingImage, { ImageUploadType } from './LoadingImage';
 
-export default class ImageChooseButton extends Component {
+export default class ActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
@@ -29,7 +29,7 @@ export default class ImageChooseButton extends Component {
     static defaultProps = {
         imageWidth: 0,
         imageHeight: 0,
-        imageSource: require('./resources/healthCerImage1.png'),
+        imageSource: require('./resources/imageDefault.png'),
 
         clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},

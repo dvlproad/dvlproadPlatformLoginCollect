@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {View, Alert} from 'react-native';
-import ImageChooseButton from '../../commonUI/button/ImageChooseButton';
+import ActionLoadingImage from '../image/ActionLoadingImage';
 import PropTypes from "prop-types";
 
 
@@ -48,25 +48,25 @@ export default class CJDemoPickerImageFlatList extends Component {
 
         return (
             <View style={[{flexDirection: 'row', justifyContent: "space-between"}, style]}>
-                <ImageChooseButton style={{ width: boxWidth, height: boxHeight, backgroundColor:'red'}}
-                                   imageWidth={boxWidth}
-                                   imageHeight={boxHeight}
-                                   imageSource={networkImage}
-                                   pickImageHandle={() => {
+                <ActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'red'}}
+                                    imageWidth={boxWidth}
+                                    imageHeight={boxHeight}
+                                    imageSource={networkImage}
+                                    pickImageHandle={() => {
                                        Alert.alert("点击选择图片1");
                                    }}
-                                   deleteImageHandle={() => {
+                                    deleteImageHandle={() => {
                                        Alert.alert("点击删除图片1");
                                    }}
                 />
-                <ImageChooseButton style={{ width: boxWidth, height: boxHeight, backgroundColor:'purple'}}
-                                   imageWidth={boxWidth}
-                                   imageHeight={boxHeight}
-                                   imageSource={networkImage}
-                                   pickImageHandle={() => {
+                <ActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'purple'}}
+                                    imageWidth={boxWidth}
+                                    imageHeight={boxHeight}
+                                    imageSource={networkImage}
+                                    pickImageHandle={() => {
                                        Alert.alert("点击选择图片2");
                                    }}
-                                   deleteImageHandle={() => {
+                                    deleteImageHandle={() => {
                                        Alert.alert("点击删除图片2");
                                    }}
                 />

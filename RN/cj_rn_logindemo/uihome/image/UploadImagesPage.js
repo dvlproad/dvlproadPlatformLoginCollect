@@ -239,7 +239,7 @@ export default class UploadImagesPage extends Component {
     }
 
     stopSimulateUpload = () => {
-        Alert.alert('stopSimulateUpload');
+        //Alert.alert('stopSimulateUpload');
         this._uploadTimer && clearInterval(this._uploadTimer);
     }
 

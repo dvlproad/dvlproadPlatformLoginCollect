@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { Button } from 'react-native';
 
+
 type Props = {};
-export default class HomePage extends Component <Props> {
+export default class NavigationHomePage extends Component <Props> {
     render() {
         const {navigate} = this.props.navigation;   //TODO:怎么判断导航栏是否为空
 
@@ -44,3 +45,51 @@ export default class HomePage extends Component <Props> {
         );
     }
 }
+
+
+
+
+//NavigationPages
+import Page1 from './page1';
+import Page2 from './page2';
+import Page3 from './page3';
+
+export const NavigationPages = {
+    NavigationHome: {
+        screen: NavigationHomePage,
+        navigationOptions: () => ({
+            title: `NavigationHome`,
+        }),
+    },
+    A: {
+        screen: Page1,
+        navigationOptions: () => ({
+            title: `A(react-native)`,
+        }),
+    },
+    B: {
+        screen: Page2,
+        navigationOptions: () => ({
+            title: `B(@ant-design/react-native)`,
+        }),
+    },
+    C : {
+        screen: Page3,
+        navigationOptions: (props) => {//在这里定义每个页面的导航属性，动态配置
+            const {navigation} = props;
+            const {state, setParams} = navigation;
+            const {params} = state;
+
+            return {
+                title: params.title ? params.title : '右上角测试专用页',
+                headerRight: (
+                    <Button
+                        title={params.mode === 'edit' ? '保存' : '编辑'}
+                        onPress={() =>
+                            setParams({mode: params.mode === 'edit' ? '' : 'edit'})}
+                    />
+                ),
+            }
+        },
+    },
+};
