@@ -1,141 +1,209 @@
 //LoadingImage.js
-import React, { Component } from "react";
-import {Animated, Easing, Image, StyleSheet, View} from "react-native";
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import {View, Image, Text, ActivityIndicator} from "react-native";
 
-var ColorsC6 = 'blue';
-var ColorsC7 = 'red';
+
+/// 图片加载状态
+var ImageLoadStatus = {
+    Pending: 0,     /**< 准备加载 */
+    Loading: 1,     /**< 正在加载 */
+    Success: 2,     /**< 加载成功 */
+    Failure: 3,     /**< 加载失败 */
+};
+
+/// 图片来源
+export var ImageUploadType = {
+    NotNeed: 0,     /**< 不需要上传 */
+    Waiting: 1,     /**< 等待上传 */
+    Uploading: 2,   /**< 正在上传 */
+    Success: 3,     /**< 上传成功 */
+    Failure: 4,     /**< 上传失败 */
+};
+
+var isNetworkImage = false;
 
 export default class LoadingImage extends Component {
-    // static propTypes = {
-    //     style: React.PropTypes.oneOfType([
-    //         ViewPropTypes.style,
-    //         React.PropTypes.number
-    //     ]),
-    //     source: React.PropTypes.object.isRequired,
-    //     defaultSource: React.PropTypes.oneOfType([
-    //         React.PropTypes.object,
-    //         React.PropTypes.number
-    //     ])
-    // }
+    static propTypes = {
+        imageWidth: PropTypes.number.isRequired,
+        imageHeight: PropTypes.number.isRequired,
+        // imageSource: PropTypes.object.isRequired,    //图片
 
-    constructor (props) {
+        buttonIndex: PropTypes.number,
+
+        isEditing: PropTypes.bool,
+        isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
+
+        onLoadComplete: PropTypes.func, //图片加载结束的回调
+
+        uploadType: PropTypes.number,       //图片上传类型
+        uploadProgress: PropTypes.number,   //图片上传进度
+    };
+
+    static defaultProps = {
+        imageWidth: 0,
+        imageHeight: 0,
+        imageSource: require('./imageDefault.png'),
+
+        buttonIndex: 0,
+
+        isEditing: false,
+        isAddIcon: false,
+
+        onLoadComplete: (buttonIndex)=>{},
+
+        uploadType: ImageUploadType.NotNeed,
+        uploadProgress: 0,
+    };
+
+    constructor(props) {
         super(props);
+
         this.state = {
-            loadStatus: 'pending',
-            backgroundColor: new Animated.Value(0)
+            loaded: false,
+            loadStatus: ImageLoadStatus.Pending,
         }
     }
 
-    componentWillUnmount () {
-        if (undefined !== this.backgroundColorAnimated) this.backgroundColorAnimated.stop()
+    /**
+     * 是否是网络图片
+     */
+    checkIsNetworkImage= (imageSource) => {
+        let isNetworkImage = false;
+        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+            let uri = imageSource['uri'];
+            if (uri.indexOf('http:') == 0 || uri.indexOf('https:') == 0) {
+                isNetworkImage = true;
+            }
+        }
+        return isNetworkImage;
     }
 
     /**
-     * 开始加载
+     * 开始加载(当开始加载图片调用该方法)
      */
-    onLoadStart () {
-        // 配置加载动画
-        this.backgroundColorAnimated =
-            Animated.sequence([
-                Animated.timing(this.state.backgroundColor, {
-                    toValue: 1,
-                    easing: Easing.ease,
-                    duration: 400
-                }),
-                Animated.timing(this.state.backgroundColor, {
-                    toValue: 0,
-                    easing: Easing.in,
-                    duration: 400
-                })
-            ])
+    onLoadStart = () => {
+        let loadStatus = isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
+        this.setState({
+            loaded: false,
+            loadStatus: loadStatus,
+        })
+    }
 
-        this.backgroundColorAnimated.start(() => {
-            this.state.loadStatus === 'pending' && this.onLoadStart()
+
+    /**
+     * 加载结束(当加载完成回调该方法，不管图片加载成功还是失败都会调用该方法)
+     */
+    onLoadEnd = () => {
+        this.setState({
+            loaded: true,
         })
     }
 
     /**
-     * 加载结束
+     * 加载成功(当图片加载成功之后，回调该方法)
      */
-    onLoadEnd () {
-        // if (undefined !== this.backgroundColorAnimated) this.backgroundColorAnimated.stop()
+    onLoadSuccess=() => {
+        let simulateNetworkImageLoad = isNetworkImage ? 2000 : 0;
+        setTimeout(()=> {
+            this.setState({
+                loadStatus: ImageLoadStatus.Success
+            });
+
+            this.props.onLoadComplete(this.props.buttonIndex);
+        }, simulateNetworkImageLoad);
     }
 
     /**
-     * 加载成功
-     */
-    handleImageLoaded () {
-        this.setState({ loadStatus: 'success' })
-    }
-
-    /**
-     * 加载失败
+     * 加载失败(该属性要赋值一个function，当加载出错执行赋值的这个方法)
      * @param {*} error
      */
-    handleImageErrored (error) {
+    onLoadError=(error) => {
         console.log(error)
-        this.setState({ loadStatus: 'error' })
+        this.setState({
+            loadStatus: ImageLoadStatus.Failure
+        });
+        this.props.onLoadComplete(this.props.buttonIndex);
     }
 
-    /**
-     * 渲染加载中界面
-     */
-    renderPending () {
-        let { style } = this.props;
-        return (
-            <Animated.View
-                style={[style,
-                    {
-                        position: 'absolute',
-                        backgroundColor: this.state.backgroundColor.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: ['#F7F9FB', ColorsC7]
-                        })
-                    }]}
-            />
-        )
-    }
 
-    /**
-     * 渲染加载失败界面
-     */
-    renderError () {
-        let { style, defaultSource } = this.props
-        if (typeof style === 'number') {
-            style = StyleSheet.flatten(style)
+    render() {
+        const { style } = this.props;
+
+        const imageWidth = this.props.imageWidth;
+        const imageHeight = this.props.imageHeight;
+
+        let buttonIndex = this.props.buttonIndex;
+
+
+        let imageText = 'ButtonIndex:' + buttonIndex;
+        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        imageText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
+        // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+        //     imageText += '\n' + imageSource['uri'];
+        // }
+        switch (this.props.uploadType) {
+            case ImageUploadType.NotNeed: {
+                imageText += '\n' + '不需要上传';
+                break;
+            }
+            case ImageUploadType.Waiting: {
+                imageText += '\n' + '等待上传';
+                break;
+            }
+            case ImageUploadType.Uploading: {
+                imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
+                break;
+            }
+            case ImageUploadType.Success: {
+                imageText += '\n' + '上传成功';
+                break;
+            }
+            case ImageUploadType.Failure: {
+                imageText += '\n' + '上传失败';
+                break;
+            }
+            default: {
+                imageText += '\n' + '什么情况';
+                break;
+            }
         }
-        let iconSize = Math.min(style.height, style.width) / 3;
-        return (
-            defaultSource
-                ? <Image source={defaultSource} style={[{ position: 'absolute' }, style]} />
-                : <View style={[{ justifyContent: 'center', backgroundColor: ColorsC7, position: 'absolute', alignItems: 'center' }, style]}>
-                    <Image source={require('./imageDefault.png')} style={{width:iconSize.width, height:iconSize.height, backgroundColor:{ColorsC6}}} />
-                </View>
-        )
-    }
 
-    render () {
-        let { style, source } = this.props;
-        let { loadStatus } = this.state;
-        // // 兼容 uri为null的情况
-        // if (source.hasOwnProperty('uri') && typeof source['uri'] !== 'string') {
-        //     source = { ...source, uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg' }
-        // }
-        // // 兼容Android无法对空字符串进行处理情况
-        // if (Platform.OS === 'android' && source.hasOwnProperty('uri') && !source['uri']) {
-        //     source = { ...source, uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg' }
-        // }
+        let networkImage = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
+
         return (
-            <View style={style}>
-                <Image source={source} style={style}
-                       onLoadStart={this.onLoadStart.bind(this)}
-                       onLoadEnd={this.onLoadEnd.bind(this)}
-                       onLoad={this.handleImageLoaded.bind(this)}
-                       onError={this.handleImageErrored.bind(this)}
+            <View style={{flex:1}} >
+
+                <Image style={{width: imageWidth, height: imageHeight }}
+                       source={networkImage}
+                       defaultSource={require('./imageDefault.png')}
+                       onLoadStart={this.onLoadStart}
+                       onLoadEnd={this.onLoadEnd}
+                       onLoad={this.onLoadSuccess}
+                       onError={this.onLoadError}
                 />
-                {loadStatus === 'pending' && this.renderPending()}
-                {loadStatus === 'error' && this.renderError()}
+
+                <Text style={{
+                    backgroundColor: 'rgba(0,0,255,0.3)',
+                    position:'absolute',
+                    width:imageWidth,
+                    height:imageHeight,
+                    //lineHeight: boxHeight,
+                    textAlign: 'center',
+                    fontSize: 17,
+                    color: '#99ff22'
+                }}
+                >
+                    {imageText}
+                </Text>
+
+                <ActivityIndicator
+                    style={{position:'absolute', width:imageWidth, height:imageHeight}}
+                    size="large"
+                    color="red"
+                    animating={this.state.loadStatus == ImageLoadStatus.Loading}
+                />
             </View>
-        )
+        );
     }
 }

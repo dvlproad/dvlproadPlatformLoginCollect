@@ -219,7 +219,7 @@ const UIHomeNavigation = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'UploadImagesPage'
+        initialRouteName: 'LoadingImagePage'
     }
 );
 

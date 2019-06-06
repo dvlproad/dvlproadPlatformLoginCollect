@@ -22,21 +22,42 @@ export default class UploadImagesPage extends Component {
             healthCerImages:[
                 {
                     imageSource: require('./resource/healthCerImage1.png'),
-                    uploadType: ImageUploadType.NotNeed,
-                    uploadProgress: 0,
-                    imageIndex: 0,
                 },
                 {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                    uploadType: ImageUploadType.NotNeed,
-                    uploadProgress: 0,
-                    imageIndex: 1,
                 },
             ],
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
             timerSecondsCount: 0,   // 模拟上传的定时器执行了多少次
         };
+    }
+
+    componentWillUnmount() {
+        this.stopSimulateUpload();
+    }
+
+    componentDidMount() {
+        //this.startSimulateUpload();
+        this.fetchData();
+    }
+
+    fetchData = () => {
+        let healthCerImages = this.state.healthCerImages;
+        for (let i =0; i<healthCerImages.length; i++ ) {
+            let healthCerImage = healthCerImages[i];
+
+            healthCerImage.uploadType = ImageUploadType.NotNeed;
+            healthCerImage.uploadProgress = 0;
+            healthCerImage.imageIndex = i;
+
+            healthCerImages.splice(i, 1, healthCerImage);
+        }
+
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
     }
 
     clickEditTitleHandle= () => {
@@ -140,14 +161,6 @@ export default class UploadImagesPage extends Component {
         )
     }
 
-    componentDidMount() {
-        //this.startSimulateUpload();
-    }
-
-    componentWillUnmount() {
-        this.stopSimulateUpload();
-    }
-
 
     /**
      * 模拟图片上传
@@ -160,7 +173,6 @@ export default class UploadImagesPage extends Component {
             })
 
             timerMessage = '定时器执行次数:' + timerSecondsCount;
-
 
 
             imageAddDeleteMessage = '图片增删操作信息如下：';

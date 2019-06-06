@@ -2,7 +2,7 @@
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { FlatList, Alert, Text } from "react-native";
+import { FlatList, Text } from "react-native";
 import ImageChooseButton, {ImageUploadType} from '../button/ImageChooseButton'
 
 export default class ImagesChooseList extends Component {
@@ -84,6 +84,10 @@ export default class ImagesChooseList extends Component {
         }
     }
 
+    deleteImageHandle=(index) => {
+        this.props.deleteImageHandle(index);
+    }
+
     render() {
         const numColumns = this.props.numColumns;
         const boxHorizontalInterval = this.props.boxHorizontalInterval;
@@ -141,7 +145,7 @@ export default class ImagesChooseList extends Component {
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}
-                            deleteImageHandle={this.props.deleteImageHandle}
+                            deleteImageHandle={this.deleteImageHandle}
 
                             isEditing={this.props.isEditing}
                             isAddIcon={this.isAddIcon(index)}

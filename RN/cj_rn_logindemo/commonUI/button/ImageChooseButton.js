@@ -114,7 +114,7 @@ export default class ImageChooseButton extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        let simulateNetworkImageLoad = isNetworkImage ? 1 : 0;
+        let simulateNetworkImageLoad = isNetworkImage ? 2000 : 0;
         setTimeout(()=> {
             this.setState({
                 loadStatus: ImageLoadStatus.Success
@@ -216,7 +216,7 @@ export default class ImageChooseButton extends Component {
                         position:'absolute',
                         width:boxWidth,
                         height:boxHeight,
-                        lineHeight: boxHeight/4,
+                        //lineHeight: boxHeight,
                         textAlign: 'center',
                         fontSize: 17,
                         color: '#99ff22'
