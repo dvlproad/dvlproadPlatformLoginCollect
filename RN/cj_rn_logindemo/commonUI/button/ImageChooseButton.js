@@ -1,33 +1,9 @@
 //ImageChooseButton.js
+//已解耦的图片选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {View, Image, Text, TouchableOpacity, ActivityIndicator} from "react-native";
-
-/// 图片来源
-export var ImageSourceType = {
-    Default: 0,     /**< 无, 使用默认图片 */
-    Local: 1,       /**< 本地 */
-    Network: 2      /**< 网络 */
-};
-
-/// 图片加载状态
-var ImageLoadStatus = {
-    Pending: 0,     /**< 准备加载 */
-    Loading: 1,     /**< 正在加载 */
-    Success: 2,     /**< 加载成功 */
-    Failure: 3,     /**< 加载失败 */
-};
-
-/// 图片来源
-export var ImageUploadType = {
-    NotNeed: 0,     /**< 不需要上传 */
-    Waiting: 1,     /**< 等待上传 */
-    Uploading: 2,   /**< 正在上传 */
-    Success: 3,     /**< 上传成功 */
-    Failure: 4,     /**< 上传失败 */
-};
-
-var isNetworkImage = false;
+import { StyleSheet, View, Image, TouchableOpacity} from "react-native";
+import LoadingImage, { ImageUploadType } from '../image/LoadingImage';
 
 export default class ImageChooseButton extends Component {
     static propTypes = {
@@ -46,6 +22,8 @@ export default class ImageChooseButton extends Component {
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度
+
+        changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
@@ -64,77 +42,18 @@ export default class ImageChooseButton extends Component {
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
+
+        changeShowDebugMessage: false,
     };
 
     constructor(props) {
         super(props);
 
         this.state = {
-            loaded: false,
-            loadStatus: ImageLoadStatus.Pending,
+
         }
     }
 
-    /**
-     * 是否是网络图片
-     */
-    checkIsNetworkImage= (imageSource) => {
-        let isNetworkImage = false;
-        if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
-            let uri = imageSource['uri'];
-            if (uri.indexOf('http:') == 0 || uri.indexOf('https:') == 0) {
-                isNetworkImage = true;
-            }
-        }
-        return isNetworkImage;
-    }
-
-    /**
-     * 开始加载(当开始加载图片调用该方法)
-     */
-    onLoadStart = () => {
-        let loadStatus = isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
-        this.setState({
-            loaded: false,
-            loadStatus: loadStatus,
-        })
-    }
-
-
-    /**
-     * 加载结束(当加载完成回调该方法，不管图片加载成功还是失败都会调用该方法)
-     */
-    onLoadEnd = () => {
-        this.setState({
-            loaded: true,
-        })
-    }
-
-    /**
-     * 加载成功(当图片加载成功之后，回调该方法)
-     */
-    onLoadSuccess=() => {
-        let simulateNetworkImageLoad = isNetworkImage ? 2000 : 0;
-        setTimeout(()=> {
-            this.setState({
-                loadStatus: ImageLoadStatus.Success
-            });
-
-            this.props.onLoadComplete(this.props.buttonIndex);
-        }, simulateNetworkImageLoad);
-    }
-
-    /**
-     * 加载失败(该属性要赋值一个function，当加载出错执行赋值的这个方法)
-     * @param {*} error
-     */
-    onLoadError=(error) => {
-        console.log(error)
-        this.setState({
-            loadStatus: ImageLoadStatus.Failure
-        });
-        this.props.onLoadComplete(this.props.buttonIndex);
-    }
 
 
     render() {
@@ -159,85 +78,29 @@ export default class ImageChooseButton extends Component {
             }}
         /> : null;
 
-        let imageText = 'ButtonIndex:' + buttonIndex;
-        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
-        imageText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
-        // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
-        //     imageText += '\n' + imageSource['uri'];
-        // }
-        switch (this.props.uploadType) {
-            case ImageUploadType.NotNeed: {
-                imageText += '\n' + '不需要上传';
-                break;
-            }
-            case ImageUploadType.Waiting: {
-                imageText += '\n' + '等待上传';
-                break;
-            }
-            case ImageUploadType.Uploading: {
-                imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
-                break;
-            }
-            case ImageUploadType.Success: {
-                imageText += '\n' + '上传成功';
-                break;
-            }
-            case ImageUploadType.Failure: {
-                imageText += '\n' + '上传失败';
-                break;
-            }
-            default: {
-                imageText += '\n' + '什么情况';
-                break;
-            }
-        }
 
+        let testBoxStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'red'} : null;
 
         return (
             <TouchableOpacity
-                style={[{width:boxWidth, backgroundColor:'red'}, style]}
+                style={[{width:boxWidth}, style, testBoxStyle]}
                 onPress={()=> {
                     this.props.clickButtonHandle(buttonIndex);
                 }}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
-
-                    <Image style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
-                           source={imageSource}
-                           defaultSource={require('./resources/imageLook.png')}
-                           onLoadStart={this.onLoadStart}
-                           onLoadEnd={this.onLoadEnd}
-                           onLoad={this.onLoadSuccess}
-                           onError={this.onLoadError}
+                    <LoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
+                                  imageWidth={imageWidth}
+                                  imageHeight={imageHeight}
+                                  imageSource={imageSource}
+                                  buttonIndex={buttonIndex}
+                                  onLoadComplete={this.props.onLoadComplete}
+                                  uploadType={this.props.uploadType}
+                                  uploadProgress={this.props.uploadProgress}
+                                  changeShowDebugMessage={this.props.changeShowDebugMessage}
                     />
-
-                    <Text style={{
-                        backgroundColor: 'rgba(0,0,255,0.3)',
-                        position:'absolute',
-                        width:boxWidth,
-                        height:boxHeight,
-                        //lineHeight: boxHeight,
-                        textAlign: 'center',
-                        fontSize: 17,
-                        color: '#99ff22'
-                    }}
-                    >
-                        {imageText}
-                    </Text>
-
-                    <ActivityIndicator
-                        style={{position:'absolute', width:boxWidth, height:boxHeight}}
-                        size="large"
-                        color="red"
-                        animating={this.state.loadStatus == ImageLoadStatus.Loading}
-                    />
-
                     {deleteImageButton}
                 </View>
-
-
-
-
             </TouchableOpacity>
         );
     }
@@ -263,3 +126,9 @@ export class DeleteImageButton extends Component {
         )
     }
 }
+
+var styles = StyleSheet.create({
+    button: {
+
+    }
+})

@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
-import ImageChooseButton, {ImageUploadType} from "../../commonUI/button/ImageChooseButton";
+import ImageChooseButton from "../../commonUI/button/ImageChooseButton";
+import { ImageUploadType } from '../../commonUI/image/LoadingImage';
 
 export default class UploadImagePage extends Component {
     constructor(props) {

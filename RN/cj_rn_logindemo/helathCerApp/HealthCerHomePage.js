@@ -5,7 +5,7 @@ import { SubmitButton } from '../commonUI/button/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 import CJActionSheetModel from '../commonUI/alert/CJActionSheet';
-import {ImageUploadType} from "../commonUI/button/ImageChooseButton";
+import {ImageUploadType} from "../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
 
 /// 健康证状态

@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { FlatList, Text } from "react-native";
-import ImageChooseButton, {ImageUploadType} from '../button/ImageChooseButton'
+import ImageChooseButton  from '../button/ImageChooseButton';
+import { ImageUploadType } from '../image/LoadingImage';
 
 export default class ImagesChooseList extends Component {
     static propTypes = {
@@ -23,6 +24,8 @@ export default class ImagesChooseList extends Component {
         imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
 
         imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
+
+        changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
@@ -42,6 +45,8 @@ export default class ImagesChooseList extends Component {
         imageMaxCount: 10000,
 
         imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
+
+        changeShowDebugMessage: false,
     };
 
     constructor(props) {
@@ -53,14 +58,6 @@ export default class ImagesChooseList extends Component {
             imageLoadedCount: 0//完成加载的图片个数
         }
     }
-
-    // shouldComponentUpdate(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean {
-    //     return true;
-    // }
-    //
-    // componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
-    //     lifeString = 'WillReceiveProps:' + this.props.imageSources.length + "_" + nextProps.imageSources.length;
-    // }
 
     onLoadComplete=(buttonIndex)=>{
         this.state.imageLoadedCount++;
@@ -128,11 +125,21 @@ export default class ImagesChooseList extends Component {
         }
 
 
-        let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
+        let listHeaderComponent = null;
+        if (this.props.changeShowDebugMessage) {
+            let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
+            listHeaderComponent = ()=>{
+                return (
+                    <Text>{headerText}</Text>
+                )
+            }
+        }
+
+        let testListStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'green'} : null;
 
         return (
             <FlatList
-                style={this.props.style}
+                style={[this.props.style, testListStyle]}
                 data={renderImageSources}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
@@ -154,15 +161,14 @@ export default class ImagesChooseList extends Component {
 
                             uploadType={item.uploadType}
                             uploadProgress={item.uploadProgress}
+
+                            changeShowDebugMessage={this.props.changeShowDebugMessage}
                         />
                     )
                 }}
-                ListHeaderComponent={()=>{
-                    return (
-                        <Text>{headerText}</Text>
-                    )
-                }}
                 numColumns={numColumns}
+
+                // ListHeaderComponent={listHeaderComponent}
             />
         )
     }

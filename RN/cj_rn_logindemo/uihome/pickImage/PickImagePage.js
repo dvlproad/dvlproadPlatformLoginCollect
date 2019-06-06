@@ -14,8 +14,7 @@ export default class PickImagePage extends Component {
                 <ImageChooseButton style={{width: 164, height: 108, backgroundColor:'red'}}
                              imageWidth={164}
                              imageHeight={108}
-                             imageSourceType={1}
-                             imageUrl={'/resources/healthCerImage1.png'}
+                             imageSource={require('./resource/healthCerImage1.png')}
                 />
             </ScrollView>
         );

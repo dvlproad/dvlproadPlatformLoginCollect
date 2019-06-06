@@ -4,7 +4,7 @@ import { View, ScrollView, Text, Alert, Dimensions } from 'react-native';
 import { SubmitButton } from '../../commonUI/button/cjdemobuttonfactory';
 import CJDemoPickerImageFlatList from '../../commonUI/pickImage/cjdemoPickerImageCell';
 import ImagesChooseList from '../../commonUI/list/ImagesChooseList';
-import { ImageUploadType } from "../../commonUI/button/ImageChooseButton";
+import { ImageUploadType } from "../../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
 
 var currentUploadMessage = '';
@@ -345,7 +345,6 @@ export default class UploadImagesPage extends Component {
                 </View>
 
                 <ImagesChooseList
-                    style={{paddingTop: 12, backgroundColor: 'green'}}
                     listWidth={listWidth}
                     numColumns={2}
                     widthHeightRatio={164/108}
@@ -357,7 +356,7 @@ export default class UploadImagesPage extends Component {
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}
                     imageLoadedCountChange={this.imageLoadedCountChange}
-
+                    changeShowDebugMessage={true}
                 />
 
                 <SubmitButton

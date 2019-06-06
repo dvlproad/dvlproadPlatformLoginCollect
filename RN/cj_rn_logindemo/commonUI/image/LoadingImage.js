@@ -29,15 +29,14 @@ export default class LoadingImage extends Component {
         imageHeight: PropTypes.number.isRequired,
         // imageSource: PropTypes.object.isRequired,    //图片
 
-        buttonIndex: PropTypes.number,
-
-        isEditing: PropTypes.bool,
-        isAddIcon: PropTypes.bool,   //是否是添加按钮，编辑状态时候，添加按钮，不显示右上角的删除
+        buttonIndex: PropTypes.number.isRequired,
 
         onLoadComplete: PropTypes.func, //图片加载结束的回调
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度
+
+        changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
@@ -47,13 +46,12 @@ export default class LoadingImage extends Component {
 
         buttonIndex: 0,
 
-        isEditing: false,
-        isAddIcon: false,
-
         onLoadComplete: (buttonIndex)=>{},
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
+
+        changeShowDebugMessage: false,
     };
 
     constructor(props) {
@@ -127,55 +125,129 @@ export default class LoadingImage extends Component {
     }
 
 
+    /**
+     * 获取正式的信息
+     */
+    getFormalImageStateText=()=> {
+        let formalImageStateText = '';
+        switch (this.props.uploadType) {
+            case ImageUploadType.Uploading: {
+                formalImageStateText = this.props.uploadProgress + '%';
+                break;
+            }
+            case ImageUploadType.Success: {
+                formalImageStateText = '上传成功';
+                break;
+            }
+            case ImageUploadType.Failure: {
+                formalImageStateText = '重新上传';
+                break;
+            }
+            default: {
+                formalImageStateText = '';
+                break;
+            }
+        }
+        return formalImageStateText;
+    }
+
+    /**
+     * 获取调试的信息
+     */
+    getDebugImageStateText=()=> {
+        let debugImageStateText = 'ButtonIndex:' + this.props.buttonIndex;
+        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        debugImageStateText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
+        debugImageStateText += this.getDebugImageUploadStateText();
+
+        // let imageSource = this.props.imageSource;
+        // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
+        //     debugImageStateText += '\n' + imageSource['uri'];
+        // }
+        return debugImageStateText;
+    }
+
+    getDebugImageUploadStateText=()=> {
+        let debugImageUploadStateText = '';
+        switch (this.props.uploadType) {
+            case ImageUploadType.NotNeed: {
+                debugImageUploadStateText += '\n' + '不需要上传';
+                break;
+            }
+            case ImageUploadType.Waiting: {
+                debugImageUploadStateText += '\n' + '等待上传';
+                break;
+            }
+            case ImageUploadType.Uploading: {
+                debugImageUploadStateText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
+                break;
+            }
+            case ImageUploadType.Success: {
+                debugImageUploadStateText += '\n' + '上传成功';
+                break;
+            }
+            case ImageUploadType.Failure: {
+                debugImageUploadStateText += '\n' + '上传失败';
+                break;
+            }
+            default: {
+                debugImageUploadStateText += '\n' + '什么情况';
+                break;
+            }
+        }
+        return debugImageUploadStateText;
+    }
+
+
     render() {
         const { style } = this.props;
 
         const imageWidth = this.props.imageWidth;
         const imageHeight = this.props.imageHeight;
 
-        let buttonIndex = this.props.buttonIndex;
 
-
-        let imageText = 'ButtonIndex:' + buttonIndex;
-        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
-        imageText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
-        // if (imageSource.hasOwnProperty('uri') && typeof imageSource['uri'] === 'string') {
-        //     imageText += '\n' + imageSource['uri'];
-        // }
-        switch (this.props.uploadType) {
-            case ImageUploadType.NotNeed: {
-                imageText += '\n' + '不需要上传';
-                break;
-            }
-            case ImageUploadType.Waiting: {
-                imageText += '\n' + '等待上传';
-                break;
-            }
-            case ImageUploadType.Uploading: {
-                imageText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
-                break;
-            }
-            case ImageUploadType.Success: {
-                imageText += '\n' + '上传成功';
-                break;
-            }
-            case ImageUploadType.Failure: {
-                imageText += '\n' + '上传失败';
-                break;
-            }
-            default: {
-                imageText += '\n' + '什么情况';
-                break;
-            }
+        let imageStateText = this.getFormalImageStateText();
+        if (this.props.changeShowDebugMessage) {
+            imageStateText = this.getDebugImageStateText()
         }
 
-        let networkImage = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
+        let stateTextBGColor = imageStateText.length > 0 ? 'rgba(0,0,0,0.6)' : null;
+        let stateTextComponent = (
+            <Text style={{
+                backgroundColor: stateTextBGColor,
+                position:'absolute',
+                width:imageWidth,
+                height:imageHeight,
+                lineHeight: imageHeight,
+                textAlign: 'center',
+                fontSize: 17,
+                color: '#FFFFFF'
+            }}
+            >
+                {imageStateText}
+            </Text>
+        );
+        if (this.props.changeShowDebugMessage) {
+            stateTextComponent = <Text style={{
+                backgroundColor: 'rgba(0,0,255,0.3)',
+                position:'absolute',
+                width:imageWidth,
+                height:imageHeight,
+                //lineHeight: imageHeight,
+                textAlign: 'center',
+                fontSize: 17,
+                color: '#99ff22'
+            }}
+            >
+                {imageStateText}
+            </Text>
+        }
 
         return (
-            <View style={{flex:1}} >
+            <View style={[{flex:1}, style]} >
 
                 <Image style={{width: imageWidth, height: imageHeight }}
-                       source={networkImage}
+                       source={this.props.imageSource}
                        defaultSource={require('./imageDefault.png')}
                        onLoadStart={this.onLoadStart}
                        onLoadEnd={this.onLoadEnd}
@@ -183,22 +255,14 @@ export default class LoadingImage extends Component {
                        onError={this.onLoadError}
                 />
 
-                <Text style={{
-                    backgroundColor: 'rgba(0,0,255,0.3)',
-                    position:'absolute',
-                    width:imageWidth,
-                    height:imageHeight,
-                    //lineHeight: boxHeight,
-                    textAlign: 'center',
-                    fontSize: 17,
-                    color: '#99ff22'
-                }}
-                >
-                    {imageText}
-                </Text>
+                {stateTextComponent}
 
                 <ActivityIndicator
-                    style={{position:'absolute', width:imageWidth, height:imageHeight}}
+                    style={{
+                        position:'absolute',
+                        width:imageWidth,
+                        height:imageHeight,
+                    }}
                     size="large"
                     color="red"
                     animating={this.state.loadStatus == ImageLoadStatus.Loading}
