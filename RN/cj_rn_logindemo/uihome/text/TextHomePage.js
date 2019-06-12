@@ -18,18 +18,18 @@ export default class TextHomePage extends Component {
             <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-start"}}>
                 <View style={{backgroundColor: "#6600ff", flex: 5, flexDirection: "column", justifyContent: "center" }}>
 
-                    <Text style={{
-                        backgroundColor: 'rgba(0,0,0,0.6)',
-                        width:300,
-                        height:44,
-                        lineHeight: 44,
-                        textAlign: 'center',
-                        fontSize: 17,
-                        color: '#FFFFFF'
-                    }}
-                    >
-                        100%(为什么颜色不对)
-                    </Text>
+                    <View style={{backgroundColor: 'rgba(0,0,0,0.6)'}}>
+                        <Text style={{
+                            width:300,
+                            height:44,
+                            textAlign: 'center',
+                            fontSize: 17,
+                            color: '#FFFFFF'
+                        }}
+                        >
+                            100%(设置文本'背景色'的方法)
+                        </Text>
+                    </View>
 
                     <Text style={[styles.normalText, {backgroundColor: "orange"}]}>
                         {normalText}

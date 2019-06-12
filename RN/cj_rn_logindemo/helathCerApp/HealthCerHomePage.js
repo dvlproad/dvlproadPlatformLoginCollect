@@ -4,7 +4,6 @@ import {View, ScrollView, Text, StyleSheet, Alert, Dimensions} from 'react-nativ
 import { SubmitButton } from '../commonUI/button/cjdemobuttonfactory';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
-import CJActionSheetModel from '../commonUI/alert/CJActionSheet';
 import {ImageUploadType} from "../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
 
@@ -108,17 +107,11 @@ export default class HealthCerHomePage extends Component {
     }
 
     chooseImageSource=(index)=>{
-        // this.refs.actionSheet.show('请选择图片来源', ['拍摄', '从相册选择'], null, (item) => {
-        //     //Alert.alert(item);
-        // });
-
-        // More info on all the options is below in the API Reference... just some common use cases shown here
         const options = {
-            title: 'Select Avatar',
-            storageOptions: {
-                skipBackup: true,
-                path: 'images',
-            },
+            //title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
+            cancelButtonTitle: '取消',
+            takePhotoButtonTitle: '拍摄',
+            chooseFromLibraryButtonTitle: '从手机相册选择',
         };
 
         /**
@@ -134,11 +127,8 @@ export default class HealthCerHomePage extends Component {
                 console.log('ImagePicker Error: ', response.error);
             } else {
                 const imageSource = { uri: response.uri };
-                //Alert.alert(response.uri);
-                //const imageSource = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
-
                 // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+                // const imageSource = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.addImageHandle(index, imageSource);
             }
         });
@@ -195,7 +185,6 @@ export default class HealthCerHomePage extends Component {
             }
 
             let curUploadProgress = this.getRandom1(10, 20);
-            curUploadProgress=1;
             healthCerImage.uploadProgress += curUploadProgress;
             if (healthCerImage.uploadProgress >= 100) {
                 healthCerImage.uploadType = ImageUploadType.Success;
@@ -259,7 +248,6 @@ export default class HealthCerHomePage extends Component {
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
-                <CJActionSheetModel ref='actionSheet' />
                 <View style={{flexDirection: 'row', marginTop: 30}}>
                     <Text style={{fontSize:15, color: "#333333"}}>上传健康证</Text>
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>

@@ -15,6 +15,7 @@ export default class UploadImagesPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            debug: true,
             loaded: false,
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
@@ -207,7 +208,9 @@ export default class UploadImagesPage extends Component {
             }
 
             let curUploadProgress = this.getRandom1(10, 20);
-            curUploadProgress=1;
+            if (this.state.debug) {
+                curUploadProgress = 1;
+            }
             healthCerImage.uploadProgress += curUploadProgress;
             if (healthCerImage.uploadProgress >= 100) {
                 healthCerImage.uploadType = ImageUploadType.Success;
@@ -356,7 +359,7 @@ export default class UploadImagesPage extends Component {
                     isEditing={this.state.isUpdatingInfo}
                     imageMaxCount={2}
                     imageLoadedCountChange={this.imageLoadedCountChange}
-                    changeShowDebugMessage={true}
+                    changeShowDebugMessage={this.state.debug}
                 />
 
                 <SubmitButton

@@ -1,4 +1,4 @@
-// HeathCerRooter.js
+// HealthCerRooter.js
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
@@ -6,7 +6,7 @@ import HealthCerHomePage from "./HealthCerHomePage";
 
 const HeathCerNavigator = createStackNavigator(
     {
-        HelathCerHome: {
+        HealthCerHome: {
             screen: HealthCerHomePage,
             navigationOptions: () => ({
                 title: `个人健康证`,
@@ -17,7 +17,7 @@ const HeathCerNavigator = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'HelathCerHome'
+        initialRouteName: 'HealthCerHome'
     }
 );
 

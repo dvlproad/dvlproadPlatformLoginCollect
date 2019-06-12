@@ -1,7 +1,7 @@
 //LoadingImage.js
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {View, Image, Text, ActivityIndicator} from "react-native";
+import {StyleSheet, View, Image, Text, ActivityIndicator} from "react-native";
 
 
 /// 图片加载状态
@@ -211,37 +211,23 @@ export default class LoadingImage extends Component {
             imageStateText = this.getDebugImageStateText()
         }
 
-        let stateTextBGColor = imageStateText.length > 0 ? 'rgba(0,0,0,0.6)' : null;
-        let stateTextComponent = (
-            <Text style={{
-                backgroundColor: stateTextBGColor,
-                position:'absolute',
-                width:imageWidth,
-                height:imageHeight,
-                lineHeight: imageHeight,
-                textAlign: 'center',
-                fontSize: 17,
-                color: '#FFFFFF'
-            }}
-            >
-                {imageStateText}
-            </Text>
-        );
+        let stateBGColor = imageStateText.length > 0 ? 'rgba(0,0,0,0.6)' : null;
         if (this.props.changeShowDebugMessage) {
-            stateTextComponent = <Text style={{
-                backgroundColor: 'rgba(0,0,255,0.3)',
-                position:'absolute',
-                width:imageWidth,
-                height:imageHeight,
-                //lineHeight: imageHeight,
-                textAlign: 'center',
-                fontSize: 17,
-                color: '#99ff22'
-            }}
-            >
-                {imageStateText}
-            </Text>
+            stateBGColor = 'rgba(0,0,255,0.3)';
         }
+
+        let stateTextStyle ={flex: 1, textAlign: 'center', fontSize: 17, color: '#FFFFFF'};
+        if (this.props.changeShowDebugMessage) {
+            stateTextStyle = [stateTextStyle, {color: '#99ff22'}]
+        } else {
+            stateTextStyle = [stateTextStyle, {lineHeight: imageHeight}];
+        }
+
+        let stateComponent = (
+            <View style={{backgroundColor:stateBGColor, position:'absolute', width:imageWidth, height:imageHeight}}>
+                <Text style={stateTextStyle}>{imageStateText}</Text>
+            </View>
+        );
 
         return (
             <View style={[{flex:1}, style]} >
@@ -255,7 +241,7 @@ export default class LoadingImage extends Component {
                        onError={this.onLoadError}
                 />
 
-                {stateTextComponent}
+                {stateComponent}
 
                 <ActivityIndicator
                     style={{
@@ -271,3 +257,7 @@ export default class LoadingImage extends Component {
         );
     }
 }
+
+var styles = StyleSheet.create({
+
+})
