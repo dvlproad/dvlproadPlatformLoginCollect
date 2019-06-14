@@ -1,7 +1,7 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions} from 'react-native';
-import { SubmitButton } from '../commonUI/button/cjdemobuttonfactory';
+import { SubmitButton } from '../commonUI/button/Button';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 import {ImageUploadType} from "../commonUI/image/LoadingImage";
@@ -29,19 +29,15 @@ export default class HealthCerHomePage extends Component {
         super(props);
         this.state = {
             loaded: false,
+
+            // healthCerInfoResult: new Map(),
+            healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
+
+            //考虑以后增加"取消"操作的情况，这里我们增加以下操作变量
+            healthCerImages:[],
+            beginDateString: '2019-09-09',
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
-            healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
-            //TODO:如果要增加"取消"操作是不是还得增加对应的如beginDateString的变量
-
-            healthCerImages:[
-                {
-                    imageSource: require('./resource/healthCerImage1.png'),
-                },
-                {
-                    imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                },
-            ],
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
         };
@@ -59,9 +55,24 @@ export default class HealthCerHomePage extends Component {
         fetch("http://localhost/simulateApi/healthCerApiJSON/healthCardDetail")
             .then(response => response.json())
             .then(responseData => {
-                // 注意，这里使用了this关键字，为了保证this在调用时仍然指向当前组件，我们需要对其进行“绑定”操作
+                //healthCerInfoResult
+                let healthCerInfoResult = responseData.content;
 
-                let healthCerImages = this.state.healthCerImages;
+                //healthCerImages
+                let healthCerImages = new Array();
+                if (healthCerInfoResult.healthCard1Url.length > 0) {
+                    let healthCerImage = new Map();
+                    healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard1Url};
+                    healthCerImages.push(healthCerImage);
+                }
+
+                if (healthCerInfoResult.healthCard2Url.length > 0) {
+                    let healthCerImage = new Map();
+                    healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard2Url};
+                    healthCerImages.push(healthCerImage);
+                }
+
+
                 for (let i =0; i<healthCerImages.length; i++ ) {
                     let healthCerImage = healthCerImages[i];
 
@@ -72,11 +83,18 @@ export default class HealthCerHomePage extends Component {
                     healthCerImages.splice(i, 1, healthCerImage);
                 }
 
+                //beginDateString
+                let beginDateString = healthCerInfoResult.healthCardStartTime;
+
+                //isUpdatingInfo
+                let isUpdatingInfo = healthCerInfoResult.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false;
+
                 this.setState({
-                    healthCerImages: healthCerImages,
-                    healthCerInfoResult: responseData.content,
                     loaded: true,
-                    isUpdatingInfo: responseData.content.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false
+                    healthCerInfoResult: healthCerInfoResult,
+                    healthCerImages: healthCerImages,
+                    beginDateString: beginDateString,
+                    isUpdatingInfo: isUpdatingInfo,
                 });
             }).catch(
             (error) => {
@@ -241,8 +259,7 @@ export default class HealthCerHomePage extends Component {
         let approveResultCell = !this.state.isUpdatingInfo?
             <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
             : null;
-        let beginDateString = this.state.healthCerInfoResult.healthCardStartTime;
-        //let beginDateString = this.state.beginDateString;
+        let beginDateString = this.state.beginDateString;
 
         let imageSources = this.state.healthCerImages;
 
@@ -273,10 +290,8 @@ export default class HealthCerHomePage extends Component {
                                     isEditing={this.state.isUpdatingInfo}
                                     beginDateString={beginDateString}
                                     onBeginDateChange={ (date)=> {
-                                        let healthCerInfoResult = this.state.healthCerInfoResult
-                                        healthCerInfoResult.healthCardStartTime = date;
                                         this.setState({
-                                            healthCerInfoResult: healthCerInfoResult
+                                            beginDateString: date
                                         })
                                     }}
                 />

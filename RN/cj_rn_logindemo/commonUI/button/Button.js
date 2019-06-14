@@ -1,13 +1,8 @@
-//cjdemobuttonfactory.js
+//Button.js
 import React, { Component } from 'react'
 import {Button, View, StyleSheet, Text, TouchableWithoutFeedback, TouchableOpacity} from 'react-native'
 import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
 
-class ButtonFactory {
-    static blueButton() {
-        return <Button title="内标题">外标题</Button>
-    }
-}
 
 class SubmitButton extends Component {
     constructor(props) {
@@ -119,4 +114,4 @@ const styles = StyleSheet.create({
 });
 
 
-export {ButtonFactory, EnableBlueButton, SubmitButton};
+export {EnableBlueButton, SubmitButton};

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 
-import { EnableBlueButton } from '../../commonUI/button/cjdemobuttonfactory'
+import { EnableBlueButton } from '../../commonUI/button/Button'
 
 export default class LayoutHomePageHomePage extends Component {
     render() {

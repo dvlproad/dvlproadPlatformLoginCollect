@@ -123,7 +123,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'UIRooter'
+        initialRouteName: 'HealthCerRooter'
     });
 
 class TabBarItem extends React.Component {

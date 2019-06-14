@@ -1,7 +1,7 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import { View, ScrollView, Text, Alert, Dimensions } from 'react-native';
-import { SubmitButton } from '../../commonUI/button/cjdemobuttonfactory';
+import { SubmitButton } from '../../commonUI/button/Button';
 import CJDemoPickerImageFlatList from '../../commonUI/pickImage/cjdemoPickerImageCell';
 import ImagesChooseList from '../../commonUI/list/ImagesChooseList';
 import { ImageUploadType } from "../../commonUI/image/LoadingImage";

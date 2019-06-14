@@ -1,7 +1,7 @@
 //ButtonHomePage.js
 import React, {Component} from 'react';
 import {Button, Alert, Text, View, ScrollView, FlatList, TouchableWithoutFeedback} from 'react-native';
-import {SubmitButton} from "../../commonUI/button/cjdemobuttonfactory";
+import {SubmitButton} from "../../commonUI/button/Button";
 
 export default class ButtonHomePage extends Component {
     renderSeparator() {
