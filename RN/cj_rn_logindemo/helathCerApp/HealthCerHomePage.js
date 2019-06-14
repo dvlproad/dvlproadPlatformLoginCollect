@@ -6,6 +6,7 @@ import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 import {ImageUploadType} from "../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
+import Toast from 'react-native-root-toast';
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -105,7 +106,16 @@ export default class HealthCerHomePage extends Component {
 
     clickEditTitleHandle= () => {
         if (!this.state.isImageAllLoaded) {
-            Alert.alert('请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length);
+            let message = '请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length;
+            Toast.show(message, {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.CENTER,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+            });
+
             return;
         }
         this.setState({

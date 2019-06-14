@@ -6,6 +6,7 @@ import CJDemoPickerImageFlatList from '../../commonUI/pickImage/cjdemoPickerImag
 import ImagesChooseList from '../../commonUI/list/ImagesChooseList';
 import { ImageUploadType } from "../../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
+import Toast from "react-native-root-toast";
 
 var currentUploadMessage = '';
 var timerMessage = '';
@@ -63,7 +64,15 @@ export default class UploadImagesPage extends Component {
 
     clickEditTitleHandle= () => {
         if (!this.state.isImageAllLoaded) {
-            Alert.alert('请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length);
+            let message = '请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length;
+            Toast.show(message, {
+                duration: Toast.durations.SHORT, // toast显示时长
+                position: Toast.positions.CENTER, // toast位置
+                shadow: true, // toast是否出现阴影
+                animation: true, // toast显示/隐藏的时候是否需要使用动画过渡
+                hideOnPress: true, // 是否可以通过点击事件对toast进行隐藏
+                delay: 0, // toast显示的延时
+            });
             return;
         }
         this.setState({
