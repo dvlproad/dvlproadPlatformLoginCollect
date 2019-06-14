@@ -1,6 +1,6 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
-import {View, ScrollView, Text, StyleSheet, Alert, Dimensions} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
 import { SubmitButton } from '../commonUI/button/Button';
 import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
@@ -142,13 +142,7 @@ export default class HealthCerHomePage extends Component {
             chooseFromLibraryButtonTitle: '从手机相册选择',
         };
 
-        /**
-         * The first arg is the options object for customization (it can also be null or omitted for default options),
-         * The second arg is the callback which sends object: response (more info in the API Reference)
-         */
         ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
-
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
@@ -275,6 +269,9 @@ export default class HealthCerHomePage extends Component {
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
+                <View style={styles.loadingView}>
+                    <ActivityIndicator size="large" color="#0000ff" animating={!this.state.loaded} />
+                </View>
                 <View style={{flexDirection: 'row', marginTop: 30}}>
                     <Text style={{fontSize:15, color: "#333333"}}>上传健康证</Text>
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
@@ -370,6 +367,13 @@ class LineSeparator extends Component{
 
 
 const styles = StyleSheet.create({
+    loadingView: {
+        position:'absolute',
+        width:Dimensions.get("window").width,
+        height:Dimensions.get("window").height,
+        justifyContent: 'center',
+        marginTop: -50,
+    },
     list: {
         flex: 1,
         justifyContent: "space-between",

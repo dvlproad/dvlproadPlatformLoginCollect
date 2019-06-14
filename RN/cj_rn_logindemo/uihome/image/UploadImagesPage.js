@@ -92,13 +92,11 @@ export default class UploadImagesPage extends Component {
     }
 
     chooseImageSource=(index)=>{
-        // More info on all the options is below in the API Reference... just some common use cases shown here
         const options = {
-            title: 'Select Avatar',
-            storageOptions: {
-                skipBackup: true,
-                path: 'images',
-            },
+            //title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
+            cancelButtonTitle: '取消',
+            takePhotoButtonTitle: '拍摄',
+            chooseFromLibraryButtonTitle: '从手机相册选择',
         };
 
         /**
@@ -114,11 +112,8 @@ export default class UploadImagesPage extends Component {
                 console.log('ImagePicker Error: ', response.error);
             } else {
                 const imageSource = { uri: response.uri };
-                //Alert.alert(response.uri);
-                //const imageSource = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
-
                 // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+                // const imageSource = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.addImageHandle(index, imageSource);
             }
         });

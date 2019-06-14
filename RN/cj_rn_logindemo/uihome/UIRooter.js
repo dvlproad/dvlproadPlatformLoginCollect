@@ -21,6 +21,9 @@ import ImageHomePage, { ImagePages } from "./image/ImageHomePage";
 //text
 import TextHomePage from "./text/TextHomePage"
 
+//hud
+import HUDHomePage from './loading/HUDHomePage'
+
 //pickDate
 import PickDatePage from './pickDate/PickDatePage'
 //pickImage
@@ -81,6 +84,13 @@ const UIHomeNavigation = createStackNavigator(
             navigationOptions: () => ({
                 title: `Navigation首页`,
                 // header: null,
+            }),
+        },
+
+        HUDHomePage: {
+            screen: HUDHomePage,
+            navigationOptions: () => ({
+                title: `HUD首页`,
             }),
         },
 

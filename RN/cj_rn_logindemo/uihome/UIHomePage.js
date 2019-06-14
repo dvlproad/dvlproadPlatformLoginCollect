@@ -36,6 +36,12 @@ export default class UIHomePage extends Component {
                     { title: "ImageHomePage", page: "ImageHomePage" },
                 ]
             },
+            { key: "Loading",
+                data: [
+                    { title: "ActivityIndicatorPage", page: "ActivityIndicatorPage" },
+                    { title: "HUDHomePage", page: "HUDHomePage" },
+                ]
+            },
             { key: "Pick",
                 data: [
                     { title: "PickDatePage", page: "PickDatePage" },
@@ -51,11 +57,6 @@ export default class UIHomePage extends Component {
                     { title: "ImagesChoosePage", page: "ImagesChoosePage" },
                     { title: "ListExamplePage", page: "ListExamplePage" },
                     ]
-            },
-            { key: "Loading",
-                data: [
-                    { title: "ActivityIndicatorPage", page: "ActivityIndicatorPage" },
-                ]
             },
             { key: "W",
                 data: [
