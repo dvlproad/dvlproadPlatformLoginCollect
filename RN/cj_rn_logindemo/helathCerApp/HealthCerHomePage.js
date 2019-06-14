@@ -45,7 +45,7 @@ export default class HealthCerHomePage extends Component {
     }
 
     componentWillUnmount() {
-
+        this.stopSimulateUpload();
     }
 
     componentDidMount() {
@@ -53,7 +53,7 @@ export default class HealthCerHomePage extends Component {
     }
 
     fetchData = () => {
-        fetch("http://localhost/simulateApi/healthCerApiJSON/healthCardDetail")
+        fetch("http://localhost/simulateApi/healthCerApiJSON/healthCardDetail_notupload")
             .then(response => response.json())
             .then(responseData => {
                 //healthCerInfoResult
@@ -136,7 +136,7 @@ export default class HealthCerHomePage extends Component {
 
     chooseImageSource=(index)=>{
         const options = {
-            //title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
+            title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
             cancelButtonTitle: '取消',
             takePhotoButtonTitle: '拍摄',
             chooseFromLibraryButtonTitle: '从手机相册选择',
@@ -175,8 +175,11 @@ export default class HealthCerHomePage extends Component {
             }
         )
 
-        this.uploadImage(index, healthCerImage); //测试图片上传
+        // 测试图片上传
+        // this.uploadImage(index, healthCerImage);
+        this.startSimulateUpload();
     }
+
 
     updateImagesIndex=(healthCerImages)=>{
         for(let i = 0; i < healthCerImages.length; i++) {
@@ -190,7 +193,51 @@ export default class HealthCerHomePage extends Component {
         )
     }
 
+    /**
+     * 模拟图片上传方法1
+     */
+    startSimulateUpload = () => {
+        if (this._uploadTimer != null) {
+            return;
+        }
 
+        let healthCerImages = this.state.healthCerImages;
+        this._uploadTimer=setInterval(()=>{
+            for(let i = 0; i < healthCerImages.length; i++) {
+                let healthCerImage = healthCerImages[i];
+                if (healthCerImage.uploadType == ImageUploadType.NotNeed) {
+                    continue;
+                }
+                if (healthCerImage.uploadProgress >= 100) {
+                    continue;
+                }
+
+                let curUploadProgress = this.getRandom1(10, 20);
+                healthCerImage.uploadProgress += curUploadProgress;
+                if (healthCerImage.uploadProgress >= 100) {
+                    healthCerImage.uploadType = ImageUploadType.Success;
+                    healthCerImage.uploadProgress = 100;
+                }  else {
+                    healthCerImage.uploadType = ImageUploadType.Uploading;
+                }
+
+                healthCerImages.splice(i, 1, healthCerImage);
+            }
+
+            this.setState({
+                healthCerImages: healthCerImages,
+            });
+
+        },1000);
+    }
+
+    stopSimulateUpload = () => {
+        this._uploadTimer && clearInterval(this._uploadTimer);
+    }
+
+    /**
+     * 模拟图片上传方法2
+     */
     uploadImage=(index, healthCerImage)=>{
         setInterval(()=>{
 
