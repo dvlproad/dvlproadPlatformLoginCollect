@@ -2,7 +2,7 @@
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, Alert } from "react-native";
 import ActionLoadingImage  from '../image/ActionLoadingImage';
 import { ImageUploadType } from '../image/LoadingImage';
 
@@ -57,6 +57,11 @@ export default class ImagesChooseList extends Component {
 
             imageLoadedCount: 0//完成加载的图片个数
         }
+    }
+
+    componentDidMount(): void {
+        let isImageAllLoaded = this.props.imageSources.length == 0;
+        this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
     }
 
     onLoadComplete=(buttonIndex)=>{
