@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
 import { SubmitButton } from '../commonUI/button/Button';
-import CJDemoDateBeginEnd from '../commonUI/pickDate/cjdemoDateBeginEnd';
+import CJDemoDateBeginEnd from '../commonUI/pickDate/CJDemoDateBeginEnd';
 import ImagesChooseList from '../commonUI/list/ImagesChooseList';
 import {ImageUploadType} from "../commonUI/image/LoadingImage";
 import ImagePicker from 'react-native-image-picker';
@@ -31,12 +31,10 @@ export default class HealthCerHomePage extends Component {
         this.state = {
             loaded: false,
 
-            // healthCerInfoResult: new Map(),
-            healthCerInfoResult: {approvalTips:"第11@第22", healthCardStartTime:"2088-08-18"},
-
+            healthCerInfoResult: new Map(),
             //考虑以后增加"取消"操作的情况，这里我们增加以下操作变量
             healthCerImages:[],
-            beginDateString: '2019-09-09',
+            beginDateString: '',
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
 
@@ -53,7 +51,9 @@ export default class HealthCerHomePage extends Component {
     }
 
     fetchData = () => {
-        fetch("http://localhost/simulateApi/healthCerApiJSON/healthCardDetail_notupload")
+        let healthCardDetailUrl = 'http://localhost/simulateApi/healthCerApiJSON/healthCardDetail_notupload';
+
+        fetch(healthCardDetailUrl)
             .then(response => response.json())
             .then(responseData => {
                 //healthCerInfoResult
@@ -83,6 +83,7 @@ export default class HealthCerHomePage extends Component {
 
                     healthCerImages.splice(i, 1, healthCerImage);
                 }
+                healthCerInfoResult.healthCerImages = healthCerImages;
 
                 //beginDateString
                 let beginDateString = healthCerInfoResult.healthCardStartTime;
@@ -98,8 +99,22 @@ export default class HealthCerHomePage extends Component {
                     isUpdatingInfo: isUpdatingInfo,
                 });
             }).catch(
-            (error) => {
-                console.log("错误：" + error);
+                (error) => {
+                    let message = "错误：" + error;
+                    console.log(message);
+
+                    Toast.show(message, {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.CENTER,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+
+                    this.setState({
+                        loaded: true,
+                    });
             }
         );
     }
@@ -307,8 +322,10 @@ export default class HealthCerHomePage extends Component {
         const listWidth = screenWidth - 2*paddingHorizontal;
 
         let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
+
+        let approvalTips = this.state.healthCerInfoResult.approvalTips;
         let approveResultCell = !this.state.isUpdatingInfo?
-            <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={this.state.healthCerInfoResult.approvalTips} />
+            <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={approvalTips} />
             : null;
         let beginDateString = this.state.beginDateString;
 
@@ -378,18 +395,21 @@ class HealthCerApproveResultCell extends Component {
 
     render() {
         let approvalTips = this.props.approvalTips;
-        let tips = approvalTips.split("@");
 
         let text1 = "";
         let text2 = "";
-        if (tips.length >= 2) {
-            text1 = tips[0];
-            text2 = tips[1];
-        } else if (tips.count >= 1) {
-            text1 = tips[0];
+        if (approvalTips != null && approvalTips.length > 0) {
+            let tips = approvalTips.split("@");
+            if (tips.length >= 2) {
+                text1 = tips[0];
+                text2 = tips[1];
+            } else if (tips.count >= 1) {
+                text1 = tips[0];
+            }
         }
 
-        const { style } = this.props
+
+        const { style } = this.props;
         return (
             <View style={[{flex:1, flexDirection: "column", justifyContent: "center"}, style]}>
                 <LineSeparator style={{marginHorizontal: 20}}/>
