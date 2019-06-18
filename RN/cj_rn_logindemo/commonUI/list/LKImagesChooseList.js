@@ -1,12 +1,12 @@
-//ImagesChooseList.js
+//LKImagesChooseListst.js
 // 图片系列选择视图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { FlatList, Text, Alert } from "react-native";
-import ActionLoadingImage  from '../image/ActionLoadingImage';
-import { ImageUploadType } from '../image/LoadingImage';
+import { FlatList, Text } from "react-native";
+import LKActionLoadingImage  from '../image/LKActionLoadingImage';
+import { ImageUploadType } from '../image/LKLoadingImage';
 
-export default class ImagesChooseList extends Component {
+export default class LKImagesChooseList extends Component {
     static propTypes = {
         boxHorizontalInterval: PropTypes.number,      // 水平方向上box之间的间隔
         listWidth: PropTypes.number.isRequired,
@@ -107,7 +107,7 @@ export default class ImagesChooseList extends Component {
                 let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount;
                 if (shouldAddAddIcon) {
                     let addImage = {
-                                        imageSource: require('./images/pickImage_blue.png'),
+                                        imageSource: require('./resources/pickImage_blue.png'),
                                         uploadType: ImageUploadType.NotNeed,
                                         uploadProgress: 0,
                                         imageIndex: renderImageSources.length,
@@ -149,7 +149,7 @@ export default class ImagesChooseList extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     return (
-                        <ActionLoadingImage
+                        <LKActionLoadingImage
                             style={{marginRight:boxHorizontalInterval}}
                             imageWidth={boxWidth}
                             imageHeight={boxHeight}

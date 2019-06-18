@@ -1,9 +1,8 @@
 //UploadImagePage.js
-
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
-import ActionLoadingImage from "../../commonUI/image/ActionLoadingImage";
-import { ImageUploadType } from '../../commonUI/image/LoadingImage';
+import LKActionLoadingImage from "../../commonUI/image/LKActionLoadingImage";
+import { ImageUploadType } from '../../commonUI/image/LKLoadingImage';
 
 export default class UploadImagePage extends Component {
     constructor(props) {
@@ -91,7 +90,7 @@ export default class UploadImagePage extends Component {
     deleteImageHandle=(index) => {
         this.stopTime();
 
-        let addImage = require('../../commonUI/list/images/pickImage_blue.png');
+        let addImage = require('../../commonUI/list/resources/pickImage_blue.png');
         this.setState({
                 addIconCurIndex: 0,
                 imageSource: addImage,
@@ -142,7 +141,7 @@ export default class UploadImagePage extends Component {
         return (
             <View>
                 <Text>{uploadStateString}</Text>
-                <ActionLoadingImage
+                <LKActionLoadingImage
                     imageWidth={boxWidth}
                     imageHeight={boxHeight}
                     imageSource={this.state.imageSource}

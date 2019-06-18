@@ -1,10 +1,10 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import { View, ScrollView, Text, Alert, Dimensions } from 'react-native';
-import { SubmitButton } from '../../commonUI/button/Button';
+import { LKEditSubmitButton } from '../../commonUI/button/LKEditSubmitButton';
 import CJDemoPickerImageFlatList from '../../commonUI/pickImage/cjdemoPickerImageCell';
-import ImagesChooseList from '../../commonUI/list/ImagesChooseList';
-import { ImageUploadType } from "../../commonUI/image/LoadingImage";
+import LKImagesChooseList from '../../commonUI/list/LKImagesChooseList';
+import { ImageUploadType } from "../../commonUI/image/LKLoadingImage";
 import ImagePicker from 'react-native-image-picker';
 import Toast from "react-native-root-toast";
 
@@ -358,7 +358,7 @@ export default class UploadImagesPage extends Component {
                     <Text style={{marginTop:10, backgroundColor:'rgba(0,255,0,0.9)', color:'#339900'}}>{currentUploadMessage}</Text>
                 </View>
 
-                <ImagesChooseList
+                <LKImagesChooseList
                     listWidth={listWidth}
                     numColumns={2}
                     widthHeightRatio={164/108}
@@ -373,7 +373,7 @@ export default class UploadImagesPage extends Component {
                     changeShowDebugMessage={this.state.debug}
                 />
 
-                <SubmitButton
+                <LKEditSubmitButton
                     style={[{flex:1, marginTop: 40, height:44, marginBottom: 34}, submitButtonStyle]}
                     fontSize={17}
                     isShowEditTitle={!this.state.isUpdatingInfo}

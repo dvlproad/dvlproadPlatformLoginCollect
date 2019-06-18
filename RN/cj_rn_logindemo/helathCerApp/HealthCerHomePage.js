@@ -1,10 +1,10 @@
 //HealthCerHomePage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
-import { SubmitButton } from '../commonUI/button/Button';
-import CJDemoDateBeginEnd from '../commonUI/pickDate/CJDemoDateBeginEnd';
-import ImagesChooseList from '../commonUI/list/ImagesChooseList';
-import {ImageUploadType} from "../commonUI/image/LoadingImage";
+import { LKEditSubmitButton } from '../commonUI/button/LKEditSubmitButton';
+import LKDateBeginEnd from '../commonUI/pickDate/LKDateBeginEnd';
+import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
+import {ImageUploadType} from "../commonUI/image/LKLoadingImage";
 import ImagePicker from 'react-native-image-picker';
 import Toast from 'react-native-root-toast';
 
@@ -341,7 +341,7 @@ export default class HealthCerHomePage extends Component {
                     <Text style={{fontSize:12, color: "#FF4500"}}>（至少要1张健康证照片）</Text>
                 </View>
 
-                <ImagesChooseList
+                <LKImagesChooseList
                     style={{paddingTop: 12}}
                     listWidth={listWidth}
                     numColumns={2}
@@ -357,7 +357,7 @@ export default class HealthCerHomePage extends Component {
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
-                <CJDemoDateBeginEnd style={{marginTop: 22}}
+                <LKDateBeginEnd style={{marginTop: 22}}
                                     isEditing={this.state.isUpdatingInfo}
                                     beginDateString={beginDateString}
                                     onBeginDateChange={ (date)=> {
@@ -369,7 +369,7 @@ export default class HealthCerHomePage extends Component {
 
                 {approveResultCell}
 
-                <SubmitButton
+                <LKEditSubmitButton
                     style={[{flex:1, marginTop: 40, height:44, marginBottom: 34}, submitButtonStyle]}
                     fontSize={17}
                     isShowEditTitle={!this.state.isUpdatingInfo}

@@ -1,6 +1,6 @@
 //ActivityIndicatorPage.js
 import React, { Component } from 'react'
-import { View, ScrollView, ActivityIndicator, Button, Alert } from 'react-native'
+import { View, ScrollView, ActivityIndicator, Button } from 'react-native'
 
 export default class ActivityIndicatorPage extends Component {
     constructor(props) {

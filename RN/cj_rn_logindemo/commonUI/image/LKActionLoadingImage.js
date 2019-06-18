@@ -1,11 +1,11 @@
-//ActionLoadingImage.js
+//LKActionLoadingImage.js
 //已解耦的图片选择视图
 import React, { Component } from 'react';
+import { StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import LKLoadingImage, { ImageUploadType } from './LKLoadingImage';
 import PropTypes from "prop-types";
-import { StyleSheet, View, Image, TouchableOpacity} from "react-native";
-import LoadingImage, { ImageUploadType } from './LoadingImage';
 
-export default class ActionLoadingImage extends Component {
+export default class LKActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
@@ -89,15 +89,15 @@ export default class ActionLoadingImage extends Component {
                 }}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
-                    <LoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
-                                  imageWidth={imageWidth}
-                                  imageHeight={imageHeight}
-                                  imageSource={imageSource}
-                                  buttonIndex={buttonIndex}
-                                  onLoadComplete={this.props.onLoadComplete}
-                                  uploadType={this.props.uploadType}
-                                  uploadProgress={this.props.uploadProgress}
-                                  changeShowDebugMessage={this.props.changeShowDebugMessage}
+                    <LKLoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
+                                    imageWidth={imageWidth}
+                                    imageHeight={imageHeight}
+                                    imageSource={imageSource}
+                                    buttonIndex={buttonIndex}
+                                    onLoadComplete={this.props.onLoadComplete}
+                                    uploadType={this.props.uploadType}
+                                    uploadProgress={this.props.uploadProgress}
+                                    changeShowDebugMessage={this.props.changeShowDebugMessage}
                     />
                     {deleteImageButton}
                 </View>

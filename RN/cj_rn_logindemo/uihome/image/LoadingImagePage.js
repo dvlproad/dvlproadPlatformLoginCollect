@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native';
-import LoadingImage from '../../commonUI/image/LoadingImage'
+import LKLoadingImage from '../../commonUI/image/LKLoadingImage'
 import OtherLoadingImage from '../../commonUI/image/OtherLoadingImage'
 
 export default class LoadingImagePage extends Component {
@@ -11,7 +11,7 @@ export default class LoadingImagePage extends Component {
         return (
             <View style={{flex:1}}>
                 <Text style={{marginTop:20}}>LoadingImage</Text>
-                <LoadingImage
+                <LKLoadingImage
                     style={{width: 200, height: 200, backgroundColor:'red'}}
                     imageWidth={200}
                     imageHeight={200}

@@ -1,8 +1,8 @@
 //ActionImagePage.js
 import React, { Component } from 'react';
 import {Alert, ScrollView} from 'react-native';
-import ActionLoadingImage  from '../../commonUI/image/ActionLoadingImage'
-import {ImageUploadType} from "../../commonUI/image/LoadingImage";
+import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage'
+import {ImageUploadType} from '../../commonUI/image/LKLoadingImage';
 
 export default class ActionImagePage extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ export default class ActionImagePage extends Component {
     }
 
     deleteImageHandle=(index) => {
-        let addImage = require('../../commonUI/list/images/pickImage_blue.png');
+        let addImage = require('../../commonUI/list/resources/pickImage_blue.png');
         this.setState({
                 addIconCurIndex: 0,
                 imageSource: addImage,
@@ -58,7 +58,7 @@ export default class ActionImagePage extends Component {
 
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
-                <ActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
+                <LKActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
                                     imageWidth={164}
                                     imageHeight={108}
                                     imageSource={this.state.imageSource}

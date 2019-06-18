@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import {View, Text, Dimensions, ScrollView, Alert} from 'react-native';
 
-import ImagesChooseList  from '../../commonUI/list/ImagesChooseList'
+import LKImagesChooseList  from '../../commonUI/list/LKImagesChooseList'
 
 // 取得屏幕的宽高Dimensions
 const { width, height } = Dimensions.get('window');
@@ -52,7 +52,7 @@ export default class ImagesChoosePage extends Component {
         let listWidth = width;
         return (
             <View style={{backgroundColor: 'green'}}>
-                <ImagesChooseList style={{backgroundColor: 'green'}}
+                <LKImagesChooseList style={{backgroundColor: 'green'}}
                                   listWidth={listWidth}
                                   numColumns={2}
                                   widthHeightRatio={164/108}

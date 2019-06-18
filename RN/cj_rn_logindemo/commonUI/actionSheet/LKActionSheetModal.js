@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     Modal,
+    Platform,
     StyleSheet,
     Text,
     View,
@@ -13,15 +14,12 @@ import {
 } from 'react-native';
 
 
-
-
-
-let screenHeight = Dimensions.get('window').height;
+let screenHeight = Platform.OS === 'ios' ? Dimensions.get('window').height : Dimensions.get('window').height - 20;
 let screenWidth = Dimensions.get('window').width;
-let screenBottomHeight = screenHeight >= 812 ? 34 : 0;
+let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 0;
 const [screenMiddleTop] = [(screenHeight - 60.0) / 2.0];
 
-export default class CJActionSheetModel extends Component {
+export default class LKActionSheetModal extends Component {
     constructor(props) {
         super(props);
         this.watcher = null;   //监视器
@@ -46,17 +44,22 @@ export default class CJActionSheetModel extends Component {
         });
     }
     render() {
+        let actionSheetTitleBox = (
+            this.state.title ? <View style={styles.actionSheetTitleBox}>
+                <Text style={styles.actionSheetTitle}>{this.state.title}</Text>
+            </View> : null
+        );
+
         return (
             <Modal style={styles.container}
-                transparent={true}
-                visible={this.state.visible}
+                   transparent={true}
+                   visible={this.state.visible}
             >
                 <Animated.View style={styles.mask1} {...this.watcher.panHandlers}>
                 </Animated.View>
                 <Animated.View style={[styles.actionSheetBox, { top: this.state.topAnimated }]}>
-                    <View style={styles.actionSheetTitleBox}>
-                        <Text style={styles.actionSheetTitle}>{this.state.title}</Text>
-                    </View>
+                    {actionSheetTitleBox}
+
                     <ScrollView
                         style={{ height: this.state.height }}
                         showsVerticalScrollIndicator={false}
@@ -80,19 +83,19 @@ export default class CJActionSheetModel extends Component {
         let items = this.state.arrayItems;
         for (let i = 0; i < items.length; i++) {
             let item = items[i];
-            array.push(this.renderItem(item, i));
+            array.push(this.renderItem(i, item));
         }
         return array;
     }
 
-    renderItem(item, index) {
-        return <View style={styles.itemBox}>
+    renderItem(index, item) {
+        return <View key = {index} style={styles.itemBox}>
             <TouchableHighlight
                 style={{ flex: 1 }}
                 activeOpacity={0.8}
                 underlayColor={'#F1F1F1'}
                 onPress={() => {
-                    this.state.confirmClick && this.state.confirmClick(item, index);
+                    this.state.confirmClick && this.state.confirmClick(index, item);
                     this.out();
                 }}>
                 <Text style={{ color: '#333', fontSize: 15, textAlign: 'center', lineHeight: 50 }}>{this.state.showKey ? item[this.state.showKey] : item}</Text>
@@ -117,17 +120,20 @@ export default class CJActionSheetModel extends Component {
             />
         </View>;
     }
+
     /**
-     *显示弹窗
+     * 显示弹窗
      *
-* @param {标题 *} [title=null]
-* @param {item数组 *} [arrayItems=null]   示例：arrayItems = ['高德地图','百度地图','苹果地图']，showKey= null ;;;;; arrayItems = [{id: '3261372',name:'计划有变'},{id: '28963',name:'店铺未营业'},]，showKey= 'name'
-* @param {显示内容的key,null时数组的成员是字符串，不为 null时数组的对象是json*} [showKey=null]
-* @param {点击按钮回调 *} confirmClick（index = 0:第一个按钮点击，1：第二个那妞点击，只有一个按钮无需处理）
-        * @memberof LuckinAlertModal
-        */
+     * @param {标题 *}
+     * @param {item数组 *}
+     * @param {显示内容的key,null时数组的成员是字符串，不为 null时数组的对象是json*} [showKey=null]
+     * @param {点击按钮回调 *} confirmClick（index = 0:第一个按钮点击，1：第二个那妞点击，只有一个按钮无需处理）
+     * @memberof LKActionSheetModal
+     */
     show(title = null, arrayItems, showKey = null, confirmClick) {
-        let otherHeight = screenBottomHeight + 52 + 10 + 51;
+        let titleHeight = title ? 51 : 0;
+        let otherHeight = screenBottomHeight + 52 + 10 + titleHeight;
+
         let height = otherHeight + (arrayItems.length * 51);
         if (height > screenHeight * 0.7) {
             height = screenHeight * 0.7;

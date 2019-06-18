@@ -1,8 +1,7 @@
-//LoadingImage.js
+//LKLoadingImage.js
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
 import {StyleSheet, View, Image, Text, ActivityIndicator} from "react-native";
-
+import PropTypes from "prop-types";
 
 /// 图片加载状态
 var ImageLoadStatus = {
@@ -23,7 +22,7 @@ export var ImageUploadType = {
 
 var isNetworkImage = false;
 
-export default class LoadingImage extends Component {
+export default class LKLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,

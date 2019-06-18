@@ -1,7 +1,7 @@
 //ButtonHomePage.js
 import React, {Component} from 'react';
 import {Button, Alert, Text, View, ScrollView, FlatList, TouchableWithoutFeedback} from 'react-native';
-import {SubmitButton} from "../../commonUI/button/Button";
+import {LKEditSubmitButton} from "../../commonUI/button/LKEditSubmitButton";
 
 export default class ButtonHomePage extends Component {
     renderSeparator() {
@@ -106,7 +106,7 @@ class Separator extends Component {
 }
 
 
-class TestSubmitButton extends SubmitButton {
+class TestSubmitButton extends LKEditSubmitButton {
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -116,7 +116,7 @@ class TestSubmitButton extends SubmitButton {
 
     render() {
         return (
-            <SubmitButton isShowEditTitle={this.props.isShowEditTitle} isDisabled={this.props.isDisabled}
+            <LKEditSubmitButton isShowEditTitle={this.props.isShowEditTitle} isDisabled={this.props.isDisabled}
                           clickEditTitleHandle={() => {
                               Alert.alert("你点击了编辑按钮！");
                           }}

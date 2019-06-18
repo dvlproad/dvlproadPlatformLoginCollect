@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {View, Alert} from 'react-native';
-import ActionLoadingImage from '../image/ActionLoadingImage';
+import LKActionLoadingImage from '../image/LKActionLoadingImage';
 import PropTypes from "prop-types";
 
 
@@ -48,7 +48,7 @@ export default class CJDemoPickerImageFlatList extends Component {
 
         return (
             <View style={[{flexDirection: 'row', justifyContent: "space-between"}, style]}>
-                <ActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'red'}}
+                <LKActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'red'}}
                                     imageWidth={boxWidth}
                                     imageHeight={boxHeight}
                                     imageSource={networkImage}
@@ -59,7 +59,7 @@ export default class CJDemoPickerImageFlatList extends Component {
                                        Alert.alert("点击删除图片1");
                                    }}
                 />
-                <ActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'purple'}}
+                <LKActionLoadingImage style={{ width: boxWidth, height: boxHeight, backgroundColor:'purple'}}
                                     imageWidth={boxWidth}
                                     imageHeight={boxHeight}
                                     imageSource={networkImage}

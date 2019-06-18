@@ -1,4 +1,4 @@
-//CJDemoDateBeginEnd.js
+//LKDateBeginEnd.js
 import React, { Component } from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native'
 import DatePicker from 'react-native-datepicker'
@@ -6,7 +6,7 @@ import DateUtil from "../../commonUtil/DateUtil";
 import PropTypes from "prop-types";
 
 
-export default class CJDemoDateBeginEnd extends Component {
+export default class LKDateBeginEnd extends Component {
     static propTypes = {
         isEditing: PropTypes.bool,
         beginDateString: PropTypes.string.isRequired,

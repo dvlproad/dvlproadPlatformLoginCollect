@@ -1,25 +1,39 @@
-//Button.js
-import React, { Component } from 'react'
-import {Button, View, StyleSheet, Text, TouchableWithoutFeedback, TouchableOpacity} from 'react-native'
-import type {PressEvent} from "react-native/Libraries/Types/CoreEventTypes";
+//LKEditSubmitButton.js
+import React, { Component } from 'react';
+import {Button, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import PropTypes from "prop-types";
+
+class LKEditSubmitButton extends Component {
+    static propTypes = {
+        submitTitle: PropTypes.string.isRequired,
+        editTitle:  PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+        isShowEditTitle: PropTypes.bool.isRequired,
+        isDisabled: PropTypes.bool,
+        clickEditTitleHandle: PropTypes.func,
+        clickSubmitTitleHandle: PropTypes.func,
+    };
+
+    static defaultProps = {
+        submitTitle: "提交",
+        editTitle:  "修改",
+        fontSize: 17,
+        isShowEditTitle: false,
+        isDisabled: false,
+        clickEditTitleHandle: () => {},
+        clickSubmitTitleHandle: () => {}
+    };
 
 
-class SubmitButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            submitTitle: "提交",
-            editTitle:  "修改",
-            fontSize: 17,
-            isShowEditTitle: false,
-            isDisabled: false,
-            clickEditTitleHandle: (event?: PressEvent) => mixed,
-            clickSubmitTitleHandle: (event?: PressEvent) => mixed
+
         };
     }
 
     render() {
-        const { style } = this.props
+        const { style } = this.props;
 
         let isShowEditTitle = this.props.isShowEditTitle;
         let submitTitle = this.props.submitTitle ? this.props.submitTitle : this.state.submitTitle;
@@ -68,7 +82,7 @@ class SubmitButton extends Component {
     }
 }
 
-class EnableBlueButton extends React.Component {
+class EnableBlueButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -114,4 +128,4 @@ const styles = StyleSheet.create({
 });
 
 
-export {EnableBlueButton, SubmitButton};
+export {EnableBlueButton, LKEditSubmitButton};
