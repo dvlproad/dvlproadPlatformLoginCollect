@@ -1,15 +1,15 @@
 //LKDateBeginEnd.js
 import React, { Component } from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native'
-import DatePicker from 'react-native-datepicker'
-import DateUtil from "../../commonUtil/DateUtil";
+import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import DatePicker from 'react-native-datepicker';
+import LKDateUtil from '../../commonUtil/LKDateUtil';
 import PropTypes from "prop-types";
 
 
 export default class LKDateBeginEnd extends Component {
     static propTypes = {
         isEditing: PropTypes.bool,
-        beginDateString: PropTypes.string.isRequired,
+        beginDateString: PropTypes.string,
         onBeginDateChange: PropTypes.func.isRequired,
     };
 
@@ -23,10 +23,10 @@ export default class LKDateBeginEnd extends Component {
 
         let beginDateString = this.props.beginDateString;
         let endDateString = '';
-        if (beginDateString.length > 4) {
-            let beginDate = DateUtil.parserDateString(beginDateString);
-            let endDate = DateUtil.addYears(beginDate, 1);
-            endDateString = DateUtil.yyyyMMddString(endDate);
+        if (beginDateString && beginDateString.length > 4) {
+            let beginDate = LKDateUtil.parserDateString(beginDateString);
+            let endDate = LKDateUtil.addYears(beginDate, 1);
+            endDateString = LKDateUtil.yyyyMMddString(endDate);
         }
 
 
@@ -59,7 +59,7 @@ export default class LKDateBeginEnd extends Component {
 class CJDemoDatePicker extends React.Component {
     static propTypes = {
         allowPickDate: PropTypes.bool,
-        chooseDateString: PropTypes.string.isRequired,
+        chooseDateString: PropTypes.string,
         onDateChange: PropTypes.func,
     };
 

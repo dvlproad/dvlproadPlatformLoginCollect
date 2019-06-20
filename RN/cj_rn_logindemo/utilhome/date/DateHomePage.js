@@ -2,20 +2,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 
-import DateUtil from "../../commonUtil/DateUtil";
+import LKDateUtil from "../../commonUtil/LKDateUtil";
 import moment from 'moment';
 
 export default class DateHomePage extends Component {
     render() {
-        let date = DateUtil.parserDateString("2019-01-01");
-        let yyyyMMddString = DateUtil.yyyyMMddString(date);
-        let yyyyMMdd_hhmmssString = DateUtil.yyyyMMdd_hhmmssString(date);
+        let date = LKDateUtil.parserDateString("2019-01-01");
+        let yyyyMMddString = LKDateUtil.yyyyMMddString(date);
+        let yyyyMMdd_hhmmssString = LKDateUtil.yyyyMMdd_hhmmssString(date);
 
         let beginDateString1 = "2000-02-29";
-        let beginDate = DateUtil.parserDateString(beginDateString1);
-        let beginDateString2 = DateUtil.yyyyMMdd_hhmmssString(beginDate);
-        let endDate = DateUtil.addYears(beginDate, 1);
-        let endDateString = DateUtil.yyyyMMdd_hhmmssString(endDate);
+        let beginDate = LKDateUtil.parserDateString(beginDateString1);
+        let beginDateString2 = LKDateUtil.yyyyMMdd_hhmmssString(beginDate);
+        let endDate = LKDateUtil.addYears(beginDate, 1);
+        let endDateString = LKDateUtil.yyyyMMdd_hhmmssString(endDate);
 
         let momentAddDay1 = moment().add(1, 'days').calendar();
         let momentAddDay2 = moment().add(2, 'days').calendar();

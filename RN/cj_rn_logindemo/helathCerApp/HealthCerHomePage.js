@@ -4,9 +4,9 @@ import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator
 import { LKEditSubmitButton } from '../commonUI/button/LKEditSubmitButton';
 import LKDateBeginEnd from '../commonUI/pickDate/LKDateBeginEnd';
 import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
-import {ImageUploadType} from "../commonUI/image/LKLoadingImage";
+import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
 import ImagePicker from 'react-native-image-picker';
-import Toast from 'react-native-root-toast';
+import LKToastUtil from '../commonUI/toast/LKToastUtil';
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -24,15 +24,22 @@ var HealthCardApproveCode = {
     NotPass: 3,       /**< 未通过--获取照片时候,得到健康证正修改的照片 */
 };
 
+/// API网络请求状态
+var APILoadStatus = {
+    Pending: 0,     /**< 正准备请求数据 */
+    Success: 1,     /**< 成功请求到数据 */
+    Failure: 2,     /**< 失败请求不到数据 */
+};
 
 export default class HealthCerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loaded: false,
+            apiLoadStatus: APILoadStatus.Pending,
 
             healthCerInfoResult: new Map(),
             //考虑以后增加"取消"操作的情况，这里我们增加以下操作变量
+
             healthCerImages:[],
             beginDateString: '',
             isUpdatingInfo: false,
@@ -56,6 +63,23 @@ export default class HealthCerHomePage extends Component {
         fetch(healthCardDetailUrl)
             .then(response => response.json())
             .then(responseData => {
+                //statusCode
+                let apiStatusCode = responseData.code;
+                if (apiStatusCode != 1) {
+                    let message = responseData.msg;
+                    LKToastUtil.showMessage(message);
+
+                    this.setState({
+                        apiLoadStatus: APILoadStatus.Success,
+
+                        healthCerInfoResult: null,
+                        healthCerImages:[],
+                        beginDateString: null,
+                        isUpdatingInfo: false,
+                    });
+                    return;
+                }
+
                 //healthCerInfoResult
                 let healthCerInfoResult = responseData.content;
 
@@ -92,7 +116,7 @@ export default class HealthCerHomePage extends Component {
                 let isUpdatingInfo = healthCerInfoResult.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false;
 
                 this.setState({
-                    loaded: true,
+                    apiLoadStatus: APILoadStatus.Success,
                     healthCerInfoResult: healthCerInfoResult,
                     healthCerImages: healthCerImages,
                     beginDateString: beginDateString,
@@ -101,19 +125,15 @@ export default class HealthCerHomePage extends Component {
             }).catch(
                 (error) => {
                     let message = "错误：" + error;
-                    console.log(message);
-
-                    Toast.show(message, {
-                        duration: Toast.durations.SHORT,
-                        position: Toast.positions.CENTER,
-                        shadow: true,
-                        animation: true,
-                        hideOnPress: true,
-                        delay: 0,
-                    });
+                    LKToastUtil.showMessage(message);
 
                     this.setState({
-                        loaded: true,
+                        apiLoadStatus: APILoadStatus.Failure,
+
+                        healthCerInfoResult: null,
+                        healthCerImages:[],
+                        beginDateString: null,
+                        isUpdatingInfo: false,
                     });
             }
         );
@@ -122,14 +142,7 @@ export default class HealthCerHomePage extends Component {
     clickEditTitleHandle= () => {
         if (!this.state.isImageAllLoaded) {
             let message = '请等待所有图片加载完成\ncurrentImageCount=' + this.state.healthCerImages.length;
-            Toast.show(message, {
-                duration: Toast.durations.SHORT,
-                position: Toast.positions.CENTER,
-                shadow: true,
-                animation: true,
-                hideOnPress: true,
-                delay: 0,
-            });
+            LKToastUtil.showMessage(message);
 
             return;
         }
@@ -314,16 +327,22 @@ export default class HealthCerHomePage extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
+    healthCerBankComponents=()=>{
+        return (
+            <ScrollView>
+                <Text>网络请求失败，请重新加载</Text>
+            </ScrollView>
+        )
+    }
 
-
-    render() {
+    healthCerComponents=()=>{
         const paddingHorizontal = 15;
         const screenWidth = Dimensions.get('window').width;
         const listWidth = screenWidth - 2*paddingHorizontal;
 
         let submitButtonStyle = this.state.isUpdatingInfo?{flex:1, marginHorizontal: 20}:{width:160, alignSelf:"center"}
 
-        let approvalTips = this.state.healthCerInfoResult.approvalTips;
+        let approvalTips = this.state.healthCerInfoResult ? this.state.healthCerInfoResult.approvalTips : null;
         let approveResultCell = !this.state.isUpdatingInfo?
             <HealthCerApproveResultCell style={{marginTop: 40}} approvalTips={approvalTips} />
             : null;
@@ -334,7 +353,7 @@ export default class HealthCerHomePage extends Component {
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
                 <View style={styles.loadingView}>
-                    <ActivityIndicator size="large" color="#0000ff" animating={!this.state.loaded} />
+                    <ActivityIndicator size="large" color="#0000ff" animating={this.state.apiLoadStatus == APILoadStatus.Requesting} />
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 30}}>
                     <Text style={{fontSize:15, color: "#333333"}}>上传健康证</Text>
@@ -358,13 +377,13 @@ export default class HealthCerHomePage extends Component {
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
                 <LKDateBeginEnd style={{marginTop: 22}}
-                                    isEditing={this.state.isUpdatingInfo}
-                                    beginDateString={beginDateString}
-                                    onBeginDateChange={ (date)=> {
-                                        this.setState({
-                                            beginDateString: date
-                                        })
-                                    }}
+                                isEditing={this.state.isUpdatingInfo}
+                                beginDateString={beginDateString}
+                                onBeginDateChange={ (date)=> {
+                                    this.setState({
+                                        beginDateString: date
+                                    })
+                                }}
                 />
 
                 {approveResultCell}
@@ -380,6 +399,15 @@ export default class HealthCerHomePage extends Component {
 
             </ScrollView>
         );
+    }
+
+
+    render() {
+        if (this.state.apiLoadStatus == APILoadStatus.Success) {
+            return this.healthCerComponents();
+        } else {
+            return this.healthCerBankComponents();
+        }
     }
 }
 

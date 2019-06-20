@@ -1,8 +1,7 @@
 //ActionImagePage.js
 import React, { Component } from 'react';
 import {Alert, ScrollView} from 'react-native';
-import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage'
-import {ImageUploadType} from '../../commonUI/image/LKLoadingImage';
+import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 
 export default class ActionImagePage extends Component {
     constructor(props) {

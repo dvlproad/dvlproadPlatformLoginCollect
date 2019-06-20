@@ -1,6 +1,6 @@
-//DateUtil.js
+//LKDateUtil.js
 
-class DateUtil{
+class LKDateUtil{
     /**
      * 例如:2017-06-28 10:48:46转成date类,
      * 可把- replace成/
@@ -78,4 +78,4 @@ class DateUtil{
         return date.Format(formater);
     }
 }
-export default DateUtil;
+export default LKDateUtil;
