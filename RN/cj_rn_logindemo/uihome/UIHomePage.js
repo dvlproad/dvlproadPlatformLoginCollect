@@ -29,11 +29,12 @@ export default class UIHomePage extends Component {
                     { title: "Button", page: "ButtonHome" },
                     { title: "Navigation", page: "NavigationHome" },
                     { title: "Text", page: "TextHome" },
+                    { title: "ImageHomePage", page: "ImageHomePage" },
                     ]
             },
-            { key: "image",
+            { key: "List",
                 data: [
-                    { title: "ImageHomePage", page: "ImageHomePage" },
+                    { title: "ListHomePage", page: "ListHomePage" },
                 ]
             },
             { key: "Loading",
@@ -48,24 +49,9 @@ export default class UIHomePage extends Component {
                     { title: "PickImagesPage", page: "PickImagesPage" },
                     ]
             },
-            { key: "List",
+            { key: "WebView",
                 data: [
-                    { title: "FlatListEasyPage", page: "FlatListEasyPage" },
-                    { title: "FlatListNumColumnsPage", page: "FlatListNumColumnsPage" },
-                    { title: "FlatListHorizontalEasyPage", page: "FlatListHorizontalEasyPage" },
-                    { title: "GoodsChoosePage", page: "GoodsChoosePage" },
-                    { title: "ImagesChoosePage", page: "ImagesChoosePage" },
-                    { title: "ListExamplePage", page: "ListExamplePage" },
-                    ]
-            },
-            { key: "W",
-                data: [
-                    { title: "王磊" },
-                    { title: "王者荣耀" },
-                    { title: "往事不能回味" },
-                    { title: "王小磊" },
-                    { title: "王中磊" },
-                    { title: "王大磊" }
+                    { title: "WebViewHomePage", page: "WebViewHomePage" },
                     ]
             },
         ];

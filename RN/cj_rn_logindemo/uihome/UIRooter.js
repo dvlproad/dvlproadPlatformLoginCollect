@@ -10,16 +10,18 @@ import UIHomePage from "./UIHomePage"
 import LayoutHomePage from "./layout/LayoutHomePage"
 
 //navigation
-import NavigationHomePage, { NavigationPages } from "./navigation/NavigationHomePage";
+import { NavigationPages } from "./navigation/NavigationHomePage";
 
 //button
 import ButtonHomePage from "./button/ButtonHomePage"
 
-//image
-import ImageHomePage, { ImagePages } from "./image/ImageHomePage";
-
 //text
 import TextHomePage from "./text/TextHomePage"
+
+//image
+import { ImagePages } from "./image/ImageHomePage";
+//list
+import { ListPages } from "./list/ListRooter";
 
 //hud
 import HUDHomePage from './loading/HUDHomePage'
@@ -29,17 +31,12 @@ import PickDatePage from './pickDate/PickDatePage'
 //pickImage
 import PickImagesPage from './pickImage/PickImagesPage'
 
-//list
-import FlatListEasyPage from './list/FlatListEasyPage'
-import FlatListNumColumnsPage from './list/FlatListNumColumnsPage'
-import FlatListHorizontalEasyPage from './list/FlatListHorizontalEasyPage'
-import GoodsChoosePage from './list/GoodsChoosePage'
-import ListExamplePage from './list/ListExamplePage'
-import ImagesChoosePage from './list/ImagesChoosePage'
-import SectionListEasyPage from './list/SectionListEasyPage'
 
 //loading
 import ActivityIndicatorPage from './loading/ActivityIndicatorPage'
+
+//webview
+import { WebViewPages } from './webview/WebViewRooter';
 
 
 
@@ -58,14 +55,8 @@ const UIHomeNavigation = createStackNavigator(
                 title: `Layout首页`,
             }),
         },
-        NavigationHome: {
-            screen: createStackNavigator(NavigationPages), //会多一个导航栏
-            // screen: NavigationHomePage, //TODO:怎么传递导航栏
-            navigationOptions: () => ({
-                title: `Navigation首页`,
-                // header: null,
-            }),
-        },
+        ...NavigationPages,
+
         ButtonHome: {
             screen: ButtonHomePage,
             navigationOptions: () => ({
@@ -79,13 +70,8 @@ const UIHomeNavigation = createStackNavigator(
             }),
         },
 
-        Image: {
-            screen: createStackNavigator(ImagePages), //会多一个导航栏
-            navigationOptions: () => ({
-                title: `Navigation首页`,
-                // header: null,
-            }),
-        },
+        ...ImagePages,
+        ...ListPages,
 
         HUDHomePage: {
             screen: HUDHomePage,
@@ -110,49 +96,7 @@ const UIHomeNavigation = createStackNavigator(
 
 
 
-        // 以下为列表相关
-        FlatListEasyPage: {
-            screen: FlatListEasyPage,
-            navigationOptions: () => ({
-                title: `列表的简单使用`,
-            }),
-        },
-        FlatListNumColumnsPage: {
-            screen: FlatListNumColumnsPage,
-            navigationOptions: () => ({
-                title: `列表的列数使用`,
-            }),
-        },
-        FlatListHorizontalEasyPage: {
-            screen: FlatListHorizontalEasyPage,
-            navigationOptions: () => ({
-                title: `水平列表的简单使用`,
-            }),
-        },
-        ListExamplePage: {
-            screen: ListExamplePage,
-            navigationOptions: () => ({
-                title: `列表的使用示例`,
-            }),
-        },
-        GoodsChoosePage: {
-            screen: GoodsChoosePage,
-            navigationOptions: () => ({
-                title: `一系列商品的选择`,
-            }),
-        },
-        ImagesChoosePage: {
-            screen: ImagesChoosePage,
-            navigationOptions: () => ({
-                title: `一系列图片的选择`,
-            }),
-        },
-        SectionListEasyPage: {
-            screen: SectionListEasyPage,
-            navigationOptions: () => ({
-                title: `分区列表的简单使用`,
-            }),
-        },
+
 
         ActivityIndicatorPage: {
             screen: ActivityIndicatorPage,
@@ -160,6 +104,8 @@ const UIHomeNavigation = createStackNavigator(
                 title: `ActivityIndicatorPage(一个圆形的 loading 提示符号)`,
             }),
         },
+
+        ...WebViewPages,
     },
     {
         initialRouteName: 'UIHome'
