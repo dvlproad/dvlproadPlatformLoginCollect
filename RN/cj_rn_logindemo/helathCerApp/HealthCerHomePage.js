@@ -7,6 +7,7 @@ import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
 import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
 import ImagePicker from 'react-native-image-picker';
 import LKToastUtil from '../commonUI/toast/LKToastUtil';
+import LKEmptyNetwork from "../commonUI/empty/LKEmptyNetwork";
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -327,13 +328,6 @@ export default class HealthCerHomePage extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
-    healthCerBankComponents=()=>{
-        return (
-            <ScrollView>
-                <Text>网络请求失败，请重新加载</Text>
-            </ScrollView>
-        )
-    }
 
     healthCerComponents=()=>{
         const paddingHorizontal = 15;
@@ -406,7 +400,7 @@ export default class HealthCerHomePage extends Component {
         if (this.state.apiLoadStatus == APILoadStatus.Success) {
             return this.healthCerComponents();
         } else {
-            return this.healthCerBankComponents();
+            return <LKEmptyNetwork />;
         }
     }
 }
