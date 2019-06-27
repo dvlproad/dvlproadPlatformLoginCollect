@@ -1,9 +1,10 @@
 //LKActionLoadingImage.js
 //已解耦的图片选择视图
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, TouchableOpacity} from 'react-native';
 import LKLoadingImage, { ImageUploadType } from './LKLoadingImage';
 import PropTypes from "prop-types";
+import {LKDeleteButton} from "../button/LKImageButton";
 
 export default class LKActionLoadingImage extends Component {
     static propTypes = {
@@ -71,7 +72,7 @@ export default class LKActionLoadingImage extends Component {
 
         let buttonIndex = this.props.buttonIndex;
 
-        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <DeleteImageButton
+        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <LKDeleteButton
             style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
             deleteImageHandle={()=> {
                 this.props.deleteImageHandle(buttonIndex);
@@ -103,27 +104,6 @@ export default class LKActionLoadingImage extends Component {
                 </View>
             </TouchableOpacity>
         );
-    }
-}
-
-export class DeleteImageButton extends Component {
-    static propTypes = {
-        deleteImageHandle: PropTypes.func
-    };
-
-    static defaultProps = {
-        deleteImageHandle: null,
-    };
-
-
-    render() {
-        return (
-            <View style={this.props.style} >
-                <TouchableOpacity onPress={this.props.deleteImageHandle} >
-                    <Image source={require('./resources/healthCer_delete_blue.png') } />
-                </TouchableOpacity>
-            </View>
-        )
     }
 }
 

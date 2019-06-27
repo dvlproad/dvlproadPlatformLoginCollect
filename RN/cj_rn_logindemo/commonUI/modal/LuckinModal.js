@@ -10,7 +10,7 @@ import {
 
 import TimerMixin from 'react-timer-mixin';
 import { Input, Button } from "teaset";
-import LuckinButton from '../button/LKImageButton';
+import LuckinButton from '../button/LKTextImageButton';
 
 let screenHeight = Dimensions.get('window').height;
 let screenWidth = Dimensions.get('window').width;

@@ -1,15 +1,9 @@
 //UnDecoupleActionLoadingImage.js
-//未解耦的图片选择视图
+//未解耦的图
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, Image, Text, TouchableOpacity, ActivityIndicator} from "react-native";
-
-/// 图片来源
-export var ImageSourceType = {
-    Default: 0,     /**< 无, 使用默认图片 */
-    Local: 1,       /**< 本地 */
-    Network: 2      /**< 网络 */
-};
+import {LKDeleteButton} from "../button/LKImageButton";
 
 /// 图片加载状态
 var ImageLoadStatus = {
@@ -153,7 +147,7 @@ export default class UnDecoupleActionLoadingImage extends Component {
 
         let buttonIndex = this.props.buttonIndex;
 
-        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <DeleteImageButton
+        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <LKDeleteButton
             style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
             deleteImageHandle={()=> {
                 this.props.deleteImageHandle(buttonIndex);
@@ -241,26 +235,5 @@ export default class UnDecoupleActionLoadingImage extends Component {
 
             </TouchableOpacity>
         );
-    }
-}
-
-export class DeleteImageButton extends Component {
-    static propTypes = {
-        deleteImageHandle: PropTypes.func
-    };
-
-    static defaultProps = {
-        deleteImageHandle: null,
-    };
-
-
-    render() {
-        return (
-            <View style={this.props.style} >
-                <TouchableOpacity onPress={this.props.deleteImageHandle} >
-                    <Image source={require('./resources/healthCer_delete_blue.png') } />
-                </TouchableOpacity>
-            </View>
-        )
     }
 }

@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native';
 
-import LuckinButton from '../button/LKImageButton';
+import LuckinButton from '../button/LKTextImageButton';
 
 let screenHeight = Dimensions.get('window').height;
 let screenWidth = Dimensions.get('window').width;
