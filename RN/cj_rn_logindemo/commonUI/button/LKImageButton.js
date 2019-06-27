@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {Image, TouchableOpacity, View} from "react-native";
 
+// 返回App的图片按钮
+export class LKBackAppButton extends Component {
+    render() {
+        return (
+            <LKBackButton onPress={() => {
+                              
+                          }}
+            />
+        )
+    }
+}
+
 // 返回的图片按钮
 export class LKBackButton extends Component {
     static propTypes = {
@@ -47,7 +59,7 @@ export class LKDeleteButton extends Component {
 // 图片按钮
 export class LKImageButton extends Component {
     static propTypes = {
-        source: PropTypes.object,
+        source: PropTypes.number,
         onPress: PropTypes.func
     };
 

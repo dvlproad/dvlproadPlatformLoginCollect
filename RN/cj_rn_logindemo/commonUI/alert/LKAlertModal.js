@@ -15,110 +15,7 @@ let screenHeight = Dimensions.get('window').height;
 let screenWidth = Dimensions.get('window').width;
 const [middleTop] = [(screenHeight - 60.0) / 2.0];
 
-const styles = StyleSheet.create({
-    container: {
-        width: screenWidth,
-        height: screenHeight,
-    },
-    mask: {
-        position: "absolute",
-        width: screenWidth,
-        height: screenHeight,
-    },
-    mask1: {
-        backgroundColor: "#000",
-        opacity: 0.7,
-        position: "absolute",
-        width: screenWidth,
-        height: screenHeight,
-    },
-    content: {
-        width: screenWidth,
-        height: 60,
-        position: 'absolute',
-        left: 0,
-        top: middleTop,
-        alignItems: 'center',
-    },
-    imageBox: {
-        width: 48,
-        height: 48,
-    },
-    tipMessage: {
-        marginTop: 15,
-        fontSize: 15,
-        color: '#FFF',
-
-    },
-    contentBox: {
-        overflow: 'hidden',
-        width: 272,
-        backgroundColor: '#FFF',
-        borderRadius: 5,
-        left: (screenWidth - 272) / 2
-    },
-    title: {
-        marginHorizontal: 15,
-        marginTop: 30,
-        lineHeight: 18,
-        fontSize: 16,
-        color: '#333',
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    message: {
-        marginHorizontal: 15,
-        lineHeight: 16,
-        fontSize: 14,
-        color: '#666',
-        textAlign: 'center',
-
-    },
-    buttonBox: {
-        position: 'absolute',
-        height: 46,
-        width: 136,
-        marginTop: 30,
-        bottom: 0,
-        left: 0,
-    },
-    buttonContent: {
-        flexDirection: 'row',
-        flex: 1,
-        width: 272,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-    },
-    actionSheetBox: {
-        backgroundColor: '#FFF',
-    },
-    actionSheetTitleBox: {
-        height: 51,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    actionSheetTitle: {
-        lineHeight: 51,
-        marginHorizontal: 15,
-        color: '#999',
-        fontSize: 14,
-        textAlign: 'center',
-    },
-    closeButton: {
-        marginHorizontal: 15,
-    },
-    itemBox: {
-        width: screenWidth,
-        height: 51,
-        borderTopWidth: 1,
-        borderTopColor: '#F1F1F1',
-        backgroundColor: '#FFF',
-    }
-});
-
-
-export class LKAlertModal extends Component {
+export default class LKAlertModal extends Component {
     initHeight = 0;
     isHide = false;
     constructor(props) {
@@ -324,3 +221,105 @@ export class LKAlertModal extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        width: screenWidth,
+        height: screenHeight,
+    },
+    mask: {
+        position: "absolute",
+        width: screenWidth,
+        height: screenHeight,
+    },
+    mask1: {
+        backgroundColor: "#000",
+        opacity: 0.7,
+        position: "absolute",
+        width: screenWidth,
+        height: screenHeight,
+    },
+    content: {
+        width: screenWidth,
+        height: 60,
+        position: 'absolute',
+        left: 0,
+        top: middleTop,
+        alignItems: 'center',
+    },
+    imageBox: {
+        width: 48,
+        height: 48,
+    },
+    tipMessage: {
+        marginTop: 15,
+        fontSize: 15,
+        color: '#FFF',
+
+    },
+    contentBox: {
+        overflow: 'hidden',
+        width: 272,
+        backgroundColor: '#FFF',
+        borderRadius: 5,
+        left: (screenWidth - 272) / 2
+    },
+    title: {
+        marginHorizontal: 15,
+        marginTop: 30,
+        lineHeight: 18,
+        fontSize: 16,
+        color: '#333',
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    message: {
+        marginHorizontal: 15,
+        lineHeight: 16,
+        fontSize: 14,
+        color: '#666',
+        textAlign: 'center',
+
+    },
+    buttonBox: {
+        position: 'absolute',
+        height: 46,
+        width: 136,
+        marginTop: 30,
+        bottom: 0,
+        left: 0,
+    },
+    buttonContent: {
+        flexDirection: 'row',
+        flex: 1,
+        width: 272,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    actionSheetBox: {
+        backgroundColor: '#FFF',
+    },
+    actionSheetTitleBox: {
+        height: 51,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    actionSheetTitle: {
+        lineHeight: 51,
+        marginHorizontal: 15,
+        color: '#999',
+        fontSize: 14,
+        textAlign: 'center',
+    },
+    closeButton: {
+        marginHorizontal: 15,
+    },
+    itemBox: {
+        width: screenWidth,
+        height: 51,
+        borderTopWidth: 1,
+        borderTopColor: '#F1F1F1',
+        backgroundColor: '#FFF',
+    }
+});
