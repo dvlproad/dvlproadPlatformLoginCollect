@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
+import PickWeightPage from "./picker/PickWeightPage";
 
 
 export default class UIHomePage extends Component {
@@ -46,8 +47,7 @@ export default class UIHomePage extends Component {
             },
             { key: "Pick",
                 data: [
-                    { title: "PickDatePage", page: "PickDatePage" },
-                    { title: "PickImagesPage", page: "PickImagesPage" },
+                    { title: "PickHomePage", page: "PickHomePage" },
                     ]
             },
             { key: "WebView",

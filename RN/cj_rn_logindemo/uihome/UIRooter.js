@@ -22,15 +22,11 @@ import TextHomePage from "./text/TextHomePage"
 import { ImagePages } from "./image/ImageHomePage";
 //list
 import { ListPages } from "./list/ListRooter";
+//picker
+import { PickPages } from "./picker/PickRooter";
 
 //hud
 import HUDHomePage from './loading/HUDHomePage'
-
-//pickDate
-import PickDatePage from './pickDate/PickDatePage'
-//pickImage
-import PickImagesPage from './pickImage/PickImagesPage'
-
 
 //loading
 import ActivityIndicatorPage from './loading/ActivityIndicatorPage'
@@ -80,6 +76,7 @@ const UIHomeNavigation = createStackNavigator(
 
         ...ImagePages,
         ...ListPages,
+        ...PickPages,
 
         HUDHomePage: {
             screen: HUDHomePage,
@@ -87,23 +84,6 @@ const UIHomeNavigation = createStackNavigator(
                 title: `HUD首页`,
             }),
         },
-
-
-        PickDatePage: {
-            screen: PickDatePage,
-            navigationOptions: () => ({
-                title: `日期选择`,
-            }),
-        },
-        PickImagesPage: {
-            screen: PickImagesPage,
-            navigationOptions: () => ({
-                title: `多个图片选择`,
-            }),
-        },
-
-
-
 
 
         ActivityIndicatorPage: {
