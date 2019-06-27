@@ -29,7 +29,8 @@ export default class UIHomePage extends Component {
                     { title: "Button", page: "ButtonHome" },
                     { title: "Navigation", page: "NavigationHome" },
                     { title: "Text", page: "TextHome" },
-                    { title: "ImageHomePage", page: "ImageHomePage" },
+                    { title: "Image", page: "ImageHomePage" },
+                    { title: "Empty", page: "EmptyNetworkPage" },
                     ]
             },
             { key: "List",

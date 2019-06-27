@@ -328,8 +328,20 @@ export default class HealthCerHomePage extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
+    // 刷新
+    refreshHandle=()=>{
+        this.fetchData();
+    }
 
-    healthCerComponents=()=>{
+    // 网络错误时候的空白页
+    healthCerBankComponents=()=>{
+        return (
+            <LKEmptyNetwork refreshHandle={this.refreshHandle} />
+        )
+    }
+
+    // 网路正常时候的页面
+    healthCerNormalComponents=()=>{
         const paddingHorizontal = 15;
         const screenWidth = Dimensions.get('window').width;
         const listWidth = screenWidth - 2*paddingHorizontal;
@@ -398,9 +410,9 @@ export default class HealthCerHomePage extends Component {
 
     render() {
         if (this.state.apiLoadStatus == APILoadStatus.Success) {
-            return this.healthCerComponents();
+            return this.healthCerNormalComponents();
         } else {
-            return <LKEmptyNetwork />;
+            return this.healthCerBankComponents();
         }
     }
 }

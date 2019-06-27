@@ -1,9 +1,11 @@
-//LKEditSubmitButton.js
+// LKEditSubmitButton.js
+// '提交'/'修改' 文字切换的按钮(包含各自的disable处理)
 import React, { Component } from 'react';
-import {Button, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import PropTypes from "prop-types";
+import {StyleSheet} from 'react-native';
+import LKTextButton from "./LKTextButton";
 
-class LKEditSubmitButton extends Component {
+export class LKEditSubmitButton extends Component {
     static propTypes = {
         submitTitle: PropTypes.string.isRequired,
         editTitle:  PropTypes.string.isRequired,
@@ -48,58 +50,18 @@ class LKEditSubmitButton extends Component {
 
         let currentOnPress = isShowEditTitle ? this.props.clickEditTitleHandle : this.props.clickSubmitTitleHandle
 
-        // 使用Button组件，无法处理disabled时候的文字颜色问题
-        // return (
-        //     <View style={[{flex:1}, enableStateStyle, style]} >
-        //         <Button
-        //             title={showTitle}
-        //             color={showTextColor}
-        //             disabled={isDisable}
-        //             onPress={currentOnPress}
-        //         />
-        //     </View>
-        // )
         return (
-
-                <View style={[{justifyContent: "center", height: 44}, enableStateStyle, style]} >
-                    <TouchableOpacity
-                        onPress={currentOnPress}
-                        disabled={isDisable}
-                        //activeOpacity={0.4}
-                    >
-                    <Text
-                        style={{textAlign:'center',
-                            color: showTextColor,
-                            //backgroundColor:'red',
-                            fontSize:showTextFont}}
-                    >
-                        {showTitle}
-                    </Text>
-                    </TouchableOpacity>
-                </View>
-
+            <LKTextButton style={[enableStateStyle, style]}
+                          title={showTitle}
+                          color={showTextColor}
+                          fontSize={showTextFont}
+                          onPress={currentOnPress}
+                          disabled={isDisable}
+            />
         )
     }
 }
 
-class EnableBlueButton extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            submitTitle: "title"
-        };
-    }
-
-    render() {
-        const { style } = this.props
-
-        return (
-            <View style={styles.submitEnable} >
-                <Button title={this.props.submitTitle} color="#FFFFFF" >外标题</Button>
-            </View>
-        )
-    }
-}
 
 const styles = StyleSheet.create({
     submitEnable: {
@@ -126,6 +88,3 @@ const styles = StyleSheet.create({
         borderColor: "#01ADFE4C"
     }
 });
-
-
-export {EnableBlueButton, LKEditSubmitButton};

@@ -37,6 +37,7 @@ import ActivityIndicatorPage from './loading/ActivityIndicatorPage'
 
 //webview
 import { WebViewPages } from './webview/WebViewRooter';
+import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
 
 
@@ -56,6 +57,13 @@ const UIHomeNavigation = createStackNavigator(
             }),
         },
         ...NavigationPages,
+
+        EmptyNetworkPage: {
+            screen: EmptyNetworkPage,
+            navigationOptions: () => ({
+                title: `EmptyNetworkPage`,
+            }),
+        },
 
         ButtonHome: {
             screen: ButtonHomePage,

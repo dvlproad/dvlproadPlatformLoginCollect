@@ -1,16 +1,16 @@
 //LKEmptyNetwork.js
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import LKImageButton from "../button/LKImageButton";
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import {ScrollView, StyleSheet, Text, Image, View} from "react-native";
+import {LKWhiteBGButton} from "../button/LKTextButton";
 
 export default class LKEmptyNetwork extends Component {
     static propTypes = {
-        onClick: PropTypes.func,
+        refreshHandle: PropTypes.func,
     };
 
     static defaultProps = {
-        onClick: () => {},
+        refreshHandle: () => {},
     };
 
 
@@ -19,13 +19,17 @@ export default class LKEmptyNetwork extends Component {
 
         return (
                 <ScrollView style={[{flex:1}, style]} contentContainerStyle={{flexGrow:1}}>
-                    <View style={{flex:1, flexDirection: "column", justifyContent: "center", marginTop:-60}}>
-                        <LKImageButton
-                            imageName={require('./resources/networkError.png')}
-                            onClick={this.props.onClick}
+                    <View style={{flex:1, flexDirection: "column", marginTop:-60, justifyContent: "center", alignItems:'center'}}>
+                        <Image
+                            source={require('./resources/networkError.png')}
                         />
 
-                        <Text style={styles.singleLineHVCenterText} >网络好像有点问题</Text>
+                        <Text style={[styles.text, {marginTop: 22}]}>网络好像有点问题</Text>
+
+                        <LKWhiteBGButton style={{width:160, marginTop:60}}
+                                         title={'刷新'}
+                                         onPress={this.props.refreshHandle}
+                        />
                     </View>
                 </ScrollView>
             )
@@ -33,10 +37,11 @@ export default class LKEmptyNetwork extends Component {
 }
 
 var styles = StyleSheet.create({
-    singleLineHVCenterText: {   //单行文本水平&垂直居中
+    text: {
         height: 44,
         fontSize: 17,
         textAlign: 'center',
         lineHeight:44,
+        color: '#999999'
     },
 });
