@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
-import PickWeightPage from "./picker/PickWeightPage";
 
 
 export default class UIHomePage extends Component {
@@ -24,36 +23,27 @@ export default class UIHomePage extends Component {
 
     render() {
         let sections = [
-            { key: "Base",
+            { key: "布局/跳转",
                 data: [
                     { title: "Layout", page: "LayoutHome" },
-                    { title: "Button", page: "ButtonHome" },
                     { title: "Navigation", page: "NavigationHome" },
+                    ]
+            },
+            { key: "组件",
+                data: [
+                    { title: "Button", page: "ButtonHome" },
                     { title: "Text", page: "TextHome" },
                     { title: "Image", page: "ImageHomePage" },
                     { title: "Empty", page: "EmptyNetworkPage" },
-                    ]
-            },
-            { key: "List",
-                data: [
-                    { title: "ListHomePage", page: "ListHomePage" },
+                    { title: "WebView", page: "WebViewHomePage" },
                 ]
             },
-            { key: "Loading",
+            { key: "进阶",
                 data: [
-                    { title: "ActivityIndicatorPage", page: "ActivityIndicatorPage" },
-                    { title: "HUDHomePage", page: "HUDHomePage" },
+                    { title: "List(列表)", page: "ListHomePage" },
+                    { title: "Modal(Modal)", page: "ModalHomePage" },
+                    { title: "Picker(选择器)", page: "PickHomePage" },
                 ]
-            },
-            { key: "Pick",
-                data: [
-                    { title: "PickHomePage", page: "PickHomePage" },
-                    ]
-            },
-            { key: "WebView",
-                data: [
-                    { title: "WebViewHomePage", page: "WebViewHomePage" },
-                    ]
             },
         ];
 

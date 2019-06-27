@@ -24,16 +24,14 @@ import { ImagePages } from "./image/ImageHomePage";
 import { ListPages } from "./list/ListRooter";
 //picker
 import { PickPages } from "./picker/PickRooter";
-
-//hud
-import HUDHomePage from './loading/HUDHomePage'
-
-//loading
-import ActivityIndicatorPage from './loading/ActivityIndicatorPage'
+//modal
+import {ModalPages} from "./modal/ModalRooter";
 
 //webview
 import { WebViewPages } from './webview/WebViewRooter';
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
+
+
 
 
 
@@ -77,21 +75,7 @@ const UIHomeNavigation = createStackNavigator(
         ...ImagePages,
         ...ListPages,
         ...PickPages,
-
-        HUDHomePage: {
-            screen: HUDHomePage,
-            navigationOptions: () => ({
-                title: `HUD首页`,
-            }),
-        },
-
-
-        ActivityIndicatorPage: {
-            screen: ActivityIndicatorPage,
-            navigationOptions: () => ({
-                title: `ActivityIndicatorPage(一个圆形的 loading 提示符号)`,
-            }),
-        },
+        ...ModalPages,
 
         ...WebViewPages,
     },
