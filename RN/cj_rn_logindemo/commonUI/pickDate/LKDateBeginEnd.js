@@ -1,9 +1,9 @@
 //LKDateBeginEnd.js
 import React, { Component } from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
-import DatePicker from 'react-native-datepicker';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
 import PropTypes from "prop-types";
+import LKDatePicker from "./LKDatePicker";
 
 
 export default class LKDateBeginEnd extends Component {
@@ -35,7 +35,7 @@ export default class LKDateBeginEnd extends Component {
                 {flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                 style]
             }>
-                <CJDemoDatePicker style={{flex: 1}}
+                <LKDatePicker style={{flex: 1}}
                                   placeholder= {"选择日期"}
                                   chooseDateString={beginDateString}
                                   allowPickDate={this.props.isEditing}
@@ -46,7 +46,7 @@ export default class LKDateBeginEnd extends Component {
                 <DateConnectView style={{width: 20, marginHorizontal: 10}}
                                  showWave={this.props.isEditing}
                 />
-                <CJDemoDatePicker style={{flex: 1}}
+                <LKDatePicker style={{flex: 1}}
                                   placeholder= {"自动填写"}
                                   chooseDateString={endDateString}
                                   allowPickDate={false}
@@ -56,56 +56,6 @@ export default class LKDateBeginEnd extends Component {
     }
 }
 
-class CJDemoDatePicker extends React.Component {
-    static propTypes = {
-        allowPickDate: PropTypes.bool,
-        chooseDateString: PropTypes.string,
-        onDateChange: PropTypes.func,
-    };
-
-    static defaultProps = {
-        allowPickDate: false,
-    };
-
-
-    render() {
-        const { style } = this.props;
-
-        return (
-            <DatePicker
-                style={[{flex: 1}, style]}
-                disabled={!this.props.allowPickDate}
-                placeholder= {this.props.placeholder}
-                date={this.props.chooseDateString}
-                minDate="1900-01-01"
-                maxDate="2300-01-01"
-
-                mode="date"
-                format="YYYY-MM-DD"
-                confirmBtnText="确定"
-                cancelBtnText="取消"
-                showIcon={false}
-                customStyles={{
-                    dateInput: {
-                        borderRadius: 4,
-                        borderWidth: this.props.allowPickDate ? 1 : 0,
-                        borderColor: "#CCCCCC",
-                        backgroundColor: this.props.allowPickDate ? "white" : "#F9F9F9"
-                    }
-                    // ... You can check the source to find the other keys.
-                }}
-
-                onDateChange={(date) => { //
-                    if(date.constructor===String) {
-                        let dateString = date;
-                        // this.setState({chooseDateString: dateString})
-                        this.props.onDateChange(dateString);
-                    }
-                }}
-            />
-        )
-    }
-}
 
 class DateConnectView extends React.Component {
     constructor(props) {

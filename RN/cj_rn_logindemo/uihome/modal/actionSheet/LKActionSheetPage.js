@@ -7,14 +7,13 @@ export default class LKActionSheetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAction: true
+            showAction: false
         };
     }
 
-
-
-    render() {
-        let photoCameraSheet = (
+    // 获取图片选择器
+    photoCameraSheet=()=>{
+        return (
             <LKPhotoCameraSheet visible={this.state.showAction}
                                 clickCancel={()=>{
                                     this.setState({
@@ -28,10 +27,13 @@ export default class LKActionSheetPage extends Component {
                                     alert("你点击了从相册选择")
                                 }}
             />
-        );
+        )
+    }
 
+    render() {
         return (
             <View>
+                {this.photoCameraSheet()}
                 <LKTextButton title={'弹出actionSheet'}
                               onPress={()=>{
                                   this.setState({
@@ -39,9 +41,6 @@ export default class LKActionSheetPage extends Component {
                                   })
                               }}
                 />
-
-                {photoCameraSheet}
-
             </View>
 
         )

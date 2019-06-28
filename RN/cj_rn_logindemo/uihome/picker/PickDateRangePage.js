@@ -1,9 +1,9 @@
-//PickDatePage.js
+//PickDateRangePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
 import LKDateBeginEnd  from '../../commonUI/pickDate/LKDateBeginEnd'
 
-export default class PickDatePage extends Component {
+export default class PickDateRangePage extends Component {
     constructor(props) {
         super(props);
         this.state = {

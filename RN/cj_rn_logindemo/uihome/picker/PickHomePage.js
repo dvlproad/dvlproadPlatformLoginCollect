@@ -24,10 +24,20 @@ export default class PickHomePage extends Component {
 
     render() {
         let sections = [
-            { key: "Picker",
+            { key: "Weight",
                 data: [
                     { title: "PickWeightPage", page: "PickWeightPage" },
-                    { title: "PickDatePage", page: "PickDatePage" },
+                ]
+            },
+            { key: "Date",
+                data: [
+                    { title: "PickDateOnePage", page: "PickDateOnePage" },
+                    { title: "PickDateRangePage", page: "PickDateRangePage" },
+                    { title: "PickImagesPage", page: "PickImagesPage" },
+                ]
+            },
+            { key: "Image",
+                data: [
                     { title: "PickImagesPage", page: "PickImagesPage" },
                 ]
             },

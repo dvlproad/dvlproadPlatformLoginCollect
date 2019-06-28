@@ -47,6 +47,9 @@ export default class HealthCerHomePage extends Component {
             submitEditButtonEnable: true,
 
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
+
+            photoCameraSheetShow: false,    //图片选择器是否显示
+            choosePhotoForIndex: -1,        //当前图片选择器是给谁选择的
         };
     }
 
@@ -164,6 +167,11 @@ export default class HealthCerHomePage extends Component {
     }
 
     chooseImageSource=(index)=>{
+        this.setState({
+            photoCameraSheetShow: true,
+            choosePhotoForIndex: index,
+        })
+
         const options = {
             title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
             cancelButtonTitle: '取消',
