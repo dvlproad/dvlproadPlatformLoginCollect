@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
 import { LKEditSubmitButton } from '../commonUI/button/LKEditSubmitButton';
-import LKDateBeginEnd from '../commonUI/pickDate/LKDateBeginEnd';
+import LKRangeDateComponent from '../commonUI/date/LKRangeDateComponent';
 import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
 import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
-import ImagePicker from 'react-native-image-picker';
 import LKToastUtil from '../commonUI/toast/LKToastUtil';
 import LKEmptyNetwork from "../commonUI/empty/LKEmptyNetwork";
+import LKImagePickerUtil from "../commonUI/pickImage/LKImagePickerUtil";
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -172,25 +172,10 @@ export default class HealthCerHomePage extends Component {
             choosePhotoForIndex: index,
         })
 
-        const options = {
-            title: '选择图片', //如果要不显示title，应该设为null，而非注释掉此行
-            cancelButtonTitle: '取消',
-            takePhotoButtonTitle: '拍摄',
-            chooseFromLibraryButtonTitle: '从手机相册选择',
-        };
-
-        ImagePicker.showImagePicker(options, (response) => {
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else {
-                const imageSource = { uri: response.uri };
-                // You can also display the image using data:
-                // const imageSource = { uri: 'data:image/jpeg;base64,' + response.data };
-                this.addImageHandle(index, imageSource);
-            }
-        });
+        LKImagePickerUtil.showPhotoCameraActionSheet((uri)=>{
+            const imageSource = { uri: uri };
+            this.addImageHandle(index, imageSource);
+        })
     }
 
     addImageHandle=(index, imageSource) => {
@@ -390,10 +375,10 @@ export default class HealthCerHomePage extends Component {
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
-                <LKDateBeginEnd style={{marginTop: 22}}
-                                isEditing={this.state.isUpdatingInfo}
-                                beginDateString={beginDateString}
-                                onBeginDateChange={ (date)=> {
+                <LKRangeDateComponent style={{marginTop: 22}}
+                                      isEditing={this.state.isUpdatingInfo}
+                                      beginDateString={beginDateString}
+                                      onBeginDateChange={ (date)=> {
                                     this.setState({
                                         beginDateString: date
                                     })

@@ -1,7 +1,7 @@
 //PickDateRangePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
-import LKDateBeginEnd  from '../../commonUI/pickDate/LKDateBeginEnd'
+import LKRangeDateComponent  from '../../commonUI/date/LKRangeDateComponent'
 
 export default class PickDateRangePage extends Component {
     constructor(props) {
@@ -19,9 +19,9 @@ export default class PickDateRangePage extends Component {
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString1}</Text>
-                <LKDateBeginEnd isEditing={true}
-                                    beginDateString={beginDateString1}
-                                    onBeginDateChange={ (date)=> {
+                <LKRangeDateComponent isEditing={true}
+                                      beginDateString={beginDateString1}
+                                      onBeginDateChange={ (date)=> {
                                         this.setState({
                                             beginDateString1: date
                                         })
@@ -29,9 +29,9 @@ export default class PickDateRangePage extends Component {
                 />
 
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString2}</Text>
-                <LKDateBeginEnd isEditing={true}
-                                    beginDateString={beginDateString2}
-                                    onBeginDateChange={ (date)=> {
+                <LKRangeDateComponent isEditing={true}
+                                      beginDateString={beginDateString2}
+                                      onBeginDateChange={ (date)=> {
                                         this.setState({
                                             beginDateString2: date
                                         })

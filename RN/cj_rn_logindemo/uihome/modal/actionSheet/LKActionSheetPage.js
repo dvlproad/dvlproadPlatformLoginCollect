@@ -7,27 +7,39 @@ export default class LKActionSheetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAction: false
+            photoCameraSheetShow: false
         };
     }
 
     // 获取图片选择器
     photoCameraSheet=()=>{
         return (
-            <LKPhotoCameraSheet visible={this.state.showAction}
-                                clickCancel={()=>{
-                                    this.setState({
-                                        showAction: !this.state.showAction
-                                    })
-                                }}
+            <LKPhotoCameraSheet visible={this.state.photoCameraSheetShow}
+                                clickCancel={this.hidePhotoCameraSheet}
                                 clickTakePhoto={()=>{
+                                    this.hidePhotoCameraSheet();
                                     alert("你点击了拍摄")
                                 }}
                                 clickChooseFromLibrary={()=>{
+                                    this.hidePhotoCameraSheet();
                                     alert("你点击了从相册选择")
                                 }}
             />
         )
+    }
+
+    // 显示图片选择器
+    showPhotoCameraSheet=()=>{
+        this.setState({
+            photoCameraSheetShow: true
+        })
+    }
+
+    // 隐藏图片选择器
+    hidePhotoCameraSheet=()=>{
+        this.setState({
+            photoCameraSheetShow: !this.state.photoCameraSheetShow
+        })
     }
 
     render() {
@@ -35,11 +47,7 @@ export default class LKActionSheetPage extends Component {
             <View>
                 {this.photoCameraSheet()}
                 <LKTextButton title={'弹出actionSheet'}
-                              onPress={()=>{
-                                  this.setState({
-                                      showAction: true
-                                  })
-                              }}
+                              onPress={this.showPhotoCameraSheet}
                 />
             </View>
 

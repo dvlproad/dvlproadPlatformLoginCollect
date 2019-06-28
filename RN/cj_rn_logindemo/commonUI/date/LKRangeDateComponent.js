@@ -1,12 +1,12 @@
-//LKDateBeginEnd.js
+//LKRangeDateComponent.jsent.js
 import React, { Component } from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
 import PropTypes from "prop-types";
-import LKDatePicker from "./LKDatePicker";
+import LKSingleDateComponent from "./LKSingleDateComponent";
 
 
-export default class LKDateBeginEnd extends Component {
+export default class LKRangeDateComponent extends Component {
     static propTypes = {
         isEditing: PropTypes.bool,
         beginDateString: PropTypes.string,
@@ -35,21 +35,21 @@ export default class LKDateBeginEnd extends Component {
                 {flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                 style]
             }>
-                <LKDatePicker style={{flex: 1}}
-                                  placeholder= {"选择日期"}
-                                  chooseDateString={beginDateString}
-                                  allowPickDate={this.props.isEditing}
-                                  onDateChange={ (date) => {
+                <LKSingleDateComponent style={{flex: 1}}
+                                       placeholder= {"选择日期"}
+                                       chooseDateString={beginDateString}
+                                       allowPickDate={this.props.isEditing}
+                                       onDateChange={ (date) => {
                                       this.props.onBeginDateChange(date)
                                   }}
                 />
                 <DateConnectView style={{width: 20, marginHorizontal: 10}}
                                  showWave={this.props.isEditing}
                 />
-                <LKDatePicker style={{flex: 1}}
-                                  placeholder= {"自动填写"}
-                                  chooseDateString={endDateString}
-                                  allowPickDate={false}
+                <LKSingleDateComponent style={{flex: 1}}
+                                       placeholder= {"自动填写"}
+                                       chooseDateString={endDateString}
+                                       allowPickDate={false}
                 />
             </View>
         )

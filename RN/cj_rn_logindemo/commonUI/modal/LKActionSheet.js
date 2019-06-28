@@ -3,7 +3,6 @@ import { Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import LKActionSheetComponent, {LKActionDom} from "./LKActionSheetComponent";
 
-
 export class LKPhotoCameraSheet extends Component {
     static propTypes = {
         visible: PropTypes.bool,
@@ -32,7 +31,7 @@ export class LKPhotoCameraSheet extends Component {
                              onPress={this.props.clickTakePhoto}
                 />
                 <LKActionDom actionName={'从手机相册选择'}
-                             onPress={this.props.clickTakePhoto}
+                             onPress={this.props.clickChooseFromLibrary}
                 />
             </LKActionSheet>
         )

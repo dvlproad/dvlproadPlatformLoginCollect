@@ -5,7 +5,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import PickHomePage from "./PickHomePage";
 //weight
 import PickWeightPage from "./PickWeightPage";
-//pickDate
+//date
 import PickDateOnePage from "./PickDateOnePage";
 import PickDateRangePage from './PickDateRangePage';
 //pickImage

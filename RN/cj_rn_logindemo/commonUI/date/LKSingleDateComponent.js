@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import PropTypes from "prop-types";
 import DatePicker from "react-native-datepicker";
 
-export default class LKDatePicker extends Component {
+export default class LKSingleDateComponent extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,

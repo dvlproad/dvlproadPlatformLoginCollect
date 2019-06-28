@@ -1,7 +1,7 @@
 //PickDateOnePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
-import LKDatePicker from "../../commonUI/pickDate/LKDatePicker";
+import LKSingleDateComponent from "../../commonUI/date/LKSingleDateComponent";
 
 export default class PickDateOnePage extends Component {
     constructor(props) {
@@ -19,29 +19,29 @@ export default class PickDateOnePage extends Component {
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString1}</Text>
-                <LKDatePicker style={{flex: 1}}
-                              placeholder= {"选择日期"}
-                              chooseDateString={beginDateString1}
-                              allowPickDate={true}
-                              onDateChange={ (date) => {
+                <LKSingleDateComponent style={{flex: 1}}
+                                       placeholder= {"选择日期"}
+                                       chooseDateString={beginDateString1}
+                                       allowPickDate={true}
+                                       onDateChange={ (date) => {
                                   this.setState({
                                       beginDateString1: date
                                   })
                               }}
-                              isBankStyle={false}
+                                       isBankStyle={false}
                 />
 
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString2}</Text>
-                <LKDatePicker style={{flex: 1}}
-                              placeholder= {"选择日期"}
-                              chooseDateString={beginDateString2}
-                              allowPickDate={true}
-                              onDateChange={ (date) => {
+                <LKSingleDateComponent style={{flex: 1}}
+                                       placeholder= {"选择日期"}
+                                       chooseDateString={beginDateString2}
+                                       allowPickDate={true}
+                                       onDateChange={ (date) => {
                                   this.setState({
                                       beginDateString2: date
                                   })
                               }}
-                              isBankStyle={true}
+                                       isBankStyle={true}
                 />
 
             </ScrollView>

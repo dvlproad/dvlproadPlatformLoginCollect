@@ -74,7 +74,7 @@ export default class LKActionLoadingImage extends Component {
 
         let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <LKDeleteButton
             style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
-            deleteImageHandle={()=> {
+            onPress={()=> {
                 this.props.deleteImageHandle(buttonIndex);
             }}
         /> : null;

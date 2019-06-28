@@ -29,8 +29,8 @@ import UploadImagesPage from "./image/UploadImagesPage";
 //text
 import TextHomePage from "./text/TextHomePage"
 
-//pickDate
-import PickDatePage from './pickDate/PickDateRangePage'
+//date
+import PickDatePage from './date/PickDateRangePage'
 //pickImage
 import PickImagesPage from './pickImage/PickImagesPage'
 
