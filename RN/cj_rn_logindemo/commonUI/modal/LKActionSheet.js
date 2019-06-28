@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-// import BaseStyle from '../constants/Style';
+import { Modal } from 'react-native';
 import PropTypes from 'prop-types';
+import LKActionSheetComponent, {LKActionDom} from "./LKActionSheetComponent";
 
-export class LKActionSheet extends Component {
-    static defaultProps = {
-        animationType: 'slide',
-        title: '',
-    };
+
+export class LKPhotoCameraSheet extends Component {
     static propTypes = {
-        animationType: PropTypes.string, //模态弹出效果
-        ActionItem: PropTypes.element, //动作名称数组的形式
-        ActionArray: PropTypes.array,
-        showAction: PropTypes.bool,
-        cancel: PropTypes.func, // 取消操作
-        title: PropTypes.string, //头部
-        titleTextStyle: PropTypes.object, //标题样式
-        children: PropTypes.element,
+        visible: PropTypes.bool,
+
+        clickCancel: PropTypes.func.isRequired,
+        clickTakePhoto: PropTypes.func.isRequired,
+        clickChooseFromLibrary: PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+        visible: false,
     };
 
     constructor(props) {
@@ -24,115 +22,58 @@ export class LKActionSheet extends Component {
     }
 
     render() {
-        const {
-            animationType,
-            showAction,
-            title,
-            titleTextStyle,
-            cancel,
-        } = this.props;
-
         return (
-            <Modal
-                animationType={"slide"}
-                transparent={true}
-                onRequestClose={() => {}}
-                visible={showAction}>
-                <TouchableOpacity
-                    style={styles.modelView}
-                    onPress={cancel}
-                    activeOpacity={0.9}>
-                    <View style={styles.bottomView}>
-                        {!title ? (
-                            <View style={styles.TitleView}>
-                                <Text style={[styles.titleText, titleTextStyle]}>{title}</Text>
-                                <TouchableOpacity style={styles.closeView} onPress={cancel}>
-                                    <Text style={styles.close}>&#xe68c;</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ) : null}
-                        {this.props.children}
-                        <TouchableOpacity
-                            style={[styles.items, styles.cancel]}
-                            onPress={cancel}>
-                            <Text style={styles.itemsText}>取消</Text>
-                        </TouchableOpacity>
-                    </View>
-                </TouchableOpacity>
+            <LKActionSheet visible={this.props.visible}
+                           animationType={'none'}
+                           actionTitle={'选择图片'}
+                           cancel={this.props.clickCancel}
+            >
+                <LKActionDom actionName={'拍摄'}
+                             onPress={this.props.clickTakePhoto}
+                />
+                <LKActionDom actionName={'从手机相册选择'}
+                             onPress={this.props.clickTakePhoto}
+                />
+            </LKActionSheet>
+        )
+    }
+}
+
+
+export class LKActionSheet extends Component {
+    static propTypes = {
+        visible: PropTypes.bool,
+        animationType: PropTypes.string, //模态弹出效果
+
+        actionTitle: PropTypes.string, //头部
+        cancel: PropTypes.func, // 取消操作
+        children: PropTypes.array,
+    };
+
+    static defaultProps = {
+        visible: false,
+        animationType: 'slide',
+
+        actionTitle: '',
+    };
+
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Modal visible={this.props.visible}
+                   animationType={this.props.animationType}
+                   transparent={true}
+                   onRequestClose={() => {}}
+            >
+                <LKActionSheetComponent actionTitle={this.props.actionTitle}
+                                        cancel={this.props.cancel}
+                                        children={this.props.children}
+                />
             </Modal>
         );
     }
 }
-
-export class LKActionDom extends Component {
-    static defaultProps = {
-        actionName: '按钮一',
-    };
-    static propTypes = {
-        actionName: PropTypes.string, //模态弹出效果
-        onPress: PropTypes.func,
-    };
-    render() {
-        const { actionName, onPress } = this.props;
-        return (
-            <TouchableOpacity style={styles.items} onPress={onPress}>
-                <Text style={styles.itemsText}>{actionName}</Text>
-            </TouchableOpacity>
-        );
-    }
-}
-
-const styles = StyleSheet.create({
-    modelView: {
-        flex: 1,
-        backgroundColor: 'rgba(40,40,40,0.4)',
-        // ...BaseStyle.justifyContentCenter,
-        // ...BaseStyle.alignItemsCenter,
-    },
-    bottomView: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#fff',
-    },
-    TitleView: {
-        // ...BaseStyle.row,
-        // ...BaseStyle.justifyContentCenter,
-        // ...BaseStyle.alignItemsCenter,
-        borderBottomWidth: 1,
-        borderBottomColor: '#eee',
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-    titleText: {
-        fontSize: 14,
-        color: '#aaa',
-    },
-    closeView: {
-        position: 'absolute',
-        right: 15,
-        top: 8,
-    },
-    close: {
-        fontFamily: 'iconfont',
-        fontSize: 20,
-        color: '#ccc',
-    },
-    items: {
-        // ...BaseStyle.row,
-        // ...BaseStyle.justifyContentCenter,
-        // ...BaseStyle.alignItemsCenter,
-        height: 50,
-        borderBottomWidth: 1,
-        borderBottomColor: '#eee',
-    },
-    cancel: {
-        borderTopWidth: 4,
-        borderTopColor: '#eee',
-    },
-    itemsText: {
-        fontSize: 15,
-        color: '#333',
-    },
-});

@@ -30,6 +30,11 @@ export default class ModalHomePage extends Component {
                     { title: "HUDHomePage", page: "HUDHomePage" },
                 ]
             },
+            { key: "Modal",
+                data: [
+                    { title: "EasyModalPage", page: "EasyModalPage" },
+                ]
+            },
             { key: "ActionSheet",
                 data: [
                     { title: "RNActionSheetPage", page: "RNActionSheetPage" },

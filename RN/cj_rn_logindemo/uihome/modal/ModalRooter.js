@@ -3,8 +3,13 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import ModalHomePage from "./ModalHomePage";
+
+
 import ActivityIndicatorPage from "./hud/ActivityIndicatorPage";
 import HUDHomePage from "./hud/HUDHomePage";
+
+import EasyModalPage from './modal/EasyModalPage';
+
 import LKActionSheetPage from "./actionSheet/LKActionSheetPage";
 import RNActionSheetPage from "./actionSheet/RNActionSheetPage";
 
@@ -28,6 +33,14 @@ export const ModalPages = {
         screen: HUDHomePage,
         navigationOptions: () => ({
             title: `HUDHomePage`,
+        }),
+    },
+
+    //modal
+    EasyModalPage: {
+        screen: EasyModalPage,
+        navigationOptions: () => ({
+            title: `EasyModalPage`,
         }),
     },
 
