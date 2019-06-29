@@ -1,4 +1,17 @@
-//LKLoadingImage.js
+// LKLoadingImage.js
+/*
+LKLoadingImage:图片控件(只含加载动画,但不含其他可操作事件) 的使用示例
+
+import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
+
+                <LKLoadingImage style={{width: 200, height: 200, backgroundColor:'red'}}
+                                imageWidth={200}
+                                imageHeight={200}
+                                imageSource={{uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}}
+                />
+
+ */
+
 import React, { Component } from 'react';
 import {StyleSheet, View, Image, Text, ActivityIndicator} from "react-native";
 import PropTypes from "prop-types";

@@ -116,13 +116,14 @@ class TestSubmitButton extends LKEditSubmitButton {
 
     render() {
         return (
-            <LKEditSubmitButton isShowEditTitle={this.props.isShowEditTitle} isDisabled={this.props.isDisabled}
-                          clickEditTitleHandle={() => {
-                              Alert.alert("你点击了编辑按钮！");
-                          }}
-                          clickSubmitTitleHandle={() => {
-                              Alert.alert("你点击了提交按钮！");
-                          }}
+            <LKEditSubmitButton isShowEditTitle={this.props.isShowEditTitle}
+                                isDisabled={this.props.isDisabled}
+                                clickEditTitleHandle={() => {
+                                    Alert.alert("你点击了编辑按钮！");
+                                }}
+                                clickSubmitTitleHandle={() => {
+                                    Alert.alert("你点击了提交按钮！");
+                                }}
             />
         );
     }

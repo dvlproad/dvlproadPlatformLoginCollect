@@ -1,3 +1,32 @@
+// LKSingleDateComponent.js
+/* 使用示例
+import LKSingleDateComponent from "../../commonUI/date/LKSingleDateComponent";
+
+export default class PickSingleDatePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            beginDateString1: "2000-02-29",
+        };
+    }
+
+    render() {
+        return (
+            <LKSingleDateComponent style={{flex: 1}}
+                                   placeholder= {"选择日期"}
+                                   chooseDateString={this.state.beginDateString1}
+                                   allowPickDate={true}
+                                   onDateChange={ (date) => {
+                                       this.setState({
+                                           beginDateString1: date
+                                       })
+                                   }}
+                                   isBankStyle={false}
+            />
+        );
+    }
+}
+ */
 import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from "prop-types";

@@ -1,3 +1,40 @@
+// LKActionSheet.js
+/* LKPhotoCameraSheet:'拍摄/从手机相册选择'使用示例
+
+import {LKPhotoCameraSheet} from "../../../commonUI/modal/LKActionSheet";
+
+            <LKPhotoCameraSheet visible={this.state.photoCameraSheetShow}
+                                clickCancel={this.hidePhotoCameraSheet}
+                                clickTakePhoto={()=>{
+                                    this.hidePhotoCameraSheet();
+                                    alert("你点击了拍摄")
+                                }}
+                                clickChooseFromLibrary={()=>{
+                                    this.hidePhotoCameraSheet();
+                                    alert("你点击了从相册选择")
+                                }}
+            />
+ */
+
+/* LKActionSheet: 最基础的ActionSheet使用示例
+
+import {LKActionSheet} from "../../../commonUI/modal/LKActionSheet";
+                <LKActionSheet actionTitle={'请选择'}
+                               visible={this.state.showAction}
+                               cancel={()=>{this.setState({showAction:false})}}
+                >
+                    <LKActionDom actionName={'我是按钮一'}
+                                 onPress={()=>{
+                                     alert("你点击了按钮一")
+                                 }}
+                    />
+                    <LKActionDom actionName={'我是按钮二'}
+                                 onPress={()=>{
+                                     alert("你点击了按钮一")
+                                 }}
+                    />
+                </LKActionSheet>
+ */
 import React, { Component } from 'react';
 import { Modal } from 'react-native';
 import PropTypes from 'prop-types';

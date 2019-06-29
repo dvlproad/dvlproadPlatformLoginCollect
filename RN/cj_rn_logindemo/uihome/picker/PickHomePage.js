@@ -31,8 +31,8 @@ export default class PickHomePage extends Component {
             },
             { key: "Date",
                 data: [
-                    { title: "PickDateOnePage", page: "PickDateOnePage" },
-                    { title: "PickDateRangePage", page: "PickDateRangePage" },
+                    { title: "PickSingleDatePage", page: "PickSingleDatePage" },
+                    { title: "PickRangeDatePage", page: "PickRangeDatePage" },
                     { title: "PickImagesPage", page: "PickImagesPage" },
                 ]
             },

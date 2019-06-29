@@ -67,80 +67,89 @@ export default class HealthCerHomePage extends Component {
         fetch(healthCardDetailUrl)
             .then(response => response.json())
             .then(responseData => {
-                //statusCode
-                let apiStatusCode = responseData.code;
-                if (apiStatusCode != 1) {
-                    let message = responseData.msg;
-                    LKToastUtil.showMessage(message);
-
-                    this.setState({
-                        apiLoadStatus: APILoadStatus.Success,
-
-                        healthCerInfoResult: null,
-                        healthCerImages:[],
-                        beginDateString: null,
-                        isUpdatingInfo: false,
-                    });
-                    return;
-                }
-
-                //healthCerInfoResult
-                let healthCerInfoResult = responseData.content;
-
-                //healthCerImages
-                let healthCerImages = new Array();
-                if (healthCerInfoResult.healthCard1Url.length > 0) {
-                    let healthCerImage = new Map();
-                    healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard1Url};
-                    healthCerImages.push(healthCerImage);
-                }
-
-                if (healthCerInfoResult.healthCard2Url.length > 0) {
-                    let healthCerImage = new Map();
-                    healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard2Url};
-                    healthCerImages.push(healthCerImage);
-                }
-
-
-                for (let i =0; i<healthCerImages.length; i++ ) {
-                    let healthCerImage = healthCerImages[i];
-
-                    healthCerImage.uploadType = ImageUploadType.NotNeed;
-                    healthCerImage.uploadProgress = 0;
-                    healthCerImage.imageIndex = i;
-
-                    healthCerImages.splice(i, 1, healthCerImage);
-                }
-                healthCerInfoResult.healthCerImages = healthCerImages;
-
-                //beginDateString
-                let beginDateString = healthCerInfoResult.healthCardStartTime;
-
-                //isUpdatingInfo
-                let isUpdatingInfo = healthCerInfoResult.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false;
-
-                this.setState({
-                    apiLoadStatus: APILoadStatus.Success,
-                    healthCerInfoResult: healthCerInfoResult,
-                    healthCerImages: healthCerImages,
-                    beginDateString: beginDateString,
-                    isUpdatingInfo: isUpdatingInfo,
-                });
-            }).catch(
-                (error) => {
-                    let message = "错误：" + error;
-                    LKToastUtil.showMessage(message);
-
-                    this.setState({
-                        apiLoadStatus: APILoadStatus.Failure,
-
-                        healthCerInfoResult: null,
-                        healthCerImages:[],
-                        beginDateString: null,
-                        isUpdatingInfo: false,
-                    });
+                this.dealSuccessResponseData(responseData);
+            }).catch((error) => {
+                this.dealFailureResponseData(error);
             }
         );
+    }
+
+    // 处理服务器返回的失败信息
+    dealFailureResponseData=(error)=>{
+        let message = "错误：" + error;
+        LKToastUtil.showMessage(message);
+
+        this.setState({
+            apiLoadStatus: APILoadStatus.Failure,
+
+            healthCerInfoResult: null,
+            healthCerImages:[],
+            beginDateString: null,
+            isUpdatingInfo: false,
+        });
+    }
+
+    // 处理服务器返回的健康证信息
+    dealSuccessResponseData=(responseData)=>{
+        //statusCode
+        let apiStatusCode = responseData.code;
+        if (apiStatusCode != 1) {
+            let message = responseData.msg;
+            LKToastUtil.showMessage(message);
+
+            this.setState({
+                apiLoadStatus: APILoadStatus.Success,
+
+                healthCerInfoResult: null,
+                healthCerImages:[],
+                beginDateString: null,
+                isUpdatingInfo: false,
+            });
+            return;
+        }
+
+        //healthCerInfoResult
+        let healthCerInfoResult = responseData.content;
+
+        //healthCerImages
+        let healthCerImages = new Array();
+        if (healthCerInfoResult.healthCard1Url.length > 0) {
+            let healthCerImage = new Map();
+            healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard1Url};
+            healthCerImages.push(healthCerImage);
+        }
+
+        if (healthCerInfoResult.healthCard2Url.length > 0) {
+            let healthCerImage = new Map();
+            healthCerImage.imageSource = {uri: healthCerInfoResult.healthCard2Url};
+            healthCerImages.push(healthCerImage);
+        }
+
+
+        for (let i =0; i<healthCerImages.length; i++ ) {
+            let healthCerImage = healthCerImages[i];
+
+            healthCerImage.uploadType = ImageUploadType.NotNeed;
+            healthCerImage.uploadProgress = 0;
+            healthCerImage.imageIndex = i;
+
+            healthCerImages.splice(i, 1, healthCerImage);
+        }
+        healthCerInfoResult.healthCerImages = healthCerImages;
+
+        //beginDateString
+        let beginDateString = healthCerInfoResult.healthCardStartTime;
+
+        //isUpdatingInfo
+        let isUpdatingInfo = healthCerInfoResult.healthCardApprovalCode == HealthCardApproveCode.NotUpload ? true: false;
+
+        this.setState({
+            apiLoadStatus: APILoadStatus.Success,
+            healthCerInfoResult: healthCerInfoResult,
+            healthCerImages: healthCerImages,
+            beginDateString: beginDateString,
+            isUpdatingInfo: isUpdatingInfo,
+        });
     }
 
     clickEditTitleHandle= () => {

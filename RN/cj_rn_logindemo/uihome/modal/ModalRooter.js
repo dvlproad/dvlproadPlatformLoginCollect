@@ -10,8 +10,8 @@ import HUDHomePage from "./hud/HUDHomePage";
 
 import EasyModalPage from './modal/EasyModalPage';
 
+import LKPhotoCameraSheetPage from "./actionSheet/LKPhotoCameraSheetPage";
 import LKActionSheetPage from "./actionSheet/LKActionSheetPage";
-import RNActionSheetPage from "./actionSheet/RNActionSheetPage";
 
 //ModalPages
 export const ModalPages = {
@@ -46,13 +46,13 @@ export const ModalPages = {
 
     //actionSheet
     RNActionSheetPage: {
-        screen: RNActionSheetPage,
+        screen: LKActionSheetPage,
         navigationOptions: () => ({
             title: `RNActionSheetPage`,
         }),
     },
     LKActionSheetPage: {
-        screen: LKActionSheetPage,
+        screen: LKPhotoCameraSheetPage,
         navigationOptions: () => ({
             title: `LKActionSheetPage`,
         }),

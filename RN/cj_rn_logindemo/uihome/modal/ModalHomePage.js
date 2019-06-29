@@ -37,8 +37,8 @@ export default class ModalHomePage extends Component {
             },
             { key: "ActionSheet",
                 data: [
-                    { title: "RNActionSheetPage", page: "RNActionSheetPage" },
                     { title: "LKActionSheetPage", page: "LKActionSheetPage" },
+                    { title: "LKPhotoCameraSheetPage", page: "LKPhotoCameraSheetPage" },
                 ]
             },
         ];

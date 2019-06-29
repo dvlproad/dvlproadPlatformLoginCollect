@@ -1,4 +1,29 @@
-//LKRangeDateComponent.jsent.js
+// LKRangeDateComponent.js
+/* 使用示例
+import LKRangeDateComponent  from '../../commonUI/date/LKRangeDateComponent';
+
+export default class PickRangeDatePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            beginDateString1: "2000-02-29",
+        };
+    }
+
+    render() {
+        return (
+            <LKRangeDateComponent isEditing={true}
+                                  beginDateString={this.state.beginDateString1}
+                                  onBeginDateChange={ (date)=> {
+                                    this.setState({
+                                        beginDateString1: date
+                                    })
+                                }}
+            />
+        );
+    }
+}
+ */
 import React, { Component } from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';

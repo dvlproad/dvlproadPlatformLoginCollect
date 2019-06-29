@@ -1,5 +1,23 @@
-//LKActionLoadingImage.js
-//已解耦的图片选择视图
+// LKActionLoadingImage.js
+/*
+LKActionLoadingImage:图片控件(含加载动画和其他可操作事件) 的使用示例
+
+import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
+
+                <LKActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
+                                    imageWidth={164}
+                                    imageHeight={108}
+                                    imageSource={this.state.imageSource}
+                                    buttonIndex={buttonIndex}
+
+                                    clickButtonHandle={this.clickButtonHandle}
+                                    deleteImageHandle={this.deleteImageHandle}
+
+                                    isEditing={true}
+                                    isAddIcon={this.isAddIcon(buttonIndex)}
+                />
+ */
+
 import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity} from 'react-native';
 import LKLoadingImage, { ImageUploadType } from './LKLoadingImage';

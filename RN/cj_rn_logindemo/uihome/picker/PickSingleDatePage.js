@@ -1,9 +1,9 @@
-//PickDateOnePage.js
+//PickSingleDatePage.js.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
 import LKSingleDateComponent from "../../commonUI/date/LKSingleDateComponent";
 
-export default class PickDateOnePage extends Component {
+export default class PickSingleDatePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,10 +24,10 @@ export default class PickDateOnePage extends Component {
                                        chooseDateString={beginDateString1}
                                        allowPickDate={true}
                                        onDateChange={ (date) => {
-                                  this.setState({
-                                      beginDateString1: date
-                                  })
-                              }}
+                                           this.setState({
+                                               beginDateString1: date
+                                           })
+                                       }}
                                        isBankStyle={false}
                 />
 
@@ -37,10 +37,10 @@ export default class PickDateOnePage extends Component {
                                        chooseDateString={beginDateString2}
                                        allowPickDate={true}
                                        onDateChange={ (date) => {
-                                  this.setState({
-                                      beginDateString2: date
-                                  })
-                              }}
+                                           this.setState({
+                                               beginDateString2: date
+                                           })
+                                       }}
                                        isBankStyle={true}
                 />
 

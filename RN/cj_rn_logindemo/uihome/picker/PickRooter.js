@@ -6,8 +6,8 @@ import PickHomePage from "./PickHomePage";
 //weight
 import PickWeightPage from "./PickWeightPage";
 //date
-import PickDateOnePage from "./PickDateOnePage";
-import PickDateRangePage from './PickDateRangePage';
+import PickSingleDatePage from "./PickSingleDatePage";
+import PickRangeDatePage from './PickRangeDatePage';
 //pickImage
 import PickImagesPage from './PickImagesPage';
 
@@ -29,13 +29,13 @@ export const PickPages = {
     },
 
     PickDateRangePage: {
-        screen: PickDateRangePage,
+        screen: PickRangeDatePage,
         navigationOptions: () => ({
             title: `日期选择`,
         }),
     },
     PickDateOnePage: {
-        screen: PickDateOnePage,
+        screen: PickSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择`,
         }),

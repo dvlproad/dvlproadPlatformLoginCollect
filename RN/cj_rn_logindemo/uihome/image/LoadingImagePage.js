@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import { View, Text } from 'react-native';
-import LKLoadingImage from '../../commonUI/image/LKLoadingImage'
-import OtherLoadingImage from '../../commonUI/image/OtherLoadingImage'
+import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
+import OtherLoadingImage from '../../commonUI/image/OtherLoadingImage';
 
 export default class LoadingImagePage extends Component {
     render() {
@@ -11,16 +11,14 @@ export default class LoadingImagePage extends Component {
         return (
             <View style={{flex:1}}>
                 <Text style={{marginTop:20}}>LoadingImage</Text>
-                <LKLoadingImage
-                    style={{width: 200, height: 200, backgroundColor:'red'}}
-                    imageWidth={200}
-                    imageHeight={200}
-                    imageSource={networkImage}
+                <LKLoadingImage style={{width: 200, height: 200, backgroundColor:'red'}}
+                                imageWidth={200}
+                                imageHeight={200}
+                                imageSource={networkImage}
                 />
                 <Text style={{marginTop:20}}>OtherLoadingImage</Text>
-                <OtherLoadingImage
-                    style={{width: 200, height: 200}}
-                    source={networkImage}
+                <OtherLoadingImage style={{width: 200, height: 200}}
+                                   source={networkImage}
                 />
             </View>
 

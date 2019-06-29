@@ -1,10 +1,19 @@
 // LKTextButton.js
 // ①文本按钮、②白色背景+黑色文字的按钮
+/* LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
+
+import {LKWhiteBGButton} from "../commonUI/button/LKTextButton";
+
+                        <LKWhiteBGButton style={{width:160, marginTop:60}}
+                                         title={'刷新'}
+                                         onPress={this.props.refreshHandle}
+                        />
+ */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {Text, TouchableOpacity, View} from "react-native";
 
-// 白色背景+黑色文字的按钮
+// LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
 export class LKWhiteBGButton extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,

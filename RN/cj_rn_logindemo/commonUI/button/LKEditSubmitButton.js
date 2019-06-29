@@ -1,5 +1,20 @@
 // LKEditSubmitButton.js
-// '提交'/'修改' 文字切换的按钮(包含各自的disable处理)
+
+/* LKEditSubmitButton:'提交'/'修改' 文字切换的按钮(包含各自的disable处理) 的使用示例
+
+import {LKEditSubmitButton} from "../../commonUI/button/LKEditSubmitButton";
+
+            <LKEditSubmitButton isShowEditTitle={this.props.isShowEditTitle}
+                                isDisabled={this.props.isDisabled}
+                                clickEditTitleHandle={() => {
+                                    Alert.alert("你点击了编辑按钮！");
+                                }}
+                                clickSubmitTitleHandle={() => {
+                                    Alert.alert("你点击了提交按钮！");
+                                }}
+            />
+ */
+
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {StyleSheet} from 'react-native';

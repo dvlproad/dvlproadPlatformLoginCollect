@@ -1,5 +1,24 @@
-//LKImagesChooseListst.js
-// 图片系列选择视图
+// LKImagesChooseList.js
+/*
+LKImagesChooseList:图片列表组件(可进行选择、删除等操作)
+
+import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
+
+                <LKImagesChooseList
+                    style={{paddingTop: 12}}
+                    listWidth={listWidth}
+                    numColumns={2}
+                    widthHeightRatio={164/108}
+                    boxHorizontalInterval={30}
+                    imageSources={imageSources}
+                    browseImageHandle={this.browseImageHandle}
+                    addImageHandle={this.chooseImageSource}
+                    deleteImageHandle={this.deleteImageHandle}
+                    isEditing={this.state.isUpdatingInfo}
+                    imageMaxCount={2}
+                    imageLoadedCountChange={this.imageLoadedCountChange}
+                />
+ */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { FlatList, Text } from "react-native";

@@ -30,7 +30,7 @@ import UploadImagesPage from "./image/UploadImagesPage";
 import TextHomePage from "./text/TextHomePage"
 
 //date
-import PickDatePage from './date/PickDateRangePage'
+import PickDatePage from './date/PickRangeDatePage'
 //pickImage
 import PickImagesPage from './pickImage/PickImagesPage'
 

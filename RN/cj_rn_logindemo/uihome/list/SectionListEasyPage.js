@@ -38,7 +38,7 @@ export default class SectionListEasyPage extends React.Component {
             },
             { key: "Pick",
                 data: [
-                    { title: "PickDateRangePage", page: "PickDateRangePage" },
+                    { title: "PickRangeDatePage", page: "PickRangeDatePage" },
                 ]
             },
             { key: "List",
