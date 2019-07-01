@@ -38,11 +38,17 @@ export default class LKSingleDateComponent extends Component {
         allowPickDate: PropTypes.bool,
         chooseDateString: PropTypes.string,
         onDateChange: PropTypes.func,
+
+        minDate: PropTypes.string,
+        maxDate: PropTypes.string,
     };
 
     static defaultProps = {
         isBankStyle: false,
         allowPickDate: false,
+
+        minDate: "1900-01-01",
+        maxDate: "2300-01-01",
     };
 
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
 import { LKEditSubmitButton } from '../commonUI/button/LKEditSubmitButton';
-import LKRangeDateComponent from '../commonUI/date/LKRangeDateComponent';
+import LKRangeDateComponent, {LKRangeDateEditingType} from '../commonUI/date/LKRangeDateComponent';
 import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
 import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
 import LKToastUtil from '../commonUI/toast/LKToastUtil';
@@ -43,6 +43,7 @@ export default class HealthCerHomePage extends Component {
 
             healthCerImages:[],
             beginDateString: '',
+            endDateString: '',
             isUpdatingInfo: false,
             submitEditButtonEnable: true,
 
@@ -358,6 +359,8 @@ export default class HealthCerHomePage extends Component {
 
         let imageSources = this.state.healthCerImages;
 
+        let dateRangeEditingType = this.state.isUpdatingInfo?LKRangeDateEditingType.Begin:LKRangeDateEditingType.None;
+
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
                 <View style={styles.loadingView}>
@@ -385,13 +388,14 @@ export default class HealthCerHomePage extends Component {
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
                 <LKRangeDateComponent style={{marginTop: 22}}
-                                      isEditing={this.state.isUpdatingInfo}
+                                      dateRangeEditingType={dateRangeEditingType}
                                       beginDateString={beginDateString}
-                                      onBeginDateChange={ (date)=> {
-                                    this.setState({
-                                        beginDateString: date
-                                    })
-                                }}
+                                      onBeginDateChange={ (beginDateString, endDateString)=> {
+                                          this.setState({
+                                              beginDateString: beginDateString,
+                                              endDateString: endDateString,
+                                          })
+                                      }}
                 />
 
                 {approveResultCell}

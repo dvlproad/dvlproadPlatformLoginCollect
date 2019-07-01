@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import HomeSectionList from "../../commonUI/list/HomeSectionList";
+import WebViewJSBridgePage from "./WebViewJSBridgePage";
 
 
 export default class WebViewHomePage extends Component {
@@ -28,6 +29,7 @@ export default class WebViewHomePage extends Component {
                 data: [
                     { title: "WebViewPage1", page: "WebViewPage1" },
                     { title: "WebViewPage2", page: "WebViewPage2" },
+                    { title: "WebViewJSBridgePage", page: "WebViewJSBridgePage" },
                 ]
             },
         ];

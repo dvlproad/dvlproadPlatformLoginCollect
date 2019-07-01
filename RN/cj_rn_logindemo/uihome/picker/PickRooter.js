@@ -28,16 +28,16 @@ export const PickPages = {
         }),
     },
 
-    PickDateRangePage: {
-        screen: PickRangeDatePage,
-        navigationOptions: () => ({
-            title: `日期选择`,
-        }),
-    },
-    PickDateOnePage: {
+    PickSingleDatePage: {
         screen: PickSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择`,
+        }),
+    },
+    PickRangeDatePage: {
+        screen: PickRangeDatePage,
+        navigationOptions: () => ({
+            title: `范围日期选择`,
         }),
     },
 

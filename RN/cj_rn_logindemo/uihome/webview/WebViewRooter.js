@@ -5,6 +5,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import WebViewHomePage from "./WebViewHomePage"
 import WebViewPage1 from "./WebViewPage1"
 import WebViewPage2 from "./WebViewPage2"
+import WebViewJSBridgePage from "./WebViewJSBridgePage";
 
 //WebViewPages
 export const WebViewPages = {
@@ -24,6 +25,12 @@ export const WebViewPages = {
         screen: WebViewPage2,
         navigationOptions: () => ({
             title: `WebViewPage2`,
+        }),
+    },
+    WebViewJSBridgePage: {
+        screen: WebViewJSBridgePage,
+        navigationOptions: () => ({
+            title: `WebViewJSBridgePage`,
         }),
     },
 };
