@@ -5,8 +5,6 @@ LKLoadingImage:图片控件(只含加载动画,但不含其他可操作事件) �
 import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
 
                 <LKLoadingImage style={{width: 200, height: 200, backgroundColor:'red'}}
-                                imageWidth={200}
-                                imageHeight={200}
                                 imageSource={{uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}}
                 />
 
@@ -33,13 +31,10 @@ export var ImageUploadType = {
     Failure: 4,     /**< 上传失败 */
 };
 
-var isNetworkImage = false;
 
 export default class LKLoadingImage extends Component {
     static propTypes = {
-        imageWidth: PropTypes.number.isRequired,
-        imageHeight: PropTypes.number.isRequired,
-        imageSource: PropTypes.object.isRequired,    //图片
+        //imageSource: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
 
         buttonIndex: PropTypes.number.isRequired,
@@ -53,8 +48,6 @@ export default class LKLoadingImage extends Component {
     };
 
     static defaultProps = {
-        imageWidth: 0,
-        imageHeight: 0,
         imageSource: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
 
@@ -72,10 +65,29 @@ export default class LKLoadingImage extends Component {
         super(props);
 
         this.state = {
+            isNetworkImage: false,
             loaded: false,
             loadStatus: ImageLoadStatus.Pending,
         }
     }
+
+    componentWillMount(): void {
+        let isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        this.setState({
+            isNetworkImage: isNetworkImage,
+        })
+    }
+
+    // componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+    //     if (this.props.imageSource !== nextProps.imageSource){
+    //         //在这里我们仍可以通过this.props来获取旧的外部状态
+    //         //通过新旧状态的对比，来决定是否进行其他方法
+    //         let isNetworkImage = this.checkIsNetworkImage(nextProps.imageSource);
+    //         this.setState({
+    //             isNetworkImage: isNetworkImage,
+    //         })
+    //     }
+    // }
 
     /**
      * 是否是网络图片
@@ -95,7 +107,7 @@ export default class LKLoadingImage extends Component {
      * 开始加载(当开始加载图片调用该方法)
      */
     onLoadStart = () => {
-        let loadStatus = isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
+        let loadStatus = this.state.isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
         this.setState({
             loaded: false,
             loadStatus: loadStatus,
@@ -116,14 +128,11 @@ export default class LKLoadingImage extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        let simulateNetworkImageLoad = isNetworkImage ? 2000 : 0;
-        setTimeout(()=> {
-            this.setState({
-                loadStatus: ImageLoadStatus.Success
-            });
+        this.setState({
+            loadStatus: ImageLoadStatus.Success
+        });
 
-            this.props.onLoadComplete(this.props.buttonIndex);
-        }, simulateNetworkImageLoad);
+        this.props.onLoadComplete(this.props.buttonIndex);
     }
 
     /**
@@ -197,7 +206,7 @@ export default class LKLoadingImage extends Component {
      */
     getDebugImageStateText=()=> {
         let debugImageStateText = 'ButtonIndex:' + this.props.buttonIndex;
-        isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        let isNetworkImage = this.state.isNetworkImage;
         debugImageStateText += '\nisNetworkImage:' + (isNetworkImage?'true':'false');
         debugImageStateText += this.getDebugImageUploadStateText();
 
@@ -243,8 +252,8 @@ export default class LKLoadingImage extends Component {
     render() {
         const { style } = this.props;
 
-        const imageWidth = this.props.imageWidth;
-        const imageHeight = this.props.imageHeight;
+        const imageWidth = this.props.style.width;
+        const imageHeight = this.props.style.height;
 
 
         let imageStateText = this.getFormalImageStateText();

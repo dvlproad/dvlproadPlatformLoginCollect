@@ -28,7 +28,7 @@ export default class LKActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        imageSource: PropTypes.object.isRequired,    //图片
+        //imageSource: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
 
         clickButtonHandle: PropTypes.func,
@@ -111,8 +111,6 @@ export default class LKActionLoadingImage extends Component {
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
                     <LKLoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
-                                    imageWidth={imageWidth}
-                                    imageHeight={imageHeight}
                                     imageSource={imageSource}
                                     defaultSource={this.props.defaultSource}
                                     buttonIndex={buttonIndex}
