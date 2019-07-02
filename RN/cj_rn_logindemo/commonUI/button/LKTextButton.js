@@ -42,6 +42,7 @@ export class LKWhiteBGButton extends Component {
                 }, style]}
                 title={this.props.title}
                 color={'#333333'}
+                onPress={this.props.onPress}
             />
         )
     }

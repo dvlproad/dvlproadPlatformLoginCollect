@@ -39,7 +39,8 @@ export default class LKLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        // imageSource: PropTypes.object.isRequired,    //图片
+        imageSource: PropTypes.object.isRequired,    //图片
+        defaultSource: PropTypes.number,
 
         buttonIndex: PropTypes.number.isRequired,
 
@@ -55,6 +56,7 @@ export default class LKLoadingImage extends Component {
         imageWidth: 0,
         imageHeight: 0,
         imageSource: require('./resources/imageDefault.png'),
+        defaultSource: require('./resources/imageDefault.png'),
 
         buttonIndex: 0,
 
@@ -144,7 +146,7 @@ export default class LKLoadingImage extends Component {
         let formalImageStateText = '';
         switch (this.props.uploadType) {
             case ImageUploadType.Uploading: {
-                formalImageStateText = this.props.uploadProgress + '%';
+                formalImageStateText = this.changeTwoDecimal_f(this.props.uploadProgress) + '%';
                 break;
             }
             case ImageUploadType.Success: {
@@ -161,6 +163,33 @@ export default class LKLoadingImage extends Component {
             }
         }
         return formalImageStateText;
+    }
+
+    /**
+     * 始终保留两位小数的方法
+     * @param x
+     * @returns {string|*}
+     */
+    changeTwoDecimal_f(x) {
+        try {
+            let f_x1 = parseFloat(x);
+            if (isNaN(f_x1)) {
+                return x;
+            }
+            let f_x = Math.round(x * 100) / 100;
+            let s_x = f_x.toString();
+            let pos_decimal = s_x.indexOf('.');
+            if (pos_decimal < 0) {
+                pos_decimal = s_x.length;
+                s_x += '.';
+            }
+            while (s_x.length <= pos_decimal + 2) {
+                s_x += '0';
+            }
+            return s_x;
+        } catch (e) {
+            return '0.00';
+        }
     }
 
     /**
@@ -246,7 +275,7 @@ export default class LKLoadingImage extends Component {
 
                 <Image style={{width: imageWidth, height: imageHeight }}
                        source={this.props.imageSource}
-                       defaultSource={require('./resources/imageDefault.png')}
+                       defaultSource={this.props.defaultSource}
                        onLoadStart={this.onLoadStart}
                        onLoadEnd={this.onLoadEnd}
                        onLoad={this.onLoadSuccess}

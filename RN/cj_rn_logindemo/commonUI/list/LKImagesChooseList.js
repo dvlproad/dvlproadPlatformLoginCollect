@@ -33,6 +33,7 @@ export default class LKImagesChooseList extends Component {
         widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
 
         imageSources: PropTypes.array,
+        imageDefaultSource: PropTypes.number,
 
         browseImageHandle: PropTypes.func,
         addImageHandle: PropTypes.func,
@@ -54,6 +55,7 @@ export default class LKImagesChooseList extends Component {
         widthHeightRatio: 1.0,  //宽高的比例
 
         imageSources: [],
+        //imageDefaultSource: '',
 
         browseImageHandle: (buttonIndex)=>{},
         addImageHandle: (buttonIndex)=>{},
@@ -173,6 +175,7 @@ export default class LKImagesChooseList extends Component {
                             imageWidth={boxWidth}
                             imageHeight={boxHeight}
                             imageSource={item.imageSource}
+                            defaultSource={this.props.imageDefaultSource}
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}

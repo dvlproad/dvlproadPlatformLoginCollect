@@ -28,7 +28,7 @@ export default class PickSingleDatePage extends Component {
 }
  */
 import React, { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import PropTypes from "prop-types";
 import DatePicker from "react-native-datepicker";
 
@@ -76,9 +76,9 @@ export default class LKSingleDateComponent extends Component {
 
         return (
             <DatePicker
-                style={[{flex: 1}, style]}
+                style={[{ flex: 1 }, style]}
                 disabled={!this.props.allowPickDate}
-                placeholder= {this.props.placeholder}
+                placeholder={this.props.placeholder}
                 date={this.props.chooseDateString}
                 minDate="1900-01-01"
                 maxDate="2300-01-01"
@@ -92,7 +92,7 @@ export default class LKSingleDateComponent extends Component {
                 customStyles={customStyles}
 
                 onDateChange={(date) => { //
-                    if(date.constructor===String) {
+                    if (date.constructor === String) {
                         let dateString = date;
                         // this.setState({chooseDateString: dateString})
                         this.props.onDateChange(dateString);

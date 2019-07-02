@@ -28,7 +28,8 @@ export default class LKActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        // imageSource: PropTypes.object.isRequired,    //图片
+        imageSource: PropTypes.object.isRequired,    //图片
+        defaultSource: PropTypes.number,
 
         clickButtonHandle: PropTypes.func,
         deleteImageHandle: PropTypes.func,
@@ -49,6 +50,7 @@ export default class LKActionLoadingImage extends Component {
         imageWidth: 0,
         imageHeight: 0,
         imageSource: require('./resources/imageDefault.png'),
+        defaultSource: require('./resources/imageDefault.png'),
 
         clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
@@ -112,6 +114,7 @@ export default class LKActionLoadingImage extends Component {
                                     imageWidth={imageWidth}
                                     imageHeight={imageHeight}
                                     imageSource={imageSource}
+                                    defaultSource={this.props.defaultSource}
                                     buttonIndex={buttonIndex}
                                     onLoadComplete={this.props.onLoadComplete}
                                     uploadType={this.props.uploadType}
