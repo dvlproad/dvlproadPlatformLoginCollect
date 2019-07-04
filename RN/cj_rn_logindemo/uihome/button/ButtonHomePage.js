@@ -1,130 +1,75 @@
 //ButtonHomePage.js
-import React, {Component} from 'react';
-import {Button, Alert, Text, View, ScrollView, FlatList, TouchableWithoutFeedback} from 'react-native';
-import {LKEditSubmitButton} from "../../commonUI/button/LKEditSubmitButton";
+import React, { Component } from 'react';
+import { View, Alert } from 'react-native';
+import HomeSectionList from "../../commonUI/list/HomeSectionList";
 
 export default class ButtonHomePage extends Component {
-    renderSeparator() {
-        return <Separator/>;
+
+    constructor(props) {
+        super(props);
+    }
+
+    _onPressButton = (nextPageName) => {
+        console.log(nextPageName);
+
+        if (nextPageName) {
+            this.props.navigation.navigate(nextPageName)
+        } else  {
+            //nextPageName = "Button";
+            Alert.alert(nextPageName)
+        }
     }
 
     render() {
+        let sections = [
+            { key: "Button",
+                data: [
+                    { title: "RNButtonPage", page: "RNButtonPage" },
+                    { title: "EditSubmitButtonPage", page: "EditSubmitButtonPage" },
+                    { title: "ButtonColorPage", page: "ButtonColorPage" },
+                ]
+            },
+        ];
+
         return (
-
-            <ScrollView style={{backgroundColor: "#f2f2f2", paddingHorizontal: 15}}>
-                <View style={{backgroundColor: "#01ADFE", marginTop: 20}}>
-                    <Button
-                        style={{
-                            flex: 1,
-                            backgroundColor: "red", //按钮背颜色不在此设置
-                            color: "white"          //按钮文字颜色不在此设置
-                        }}
-                        title={"测试按钮文字颜色的设置"}
-                        color={"white"}
-                    />
-                </View>
-
-
-
-                <View style={{backgroundColor: "#01ADFE4C", marginTop: 40}}>
-                    <Button
-                        style={{flex: 1}}
-                        title={"查看disable下的按钮《白色》文字颜色的变化"}
-                        color={"white"}
-                        disabled={true}         //按钮disable后
-                    />
-                </View>
-
-                <TouchableWithoutFeedback>
-                    <View style={{backgroundColor: "#01ADFE", marginTop: 10}}>
-                        <Button
-                            style={{flex: 1}}
-                            title={"测试disable下的按钮文字颜色修改"}
-                            color={"white"}
-                        />
-                    </View>
-                </TouchableWithoutFeedback>
-                <View style={{backgroundColor: "#01ADFE4C"}}>
-                    <Button
-                        style={{flex: 1}}
-                        title={"测试disable下的按钮文字颜色修改"}
-                        color={"#FFFFFF"}
-                        //disabled={true}
-                        onPress={null}
-                    />
-                </View>
-
-                <View style={{marginTop: 40}}>
-                    <FlatList
-                        keyExtractor={(item, index) => index.toString()}
-                        data={[
-                            {isShowEditTitle: true, isDisabled: false},
-                            {isShowEditTitle: true, isDisabled: true},
-                            {isShowEditTitle: false, isDisabled: false},
-                            {isShowEditTitle: false, isDisabled: true},
-                        ]}
-                        renderItem={({item}) => <TestSubmitButton isShowEditTitle={item.isShowEditTitle}
-                                                                  isDisabled={item.isDisabled}/>}
-                        //ItemSeparatorComponent={this.renderSeparator} //写法1
-                        ItemSeparatorComponent={() => (<Separator/>)} //写法2
-                    />
-                </View>
-
-                <View style={{paddingTop: 60, alignItems: 'center'}}>
-                    <TouchableWithoutFeedback>
-                        <View style={{
-                            marginBottom: 30,
-                            width: 260,
-                            alignItems: 'center',
-                            backgroundColor: '#2196F3'
-                        }}>
-                            <Text
-                                style={{padding: 20, color: 'white'}}
-                            >
-                                TouchableWithoutFeedback
-                            </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
-
-                <View style={{ height: 64, width: 64, borderRadius: 12, backgroundColor:'#ff0000', justifyContent:'center'}}>
-                    <Text style={{color:'#fff', fontSize:24, textAlign:'center', backgroundColor:"green"}}>1</Text>
-                </View>
-            </ScrollView>
-
+            <View style={{ flex: 1 }}>
+                <HomeSectionList
+                    sections={sections}
+                    onPress={this._onPressButton}
+                />
+            </View>
         );
     }
 }
 
+//ButtonPages
+import RNButtonPage from "./RNButtonPage";
+import EditSubmitButtonPage from "./EditSubmitButtonPage";
+import ButtonColorPage from "./ButtonColorPage";
 
-class Separator extends Component {
-    render() {
-        return (
-            <Text style={{justifyContent: "center"}}>--------</Text>
-        );
-    }
-}
-
-
-class TestSubmitButton extends LKEditSubmitButton {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         ...this.state
-    //     };
-    // }
-
-    render() {
-        return (
-            <LKEditSubmitButton isShowEditTitle={this.props.isShowEditTitle}
-                                isDisabled={this.props.isDisabled}
-                                clickEditTitleHandle={() => {
-                                    Alert.alert("你点击了编辑按钮！");
-                                }}
-                                clickSubmitTitleHandle={() => {
-                                    Alert.alert("你点击了提交按钮！");
-                                }}
-            />
-        );
-    }
+export const ButtonPages = {
+    ButtonHomePage: {
+        screen: ButtonHomePage,
+        navigationOptions: () => ({
+            title: `ButtonHomePage`,
+        }),
+    },
+    RNButtonPage: {
+        screen: RNButtonPage,
+        navigationOptions: () => ({
+            title: `RNButtonPage`,
+        }),
+    },
+    EditSubmitButtonPage: {
+        screen: EditSubmitButtonPage,
+        navigationOptions: () => ({
+            title: `EditSubmitButtonPage`,
+        }),
+    },
+    ButtonColorPage: {
+        screen: ButtonColorPage,
+        navigationOptions: () => ({
+            title: `ButtonColorPage`,
+        }),
+    },
 }

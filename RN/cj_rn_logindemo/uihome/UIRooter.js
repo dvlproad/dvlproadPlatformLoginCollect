@@ -3,20 +3,20 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 //UIHome
-import UIHomePage from "./UIHomePage"
+import UIHomePage from "./UIHomePage";
 
 
 //layout
-import LayoutHomePage from "./layout/LayoutHomePage"
+import LayoutHomePage from "./layout/LayoutHomePage";
 
 //navigation
 import { NavigationPages } from "./navigation/NavigationHomePage";
 
 //button
-import ButtonHomePage from "./button/ButtonHomePage"
+import {ButtonPages} from "./button/ButtonHomePage";
 
 //text
-import TextHomePage from "./text/TextHomePage"
+import TextHomePage from "./text/TextHomePage";
 
 //image
 import { ImagePages } from "./image/ImageHomePage";
@@ -29,6 +29,8 @@ import {ModalPages} from "./modal/ModalRooter";
 
 //webview
 import { WebViewPages } from './webview/WebViewRooter';
+
+//empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
 
@@ -38,7 +40,7 @@ import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 //UIHomeNavigation
 const UIHomeNavigation = createStackNavigator(
     {
-        UIHome: {
+        UIHomePage: {
             screen: UIHomePage,
             navigationOptions: () => ({
                 title: `UI首页`,
@@ -59,18 +61,14 @@ const UIHomeNavigation = createStackNavigator(
             }),
         },
 
-        ButtonHome: {
-            screen: ButtonHomePage,
-            navigationOptions: () => ({
-                title: `Button首页`,
-            }),
-        },
         TextHome: {
             screen: TextHomePage,
             navigationOptions: () => ({
                 title: `Text首页`,
             }),
         },
+
+        ...ButtonPages,
 
         ...ImagePages,
         ...ListPages,
@@ -80,7 +78,7 @@ const UIHomeNavigation = createStackNavigator(
         ...WebViewPages,
     },
     {
-        initialRouteName: 'PickComSingleDatePage'
+        initialRouteName: 'ButtonColorPage'
     }
 );
 

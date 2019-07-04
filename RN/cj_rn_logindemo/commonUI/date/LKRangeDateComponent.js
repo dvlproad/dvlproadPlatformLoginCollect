@@ -32,6 +32,7 @@ import PropTypes from "prop-types";
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
 import LKOwnSingleDateComponent from "./LKOwnSingleDateComponent";
+import LKComSingleDateComponent from "./LKComSingleDateComponent";
 import LKToastUtil from "../toast/LKToastUtil";
 
 /**< 日期范围的编辑状态 */
@@ -42,6 +43,9 @@ export var LKRangeDateEditingType = {
     BeginEnd: 3  /**< 编辑起始和终止日期中 */
 }
 
+/**
+ * 范围日期选择控件
+ */
 export default class LKRangeDateComponent extends Component {
     static propTypes = {
         dateRangeEditingType: PropTypes.number,
@@ -140,7 +144,7 @@ export default class LKRangeDateComponent extends Component {
                 [{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                     style]
             }>
-                <LKOwnSingleDateComponent style={{flex: 1}}
+                <LKComSingleDateComponent style={{flex: 1}}
                                           placeholder= {"选择日期"}
                                           chooseDateString={beginDateString}
                                           allowPickDate={allowPickDateForBegin}
@@ -188,7 +192,7 @@ export default class LKRangeDateComponent extends Component {
     }
 }
 
-
+// 范围日期之间的连接线
 class LKDateConnectView extends React.Component {
     constructor(props) {
         super(props);

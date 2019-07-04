@@ -28,8 +28,8 @@ export default class PickOwnSingleDatePage extends Component {
 }
  */
 import React, { Component } from 'react';
-import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import PropTypes from "prop-types";
+import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import LKDatePicker from "../picker/LKDatePicker";
 import LKToastUtil from "../toast/LKToastUtil";
 
@@ -59,16 +59,21 @@ export default class LKComSingleDateComponent extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state={
-            showingDateString: '',
-        }
     }
 
-    updateShowingDateString=(showingDateString)=>{
-        this.setState({
-            showingDateString: showingDateString,
-        })
+    showDatePick=(dateString)=>{
+        LKDatePicker.show(
+            dateString,
+            (dateString) => {
+                this.props.onDateChange(dateString);
+            },
+            (dateString) => {
+                //LKToastUtil.showMessage(dateString);
+            },
+            (dateString) => {
+                //LKToastUtil.showMessage(dateString);
+            },
+        );
     }
 
 
@@ -87,30 +92,24 @@ export default class LKComSingleDateComponent extends Component {
             borderWidth: 0,
             backgroundColor: 'transparent'
         };
-        let customStyles = this.props.isBankStyle ? bankCustomStyles : normalCustomStyles;
+        let textStyles = this.props.isBankStyle ? bankCustomStyles : normalCustomStyles;
+        textStyles = [textStyles, styles.text];
 
-        let showingDateString = this.state.chooseDateString;
-        if (showingDateString == null) {
-            showingDateString = this.props.placeholder;
+        let dateString = this.props.chooseDateString;
+        let isEmpty = dateString == null || dateString.length < 6;
+        if (isEmpty) {
+            dateString = this.props.placeholder;
+            textStyles = [textStyles, {color:'#999'}];
         }
 
         return (
-            <TouchableOpacity style={style} onPress={()=>{
-                LKDatePicker.show(
-                    '2000-02-29',
-                    (dateString) => {
-                        LKToastUtil.showMessage(dateString);
-                        this.updateShowingDateString(dateString);
-                    },
-                    (dateString) => {
-                        LKToastUtil.showMessage(dateString);
-                    },
-                    (dateString) => {
-                        LKToastUtil.showMessage(dateString);
-                    },
-                );
-            }}>
-                <Text style={customStyles}>{showingDateString}</Text>
+            <TouchableOpacity style={style}
+                              disabled={!this.props.allowPickDate}
+                              onPress={()=>{
+                                  this.showDatePick(dateString);
+                              }}
+            >
+                <Text style={textStyles}>{dateString}</Text>
             </TouchableOpacity>
         )
     }
@@ -142,9 +141,9 @@ export default class LKComSingleDateComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-    bankStyle: {
-        borderRadius: 0,
-        borderWidth: 0,
-        backgroundColor: "transparent"
+    text: {
+        // fontSize: 18,
+        textAlign: 'center',
+        paddingVertical: 10,
     },
 })

@@ -21,14 +21,13 @@ export default class LKDateUtil {
      * @returns Date
      */
     static yyyyMMdd_hhmmssDate(fullDateString){
-        if(fullDateString){
-            let regEx = new RegExp("\\-","gi");
-            let validDateStr = fullDateString.replace(regEx,"/");
+        if (fullDateString) {
+            let regEx = new RegExp("\\-", "gi");
+            let validDateStr = fullDateString.replace(regEx, "/");
             let milliseconds = Date.parse(validDateStr);
             return new Date(milliseconds);
-        } else {
-            return null;
         }
+        return '';
     }
 
     /**

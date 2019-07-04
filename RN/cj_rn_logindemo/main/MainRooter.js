@@ -138,7 +138,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'FoundationRooter'
+        initialRouteName: 'UIRooter'
     });
 
 class TabBarItem extends React.Component {

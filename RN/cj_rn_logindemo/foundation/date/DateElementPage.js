@@ -8,14 +8,14 @@ export default class DateElementPage extends Component {
     getDateShowString = (date)=>{
         let year = date.getFullYear();
         let month = date.getMonth()+1;
-        let day = date.getDay();
+        let day = date.getDate();
         let dateShowString = year+'年' + '-' + month+'月' + '-' + day+'日';
         return dateShowString;
     }
 
     render() {
         // 日期创建
-        let date1 = LKDateUtil.yyyyMMddDate("2000-02-29");
+        let date1 = LKDateUtil.yyyyMMdd_hhmmssDate("2000-02-29");
 
         // 日期转字符串
         let dateStringLong1 = LKDateUtil.yyyyMMdd_hhmmssString(date1);

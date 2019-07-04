@@ -1,8 +1,7 @@
 //PickRangeDatePage.js
 import React, { Component } from 'react';
-import {Text, ScrollView} from 'react-native';
+import {Text, ScrollView, TouchableOpacity, View} from 'react-native';
 import LKRangeDateComponent, {LKRangeDateEditingType} from '../../commonUI/date/LKRangeDateComponent';
-import LKToastUtil from "../../commonUI/toast/LKToastUtil";
 
 export default class PickRangeDatePage extends Component {
     constructor(props) {
