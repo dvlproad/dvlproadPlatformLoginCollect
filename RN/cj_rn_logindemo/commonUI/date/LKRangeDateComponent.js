@@ -144,7 +144,7 @@ export default class LKRangeDateComponent extends Component {
                 [{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                     style]
             }>
-                <LKComSingleDateComponent style={{flex: 1}}
+                <LKOwnSingleDateComponent style={{flex: 1}}
                                           placeholder= {"选择日期"}
                                           chooseDateString={beginDateString}
                                           allowPickDate={allowPickDateForBegin}
