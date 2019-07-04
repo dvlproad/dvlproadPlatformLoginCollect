@@ -66,7 +66,7 @@ export default class LKRangeDateComponent extends Component {
             if (this.props.onEndDateAutoChange) {
                 endDateString = this.props.onEndDateAutoChange(beginDateString);
             } else {
-                let beginDate = LKDateUtil.parserDateString(beginDateString);
+                let beginDate = LKDateUtil.yyyyMMdd_hhmmssDate(beginDateString);
                 let endDate = LKDateUtil.addYears(beginDate, 1);
                 endDateString = LKDateUtil.yyyyMMddString(endDate);
             }
@@ -81,7 +81,7 @@ export default class LKRangeDateComponent extends Component {
             if (this.props.onBeginDateAutoChange) {
                 beginDateString = this.props.onBeginDateAutoChange(endDateString);
             } else {
-                let endDate = LKDateUtil.parserDateString(endDateString);
+                let endDate = LKDateUtil.yyyyMMdd_hhmmssDate(endDateString);
                 let beginDate = LKDateUtil.addYears(endDate, -1);
                 beginDateString = LKDateUtil.yyyyMMddString(beginDate);
             }

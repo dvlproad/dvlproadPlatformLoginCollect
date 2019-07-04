@@ -1,10 +1,10 @@
-//UtilHomePage.js
+//FoundationHomePage.js
 import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
 
 
-export default class UtilHomePage extends Component {
+export default class FoundationHomePage extends Component {
 
     constructor(props) {
         super(props);
@@ -26,23 +26,7 @@ export default class UtilHomePage extends Component {
         let sections = [
             { key: "Date",
                 data: [
-                    { title: "Date", page: "DateHome" },
-                    ]
-            },
-            { key: "String",
-                data: [
-                    { title: "StringPage", page: "StringPage" },
-                ]
-            },
-            { key: "Timer",
-                data: [
-                    { title: "CountTimerPage", page: "CountTimerPage" },
-                ]
-            },
-            { key: "C",
-                data: [
-                    { title: "成吉思汗" },
-                    { title: "超市快递" }
+                    { title: "DateHomePage", page: "DateHomePage" },
                     ]
             },
         ];

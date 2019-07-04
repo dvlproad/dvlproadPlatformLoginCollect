@@ -1,33 +1,41 @@
-//LKDateUtil.js
+// LKDateUtil.js
 
-class LKDateUtil{
+export default class LKDateUtil {
     /**
-     * 例如:2017-06-28 10:48:46转成date类,
-     * 可把- replace成/
-     * @param dateString
-     * @return Date
+     * 创建日期
+     * @param shortDateString   将形如'2017-06-28'转成date类
+     * @returns Date
      */
-    static parserDateString(dateString){
-        if(dateString){
-            let regEx = new RegExp("\\-","gi");
-            let validDateStr=dateString.replace(regEx,"/");
-            let milliseconds=Date.parse(validDateStr);
-            return new Date(milliseconds);
-
+    static yyyyMMddDate(shortDateString){
+        if(shortDateString){
+            let fullDateString = shortDateString + ' ' + '00:00:00';
+            return this.yyyyMMdd_hhmmssDate(fullDateString);
+        } else {
+            return null;
         }
     }
 
-    /// 指定日期的加上 yearsToBeAdded 后的年
-    static addYears(sinceDate, yearsToBeAdded) {
-        const newDate = sinceDate;
-        newDate.setFullYear(sinceDate.getFullYear()+yearsToBeAdded);
-        return newDate;
+    /**
+     * 创建日期
+     * @param fullDateString    将形如'2017-06-28 10:48:46'转成date类
+     * @returns Date
+     */
+    static yyyyMMdd_hhmmssDate(fullDateString){
+        if(fullDateString){
+            let regEx = new RegExp("\\-","gi");
+            let validDateStr = fullDateString.replace(regEx,"/");
+            let milliseconds = Date.parse(validDateStr);
+            return new Date(milliseconds);
+        } else {
+            return null;
+        }
     }
 
-    static todayString() {
-        return this.yyyyMMdd_hhmmssString(new Date());
-    };
-
+    /**
+     * 日期转化为字符串
+     * @param date          将日期转化为形如'2017-06-28'的字符串
+     * @returns {string}
+     */
     static yyyyMMddString(date) {
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
@@ -37,6 +45,11 @@ class LKDateUtil{
         return y + '-' + m + '-' + d;
     };
 
+    /**
+     * 日期转化为字符串
+     * @param date          将日期转化为形如'2017-06-28 10:48:46'的字符串
+     * @returns {string}
+     */
     static yyyyMMdd_hhmmssString(date) {
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
@@ -52,11 +65,29 @@ class LKDateUtil{
         return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
     };
 
-    // timestamp时间戳  formater时间格式
-    static formatDate(timestamp, formater) {
+
+    /**
+     * 计算日期：指定日期的加上 yearsToBeAdded 后的年
+     * @param sinceDate         指定日期
+     * @param yearsToBeAdded    要加多少年
+     * @returns Date
+     */
+    static addYears(sinceDate, yearsToBeAdded) {
+        const newDate = sinceDate;
+        newDate.setFullYear(sinceDate.getFullYear()+yearsToBeAdded);
+        return newDate;
+    }
+
+    /**
+     * 日期格式化
+     * @param timestamp     时间戳
+     * @param formatter     时间格式
+     * @returns {string | boolean | NavigationReplaceAction | void | *}
+     */
+    static formatDate(timestamp, formatter) {
         let date = new Date();
         date.setTime(parseInt(timestamp));
-        formater = (formater != null)? formater : 'yyyy-MM-dd hh:mm';
+        formatter = (formatter != null)? formatter : 'yyyy-MM-dd hh:mm';
         Date.prototype.Format = function (fmt) {
             var o = {
                 "M+": this.getMonth() + 1, //月
@@ -75,7 +106,6 @@ class LKDateUtil{
             }
             return fmt;
         }
-        return date.Format(formater);
+        return date.Format(formatter);
     }
 }
-export default LKDateUtil;

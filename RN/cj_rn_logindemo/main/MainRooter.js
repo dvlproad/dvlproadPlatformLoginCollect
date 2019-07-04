@@ -9,6 +9,7 @@ import UIRooter from "../uihome/UIRooter";
 import UtilRooter from "../utilhome/UtilRooter";
 import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
 import HelloWorldPage from '../helloworld/HelloWorldPage';
+import FoundationRooter from "../foundation/FoundationRooter";
 
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
@@ -44,6 +45,20 @@ const TabBarNavigator = createBottomTabNavigator({
             screen: UIRooter,
             navigationOptions: ({ navigation }) => ({
                 title: 'BaseUI',
+                tabBarIcon: ({ focused, horizontal, tintColor }) => {
+                    return <TabBarItem
+                        tintColor={tintColor}
+                        focused={focused}
+                        normalImage={require('./image/remind.png')}
+                        selectedImage={require('./image/remind.png')}
+                    />;
+                }
+            }),
+        },
+        FoundationRooter: {
+            screen: FoundationRooter,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Foundation',
                 tabBarIcon: ({ focused, horizontal, tintColor }) => {
                     return <TabBarItem
                         tintColor={tintColor}
@@ -123,7 +138,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'UIRooter'
+        initialRouteName: 'FoundationRooter'
     });
 
 class TabBarItem extends React.Component {

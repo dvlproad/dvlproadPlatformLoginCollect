@@ -28,16 +28,17 @@ export default class PickOwnSingleDatePage extends Component {
 }
  */
 import React, { Component } from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import PropTypes from "prop-types";
-import LKTextButton from "../button/LKTextButton";
 import LKDatePicker from "../picker/LKDatePicker";
-import Picker from "react-native-picker";
+import LKToastUtil from "../toast/LKToastUtil";
 
 export default class LKComSingleDateComponent extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,
+
+        placeholder: PropTypes.string,
         chooseDateString: PropTypes.string,
         onDateChange: PropTypes.func,
 
@@ -49,9 +50,26 @@ export default class LKComSingleDateComponent extends Component {
         isBankStyle: false,
         allowPickDate: false,
 
+        placeholder: '',
+        chooseDateString: '',
+
         minDate: "1900-01-01",
         maxDate: "2300-01-01",
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state={
+            showingDateString: '',
+        }
+    }
+
+    updateShowingDateString=(showingDateString)=>{
+        this.setState({
+            showingDateString: showingDateString,
+        })
+    }
 
 
     render() {
@@ -71,42 +89,56 @@ export default class LKComSingleDateComponent extends Component {
         };
         let customStyles = this.props.isBankStyle ? bankCustomStyles : normalCustomStyles;
 
-        return (
-            <TouchableOpacity style={{marginTop: 40, marginLeft: 20}} onPress={()=>{
-                Picker.init({
-                    pickerData: LKCalendarUtil.createDateData(1900, 2300),
-                    pickerFontColor: [255, 0 ,0, 1],
-                    onPickerConfirm: (pickedValue, pickedIndex) => {
-                        console.log('date', pickedValue, pickedIndex);
-                        // onPickerConfirm(pickedValue, pickedIndex);
-                    },
-                    onPickerCancel: (pickedValue, pickedIndex) => {
-                        console.log('date', pickedValue, pickedIndex);
-                        // onPickerCancel(pickedValue, pickedIndex);
-                    },
-                    onPickerSelect: (pickedValue, pickedIndex) => {
-                        console.log('date', pickedValue, pickedIndex);
-                        // onPickerSelect(pickedValue, pickedIndex);
-                    }
-                });
-                Picker.show();
+        let showingDateString = this.state.chooseDateString;
+        if (showingDateString == null) {
+            showingDateString = this.props.placeholder;
+        }
 
-                // LKDatePicker.showDatePicker(
-                //     (pickedValue, pickedIndex) => {
-                //
-                //     },
-                //     (pickedValue, pickedIndex) => {
-                //
-                //     },
-                //     (pickedValue, pickedIndex) => {
-                //
-                //     },
-                // )
+        return (
+            <TouchableOpacity style={style} onPress={()=>{
+                LKDatePicker.show(
+                    '2000-02-29',
+                    (dateString) => {
+                        LKToastUtil.showMessage(dateString);
+                        this.updateShowingDateString(dateString);
+                    },
+                    (dateString) => {
+                        LKToastUtil.showMessage(dateString);
+                    },
+                    (dateString) => {
+                        LKToastUtil.showMessage(dateString);
+                    },
+                );
             }}>
-                <Text>DatePicker</Text>
+                <Text style={customStyles}>{showingDateString}</Text>
             </TouchableOpacity>
         )
     }
+
+
+    // render() {
+    //     return (
+    //         <DatePicker
+    //             style={[{ flex: 1 }, style]}
+    //             disabled={!this.props.allowPickDate}
+    //             placeholder={this.props.placeholder}
+    //             date={this.props.chooseDateString}
+    //             minDate="1900-01-01"
+    //             maxDate="2300-01-01"
+    //
+    //             confirmBtnText="确定"
+    //             cancelBtnText="取消"
+    //
+    //             onDateChange={(date) => { //
+    //                 if (date.constructor === String) {
+    //                     let dateString = date;
+    //                     // this.setState({chooseDateString: dateString})
+    //                     this.props.onDateChange(dateString);
+    //                 }
+    //             }}
+    //         />
+    //     )
+    // }
 }
 
 const styles = StyleSheet.create({

@@ -36,6 +36,8 @@ export default class LKOwnSingleDateComponent extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,
+
+        placeholder: PropTypes.string,
         chooseDateString: PropTypes.string,
         onDateChange: PropTypes.func,
 
@@ -46,6 +48,9 @@ export default class LKOwnSingleDateComponent extends Component {
     static defaultProps = {
         isBankStyle: false,
         allowPickDate: false,
+
+        placeholder: '',
+        chooseDateString: '',
 
         minDate: "1900-01-01",
         maxDate: "2300-01-01",

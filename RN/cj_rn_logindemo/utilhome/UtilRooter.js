@@ -3,14 +3,10 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 //UtilHome
-import UtilHomePage from "./UtilHomePage"
-
-
-//date
-import DateHomePage from "./date/DateHomePage"
+import UtilHomePage from "./UtilHomePage";
 
 //string
-import StringPage from "./string/StringPage"
+import StringPage from "./string/StringPage";
 
 //timer
 import CountTimerPage from './timer/CountTimerPage';
@@ -24,12 +20,6 @@ const UtilHomeNavigation = createStackNavigator(
             screen: UtilHomePage,
             navigationOptions: () => ({
                 title: `Util首页`,
-            }),
-        },
-        DateHome: {
-            screen: DateHomePage,
-            navigationOptions: () => ({
-                title: `Date首页`,
             }),
         },
         StringPage: {

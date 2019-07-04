@@ -1,6 +1,6 @@
 //LKCalendarUtil.js
 
-class LKCalendarUtil {
+export default class LKCalendarUtil {
     /**
      *
      * @param beginYear     开始年(默认1900)
