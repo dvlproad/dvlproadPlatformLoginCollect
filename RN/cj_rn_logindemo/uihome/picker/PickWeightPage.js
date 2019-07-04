@@ -1,4 +1,4 @@
-//PickDateRangePageePage.js
+//PickWeightPage.js
 import React, { Component } from 'react';
 import {Text, ScrollView, Picker} from 'react-native';
 

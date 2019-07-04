@@ -42,7 +42,7 @@ export default class LKLoadingImage extends Component {
         onLoadComplete: PropTypes.func, //图片加载结束的回调
 
         uploadType: PropTypes.number,       //图片上传类型
-        uploadProgress: PropTypes.number,   //图片上传进度
+        uploadProgress: PropTypes.number,   //图片上传进度(值范围为0到100)
 
         changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
@@ -176,7 +176,7 @@ export default class LKLoadingImage extends Component {
 
     /**
      * 始终保留两位小数的方法
-     * @param x
+     * @param x 要处理的数字
      * @returns {string|*}
      */
     changeTwoDecimal_f(x) {
@@ -267,14 +267,17 @@ export default class LKLoadingImage extends Component {
         }
 
         let stateTextStyle ={flex: 1, textAlign: 'center', fontSize: 17, color: '#FFFFFF'};
+        let stateTextWidth = imageWidth;
+        let stateTextHeight = imageHeight;
+        //let stateTextHeight = imageHeight * (1-this.props.uploadProgress/100);
         if (this.props.changeShowDebugMessage) {
             stateTextStyle = [stateTextStyle, {color: '#99ff22'}]
         } else {
-            stateTextStyle = [stateTextStyle, {lineHeight: imageHeight}];
+            stateTextStyle = [stateTextStyle, {lineHeight: stateTextHeight}];
         }
 
         let stateComponent = (
-            <View style={{backgroundColor:stateBGColor, position:'absolute', width:imageWidth, height:imageHeight}}>
+            <View style={{backgroundColor:stateBGColor, position:'absolute', width:stateTextWidth, height:stateTextHeight}}>
                 <Text style={stateTextStyle}>{imageStateText}</Text>
             </View>
         );
@@ -300,7 +303,7 @@ export default class LKLoadingImage extends Component {
                         height:imageHeight,
                     }}
                     size="large"
-                    color="red"
+                    color="#172991"
                     animating={this.state.loadStatus == ImageLoadStatus.Loading}
                 />
             </View>

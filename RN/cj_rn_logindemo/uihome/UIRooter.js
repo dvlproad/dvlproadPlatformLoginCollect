@@ -80,7 +80,7 @@ const UIHomeNavigation = createStackNavigator(
         ...WebViewPages,
     },
     {
-        initialRouteName: 'UIHome'
+        initialRouteName: 'PickComSingleDatePage'
     }
 );
 

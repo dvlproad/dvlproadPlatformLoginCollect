@@ -7,6 +7,14 @@ source 'https://gitee.com/dvlproad/dvlproadSpecs'
 target 'cj_rn_logindemo' do
 
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
+  pod 'Picker', :path => '../node_modules/react-native-picker'
+
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end
 
 target 'cj_rn_logindemoTests' do
