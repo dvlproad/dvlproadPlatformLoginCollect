@@ -116,9 +116,15 @@ export default class ImagesChooseListExamplePage extends Component {
                         },
                         {
                             imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                            uploadType: ImageUploadType.Uploading,
+                            uploadType: ImageUploadType.Success,
                             uploadProgress: 100,
                             imageIndex: 3,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Failure,
+                            uploadProgress: 77,
+                            imageIndex: 4,
                         },
                     ]}
                     browseImageHandle={(index)=>{
@@ -133,9 +139,13 @@ export default class ImagesChooseListExamplePage extends Component {
                     isEditing={true}
                     imageMaxCount={9}
                     imageLoadedCountChange={(imageLoadedCount, isImageAllLoaded)=>{
-                        // let message = "完成加载的图片个数为:" + imageLoadedCount + '\n'
-                        // + '图片是否全部加载完成:' + isImageAllLoaded;
-                        // LKToastUtil.showMessage(message);
+                        let message = '';
+                        if (isImageAllLoaded) {
+                            message = "所有图片加载完成，总张数为:" + imageLoadedCount;
+                        } else {
+                            message = "图片总进度加载中，当前完成张数:" + imageLoadedCount;
+                        }
+                        console.log(message);
                     }}
                 />
 
@@ -158,9 +168,13 @@ export default class ImagesChooseListExamplePage extends Component {
                     isEditing={true}
                     imageMaxCount={9}
                     imageLoadedCountChange={(imageLoadedCount, isImageAllLoaded)=>{
-                        //let message = "完成加载的图片个数为:" + imageLoadedCount + '\n'
-                        + '图片是否全部加载完成:' + isImageAllLoaded;
-                        //Alert.alert(message);
+                        let message = '';
+                        if (isImageAllLoaded) {
+                            message = "所有图片加载完成，总张数为:" + imageLoadedCount;
+                        } else {
+                            message = "图片总进度加载中，当前完成张数:" + imageLoadedCount;
+                        }
+                        console.log(message);
                     }}
                 />
             </ScrollView>

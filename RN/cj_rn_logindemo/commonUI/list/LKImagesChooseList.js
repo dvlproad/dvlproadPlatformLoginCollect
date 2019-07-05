@@ -5,18 +5,63 @@ LKImagesChooseList:图片列表组件(可进行选择、删除等操作)
 import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
 
                 <LKImagesChooseList
-                    style={{paddingTop: 12}}
-                    listWidth={listWidth}
-                    numColumns={2}
+                    style={{paddingHorizontal: 15}}
+                    listWidth={Dimensions.get('window').width-2*15}
+                    numColumns={3}
                     widthHeightRatio={164/108}
-                    boxHorizontalInterval={30}
-                    imageSources={imageSources}
-                    browseImageHandle={this.browseImageHandle}
-                    addImageHandle={this.chooseImageSource}
-                    deleteImageHandle={this.deleteImageHandle}
-                    isEditing={this.state.isUpdatingInfo}
-                    imageMaxCount={2}
-                    imageLoadedCountChange={this.imageLoadedCountChange}
+                    boxHorizontalInterval={10}
+                    imageSources={[
+                        {
+                            imageSource: require('./resource/healthCerImage1.png'),
+                            uploadType: ImageUploadType.NotNeed,
+                            uploadProgress: 0,
+                            imageIndex: 0,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Uploading,
+                            uploadProgress: 20,
+                            imageIndex: 1,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Uploading,
+                            uploadProgress: 60,
+                            imageIndex: 2,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Success,
+                            uploadProgress: 100,
+                            imageIndex: 3,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Failure,
+                            uploadProgress: 77,
+                            imageIndex: 4,
+                        },
+                    ]}
+                    browseImageHandle={(index)=>{
+                        LKToastUtil.showMessage("点击浏览图片" + index);
+                    }}
+                    addImageHandle={(index)=>{
+                        LKToastUtil.showMessage("点击添加图片" + index);
+                    }}
+                    deleteImageHandle={(index)=>{
+                        LKToastUtil.showMessage("点击删除图片" + index);
+                    }}
+                    isEditing={true}
+                    imageMaxCount={9}
+                    imageLoadedCountChange={(imageLoadedCount, isImageAllLoaded)=>{
+                        let message = '';
+                        if (isImageAllLoaded) {
+                            message = "所有图片加载完成，总张数为:" + imageLoadedCount;
+                        } else {
+                            message = "图片总进度加载中，当前完成张数:" + imageLoadedCount;
+                        }
+                        console.log(message);
+                    }}
                 />
  */
 import React, { Component } from 'react';
@@ -82,13 +127,18 @@ export default class LKImagesChooseList extends Component {
 
     componentDidMount(): void {
         let isImageAllLoaded = this.props.imageSources.length == 0;
-        this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+        if (isImageAllLoaded) {
+            this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+        }
     }
 
     onLoadComplete=(buttonIndex)=>{
-        this.state.imageLoadedCount++;
-        let isImageAllLoaded = this.state.imageLoadedCount >= this.props.imageSources.length ? true : false;
-        this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+        let isAddIcon = this.isAddIcon(buttonIndex);
+        if (isAddIcon == false) {
+            this.state.imageLoadedCount = this.state.imageLoadedCount+1;
+            let isImageAllLoaded = this.state.imageLoadedCount >= this.props.imageSources.length ? true : false;
+            this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+        }
     }
 
     isAddIcon = (index)=> {
@@ -171,7 +221,9 @@ export default class LKImagesChooseList extends Component {
                             isEditing={this.props.isEditing}
                             isAddIcon={this.isAddIcon(index)}
 
-                            onLoadComplete={this.onLoadComplete}
+                            onLoadComplete={(buttonIndex)=>{
+                                this.onLoadComplete(buttonIndex)
+                            }}
 
                             uploadType={item.uploadType}
                             uploadProgress={item.uploadProgress}
