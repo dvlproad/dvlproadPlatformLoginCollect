@@ -8,6 +8,7 @@ import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
 import LKToastUtil from '../commonUI/toast/LKToastUtil';
 import LKEmptyNetwork from "../commonUI/empty/LKEmptyNetwork";
 import LKImagePickerUtil from "../commonUI/pickImage/LKImagePickerUtil";
+import LKUDIDUtil from "../commonUtil/LKUDIDUtil";
 
 /// 健康证状态
 var HealthCardStateCode = {
@@ -285,7 +286,7 @@ export default class HealthCerHomePage extends Component {
                 return;
             }
 
-            let curUploadProgress = this.getRandom1(10, 20);
+            let curUploadProgress = LKUDIDUtil.getRandomNumber(10, 20);
             healthCerImage.uploadProgress += curUploadProgress;
             if (healthCerImage.uploadProgress >= 100) {
                 healthCerImage.uploadType = ImageUploadType.Success;
@@ -304,13 +305,6 @@ export default class HealthCerHomePage extends Component {
 
         }, 1000);
     }
-
-    getRandom1 = (start, end) => {
-        let length = end - start;
-        let num = parseInt(Math.random() * (length) + start);
-        return num;
-    }
-
 
 
     deleteImageHandle=(index) => {

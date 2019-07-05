@@ -73,7 +73,7 @@ export default class LKImagesChooseList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
+            renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
             addIconCurIndex: -1,   //添加按钮的当前索引的值①等于-1代表没有添加显示；②大于imageMaxCount则不显示
 
             imageLoadedCount: 0//完成加载的图片个数
@@ -118,39 +118,6 @@ export default class LKImagesChooseList extends Component {
         const boxWidth = boxTotalWidth/numColumns;
         const boxHeight = boxWidth / this.props.widthHeightRatio;
 
-
-        let renderImageSources = this.props.imageSources;
-
-        const allowAddIconShowing = this.props.isEditing &&
-            this.props.hasAddIconWhenEditing;
-        if (allowAddIconShowing) {
-            if (this.state.addIconCurIndex == -1) {
-                let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount;
-                if (shouldAddAddIcon) {
-                    let addImage = {
-                                        imageSource: require('./resources/pickImage_blue.png'),
-                                        uploadType: ImageUploadType.NotNeed,
-                                        uploadProgress: 0,
-                                        imageIndex: renderImageSources.length,
-                                    };
-                    renderImageSources.splice(renderImageSources.length, 0, addImage);
-                    this.state.addIconCurIndex = renderImageSources.length-1;
-                }
-            } else {
-                this.state.addIconCurIndex = renderImageSources.length-1; //特别注意:如果addIcon已经显示，则外面会将包含addIcon的数组传进来传进来，所以需要重新获取
-                let shouldDeleteAddIcon = this.props.imageSources.length > this.props.imageMaxCount;
-                if (shouldDeleteAddIcon) {
-                    renderImageSources.splice(this.state.addIconCurIndex, 1);
-                    this.state.addIconCurIndex = -1;
-                } else {
-                    this.state.addIconCurIndex = renderImageSources.length-1;
-                }
-            }
-
-            //Alert.alert('addIconCurIndex='+this.state.addIconCurIndex);
-        }
-
-
         let listHeaderComponent = null;
         if (this.props.changeShowDebugMessage) {
             let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
@@ -162,6 +129,26 @@ export default class LKImagesChooseList extends Component {
         }
 
         let testListStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'green'} : null;
+
+
+        let renderImageSources = Array.from(this.props.imageSources);
+        const allowAddIconShowing = this.props.isEditing &&
+            this.props.hasAddIconWhenEditing;
+        if (allowAddIconShowing) {
+            let shouldAddAddIcon = renderImageSources.length < this.props.imageMaxCount;
+            if (shouldAddAddIcon) {
+                let addImage = {
+                    imageSource: require('./resources/pickImage_blue.png'),
+                    uploadType: ImageUploadType.NotNeed,
+                    uploadProgress: 0,
+                    imageIndex: renderImageSources.length,
+                };
+                renderImageSources.splice(renderImageSources.length, 0, addImage);
+                this.state.addIconCurIndex = renderImageSources.length-1;
+            } else {
+                this.state.addIconCurIndex = -1;
+            }
+        }
 
         return (
             <FlatList

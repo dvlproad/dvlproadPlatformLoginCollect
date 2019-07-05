@@ -27,6 +27,12 @@ export default class ImageHomePage extends Component {
                     { title: "LoadingImagePage", page: "LoadingImagePage" },
                     { title: "ActionImagePage", page: "ActionImagePage" },
                     { title: "UploadImagePage", page: "UploadImagePage" },
+                ]
+            },
+            { key: "images",
+                data: [
+                    { title: "ImagesChooseListExamplePage", page: "ImagesChooseListExamplePage" },
+                    { title: "ImagesChooseListPage", page: "ImagesChooseListPage" },
                     { title: "UploadImagesPage", page: "UploadImagesPage" },
                 ]
             },
@@ -48,6 +54,8 @@ import LoadingImagePage from "./LoadingImagePage";
 import ActionImagePage from './ActionImagePage';
 import UploadImagePage from "./UploadImagePage";
 import UploadImagesPage from "./UploadImagesPage";
+import ImagesChooseListPage from "./ImagesChooseListPage";
+import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
 
 export const ImagePages = {
     ImageHomePage: {
@@ -72,6 +80,19 @@ export const ImagePages = {
         screen: UploadImagePage,
         navigationOptions: () => ({
             title: `Image上传首页`,
+        }),
+    },
+
+    ImagesChooseListExamplePage: {
+        screen: ImagesChooseListExamplePage,
+        navigationOptions: () => ({
+            title: `ImagesChooseListExamplePage`,
+        }),
+    },
+    ImagesChooseListPage: {
+        screen: ImagesChooseListPage,
+        navigationOptions: () => ({
+            title: `ImagesChooseListPage`,
         }),
     },
     UploadImagesPage: {
