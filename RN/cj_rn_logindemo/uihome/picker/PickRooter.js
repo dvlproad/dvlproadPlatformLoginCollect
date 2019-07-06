@@ -6,11 +6,12 @@ import PickHomePage from "./PickHomePage";
 //weight
 import PickWeightPage from "./PickWeightPage";
 //date
-import PickOwnSingleDatePage from "./PickOwnSingleDatePage";
-import PickComSingleDatePage from "./PickComSingleDatePage";
+import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
+import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
 import PickRangeDatePage from './PickRangeDatePage';
 //pickImage
 import PickImagesPage from './PickImagesPage';
+import ComJSSingleDatePage from "./ComJSSingleDatePage";
 
 
 
@@ -31,17 +32,24 @@ export const PickPages = {
     },
 
     PickOwnSingleDatePage: {
-        screen: PickOwnSingleDatePage,
+        screen: OwnNativeSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择(有区别平台)`,
         }),
     },
     PickComSingleDatePage: {
-        screen: PickComSingleDatePage,
+        screen: ComNativeSingleDatePage,
         navigationOptions: () => ({
-            title: `单个日期选择(统一样式)`,
+            title: `单个日期选择(统一样式原生)`,
         }),
     },
+    PickComRNSingleDatePage: {
+        screen: ComJSSingleDatePage,
+        navigationOptions: () => ({
+            title: `单个日期选择(统一样式RN)`,
+        }),
+    },
+
     PickRangeDatePage: {
         screen: PickRangeDatePage,
         navigationOptions: () => ({

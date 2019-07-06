@@ -1,4 +1,4 @@
-// LKDatePicker.js
+// LKComNativeDatePicker.jsPicker.js
 
 import React from 'react';
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import Picker from "react-native-picker";
 import LKCalendarUtil from "../../commonUtil/LKCalendarUtil";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 
-export default class LKDatePicker {
+export default class LKComNativeDatePicker {
     /**
      * 显示日期选择器
      * @param dateString        弹出时候选中的日期(输入的字符串，形如'2000-02-29')
@@ -100,4 +100,6 @@ export default class LKDatePicker {
         let selectedValue = [year+'年', month+'月', day+'日'];
         return selectedValue;
     }
+
+
 }

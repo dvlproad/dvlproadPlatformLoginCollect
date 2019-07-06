@@ -10,6 +10,7 @@ import UtilRooter from "../utilhome/UtilRooter";
 import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
 import HelloWorldPage from '../helloworld/HelloWorldPage';
 import FoundationRooter from "../foundation/FoundationRooter";
+import ComJSSingleDatePage from "../uihome/picker/ComJSSingleDatePage";
 
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
@@ -114,6 +115,7 @@ const TabBarNavigator = createBottomTabNavigator({
     },
     {
         tabBarPosition: 'bottom',
+        tabBarVisible: false,
         lazy: true, // 是否懒加载
         tabBarOptions: {
             // activeTintColor: Colors.themeColor,
@@ -138,7 +140,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'UIRooter'
+        initialRouteName: 'UIRooter',
     });
 
 class TabBarItem extends React.Component {
@@ -153,8 +155,31 @@ class TabBarItem extends React.Component {
 
 }
 
-export default createAppContainer(TabBarNavigator);
 
+
+
+import { createStackNavigator } from 'react-navigation';
+
+//TestNavigation
+const TestNavigation = createStackNavigator(
+    {
+        TestHomePage: {
+            screen: ComJSSingleDatePage,
+            navigationOptions: () => ({
+                title: `ComJSSingleDatePage`,
+            }),
+        },
+    },
+    {
+        initialRouteName: 'TestHomePage'
+    }
+);
+
+
+
+
+export default createAppContainer(TestNavigation);
+// export default createAppContainer(TabBarNavigator);
 
 
 

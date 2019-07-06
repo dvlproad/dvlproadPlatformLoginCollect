@@ -78,7 +78,7 @@ const UIHomeNavigation = createStackNavigator(
         ...WebViewPages,
     },
     {
-        initialRouteName: 'ImagesChooseListExamplePage'
+        initialRouteName: 'ComJSSingleDatePage'
     }
 );
 

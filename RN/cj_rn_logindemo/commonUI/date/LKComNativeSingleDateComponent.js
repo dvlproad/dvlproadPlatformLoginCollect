@@ -1,8 +1,8 @@
-// LKOwnSingleDateComponent.js.js
+// LKComNativeSingleDateComponent.js
 /* 使用示例
-import LKComSingleDateComponent from "../../commonUI/date/LKOwnSingleDateComponent";
+import LKComNativeSingleDateComponent from "../../commonUI/date/LKOwnNativeSingleDateComponent";
 
-export default class PickOwnSingleDatePage extends Component {
+export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ export default class PickOwnSingleDatePage extends Component {
 
     render() {
         return (
-            <LKComSingleDateComponent style={{flex: 1}}
+            <LKComNativeSingleDateComponent style={{flex: 1}}
                                    placeholder= {"选择日期"}
                                    chooseDateString={this.state.beginDateString1}
                                    allowPickDate={true}
@@ -30,10 +30,9 @@ export default class PickOwnSingleDatePage extends Component {
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import LKDatePicker from "../picker/LKDatePicker";
-import LKToastUtil from "../toast/LKToastUtil";
+import LKComNativeDatePicker from "../picker/LKComNativeDatePicker";
 
-export default class LKComSingleDateComponent extends Component {
+export default class LKComNativeSingleDateComponent extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,
@@ -62,7 +61,7 @@ export default class LKComSingleDateComponent extends Component {
     }
 
     showDatePick=(dateString)=>{
-        LKDatePicker.show(
+        LKComNativeDatePicker.show(
             dateString,
             (dateString) => {
                 this.props.onDateChange(dateString);

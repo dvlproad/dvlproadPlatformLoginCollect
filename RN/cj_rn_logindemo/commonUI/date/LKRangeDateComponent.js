@@ -31,8 +31,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
-import LKOwnSingleDateComponent from "./LKOwnSingleDateComponent";
-import LKComSingleDateComponent from "./LKComSingleDateComponent";
+import LKOwnNativeSingleDateComponent from "./LKOwnNativeSingleDateComponent";
 import LKToastUtil from "../toast/LKToastUtil";
 
 /**< 日期范围的编辑状态 */
@@ -144,11 +143,11 @@ export default class LKRangeDateComponent extends Component {
                 [{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                     style]
             }>
-                <LKOwnSingleDateComponent style={{flex: 1}}
-                                          placeholder= {"选择日期"}
-                                          chooseDateString={beginDateString}
-                                          allowPickDate={allowPickDateForBegin}
-                                          onDateChange={ (date) => {
+                <LKOwnNativeSingleDateComponent style={{flex: 1}}
+                                                placeholder= {"选择日期"}
+                                                chooseDateString={beginDateString}
+                                                allowPickDate={allowPickDateForBegin}
+                                                onDateChange={ (date) => {
                                            let beginDateString = date;
 
                                            let endDateString = this.props.endDateString;
@@ -167,11 +166,11 @@ export default class LKRangeDateComponent extends Component {
                 <LKDateConnectView style={{width: 20, marginHorizontal: 10}}
                                    showWave={showWave}
                 />
-                <LKOwnSingleDateComponent style={{flex: 1}}
-                                          placeholder= {"自动填写"}
-                                          chooseDateString={endDateString}
-                                          allowPickDate={allowPickDateForEnd}
-                                          onDateChange={ (date) => {
+                <LKOwnNativeSingleDateComponent style={{flex: 1}}
+                                                placeholder= {"自动填写"}
+                                                chooseDateString={endDateString}
+                                                allowPickDate={allowPickDateForEnd}
+                                                onDateChange={ (date) => {
                                            let endDateString = date;
 
                                            let beginDateString = this.props.beginDateString;
