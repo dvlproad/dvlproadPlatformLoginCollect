@@ -3,9 +3,10 @@
 /*
 LKComJSDatePicker日期选择器(使用JS实现的无平台差异的日期选择器) 使用示例：
 
-import LKComJSDatePicker from "../../commonUI/picker/LKComJSDatePicker";
+import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
 
-                <LKComJSDatePicker dateString={'2000-02-29'}
+                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMdd}
+                                   dateString={'2000-02-29'}
                                    onPickerConfirm={(dateString) => {
                                        LKToastUtil.showMessage(dateString)
                                    }}
@@ -27,8 +28,19 @@ import PropTypes from "prop-types";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 import {DatePicker} from 'react-native-pickers';
 
+/**
+ * 日期器的选择样式
+ */
+export var LKDatePickShowType = {
+    yyyyMMdd: 0,        /** 只显示年月日 */
+    yyyyMMddHHmm: 1,    /** 只显示年月日时分 */
+    yyyyMMddHHmmss: 2,  /** 只显示年月日时分秒 */
+    yyyyMM: 3,          /** 只显示年月(目前2019.07.06不支持) */
+}
+
 export default class LKComJSDatePicker extends Component {
     static propTypes = {
+        datePickShowType: PropTypes.number,  //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
         dateString: PropTypes.string,   //选择的日期
 
         onPickerConfirm: PropTypes.func, //日期选择'确认'
@@ -37,12 +49,24 @@ export default class LKComJSDatePicker extends Component {
     };
 
     static defaultProps = {
+        datePickShowType: LKDatePickShowType.yyyyMMdd,
         dateString: '',
 
         onPickerConfirm: (dateString)=>{},
         onPickerCancel: ()=>{},
         onPickerSelect: (dateString)=>{},
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state={
+            showDays: true,     //是否显示'天'
+            showHours: false,   //是否显示'时'
+            showMinutes: false, //是否显示'分'
+            showSeconds: false, //是否显示'秒'
+        }
+    }
 
 
     /**
@@ -66,7 +90,49 @@ export default class LKComJSDatePicker extends Component {
         let day = pickedValue[2].split('日')[0];
         day = day < 10 ? ('0' + day) : day;
 
-        let dateString = year + '-' + month + '-' + day;
+        let hour = '00';
+        if (pickedValue.length > 3) {
+            hour = pickedValue[3].split('时')[0];
+            hour = hour < 10 ? ('0' + hour) : hour;
+        }
+
+        let minute = '00';
+        if (pickedValue.length > 4) {
+            minute = pickedValue[4].split('分')[0];
+            minute = minute < 10 ? ('0' + minute) : minute;
+        }
+
+
+        let second = '00';
+        if (pickedValue.length > 5) {
+            second = pickedValue[5].split('秒')[0];
+            second = second < 10 ? ('0' + second) : second;
+        }
+
+        let dateString = '';
+        switch (this.props.datePickShowType) {
+            case LKDatePickShowType.yyyyMMdd: {
+                dateString = year + '-' + month + '-' + day;
+                break;
+            }
+            case LKDatePickShowType.yyyyMMddHHmm: {
+                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+                break;
+            }
+            case LKDatePickShowType.yyyyMMddHHmmss: {
+                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+                break;
+            }
+            case LKDatePickShowType.yyyyMM: {
+                dateString = year + '-' + month;
+                break;
+            }
+            default: {
+                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+                break;
+            }
+        }
+
         return dateString;
     }
 
@@ -76,19 +142,90 @@ export default class LKComJSDatePicker extends Component {
      * @returns {string[]}
      */
     getSelectedValue = (date)=>{
+        let selectedValue = [];
+
         let year = date.getFullYear();
+        selectedValue.push(year+'年');
 
         let month = date.getMonth()+1;
         //month = month < 10 ? ('0' + month) : month;
+        selectedValue.push(month+'月');
 
-        let day = date.getDate();
-        //day = day < 10 ? ('0' + day) : day;
+        if (this.state.showDays) {
+            let day = date.getDate();
+            //day = day < 10 ? ('0' + day) : day;
+            selectedValue.push(day+'日');
+        }
 
-        let selectedValue = [year+'年', month+'月', day+'日'];
+        if (this.state.showHours) {
+            let hours = date.getHours();
+            hours = hours < 10 ? ('0' + hours) : hours;
+            selectedValue.push(hours+'时');
+        }
+
+        if (this.state.showMinutes) {
+            let minutes = date.getMinutes();
+            minutes = minutes < 10 ? ('0' + minutes) : minutes;
+            selectedValue.push(minutes+'分');
+        }
+
+        if (this.state.showSeconds) {
+            let seconds = date.getSeconds();
+            seconds = seconds < 10 ? ('0' + seconds) : seconds;
+            selectedValue.push(seconds+'秒');
+        }
+
+
         return selectedValue;
     }
 
     render() {
+        let unit = ['年', '月', '日'];
+        let showDays = true;
+        let showHours = false;
+        let showMinutes = false;
+        let showSeconds = false;
+
+        switch (this.props.datePickShowType) {
+            case LKDatePickShowType.yyyyMMdd: {
+                unit = ['年', '月', '日'];
+                showDays = true;
+                showHours = false;
+                showMinutes = false;
+                showSeconds = false;
+                break;
+            }
+            case LKDatePickShowType.yyyyMMddHHmm: {
+                unit = ['年', '月', '日', '时', '分'];
+                showDays = true;
+                showHours = true;
+                showMinutes = true;
+                showSeconds = false;
+                break;
+            }
+            case LKDatePickShowType.yyyyMMddHHmmss: {
+                unit = ['年', '月', '日', '时', '分', '秒'];
+                showDays = true;
+                showHours = true;
+                showMinutes = true;
+                showSeconds = true;
+                break;
+            }
+            case LKDatePickShowType.yyyyMM: {
+                unit = ['年', '月'];
+                showDays = false;
+                showHours = false;
+                showMinutes = false;
+                showSeconds = false;
+                break;
+            }
+        }
+        this.state.showDays = showDays;
+        this.state.showHours = showHours;
+        this.state.showMinutes = showMinutes;
+        this.state.showSeconds = showSeconds;
+
+
         let dateString = this.props.dateString;
 
         let pickerTitleText = '';
@@ -98,7 +235,7 @@ export default class LKComJSDatePicker extends Component {
             defaultSelectedDate = new Date();
         } else {
             pickerTitleText = dateString;
-            defaultSelectedDate = LKDateUtil.yyyyMMddDate(dateString);
+            defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
         }
 
         ///let defaultSelectedValue = ['2019年', '08月', '08日'];
@@ -106,10 +243,10 @@ export default class LKComJSDatePicker extends Component {
 
         return (
             <DatePicker
-                HH={false}
-                mm={false}
-                ss={false}
-                unit={['年', '月', '日']}
+                HH={showHours}
+                mm={showMinutes}
+                ss={showSeconds}
+                unit={unit}
                 startYear={1900}
                 endYear={2300}
 

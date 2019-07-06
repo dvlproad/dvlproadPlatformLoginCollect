@@ -49,7 +49,7 @@ export default class LKComNativeSingleDateComponent extends Component {
         isBankStyle: false,
         allowPickDate: false,
 
-        placeholder: '',
+        placeholder: '请选择日期',
         chooseDateString: '',
 
         minDate: "1900-01-01",

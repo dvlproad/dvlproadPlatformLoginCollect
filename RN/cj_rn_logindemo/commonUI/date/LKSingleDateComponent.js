@@ -1,6 +1,7 @@
 // LKComJSSingleDateComponent.js
+
 /* 使用示例
-import LKComNativeSingleDateComponent from "../../commonUI/date/LKOwnNativeSingleDateComponent";
+import LKSingleDateComponent from "../../commonUI/date/LKSingleDateComponent";
 
 export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class OwnNativeSingleDatePage extends Component {
 
     render() {
         return (
-            <LKComNativeSingleDateComponent style={{flex: 1}}
+            <LKSingleDateComponent style={{flex: 1}}
                                    placeholder= {"选择日期"}
                                    chooseDateString={this.state.beginDateString1}
                                    allowPickDate={true}
@@ -29,51 +30,29 @@ export default class OwnNativeSingleDatePage extends Component {
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import LKComNativeDatePicker from "../picker/LKComNativeDatePicker";
-import LKToastUtil from "../toast/LKToastUtil";
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export default class LKComJSSingleDateComponent extends Component {
+export default class LKSingleDateComponent extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,
 
         placeholder: PropTypes.string,
         chooseDateString: PropTypes.string,
-        onDateChange: PropTypes.func,
-
-        minDate: PropTypes.string,
-        maxDate: PropTypes.string,
+        onPress: PropTypes.func,
     };
 
     static defaultProps = {
         isBankStyle: false,
         allowPickDate: false,
 
-        placeholder: '',
+        placeholder: '请选择日期',
         chooseDateString: '',
-
-        minDate: "1900-01-01",
-        maxDate: "2300-01-01",
+        onPress: ()=>{},
     };
 
     constructor(props) {
         super(props);
-    }
-
-    showDatePick=(dateString)=>{
-        LKComNativeDatePicker.show(
-            dateString,
-            (dateString) => {
-                this.props.onDateChange(dateString);
-            },
-            (dateString) => {
-                //LKToastUtil.showMessage(dateString);
-            },
-            (dateString) => {
-                //LKToastUtil.showMessage(dateString);
-            },
-        );
     }
 
 
@@ -103,41 +82,14 @@ export default class LKComJSSingleDateComponent extends Component {
         }
 
         return (
-            <TouchableOpacity style={style}
+            <TouchableOpacity style={[{width: 100}, style]}
                               disabled={!this.props.allowPickDate}
-                              onPress={()=>{
-                                  this.showDatePick(dateString);
-                              }}
+                              onPress={this.props.onPress}
             >
                 <Text style={textStyles}>{dateString}</Text>
             </TouchableOpacity>
         )
     }
-
-
-    // render() {
-    //     return (
-    //         <DatePicker
-    //             style={[{ flex: 1 }, style]}
-    //             disabled={!this.props.allowPickDate}
-    //             placeholder={this.props.placeholder}
-    //             date={this.props.chooseDateString}
-    //             minDate="1900-01-01"
-    //             maxDate="2300-01-01"
-    //
-    //             confirmBtnText="确定"
-    //             cancelBtnText="取消"
-    //
-    //             onDateChange={(date) => { //
-    //                 if (date.constructor === String) {
-    //                     let dateString = date;
-    //                     // this.setState({chooseDateString: dateString})
-    //                     this.props.onDateChange(dateString);
-    //                 }
-    //             }}
-    //         />
-    //     )
-    // }
 }
 
 const styles = StyleSheet.create({
