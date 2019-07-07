@@ -29,11 +29,21 @@ export default class PickHomePage extends Component {
                     { title: "PickWeightPage", page: "PickWeightPage" },
                 ]
             },
-            { key: "Date",
+            { key: "SingleDate--Native",
                 data: [
                     { title: "OwnNativeSingleDatePage", page: "OwnNativeSingleDatePage" },
                     { title: "ComNativeSingleDatePage", page: "ComNativeSingleDatePage" },
-                    { title: "ComJSSingleDatePage", page: "ComJSSingleDatePage" },
+                ]
+            },
+            { key: "SingleDate--JS",
+                data: [
+                    { title: "ComJSSingleDatePage1", page: "ComJSSingleDatePage1" },
+                    { title: "ComJSSingleDatePage2", page: "ComJSSingleDatePage2" },
+                    { title: "ComJSSingleDatePage3", page: "ComJSSingleDatePage3" },
+                ]
+            },
+            { key: "RangeDate",
+                data: [
                     { title: "PickRangeDatePage", page: "PickRangeDatePage" },
                 ]
             },
@@ -59,13 +69,18 @@ export default class PickHomePage extends Component {
 //PickPages
 //weight
 import PickWeightPage from "./PickWeightPage";
-//date
+//singleDate-Native
 import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
+//singleDate-JS
+import ComJSSingleDatePage1 from "./ComJSSingleDatePage1";
+import ComJSSingleDatePage2 from "./ComJSSingleDatePage2";
+import ComJSSingleDatePage3 from "./ComJSSingleDatePage3";
+//rangeDate
 import PickRangeDatePage from './PickRangeDatePage';
+
 //pickImage
 import PickImagesPage from './PickImagesPage';
-import ComJSSingleDatePage from "./ComJSSingleDatePage";
 
 
 export const PickPages = {
@@ -83,20 +98,33 @@ export const PickPages = {
         }),
     },
 
-    PickOwnSingleDatePage: {
+    OwnNativeSingleDatePage: {
         screen: OwnNativeSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择(有区别平台)`,
         }),
     },
-    PickComSingleDatePage: {
+    ComNativeSingleDatePage: {
         screen: ComNativeSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式原生)`,
         }),
     },
-    ComJSSingleDatePage: {
-        screen: ComJSSingleDatePage,
+
+    ComJSSingleDatePage1: {
+        screen: ComJSSingleDatePage1,
+        navigationOptions: () => ({
+            title: `单个日期选择(统一样式RN)`,
+        }),
+    },
+    ComJSSingleDatePage2: {
+        screen: ComJSSingleDatePage2,
+        navigationOptions: () => ({
+            title: `单个日期选择(统一样式RN)`,
+        }),
+    },
+    ComJSSingleDatePage3: {
+        screen: ComJSSingleDatePage3,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,
         }),

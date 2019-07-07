@@ -165,12 +165,12 @@ const hellotab = {
 
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
-        HealthCerRooter: healthcertab,
-        UIRooter: uitab,
-        FoundationRooter: foundationtab,
-        BaseUtil: utiltab,
-        Lifecycle: lifecycletab,
-        Hell: hellotab,
+        Tab_HealthCer: healthcertab,
+        Tab_UI: uitab,
+        Tab_Foundation: foundationtab,
+        Tab_Util: utiltab,
+        Tab_Lifecycle: lifecycletab,
+        Tab_Hello: hellotab,
     },
     {
         tabBarPosition: 'bottom',
@@ -199,7 +199,7 @@ const TabBarNavigator = createBottomTabNavigator({
                 height: 0,
             }
         },
-        initialRouteName: 'UIRooter',
+        initialRouteName: 'Tab_UI',
     });
 
 class TabBarItem extends React.Component {
@@ -219,12 +219,12 @@ class TabBarItem extends React.Component {
 
 
 //TestNavigation
-import ComJSSingleDatePage from "../uihome/picker/ComJSSingleDatePage";
+import ComJSSingleDatePage2 from "../uihome/picker/ComJSSingleDatePage2";
 
 const TestNavigation = createStackNavigator(
     {
         TestHomePage: {
-            screen: ComJSSingleDatePage,
+            screen: ComJSSingleDatePage2,
             navigationOptions: () => ({
                 title: `ComJSSingleDatePage`,
             }),
@@ -238,8 +238,8 @@ const TestNavigation = createStackNavigator(
 
 
 
-// export default createAppContainer(TestNavigation);
-export default createAppContainer(TabBarNavigator);
+export default createAppContainer(TestNavigation);
+// export default createAppContainer(TabBarNavigator);
 
 
 

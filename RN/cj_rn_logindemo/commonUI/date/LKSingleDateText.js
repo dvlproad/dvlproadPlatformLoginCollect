@@ -30,7 +30,7 @@ export default class OwnNativeSingleDatePage extends Component {
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Modal, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import LKToastUtil from "../toast/LKToastUtil";
 
 export default class LKSingleDateText extends Component {
