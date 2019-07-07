@@ -56,7 +56,7 @@ export default class LKEmptyNetwork extends Component {
                             source={this.props.imageSource}
                         />
 
-                        <Text style={[styles.text, {marginTop: 22}]}>{this.state.message}</Text>
+                        <Text style={[styles.text, {marginTop: 22}]}>{this.props.message}</Text>
 
                         <LKWhiteBGButton style={{width:160, marginTop:60}}
                                          title={'刷新'}

@@ -4,7 +4,7 @@ import { StyleSheet, View, Button, Text } from 'react-native';
 
 import { EnableBlueButton } from '../../commonUI/button/LKEditSubmitButton'
 
-export default class LayoutHomePageHomePage extends Component {
+export default class LayoutHomePage extends Component {
     render() {
         return (
             <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-start"}}>

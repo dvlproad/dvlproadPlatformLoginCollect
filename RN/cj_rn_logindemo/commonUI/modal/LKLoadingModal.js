@@ -9,6 +9,7 @@ export class LKLoadingModal extends Component {
             visible: false,
         };
     }
+
     render() {
         return (
             <Modal style={styles.container}

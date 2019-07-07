@@ -41,3 +41,19 @@ export default class FoundationHomePage extends Component {
         );
     }
 }
+
+
+//FoundationPages
+import {FoundationDatePages} from "./date/DateHomePage";
+
+export const FoundationRoutePage = 'FoundationHomePage';
+export const FoundationPages = {
+    FoundationHomePage: {
+        screen: FoundationHomePage,
+        navigationOptions: () => ({
+            title: `Foundation首页`,
+        }),
+    },
+
+    ...FoundationDatePages,
+};

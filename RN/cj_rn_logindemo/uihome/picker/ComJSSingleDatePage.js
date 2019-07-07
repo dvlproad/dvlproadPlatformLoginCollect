@@ -4,7 +4,9 @@ import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
 import LKTextButton from "../../commonUI/button/LKTextButton";
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
 import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
+import LKSingleDateText from "../../commonUI/date/LKSingleDateText";
 import LKSingleDateComponent from "../../commonUI/date/LKSingleDateComponent";
+import LKSingleDateActionText from "../../commonUI/date/LKSingleDateActionText";
 
 
 export default class ComJSSingleDatePage extends Component {
@@ -14,6 +16,8 @@ export default class ComJSSingleDatePage extends Component {
         this.state = {
             birthdayDateString: '2004-02-29',
             fullDateString: '2008-02-29 08:08:08',
+
+            beginDateString1: '2012-02-29',
         }
     }
 
@@ -72,25 +76,50 @@ export default class ComJSSingleDatePage extends Component {
                               }}
                 />
 
-                <LKSingleDateComponent style={{paddingTop: 20}}
-                                       placeholder={'yyyy-MM-dd'}
-                                       chooseDateString={this.state.birthdayDateString}
-                                       isBankStyle={false}
-                                       allowPickDate={true}
-                                       onPress={()=>{
-                                                this.birthdayDatePicker.show()
-                                            }}
+                <LKSingleDateText style={{paddingTop: 20}}
+                                  placeholder={'yyyy-MM-dd'}
+                                  chooseDateString={this.state.birthdayDateString}
+                                  isBankStyle={false}
+                                  allowPickDate={true}
+                                  onPress={()=>{
+                                           this.birthdayDatePicker.show()
+                                       }}
                 />
 
-                <LKSingleDateComponent style={{paddingTop: 20}}
-                                       placeholder={'yyyy-MM-dd HH:mm:ss'}
-                                       chooseDateString={this.state.fullDateString}
-                                       isBankStyle={false}
-                                       allowPickDate={true}
-                                       onPress={()=>{
-                                                this.fullDatePicker.show()
-                                            }}
+                <LKSingleDateText style={{paddingTop: 20}}
+                                  placeholder={'yyyy-MM-dd HH:mm:ss'}
+                                  chooseDateString={this.state.fullDateString}
+                                  isBankStyle={false}
+                                  allowPickDate={true}
+                                  onPress={()=>{
+                                           this.fullDatePicker.show()
+                                       }}
                 />
+
+                <LKSingleDateComponent style={{marginTop: 10}}
+                                       placeholder= {"选择日期"}
+                                       chooseDateString={this.state.beginDateString1}
+                                       allowPickDate={true}
+                                       onDateChange={ (date) => {
+                                           this.setState({
+                                               beginDateString1: date
+                                           })
+                                       }}
+                                       isBankStyle={false}
+                />
+
+                <LKSingleDateActionText style={{marginTop: 10}}
+                                       placeholder= {"选择日期"}
+                                       chooseDateString={this.state.beginDateString1}
+                                       allowPickDate={true}
+                                       onDateChange={ (date) => {
+                                           this.setState({
+                                               beginDateString1: date
+                                           })
+                                       }}
+                                       isBankStyle={false}
+                />
+
 
             </View>
         )

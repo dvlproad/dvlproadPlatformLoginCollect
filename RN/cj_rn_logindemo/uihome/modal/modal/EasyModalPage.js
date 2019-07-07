@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Text, TouchableHighlight, View } from "react-native";
+import { Modal, Text, TouchableHighlight, View, Dimensions } from "react-native";
 
 export default class EasyModalPage extends Component {
 
@@ -20,7 +20,13 @@ export default class EasyModalPage extends Component {
                            alert("Modal has been closed.");
                        }}
                 >
-                    <View style={{ marginTop: 220, backgroundColor: 'red' }}>
+                    <View
+                        style={{
+                            marginTop: 10,
+                            backgroundColor: 'red',
+                            height: Dimensions.get('window').height-240,
+                        }}
+                    >
                         <View>
                             <Text>Hello World!</Text>
 
@@ -36,9 +42,13 @@ export default class EasyModalPage extends Component {
                     </View>
                 </Modal>
 
+
+
                 <TouchableHighlight
                     onPress={() => {
-                        this.setModalVisible(true);
+                        this.setState({
+                            modalVisible: true,
+                        });
                     }}
                 >
                     <Text>弹出</Text>

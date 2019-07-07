@@ -24,15 +24,15 @@ export default class ModalHomePage extends Component {
 
     render() {
         let sections = [
+            { key: "Modal",
+                data: [
+                    { title: "EasyModalPage", page: "EasyModalPage" },
+                ]
+            },
             { key: "Loading",
                 data: [
                     { title: "ActivityIndicatorPage", page: "ActivityIndicatorPage" },
                     { title: "HUDHomePage", page: "HUDHomePage" },
-                ]
-            },
-            { key: "Modal",
-                data: [
-                    { title: "EasyModalPage", page: "EasyModalPage" },
                 ]
             },
             { key: "ActionSheet",
@@ -53,3 +53,60 @@ export default class ModalHomePage extends Component {
         );
     }
 }
+
+
+//ModalPages
+import EasyModalPage from './modal/EasyModalPage';
+
+import ActivityIndicatorPage from "./hud/ActivityIndicatorPage";
+import HUDHomePage from "./hud/HUDHomePage";
+
+import LKPhotoCameraSheetPage from "./actionSheet/LKPhotoCameraSheetPage";
+import LKActionSheetPage from "./actionSheet/LKActionSheetPage";
+
+export const ModalPages = {
+    ModalHomePage: {
+        screen: ModalHomePage,
+        navigationOptions: () => ({
+            title: `ModalHomePage`,
+        }),
+    },
+
+    //modal
+    EasyModalPage: {
+        screen: EasyModalPage,
+        navigationOptions: () => ({
+            title: `EasyModalPage`,
+        }),
+    },
+
+    //hud
+    ActivityIndicatorPage: {
+        screen: ActivityIndicatorPage,
+        navigationOptions: () => ({
+            title: `ActivityIndicatorPage`,
+        }),
+    },
+    HUDHomePage: {
+        screen: HUDHomePage,
+        navigationOptions: () => ({
+            title: `HUDHomePage`,
+        }),
+    },
+
+    //actionSheet
+    RNActionSheetPage: {
+        screen: LKActionSheetPage,
+        navigationOptions: () => ({
+            title: `RNActionSheetPage`,
+        }),
+    },
+    LKActionSheetPage: {
+        screen: LKPhotoCameraSheetPage,
+        navigationOptions: () => ({
+            title: `LKActionSheetPage`,
+        }),
+    },
+
+};
+

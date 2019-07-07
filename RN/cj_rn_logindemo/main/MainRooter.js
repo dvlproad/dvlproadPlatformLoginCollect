@@ -1,33 +1,125 @@
 // MainRooter.js
 import React from 'react';
 import { Image } from 'react-native';
-import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import {
+    createAppContainer,
+    createBottomTabNavigator,
+    createStackNavigator
+} from 'react-navigation';
 
-import HealthCerRooter from '../helathCerApp/HealthCerRooter';
+
 import SampleAppMovies from "../movieApp/MovieHomePage";
-import UIRooter from "../uihome/UIRooter";
-import UtilRooter from "../utilhome/UtilRooter";
+
 import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
 import HelloWorldPage from '../helloworld/HelloWorldPage';
-import FoundationRooter from "../foundation/FoundationRooter";
-import ComJSSingleDatePage from "../uihome/picker/ComJSSingleDatePage";
+
+//ui
+import {UIPages, UIRoutePage} from "../uihome/UIHomePage";
+
+const uiscreen = createAppContainer(createStackNavigator(
+    UIPages,
+    {
+        initialRouteName: UIRoutePage
+    }
+));
+
+const uitab = {
+    screen: uiscreen,
+    navigationOptions: ({ navigation }) => ({
+        title: 'BaseUI',
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            return <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/remind.png')}
+                selectedImage={require('./image/remind.png')}
+            />;
+        }
+    }),
+};
+
+
+
+//foundation
+import {FoundationPages, FoundationRoutePage} from "../foundation/FoundationHomePage";
+
+const foundationscreen = createAppContainer(createStackNavigator(
+    FoundationPages,
+    {
+        initialRouteName: FoundationRoutePage
+    },
+));
+
+const foundationtab = {
+    screen: foundationscreen,
+    navigationOptions: ({ navigation }) => ({
+        title: 'Foundation',
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            return <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/remind.png')}
+                selectedImage={require('./image/remind.png')}
+            />;
+        }
+    }),
+}
+
+//util
+import {UtilPages, UtilRoutePage} from "../utilhome/UtilHomePage";
+
+const utilscreen = createAppContainer(createStackNavigator(
+    UtilPages,
+    {
+        initialRouteName: UtilRoutePage
+    },
+));
+
+const utiltab = {
+    screen: utilscreen,
+    navigationOptions: ({ navigation }) => ({
+        title: 'BaseUtil',
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            return <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/mine.png')}
+                selectedImage={require('./image/mine.png')}
+            />;
+        }
+    }),
+}
+
+
+//healthcer
+import {HealthCerPages, HealthCerRoutePage} from '../helathCerApp/HealthCerRooter';
+
+const healthcerscreen = createAppContainer(createStackNavigator(
+    HealthCerPages,
+    {
+        initialRouteName: HealthCerRoutePage
+    }
+));
+
+const healthcertab = {
+    screen: healthcerscreen,
+    navigationOptions: ({ navigation }) => ({
+        title: '健康证',
+        tabBarIcon: ({ focused, tintColor }) => (
+            <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/home.png')}
+                selectedImage={require('./image/home.png')}
+            />
+        ),
+    }),
+};
+
 
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
-        HealthCerRooter: {
-            screen: HealthCerRooter,
-            navigationOptions: ({ navigation }) => ({
-                title: '健康证',
-                tabBarIcon: ({ focused, tintColor }) => (
-                    <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/home.png')}
-                        selectedImage={require('./image/home.png')}
-                    />
-                ),
-            }),
-        },
+        HealthCerRooter: healthcertab,
         Movie: {
             screen: SampleAppMovies,
             navigationOptions: ({ navigation }) => ({
@@ -42,48 +134,9 @@ const TabBarNavigator = createBottomTabNavigator({
                 ),
             }),
         },
-        UIRooter: {
-            screen: UIRooter,
-            navigationOptions: ({ navigation }) => ({
-                title: 'BaseUI',
-                tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/remind.png')}
-                        selectedImage={require('./image/remind.png')}
-                    />;
-                }
-            }),
-        },
-        FoundationRooter: {
-            screen: FoundationRooter,
-            navigationOptions: ({ navigation }) => ({
-                title: 'Foundation',
-                tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/remind.png')}
-                        selectedImage={require('./image/remind.png')}
-                    />;
-                }
-            }),
-        },
-        BaseUtil: {
-            screen: UtilRooter,
-            navigationOptions: ({ navigation }) => ({
-                title: 'BaseUtil',
-                tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/mine.png')}
-                        selectedImage={require('./image/mine.png')}
-                    />;
-                }
-            }),
-        },
+        UIRooter: uitab,
+        FoundationRooter: foundationtab,
+        BaseUtil: utiltab,
         Lifecycle: {
             screen: LifecycleRooter,
             navigationOptions: ({ navigation }) => ({
@@ -158,9 +211,10 @@ class TabBarItem extends React.Component {
 
 
 
-import { createStackNavigator } from 'react-navigation';
 
 //TestNavigation
+import ComJSSingleDatePage from "../uihome/picker/ComJSSingleDatePage";
+
 const TestNavigation = createStackNavigator(
     {
         TestHomePage: {
@@ -178,8 +232,8 @@ const TestNavigation = createStackNavigator(
 
 
 
-export default createAppContainer(TestNavigation);
-// export default createAppContainer(TabBarNavigator);
+// export default createAppContainer(TestNavigation);
+export default createAppContainer(TabBarNavigator);
 
 
 

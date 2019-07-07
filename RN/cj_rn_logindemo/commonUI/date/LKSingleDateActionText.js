@@ -35,7 +35,7 @@ import LKComJSDatePicker, {LKDatePickShowType} from "../picker/LKComJSDatePicker
 import LKToastUtil from "../toast/LKToastUtil";
 import LKSingleDateText from "./LKSingleDateText";
 
-export default class LKSingleDateComponent extends Component {
+export default class LKSingleDateActionText extends LKSingleDateText {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,
@@ -67,51 +67,27 @@ export default class LKSingleDateComponent extends Component {
         }
     }
 
+    clickDateTextAction() {
+        super.clickDateTextAction();
+        LKToastUtil.showMessage('点击了日期文本');
+        this.datePicker.show();
+    }
 
-    render() {
+    renderDatePicker(): null {
         return (
-            <TouchableOpacity style={{paddingTop:20, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center'}}
-                              disabled={!this.props.allowPickDate}
-                              onPress={()=>{
-                                  // this.showDatePick(dateString);
-                                  this.datePicker.show();
-                              }}
-
-            >
-                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMdd}
-                                   dateString={this.state.dateString}
-                                   onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString)
-                                       this.setState({
-                                           dateString: dateString,
-                                       })
-                                   }}
-                                   onPickerCancel={() => {
-                                       LKToastUtil.showMessage('取消');
-                                   }}
-                                   ref={ref => this.datePicker = ref}
-                />
-
-
-                <LKSingleDateText style={{paddingTop: 0, backgroundColor:'green'}}
-                                  placeholder={this.props.placeholder}
-                                  chooseDateString={this.state.dateString}
-                                  isBankStyle={this.props.isBankStyle}
-                                  allowPickDate={this.state.allowPickDate}
-                                  onPress={()=>{
-                                      this.datePicker.show()
-                                  }}
-                />
-
-            </TouchableOpacity>
+            <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMdd}
+                               dateString={this.props.dateString}
+                               onPickerConfirm={(dateString) => {
+                                   LKToastUtil.showMessage(dateString)
+                                   this.setState({
+                                       dateString: dateString,
+                                   })
+                               }}
+                               onPickerCancel={() => {
+                                   LKToastUtil.showMessage('取消');
+                               }}
+                               ref={ref => this.datePicker = ref}
+            />
         )
     }
 }
-
-const styles = StyleSheet.create({
-    text: {
-        // fontSize: 18,
-        textAlign: 'center',
-        paddingVertical: 10,
-    },
-})

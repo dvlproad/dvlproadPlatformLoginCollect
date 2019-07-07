@@ -4,6 +4,7 @@ import {View, Text, Alert} from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
 
 
+
 export default class UIHomePage extends Component {
 
     constructor(props) {
@@ -25,7 +26,7 @@ export default class UIHomePage extends Component {
         let sections = [
             { key: "布局/跳转",
                 data: [
-                    { title: "Layout", page: "LayoutHome" },
+                    { title: "LayoutHomePage", page: "LayoutHomePage" },
                     { title: "Navigation", page: "NavigationHome" },
                     ]
             },
@@ -57,3 +58,74 @@ export default class UIHomePage extends Component {
         );
     }
 }
+
+
+
+//UIPages
+
+//layout
+import LayoutHomePage from "./layout/LayoutHomePage";
+
+//navigation
+import { NavigationPages } from "./navigation/NavigationHomePage";
+
+//button
+import {ButtonPages} from "./button/ButtonHomePage";
+
+//text
+import TextHomePage from "./text/TextHomePage";
+
+//image
+import { ImagePages } from "./image/ImageHomePage";
+//list
+import { ListPages } from "./list/ListRooter";
+//picker
+import { PickPages } from "./picker/PickRooter";
+//modal
+import {ModalPages} from "./modal/ModalHomePage";
+
+//webview
+import { WebViewPages } from './webview/WebViewHomePage';
+
+//empty
+import EmptyNetworkPage from "./empty/EmptyNetworkPage";
+
+export const UIRoutePage = 'UIHomePage';
+export const UIPages = {
+    UIHomePage: {
+        screen: UIHomePage,
+        navigationOptions: () => ({
+            title: `UI首页`,
+        }),
+    },
+    LayoutHomePage: {
+        screen: LayoutHomePage,
+        navigationOptions: () => ({
+            title: `Layout首页`,
+        }),
+    },
+    ...NavigationPages,
+
+    EmptyNetworkPage: {
+        screen: EmptyNetworkPage,
+        navigationOptions: () => ({
+            title: `EmptyNetworkPage`,
+        }),
+    },
+
+    TextHome: {
+        screen: TextHomePage,
+        navigationOptions: () => ({
+            title: `Text首页`,
+        }),
+    },
+
+    ...ButtonPages,
+
+    ...ImagePages,
+    ...ListPages,
+    ...PickPages,
+    ...ModalPages,
+
+    ...WebViewPages,
+};
