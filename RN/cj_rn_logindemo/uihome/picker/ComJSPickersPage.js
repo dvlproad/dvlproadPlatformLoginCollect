@@ -66,7 +66,7 @@ export default class ComJSPickersPage extends BaseComponent {
 
     render() {
         return <View style={{
-            width: this.mScreenWidth, height: this.mScreenHeight,
+            flex:1,
             backgroundColor: '#f9fafb', justifyContent: 'center', alignItems: 'center'
         }}>
             <View style={{ flex: 1, width: this.mScreenWidth, justifyContent: 'center', alignItems: 'center' }}>
