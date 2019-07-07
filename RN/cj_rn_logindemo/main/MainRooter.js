@@ -211,38 +211,50 @@ class TabBarItem extends React.Component {
             />
         )
     }
-
 }
 
+export default createAppContainer(TabBarNavigator);
 
 
 
 
-//TestNavigation
+
+
+
+
+function m_navigator(Pages, RoutePage) {
+    return createStackNavigator(
+        Pages,
+        {
+            initialRouteName: RoutePage
+        }
+    )
+}
+
+// import {PickPages, PickRoutePage} from "../uihome/picker/PickHomePage";
+// export default createAppContainer(m_navigator(PickPages, PickRoutePage));
+
+// import {ImagePages, ImageRoutePage} from "../uihome/image/ImageHomePage";
+// export default createAppContainer(m_navigator(ImagePages, ImageRoutePage));
+
+// import {ListPages, ListRoutePage} from '../uihome/list/ListHomePage';
+// export default createAppContainer(m_navigator(ListPages, ListRoutePage));
+
 import ComJSSingleDatePage2 from "../uihome/picker/ComJSSingleDatePage2";
 import ComJSPickersPage from "../uihome/picker/ComJSPickersPage";
-import {PickPages} from "../uihome/picker/PickHomePage";
-
-const TestNavigation = createStackNavigator(
-    // {
-    //     TestHomePage: {
-    //         screen: ComJSPickersPage,
-    //         navigationOptions: () => ({
-    //             title: `测试的Page`,
-    //         }),
-    //     },
-    // },
-    PickPages,
-    {
-        initialRouteName: 'PickHomePage'
-    }
-);
-
-
-
-
-export default createAppContainer(TestNavigation);
-// export default createAppContainer(TabBarNavigator);
+// export default createAppContainer(
+//     createStackNavigator(
+//         {
+//             TestPage: {
+//                 screen: ComJSPickersPage,
+//                 navigationOptions: () => ({
+//                     title: `测试的Page`,
+//                 }),
+//             },
+//         },
+//         'TestPage'
+//     )
+// );
 
 
 

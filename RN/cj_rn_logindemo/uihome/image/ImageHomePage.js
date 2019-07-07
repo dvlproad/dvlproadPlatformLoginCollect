@@ -57,6 +57,7 @@ import UploadImagesPage from "./UploadImagesPage";
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
 
+export const ImageRoutePage = 'ImageHomePage';
 export const ImagePages = {
     ImageHomePage: {
         screen: ImageHomePage,

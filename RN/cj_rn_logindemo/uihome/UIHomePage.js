@@ -4,9 +4,7 @@ import {View, Text, Alert} from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
 
 
-
 export default class UIHomePage extends Component {
-
     constructor(props) {
         super(props);
     }
@@ -90,7 +88,7 @@ import { WebViewPages } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'PickHomePage';
+export const UIRoutePage = 'UIHomePage';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,

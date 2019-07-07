@@ -21,13 +21,17 @@ export default class LKActionSheetComponent extends Component {
                 style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(40,40,40,0.4)'}}
                 onPress={this.props.cancel}
                 activeOpacity={0.9}>
-                <View style={{position: 'absolute', bottom: screenBottomHeight, left: 0, right: 0, backgroundColor: '#fff'}}>
+                <View style={{position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#fff'}}>
                     {this.props.actionTitle ? <LKActionTitle actionTitle={this.props.actionTitle} /> : null}
                     {this.props.children}
-                    <LKActionDom style={{borderTopWidth: 4, borderTopColor: '#eee'}}
-                                 actionName={'取消'}
+                    <View style={{borderTopWidth: 10, borderTopColor: '#F1EFF0'}}></View>
+                    <LKActionDom actionName={'取消'}
+                                 showBottomLine={false}
                                  onPress={this.props.cancel}
                     />
+                    <Text style={{backgroundColor: '#fff', height: screenBottomHeight}}
+                    />
+
                 </View>
             </TouchableOpacity>
         )
@@ -62,17 +66,23 @@ class LKActionTitle extends Component {
 
 export class LKActionDom extends Component {
     static propTypes = {
-        actionName: PropTypes.string, //模态弹出效果
+        actionName: PropTypes.string.isRequired,
+        actionCellHeight: PropTypes.number,     //cell高
+        showBottomLine: PropTypes.bool,         //是否显示底部的分割线
         onPress: PropTypes.func,
     };
 
     static defaultProps = {
-        actionName: '按钮一',
+        actionName: '按钮标题',
+        actionCellHeight: 50,
+        showBottomLine: true,
         onPress: ()=>{},
     };
 
     render() {
-        let actionCellHeight = 50;
+        let actionCellHeight = this.props.actionCellHeight;
+        let borderBottomWidth = this.props.showBottomLine ? 1 : 0;
+
         return (
             <TouchableOpacity
                 style={[{
@@ -80,7 +90,7 @@ export class LKActionDom extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: actionCellHeight,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: borderBottomWidth,
                     borderBottomColor: '#eee'
                 }, this.props.style]}
                 onPress={this.props.onPress}
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         textAlign: 'center',
         lineHeight:44,
-        color: '#333'
+        color: '#333333'
     }
 
 });

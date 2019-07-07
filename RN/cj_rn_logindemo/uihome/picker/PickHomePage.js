@@ -85,7 +85,7 @@ import PickRangeDatePage from './PickRangeDatePage';
 //pickImage
 import PickImagesPage from './PickImagesPage';
 
-
+export const PickRoutePage = 'PickHomePage';
 export const PickPages = {
     PickHomePage: {
         screen: PickHomePage,

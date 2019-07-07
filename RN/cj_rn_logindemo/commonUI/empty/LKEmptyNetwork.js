@@ -22,8 +22,8 @@ import LKEmptyNetwork, {LKAPILoadStatus} from "../commonUI/empty/LKEmptyNetwork"
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {ScrollView, StyleSheet, Text, Image, View} from "react-native";
-import {LKWhiteBGButton} from "../button/LKTextButton";
+import { ScrollView, StyleSheet, Text, Image, View } from "react-native";
+import { LKWhiteBGButton } from "../button/LKTextButton";
 
 /// API网络请求状态
 export var LKAPILoadStatus = {
@@ -42,7 +42,7 @@ export default class LKEmptyNetwork extends Component {
     static defaultProps = {
         message: '网络好像有点问题',
         imageSource: require('./resources/networkError.png'),
-        refreshHandle: () => {},
+        refreshHandle: () => { },
     };
 
 
@@ -50,30 +50,31 @@ export default class LKEmptyNetwork extends Component {
         const { style } = this.props;
 
         return (
-                <ScrollView style={[{flex:1}, style]} contentContainerStyle={{flexGrow:1}}>
-                    <View style={{flex:1, flexDirection: "column", marginTop:-60, justifyContent: "center", alignItems:'center'}}>
-                        <Image
-                            source={this.props.imageSource}
-                        />
+            <ScrollView style={[{ flex: 1 }, style]} contentContainerStyle={{ flexGrow: 1 }}>
+                <View style={{ flex: 1, flexDirection: "column", marginTop: -60, justifyContent: "center", alignItems: 'center' }}>
+                    <Image
+                        style={{ width: 130, height: 97 }}
+                        source={this.props.imageSource}
+                    />
 
-                        <Text style={[styles.text, {marginTop: 22}]}>{this.props.message}</Text>
+                    <Text style={[styles.text, { marginTop: 22 }]}>{this.props.message}</Text>
 
-                        <LKWhiteBGButton style={{width:160, marginTop:60}}
-                                         title={'刷新'}
-                                         onPress={this.props.refreshHandle}
-                        />
-                    </View>
-                </ScrollView>
-            )
+                    <LKWhiteBGButton style={{ width: 105, height: 34, marginTop: 60 }}
+                                     title={'刷新'}
+                                     fontSize={15}
+                                     onPress={this.props.refreshHandle}
+                    />
+                </View>
+            </ScrollView>
+        )
     }
 }
 
 var styles = StyleSheet.create({
     text: {
-        height: 44,
-        fontSize: 17,
+        fontSize: 14,
         textAlign: 'center',
-        lineHeight:44,
+        lineHeight: 20,
         color: '#999999'
     },
 });

@@ -57,6 +57,7 @@ import SectionListEasyPage from './SectionListEasyPage';
 
 
 //ListPages
+export const ListRoutePage = 'ListHomePage';
 export const ListPages = {
     ListHomePage: {
         screen: ListHomePage,

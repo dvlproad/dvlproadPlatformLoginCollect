@@ -64,6 +64,7 @@ export default class ImagesChooseListExamplePage extends Component {
 
     deleteImageHandle=(index) => {
         let healthCerImages = this.state.healthCerImages;
+        // LKToastUtil.showMessage(index + '：' + healthCerImages[index].imageIndex);
         healthCerImages[index].imageIndex = -1;
         healthCerImages.splice(index,1);
 
