@@ -78,9 +78,9 @@ import TextHomePage from "./text/TextHomePage";
 //image
 import { ImagePages } from "./image/ImageHomePage";
 //list
-import { ListPages } from "./list/ListRooter";
+import { ListPages } from "./list/ListHomePage";
 //picker
-import { PickPages } from "./picker/PickRooter";
+import { PickPages } from "./picker/PickHomePage";
 //modal
 import {ModalPages} from "./modal/ModalHomePage";
 
@@ -90,7 +90,7 @@ import { WebViewPages } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'UIHomePage';
+export const UIRoutePage = 'ComJSSingleDatePage';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,

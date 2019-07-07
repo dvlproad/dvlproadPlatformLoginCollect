@@ -22,12 +22,14 @@ export default class EasyModalPage extends Component {
                 >
                     <View
                         style={{
+                            position: 'relative',
                             marginTop: 10,
                             backgroundColor: 'red',
-                            height: Dimensions.get('window').height-240,
+                            height: Dimensions.get('window').height-20,
+                            justifyContent: 'center',
                         }}
                     >
-                        <View>
+                        <View style={{backgroundColor:'green'}}>
                             <Text>Hello World!</Text>
 
                             <TouchableHighlight onPress={() => {
@@ -44,6 +46,8 @@ export default class EasyModalPage extends Component {
 
 
 
+
+
                 <TouchableHighlight
                     onPress={() => {
                         this.setState({
@@ -51,7 +55,32 @@ export default class EasyModalPage extends Component {
                         });
                     }}
                 >
-                    <Text>弹出</Text>
+                    <View style={{backgroundColor:'purple'}}>
+                    <Text style={{backgroundColor: 'yellow'}}>弹出</Text>
+                        <View
+                            style={{
+                                // position: 'absolute',
+                                marginTop: 10,
+                                backgroundColor: 'red',
+                                height: Dimensions.get('window').height-20,
+                                width: Dimensions.get('window').width,
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <View style={{backgroundColor:'green'}}>
+                                <Text>Hello World!</Text>
+
+                                <TouchableHighlight onPress={() => {
+                                    this.setState({
+                                        modalVisible: !this.state.modalVisible
+                                    })
+                                }}
+                                >
+                                    <Text>关闭</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                    </View>
                 </TouchableHighlight>
             </View>
         );
