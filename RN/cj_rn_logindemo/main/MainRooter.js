@@ -8,11 +8,6 @@ import {
 } from 'react-navigation';
 
 
-import SampleAppMovies from "../movieApp/MovieHomePage";
-
-import LifecycleRooter from "../lifecyclehome/LifecycleRooter";
-import HelloWorldPage from '../helloworld/HelloWorldPage';
-
 //ui
 import {UIPages, UIRoutePage} from "../uihome/UIHomePage";
 
@@ -31,8 +26,8 @@ const uitab = {
             return <TabBarItem
                 tintColor={tintColor}
                 focused={focused}
-                normalImage={require('./image/remind.png')}
-                selectedImage={require('./image/remind.png')}
+                normalImage={require('./image/category.png')}
+                selectedImage={require('./image/category.png')}
             />;
         }
     }),
@@ -90,6 +85,31 @@ const utiltab = {
     }),
 }
 
+//lifecycle
+import {LifeCyclePages, LifeCycleRoutePage} from '../lifecyclehome/LifecycleHomePage';
+
+const lifecyclescreen = createAppContainer(createStackNavigator(
+    LifeCyclePages,
+    {
+        initialRouteName: LifeCycleRoutePage
+    }
+));
+
+const lifecycletab = {
+    screen: lifecyclescreen,
+    navigationOptions: ({ navigation }) => ({
+        title: 'Lifecycle',
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            return <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/scanning.png')}
+                selectedImage={require('./image/scanning.png')}
+            />;
+        }
+    }),
+};
+
 
 //healthcer
 import {HealthCerPages, HealthCerRoutePage} from '../helathCerApp/HealthCerRooter';
@@ -117,54 +137,40 @@ const healthcertab = {
 };
 
 
+//hello
+import {HelloPages, HelloRoutePage} from '../hello/HelloHomePage';
+
+const helloscreen = createAppContainer(createStackNavigator(
+    HelloPages,
+    {
+        initialRouteName: HelloRoutePage
+    }
+));
+
+const hellotab = {
+    screen: helloscreen,
+    navigationOptions: ({ navigation }) => ({
+        title: 'Hello',
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            return <TabBarItem
+                tintColor={tintColor}
+                focused={focused}
+                normalImage={require('./image/search.png')}
+                selectedImage={require('./image/search.png')}
+            />;
+        }
+    }),
+};
+
+
 // 属性设置详情查看：[createBottomTabNavigator](https://reactnavigation.org/docs/zh-Hans/bottom-tab-navigator.html)
 const TabBarNavigator = createBottomTabNavigator({
         HealthCerRooter: healthcertab,
-        Movie: {
-            screen: SampleAppMovies,
-            navigationOptions: ({ navigation }) => ({
-                title: '电影',
-                tabBarIcon: ({ focused, tintColor }) => (
-                    <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/category.png')}
-                        selectedImage={require('./image/category.png')}
-                    />
-                ),
-            }),
-        },
         UIRooter: uitab,
         FoundationRooter: foundationtab,
         BaseUtil: utiltab,
-        Lifecycle: {
-            screen: LifecycleRooter,
-            navigationOptions: ({ navigation }) => ({
-                title: 'Lifecycle',
-                tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/scanning.png')}
-                        selectedImage={require('./image/scanning.png')}
-                    />;
-                }
-            }),
-        },
-        HelloWorld: {
-            screen: HelloWorldPage,
-            navigationOptions: ({ navigation }) => ({
-                title: 'HelloWorld',
-                tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                    return <TabBarItem
-                        tintColor={tintColor}
-                        focused={focused}
-                        normalImage={require('./image/search.png')}
-                        selectedImage={require('./image/search.png')}
-                    />;
-                }
-            }),
-        },
+        Lifecycle: lifecycletab,
+        Hell: hellotab,
     },
     {
         tabBarPosition: 'bottom',

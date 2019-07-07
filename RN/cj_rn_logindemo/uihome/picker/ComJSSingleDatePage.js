@@ -82,42 +82,31 @@ export default class ComJSSingleDatePage extends Component {
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                           this.birthdayDatePicker.show()
-                                       }}
+                                      LKToastUtil.showMessage('fdfd');
+                                      this.birthdayDatePicker.show()
+                                  }}
                 />
 
-                <LKSingleDateText style={{paddingTop: 20}}
+                <LKSingleDateText style={{paddingVertical: 20, paddingHorizontal: 10}}
                                   placeholder={'yyyy-MM-dd HH:mm:ss'}
                                   chooseDateString={this.state.fullDateString}
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                           this.fullDatePicker.show()
-                                       }}
-                />
-
-                <LKSingleDateComponent style={{marginTop: 10}}
-                                       placeholder= {"选择日期"}
-                                       chooseDateString={this.state.beginDateString1}
-                                       allowPickDate={true}
-                                       onDateChange={ (date) => {
-                                           this.setState({
-                                               beginDateString1: date
-                                           })
-                                       }}
-                                       isBankStyle={false}
+                                      this.fullDatePicker.show()
+                                  }}
                 />
 
                 <LKSingleDateActionText style={{marginTop: 10}}
-                                       placeholder= {"选择日期"}
-                                       chooseDateString={this.state.beginDateString1}
-                                       allowPickDate={true}
-                                       onDateChange={ (date) => {
-                                           this.setState({
-                                               beginDateString1: date
-                                           })
-                                       }}
-                                       isBankStyle={false}
+                                        placeholder= {"选择日期"}
+                                        chooseDateString={this.state.beginDateString1}
+                                        allowPickDate={true}
+                                        onDateChange={ (date) => {
+                                            this.setState({
+                                                beginDateString1: date
+                                            })
+                                        }}
+                                        isBankStyle={false}
                 />
 
 

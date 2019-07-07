@@ -61,7 +61,11 @@ export default class LKSingleDateText extends Component {
     }
 
     clickDateTextAction() {
-        return this.props.onPress;
+        if (this.props.onPress) {
+            this.props.onPress();
+        } else {
+            LKToastUtil.showMessage('请完善点击事件');
+        }
     }
 
     render() {
