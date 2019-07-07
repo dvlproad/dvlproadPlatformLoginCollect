@@ -37,6 +37,7 @@ export default class PickHomePage extends Component {
             },
             { key: "SingleDate--JS",
                 data: [
+                    { title: "ComJSPickersPage", page: "ComJSPickersPage" },
                     { title: "ComJSSingleDatePage1", page: "ComJSSingleDatePage1" },
                     { title: "ComJSSingleDatePage2", page: "ComJSSingleDatePage2" },
                     { title: "ComJSSingleDatePage3", page: "ComJSSingleDatePage3" },
@@ -69,6 +70,8 @@ export default class PickHomePage extends Component {
 //PickPages
 //weight
 import PickWeightPage from "./PickWeightPage";
+
+import ComJSPickersPage from "./ComJSPickersPage";
 //singleDate-Native
 import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
@@ -108,6 +111,14 @@ export const PickPages = {
         screen: ComNativeSingleDatePage,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式原生)`,
+        }),
+    },
+
+
+    ComJSPickersPage: {
+        screen: ComJSPickersPage,
+        navigationOptions: () => ({
+            title: `JS写的统一样式的Pickers`,
         }),
     },
 

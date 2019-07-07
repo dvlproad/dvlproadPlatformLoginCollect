@@ -220,13 +220,14 @@ class TabBarItem extends React.Component {
 
 //TestNavigation
 import ComJSSingleDatePage2 from "../uihome/picker/ComJSSingleDatePage2";
+import ComJSPickersPage from "../uihome/picker/ComJSPickersPage";
 
 const TestNavigation = createStackNavigator(
     {
         TestHomePage: {
-            screen: ComJSSingleDatePage2,
+            screen: ComJSPickersPage,
             navigationOptions: () => ({
-                title: `ComJSSingleDatePage`,
+                title: `测试的Page`,
             }),
         },
     },
