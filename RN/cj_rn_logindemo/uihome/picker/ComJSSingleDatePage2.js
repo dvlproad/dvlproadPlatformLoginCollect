@@ -22,7 +22,7 @@ export default class ComJSSingleDatePage2 extends Component {
                 <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMdd}
                                    dateString={this.state.birthdayDateString}
                                    onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString);
+                                       LKToastUtil.showMessage(dateString)
                                        this.setState({
                                            birthdayDateString: dateString,
                                        })

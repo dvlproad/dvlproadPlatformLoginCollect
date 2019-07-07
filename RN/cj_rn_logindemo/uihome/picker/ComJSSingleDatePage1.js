@@ -38,7 +38,17 @@ export default class ComJSSingleDatePage1 extends Component {
         let screenHeight = Dimensions.get('window').height;
 
         return (
-            <View style={{flex:1, backgroundColor: '#f9fafb', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <LKTextButton
+                    style={{
+                        width: 180,
+                        backgroundColor:'red'
+                    }}
+                    title={'yyyyMMdd的日期选择'}
+                    onPress={()=>{
+                        this.birthdayDatePicker.show()
+                    }}
+                />
                 <DatePicker
                     HH={false}
                     mm={false}
@@ -53,13 +63,6 @@ export default class ComJSSingleDatePage1 extends Component {
                     }}
                     ref={ref => this.birthdayDatePicker = ref}
                 />
-
-                <LKTextButton title={'yyyyMMdd的日期选择'}
-                              onPress={()=>{
-                                  this.birthdayDatePicker.show()
-                              }}
-                />
-
             </View>
         )
     }

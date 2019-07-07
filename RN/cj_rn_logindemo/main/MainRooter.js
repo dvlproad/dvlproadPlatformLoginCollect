@@ -221,18 +221,20 @@ class TabBarItem extends React.Component {
 //TestNavigation
 import ComJSSingleDatePage2 from "../uihome/picker/ComJSSingleDatePage2";
 import ComJSPickersPage from "../uihome/picker/ComJSPickersPage";
+import {PickPages} from "../uihome/picker/PickHomePage";
 
 const TestNavigation = createStackNavigator(
+    // {
+    //     TestHomePage: {
+    //         screen: ComJSPickersPage,
+    //         navigationOptions: () => ({
+    //             title: `测试的Page`,
+    //         }),
+    //     },
+    // },
+    PickPages,
     {
-        TestHomePage: {
-            screen: ComJSPickersPage,
-            navigationOptions: () => ({
-                title: `测试的Page`,
-            }),
-        },
-    },
-    {
-        initialRouteName: 'TestHomePage'
+        initialRouteName: 'PickHomePage'
     }
 );
 
