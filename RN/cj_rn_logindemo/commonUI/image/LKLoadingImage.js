@@ -36,6 +36,7 @@ export default class LKLoadingImage extends Component {
     static propTypes = {
         //imageSource: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
+        showImageBorder: PropTypes.bool,        //是否显示图片边框(默认否)
 
         buttonIndex: PropTypes.number.isRequired,
 
@@ -50,6 +51,7 @@ export default class LKLoadingImage extends Component {
     static defaultProps = {
         imageSource: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
+        showImageBorder: false,
 
         buttonIndex: 0,
 
@@ -293,7 +295,9 @@ export default class LKLoadingImage extends Component {
                     style={{
                         width: imageWidth,
                         height: imageHeight,
-                        borderRadius: 4,
+                        borderRadius: 6,
+                        borderWidth: this.props.showImageBorder?1:0,
+                        borderColor: "#E5E5E5",
                     }}
                     source={this.props.imageSource}
                     defaultSource={this.props.defaultSource}
@@ -322,5 +326,9 @@ export default class LKLoadingImage extends Component {
 }
 
 var styles = StyleSheet.create({
-
+    imageBorder: {
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "#E5E5E5",
+    }
 })

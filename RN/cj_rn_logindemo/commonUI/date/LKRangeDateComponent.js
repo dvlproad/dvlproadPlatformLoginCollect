@@ -174,7 +174,7 @@ export default class LKRangeDateComponent extends Component {
                 />
 
                 <LKDateConnectView
-                    style={{width: 20, marginHorizontal: 10}}
+                    style={{width: 14, marginHorizontal: 10}}
                     showWave={showWave}
                 />
 
@@ -216,17 +216,22 @@ class LKDateConnectView extends React.Component {
     render() {
         const { style } = this.props;
 
+        let lineWidth = 14;
+        if (this.props.style && this.props.style.width) {
+            lineWidth = this.props.style.width;
+        }
+
         let dateConnectView = this.props.showWave ?
             (
                 <Image
-                    style={{width: 20, height: 5}}
+                    style={{width: lineWidth, height: 5}}
                     source={require('./resources/dateConnectWave.png')}
                 />
             )
             :
             (
                 <View
-                    style={{width: 20, height: 1, backgroundColor: "black"}}
+                    style={{width: lineWidth, height: 1, backgroundColor: "black"}}
                 />
             );
 

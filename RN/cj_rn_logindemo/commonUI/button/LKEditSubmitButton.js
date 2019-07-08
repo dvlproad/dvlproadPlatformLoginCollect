@@ -85,23 +85,27 @@ export class LKEditSubmitButton extends Component {
 
 const styles = StyleSheet.create({
     submitEnable: {
-        borderRadius: 4,
+        height: 46,
+        borderRadius: 6,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     submitDisable: {
-        borderRadius: 4,
+        height: 46,
+        borderRadius: 6,
         backgroundColor: disableBlueColor,
         borderWidth: 0
     },
 
     editEnable: {
+        height: 40,
         borderRadius: 4,
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
         borderColor: enableBlueColor
     },
     editDisable: {
+        height: 40,
         borderRadius: 4,
         backgroundColor: "#FFFFFF4C",
         borderWidth: 1,

@@ -62,16 +62,16 @@ export default class LKOwnNativeSingleDateComponent extends Component {
 
         let normalCustomStyles = {
             dateInput: {
-                borderRadius: 4,
+                borderRadius: 6,
                 borderWidth: this.props.allowPickDate ? 1 : 0,
-                borderColor: "#CCCCCC",
+                borderColor: "#E5E5E5",
                 backgroundColor: this.props.allowPickDate ? "white" : "#F9F9F9"
             }
             // ... You can check the source to find the other keys.
         };
         let bankCustomStyles = {
             dateInput: {
-                borderRadius: 0,
+                borderRadius: 6,
                 borderWidth: 0,
                 backgroundColor: 'transparent'
             }

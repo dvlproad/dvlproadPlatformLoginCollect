@@ -30,6 +30,7 @@ export default class LKActionLoadingImage extends Component {
         imageHeight: PropTypes.number.isRequired,
         //imageSource: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
+        showImageBorder: PropTypes.bool,      //是否显示图片边框(默认否)
 
         clickButtonHandle: PropTypes.func,
         deleteImageHandle: PropTypes.func,
@@ -51,6 +52,7 @@ export default class LKActionLoadingImage extends Component {
         imageHeight: 0,
         imageSource: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
+        showImageBorder: false,
 
         clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
@@ -113,6 +115,7 @@ export default class LKActionLoadingImage extends Component {
                     <LKLoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
                                     imageSource={imageSource}
                                     defaultSource={this.props.defaultSource}
+                                    showImageBorder={this.props.showImageBorder}
                                     buttonIndex={buttonIndex}
                                     onLoadComplete={this.props.onLoadComplete}
                                     uploadType={this.props.uploadType}

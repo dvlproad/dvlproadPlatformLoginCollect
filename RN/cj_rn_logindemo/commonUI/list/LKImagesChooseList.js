@@ -79,6 +79,7 @@ export default class LKImagesChooseList extends Component {
 
         imageSources: PropTypes.array,
         imageDefaultSource: PropTypes.number,
+        showImageBorder: PropTypes.bool,      //是否显示图片边框(默认否)
 
         browseImageHandle: PropTypes.func,
         addImageHandle: PropTypes.func,
@@ -101,6 +102,7 @@ export default class LKImagesChooseList extends Component {
 
         imageSources: [],
         //imageDefaultSource: '',
+        showImageBorder: false,
 
         browseImageHandle: (buttonIndex)=>{},
         addImageHandle: (buttonIndex)=>{},
@@ -213,6 +215,7 @@ export default class LKImagesChooseList extends Component {
                             imageHeight={boxHeight}
                             imageSource={item.imageSource}
                             defaultSource={this.props.imageDefaultSource}
+                            showImageBorder={this.props.showImageBorder}
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}
