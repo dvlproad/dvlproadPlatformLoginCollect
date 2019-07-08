@@ -269,7 +269,11 @@ export default class LKLoadingImage extends Component {
         let stateTextStyle ={flex: 1, textAlign: 'center', fontSize: 17, color: '#FFFFFF'};
         let stateTextWidth = imageWidth;
         let stateTextHeight = imageHeight;
+        if (this.props.uploadType == ImageUploadType.Success) {
+            stateTextHeight = 0;
+        }
         //let stateTextHeight = imageHeight * (1-this.props.uploadProgress/100);
+
         if (this.props.changeShowDebugMessage) {
             stateTextStyle = [stateTextStyle, {color: '#99ff22'}]
         } else {
