@@ -11,7 +11,7 @@ import {LKWhiteBGButton} from "../commonUI/button/LKTextButton";
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Text, TouchableOpacity, View} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 // LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
 export class LKWhiteBGButton extends Component {
@@ -25,12 +25,12 @@ export class LKWhiteBGButton extends Component {
     static defaultProps = {
         title: "title",
         fontSize: 17,
-        onPress: () => {},
+        onPress: () => { },
         disabled: false,
     };
 
     render() {
-        const {style} = this.props;
+        const { style } = this.props;
 
         return (
             <LKTextButton
@@ -42,6 +42,7 @@ export class LKWhiteBGButton extends Component {
                 }, style]}
                 title={this.props.title}
                 color={'#333333'}
+                fontSize={this.props.fontSize}
                 onPress={this.props.onPress}
             />
         )
@@ -62,7 +63,7 @@ export default class LKTextButton extends Component {
         title: "title",
         color: "#01ADFE",
         fontSize: 17,
-        onPress: () => {},
+        onPress: () => { },
         disabled: false,
     };
 
@@ -81,17 +82,17 @@ export default class LKTextButton extends Component {
         //     </View>
         // )
         return (
-            <View style={[{justifyContent: "center", height: 44}, style]} >
+            <View style={[{ justifyContent: "center", height: 44 }, style]} >
                 <TouchableOpacity
                     onPress={this.props.onPress}
                     disabled={this.props.disabled}
-                    //activeOpacity={0.4}
+                //activeOpacity={0.4}
                 >
                     <Text
                         style={{
-                            textAlign:'center',
+                            textAlign: 'center',
                             color: this.props.color,
-                            fontSize:this.props.fontSize
+                            fontSize: this.props.fontSize
                         }}
                     >
                         {this.props.title}

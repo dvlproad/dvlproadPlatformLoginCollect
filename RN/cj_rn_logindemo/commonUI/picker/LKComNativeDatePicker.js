@@ -1,4 +1,4 @@
-// LKComNativeDatePicker.jsPicker.js
+// LKComNativeDatePicker.js
 
 import React from 'react';
 import PropTypes from "prop-types";
@@ -100,6 +100,4 @@ export default class LKComNativeDatePicker {
         let selectedValue = [year+'年', month+'月', day+'日'];
         return selectedValue;
     }
-
-
 }

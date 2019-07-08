@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     },
     mask1: {
         backgroundColor: "#000",
-        opacity: 0.7,
+        opacity: 0.3,
         position: "absolute",
         width: screenWidth,
         height: screenHeight,

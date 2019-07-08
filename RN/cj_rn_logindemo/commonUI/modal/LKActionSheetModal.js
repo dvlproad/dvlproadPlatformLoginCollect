@@ -89,7 +89,7 @@ export default class LKActionSheetModal extends Component {
     }
 
     renderItem(index, item) {
-        return <View key = {index} style={styles.itemBox}>
+        return <View key={index} style={styles.itemBox}>
             <TouchableHighlight
                 style={{ flex: 1 }}
                 activeOpacity={0.8}
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     },
     mask1: {
         backgroundColor: "#000",
-        opacity: 0.7,
+        opacity: 0.3,
         position: "absolute",
         width: screenWidth,
         height: screenHeight,
