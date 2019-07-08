@@ -57,18 +57,28 @@ export class LKPhotoCameraSheet extends Component {
         super(props);
     }
 
+    dealAction = (action)=>{
+        setTimeout(action, 300);
+    }
+
     render() {
         return (
             <LKActionSheet visible={this.props.visible}
                            animationType={'none'}
                            actionTitle={''}
-                           cancel={this.props.clickCancel}
+                           cancel={()=>{
+                               this.dealAction(this.props.clickCancel);
+                           }}
             >
                 <LKActionDom actionName={'拍摄'}
-                             onPress={this.props.clickTakePhoto}
+                             onPress={()=>{
+                                 this.dealAction(this.props.clickTakePhoto);
+                             }}
                 />
                 <LKActionDom actionName={'从手机相册选择'}
-                             onPress={this.props.clickChooseFromLibrary}
+                             onPress={()=>{
+                                 this.dealAction(this.props.clickChooseFromLibrary);
+                             }}
                 />
             </LKActionSheet>
         )

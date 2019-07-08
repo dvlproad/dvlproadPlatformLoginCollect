@@ -1,9 +1,9 @@
-//ActionImagePage.js
+//ActionLoadingImagePage.js
 import React, { Component } from 'react';
 import {Alert, ScrollView} from 'react-native';
 import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 
-export default class ActionImagePage extends Component {
+export default class ActionLoadingImagePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,21 +53,43 @@ export default class ActionImagePage extends Component {
     }
 
     render() {
-        let buttonIndex = 0;
-
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
-                <LKActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
-                                    imageWidth={164}
-                                    imageHeight={108}
-                                    imageSource={this.state.imageSource}
-                                    buttonIndex={buttonIndex}
+                <LKActionLoadingImage
+                    style={{
+                        width: 164,
+                        height: 108,
+                        backgroundColor:'red'
+                    }}
+                    imageWidth={164}
+                    imageHeight={108}
+                    imageSource={this.state.imageSource}
+                    buttonIndex={0}
 
-                                    clickButtonHandle={this.clickButtonHandle}
-                                    deleteImageHandle={this.deleteImageHandle}
+                    clickButtonHandle={this.clickButtonHandle}
+                    deleteImageHandle={this.deleteImageHandle}
 
-                                    isEditing={true}
-                                    isAddIcon={this.isAddIcon(buttonIndex)}
+                    isEditing={true}
+                    isAddIcon={this.isAddIcon(0)}
+                />
+
+
+                <LKActionLoadingImage
+                    style={{
+                        width: 164,
+                        height: 108,
+                        backgroundColor:'#f5f5f5'
+                    }}
+                    imageWidth={164}
+                    imageHeight={108}
+                    imageSource={require('./resources/pickImage_blue.png')}
+                    buttonIndex={1}
+
+                    clickButtonHandle={this.clickButtonHandle}
+                    deleteImageHandle={this.deleteImageHandle}
+
+                    isEditing={false}
+                    isAddIcon={this.isAddIcon(1)}
                 />
             </ScrollView>
         );

@@ -14,7 +14,7 @@ export default class ActionSheetPage extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{backgroundColor:'#f5f5f5'}}>
                 <LKTextButton title={'弹出actionSheet'}
                               onPress={()=>{
                                   this.setState({

@@ -288,6 +288,7 @@ export default class LKLoadingImage extends Component {
                 <Image style={{width: imageWidth, height: imageHeight }}
                        source={this.props.imageSource}
                        defaultSource={this.props.defaultSource}
+                       resizeMode={'stretch'}
                        onLoadStart={this.onLoadStart}
                        onLoadEnd={this.onLoadEnd}
                        onLoad={this.onLoadSuccess}

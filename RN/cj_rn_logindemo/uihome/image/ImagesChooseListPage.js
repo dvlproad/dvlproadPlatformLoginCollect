@@ -33,7 +33,7 @@ export default class ImagesChooseListPage extends Component {
     requestHealthCardInfo = () => {
         let healthCerImages = [
             {
-                imageSource: require('./resource/healthCerImage1.png'),
+                imageSource: require('./resources/healthCerImage1.png'),
             },
             {
                 imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},

@@ -24,8 +24,9 @@ export default class ImageHomePage extends Component {
         let sections = [
             { key: "image",
                 data: [
+                    { title: "HelloImagePage", page: "HelloImagePage" },
                     { title: "LoadingImagePage", page: "LoadingImagePage" },
-                    { title: "ActionImagePage", page: "ActionImagePage" },
+                    { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
                     { title: "UploadImagePage", page: "UploadImagePage" },
                 ]
             },
@@ -50,8 +51,9 @@ export default class ImageHomePage extends Component {
 }
 
 //ImagePages
+import HelloImagePage from "./HelloImagePage";
 import LoadingImagePage from "./LoadingImagePage";
-import ActionImagePage from './ActionImagePage';
+import ActionLoadingImagePage from './ActionLoadingImagePage';
 import UploadImagePage from "./UploadImagePage";
 import UploadImagesPage from "./UploadImagesPage";
 import ImagesChooseListPage from "./ImagesChooseListPage";
@@ -65,14 +67,22 @@ export const ImagePages = {
             title: `ImageHomePage`,
         }),
     },
+
+    HelloImagePage: {
+        screen: HelloImagePage,
+        navigationOptions: () => ({
+            title: `Image的基本使用`,
+        }),
+    },
+
     LoadingImagePage: {
         screen: LoadingImagePage,
         navigationOptions: () => ({
             title: `Image加载首页`,
         }),
     },
-    ActionImagePage: {
-        screen: ActionImagePage,
+    ActionLoadingImagePage: {
+        screen: ActionLoadingImagePage,
         navigationOptions: () => ({
             title: `单个图片选择`,
         }),

@@ -44,7 +44,7 @@ export default class PhotoCameraSheetPage extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1, backgroundColor:'#f5f5f5'}}>
                 {this.photoCameraSheet()}
                 <LKTextButton title={'弹出actionSheet'}
                               onPress={this.showPhotoCameraSheet}

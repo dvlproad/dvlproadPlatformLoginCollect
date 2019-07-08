@@ -88,7 +88,7 @@ import { WebViewPages } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'UIHomePage';
+export const UIRoutePage = 'LoadingImagePage';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,

@@ -12,7 +12,7 @@ import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
                     boxHorizontalInterval={10}
                     imageSources={[
                         {
-                            imageSource: require('./resource/healthCerImage1.png'),
+                            imageSource: require('./resources/healthCerImage1.png'),
                             uploadType: ImageUploadType.NotNeed,
                             uploadProgress: 0,
                             imageIndex: 0,
