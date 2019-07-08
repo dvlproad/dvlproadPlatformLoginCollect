@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {LKPhotoCameraSheet} from "../../../commonUI/modal/LKActionSheet";
 import LKTextButton from "../../../commonUI/button/LKTextButton";
 
-export default class LKPhotoCameraSheetPage extends Component {
+export default class PhotoCameraSheetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {

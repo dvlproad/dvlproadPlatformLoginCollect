@@ -61,7 +61,7 @@ export class LKPhotoCameraSheet extends Component {
         return (
             <LKActionSheet visible={this.props.visible}
                            animationType={'none'}
-                           actionTitle={'选择图片'}
+                           actionTitle={''}
                            cancel={this.props.clickCancel}
             >
                 <LKActionDom actionName={'拍摄'}

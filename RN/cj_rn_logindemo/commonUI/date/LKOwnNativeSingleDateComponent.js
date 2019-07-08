@@ -1,4 +1,4 @@
-// LKOwnNativeSingleDateComponentponent.js.js
+// LKOwnNativeSingleDateComponent.js
 /* 使用示例
 import LKOwnNativeSingleDateComponent from "../../commonUI/date/LKOwnNativeSingleDateComponent";
 
@@ -89,6 +89,9 @@ export default class LKOwnNativeSingleDateComponent extends Component {
                 maxDate="2300-01-01"
 
                 mode="date"
+                // androidMode={'default'}
+                // androidMode={'calendar'}
+                androidMode={'spinner'}
                 format="YYYY-MM-DD"
                 confirmBtnText="确定"
                 cancelBtnText="取消"

@@ -20,6 +20,11 @@ import PropTypes from "prop-types";
 import {StyleSheet} from 'react-native';
 import LKTextButton from "./LKTextButton";
 
+// var enableBlueColor = '#01ADFE';
+// var disableBlueColor = '#01ADFE4C';
+var enableBlueColor = 'rgba(23, 41, 145, 1)';
+var disableBlueColor = 'rgba(23, 41, 145, 0.4)';
+
 export class LKEditSubmitButton extends Component {
     static propTypes = {
         submitTitle: PropTypes.string.isRequired,
@@ -60,7 +65,7 @@ export class LKEditSubmitButton extends Component {
         let isDisable = this.props.isDisabled;
         let enableStateStyle = isShowEditTitle ? (isDisable?styles.editDisable:styles.editEnable) : (isDisable?styles.submitDisable:styles.submitEnable)
 
-        let showTextColor = isShowEditTitle ? (isDisable?"#01ADFE4C":"#01ADFE") : "#FFFFFF";
+        let showTextColor = isShowEditTitle ? (isDisable?disableBlueColor:enableBlueColor) : "#FFFFFF";
         let showTextFont = this.props.fontSize;
 
         let currentOnPress = isShowEditTitle ? this.props.clickEditTitleHandle : this.props.clickSubmitTitleHandle
@@ -81,12 +86,12 @@ export class LKEditSubmitButton extends Component {
 const styles = StyleSheet.create({
     submitEnable: {
         borderRadius: 4,
-        backgroundColor: "#01ADFEFF",
+        backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     submitDisable: {
         borderRadius: 4,
-        backgroundColor: "#01ADFE4C",
+        backgroundColor: disableBlueColor,
         borderWidth: 0
     },
 
@@ -94,12 +99,12 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
-        borderColor: "#01ADFE"
+        borderColor: enableBlueColor
     },
     editDisable: {
         borderRadius: 4,
         backgroundColor: "#FFFFFF4C",
         borderWidth: 1,
-        borderColor: "#01ADFE4C"
+        borderColor: disableBlueColor
     }
 });

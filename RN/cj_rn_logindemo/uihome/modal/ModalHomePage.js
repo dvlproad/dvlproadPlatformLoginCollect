@@ -37,8 +37,8 @@ export default class ModalHomePage extends Component {
             },
             { key: "ActionSheet",
                 data: [
-                    { title: "LKActionSheetPage", page: "LKActionSheetPage" },
-                    { title: "LKPhotoCameraSheetPage", page: "LKPhotoCameraSheetPage" },
+                    { title: "ActionSheetPage", page: "ActionSheetPage" },
+                    { title: "PhotoCameraSheetPage", page: "PhotoCameraSheetPage" },
                 ]
             },
         ];
@@ -61,8 +61,8 @@ import EasyModalPage from './modal/EasyModalPage';
 import ActivityIndicatorPage from "./hud/ActivityIndicatorPage";
 import HUDHomePage from "./hud/HUDHomePage";
 
-import LKPhotoCameraSheetPage from "./actionSheet/LKPhotoCameraSheetPage";
-import LKActionSheetPage from "./actionSheet/LKActionSheetPage";
+import PhotoCameraSheetPage from "./actionSheet/PhotoCameraSheetPage";
+import ActionSheetPage from "./actionSheet/ActionSheetPage";
 
 export const ModalPages = {
     ModalHomePage: {
@@ -96,15 +96,21 @@ export const ModalPages = {
 
     //actionSheet
     RNActionSheetPage: {
-        screen: LKActionSheetPage,
+        screen: ActionSheetPage,
         navigationOptions: () => ({
             title: `RNActionSheetPage`,
         }),
     },
-    LKActionSheetPage: {
-        screen: LKPhotoCameraSheetPage,
+    ActionSheetPage: {
+        screen: ActionSheetPage,
         navigationOptions: () => ({
-            title: `LKActionSheetPage`,
+            title: `ActionSheetPage`,
+        }),
+    },
+    PhotoCameraSheetPage: {
+        screen: PhotoCameraSheetPage,
+        navigationOptions: () => ({
+            title: `PhotoCameraSheetPage`,
         }),
     },
 

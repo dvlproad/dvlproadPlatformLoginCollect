@@ -4,7 +4,7 @@ import {LKActionSheet} from "../../../commonUI/modal/LKActionSheet";
 import {LKActionDom} from "../../../commonUI/modal/LKActionSheetComponent";
 import LKTextButton from "../../../commonUI/button/LKTextButton";
 
-export default class LKActionSheetPage extends Component {
+export default class ActionSheetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
