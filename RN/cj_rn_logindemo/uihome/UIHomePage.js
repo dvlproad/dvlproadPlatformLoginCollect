@@ -68,27 +68,29 @@ import LayoutHomePage from "./layout/LayoutHomePage";
 import { NavigationPages } from "./navigation/NavigationHomePage";
 
 //button
-import {ButtonPages} from "./button/ButtonHomePage";
+import { ButtonPages } from "./button/ButtonHomePage";
 
 //text
 import TextHomePage from "./text/TextHomePage";
 
 //image
-import { ImagePages } from "./image/ImageHomePage";
+import { ImagePages, ImageRoutePage } from "./image/ImageHomePage";
 //list
-import { ListPages } from "./list/ListHomePage";
+import { ListPages, ListRoutePage } from "./list/ListHomePage";
+//upload
+import { UploadPages, UploadRoutePage } from "./upload/UploadHomePage";
 //picker
-import { PickPages } from "./picker/PickHomePage";
+import { PickPages, PickRoutePage } from "./picker/PickHomePage";
 //modal
-import {ModalPages} from "./modal/ModalHomePage";
+import { ModalPages, ModalRoutePage } from "./modal/ModalHomePage";
 
 //webview
-import { WebViewPages } from './webview/WebViewHomePage';
+import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'LoadingImagePage';
+export const UIRoutePage = UploadRoutePage;
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,
@@ -122,6 +124,8 @@ export const UIPages = {
 
     ...ImagePages,
     ...ListPages,
+    ...UploadPages,
+
     ...PickPages,
     ...ModalPages,
 

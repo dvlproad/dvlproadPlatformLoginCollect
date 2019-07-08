@@ -56,10 +56,14 @@ export default class LKRangeDateComponent extends Component {
         endDateString: PropTypes.string,
         onEndDatePickChange: PropTypes.func,
         onEndDateAutoChange: PropTypes.func,  // 结束日期根据开始日期自动变化(仅在LKRangeDateEditingType.Begin下有效)
+
+        keepAlwaysWaveLine: PropTypes.bool,     // 是否始终显示成波浪线(如果否，则在在某个值是输入的情况下，会显示直线)
     };
 
     static defaultProps = {
         dateRangeEditingType: LKRangeDateEditingType.Begin,
+
+        keepAlwaysWaveLine: false,
     };
 
     // 结束日期根据开始日期自动变化(仅在LKRangeDateEditingType.Begin下有效)
@@ -137,54 +141,63 @@ export default class LKRangeDateComponent extends Component {
             }
         }
 
+        if (this.props.keepAlwaysWaveLine) {
+            showWave = true;
+        }
+
 
         return (
             <View style={
                 [{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                     style]
             }>
-                <LKOwnNativeSingleDateComponent style={{flex: 1}}
-                                                placeholder= {"选择日期"}
-                                                chooseDateString={beginDateString}
-                                                allowPickDate={allowPickDateForBegin}
-                                                onDateChange={ (date) => {
-                                           let beginDateString = date;
+                <LKOwnNativeSingleDateComponent
+                    style={{flex: 1}}
+                    placeholder= {"选择日期"}
+                    chooseDateString={beginDateString}
+                    allowPickDate={allowPickDateForBegin}
+                    onDateChange={ (date) => {
+                        let beginDateString = date;
 
-                                           let endDateString = this.props.endDateString;
-                                           if (this.props.dateRangeEditingType == LKRangeDateEditingType.Begin) {
-                                               endDateString = this.autoUpdateEndDate(beginDateString);
-                                           }
+                        let endDateString = this.props.endDateString;
+                        if (this.props.dateRangeEditingType == LKRangeDateEditingType.Begin) {
+                            endDateString = this.autoUpdateEndDate(beginDateString);
+                        }
 
-                                           let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
-                                           if (allowUpdate) {
-                                               this.props.onBeginDatePickChange(beginDateString, endDateString);
-                                           } else {
-                                               LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
-                                           }
-                                       }}
+                        let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
+                        if (allowUpdate) {
+                            this.props.onBeginDatePickChange(beginDateString, endDateString);
+                        } else {
+                            LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                        }
+                    }}
                 />
-                <LKDateConnectView style={{width: 20, marginHorizontal: 10}}
-                                   showWave={showWave}
+
+                <LKDateConnectView
+                    style={{width: 20, marginHorizontal: 10}}
+                    showWave={showWave}
                 />
-                <LKOwnNativeSingleDateComponent style={{flex: 1}}
-                                                placeholder= {"自动填写"}
-                                                chooseDateString={endDateString}
-                                                allowPickDate={allowPickDateForEnd}
-                                                onDateChange={ (date) => {
-                                           let endDateString = date;
 
-                                           let beginDateString = this.props.beginDateString;
-                                           if (this.props.dateRangeEditingType == LKRangeDateEditingType.End) {
-                                               beginDateString = this.autoUpdateBeginDate(endDateString);
-                                           }
+                <LKOwnNativeSingleDateComponent
+                    style={{flex: 1}}
+                    placeholder= {"自动填写"}
+                    chooseDateString={endDateString}
+                    allowPickDate={allowPickDateForEnd}
+                    onDateChange={ (date) => {
+                        let endDateString = date;
 
-                                           let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
-                                           if (allowUpdate) {
-                                               this.props.onEndDatePickChange(beginDateString, endDateString);
-                                           } else {
-                                               LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
-                                           }
-                                       }}
+                        let beginDateString = this.props.beginDateString;
+                        if (this.props.dateRangeEditingType == LKRangeDateEditingType.End) {
+                            beginDateString = this.autoUpdateBeginDate(endDateString);
+                        }
+
+                        let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
+                        if (allowUpdate) {
+                            this.props.onEndDatePickChange(beginDateString, endDateString);
+                        } else {
+                            LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                        }
+                    }}
                 />
             </View>
         )
@@ -201,17 +214,22 @@ class LKDateConnectView extends React.Component {
     }
 
     render() {
-        const { style } = this.props
+        const { style } = this.props;
 
         let dateConnectView = this.props.showWave ?
-            <View
-                style={{width: 20, height: 1, backgroundColor: "black"}}
-            />
+            (
+                <Image
+                    style={{width: 20, height: 5}}
+                    source={require('./resources/dateConnectWave.png')}
+                />
+            )
             :
-            <Image
-                style={{width: 20, height: 5}}
-                source={require('./resources/dateConnectWave.png')}
-            />
+            (
+                <View
+                    style={{width: 20, height: 1, backgroundColor: "black"}}
+                />
+            );
+
 
         return (
             <View

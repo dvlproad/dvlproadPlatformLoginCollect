@@ -1,10 +1,9 @@
-//UtilHomePage.js
+//UploadHomePage.js
 import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import HomeSectionList from "../../commonUI/list/HomeSectionList";
 
-
-export default class WebViewHomePage extends Component {
+export default class UploadHomePage extends Component {
 
     constructor(props) {
         super(props);
@@ -21,14 +20,16 @@ export default class WebViewHomePage extends Component {
         }
     }
 
-
     render() {
         let sections = [
-            { key: "WebView",
+            { key: "image",
                 data: [
-                    { title: "WebViewPage1", page: "WebViewPage1" },
-                    { title: "WebViewPage2", page: "WebViewPage2" },
-                    { title: "WebViewJSBridgePage", page: "WebViewJSBridgePage" },
+                    { title: "UploadImagePage", page: "UploadImagePage" },
+                ]
+            },
+            { key: "images",
+                data: [
+                    { title: "UploadImagesPage", page: "UploadImagesPage" },
                 ]
             },
         ];
@@ -44,37 +45,30 @@ export default class WebViewHomePage extends Component {
     }
 }
 
-//WebViewPages
+//UploadPages
+import UploadImagePage from "../upload/UploadImagePage";
+import UploadImagesPage from "../upload/UploadImagesPage";
 
-import WebViewPage1 from "./WebViewPage1";
-import WebViewPage2 from "./WebViewPage2";
-import WebViewJSBridgePage from "./WebViewJSBridgePage";
+export const UploadRoutePage = 'UploadHomePage';
+export const UploadPages = {
+    UploadHomePage: {
+        screen: UploadHomePage,
+        navigationOptions: () => ({
+            title: `UploadHomePage`,
+        }),
+    },
 
+    UploadImagePage: {
+        screen: UploadImagePage,
+        navigationOptions: () => ({
+            title: `UploadImagePage`,
+        }),
+    },
 
-export const WebViewRoutePage = WebViewHomePage;
-export const WebViewPages = {
-    WebViewHomePage: {
-        screen: WebViewHomePage,
+    UploadImagesPage: {
+        screen: UploadImagesPage,
         navigationOptions: () => ({
-            title: `WebViewHomePage`,
+            title: `UploadImagesPage`,
         }),
     },
-    WebViewPage1: {
-        screen: WebViewPage1,
-        navigationOptions: () => ({
-            title: `WebViewPage1`,
-        }),
-    },
-    WebViewPage2: {
-        screen: WebViewPage2,
-        navigationOptions: () => ({
-            title: `WebViewPage2`,
-        }),
-    },
-    WebViewJSBridgePage: {
-        screen: WebViewJSBridgePage,
-        navigationOptions: () => ({
-            title: `WebViewJSBridgePage`,
-        }),
-    },
-};
+}

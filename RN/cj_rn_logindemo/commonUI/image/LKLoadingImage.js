@@ -289,14 +289,19 @@ export default class LKLoadingImage extends Component {
         return (
             <View style={[{flex:1}, style]} >
 
-                <Image style={{width: imageWidth, height: imageHeight }}
-                       source={this.props.imageSource}
-                       defaultSource={this.props.defaultSource}
-                       resizeMode={'stretch'}
-                       onLoadStart={this.onLoadStart}
-                       onLoadEnd={this.onLoadEnd}
-                       onLoad={this.onLoadSuccess}
-                       onError={this.onLoadError}
+                <Image
+                    style={{
+                        width: imageWidth,
+                        height: imageHeight,
+                        borderRadius: 4,
+                    }}
+                    source={this.props.imageSource}
+                    defaultSource={this.props.defaultSource}
+                    resizeMode={'stretch'}
+                    onLoadStart={this.onLoadStart}
+                    onLoadEnd={this.onLoadEnd}
+                    onLoad={this.onLoadSuccess}
+                    onError={this.onLoadError}
                 />
 
                 {stateComponent}

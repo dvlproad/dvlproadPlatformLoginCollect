@@ -27,14 +27,12 @@ export default class ImageHomePage extends Component {
                     { title: "HelloImagePage", page: "HelloImagePage" },
                     { title: "LoadingImagePage", page: "LoadingImagePage" },
                     { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
-                    { title: "UploadImagePage", page: "UploadImagePage" },
                 ]
             },
             { key: "images",
                 data: [
                     { title: "ImagesChooseListExamplePage", page: "ImagesChooseListExamplePage" },
                     { title: "ImagesChooseListPage", page: "ImagesChooseListPage" },
-                    { title: "UploadImagesPage", page: "UploadImagesPage" },
                 ]
             },
         ];
@@ -54,8 +52,6 @@ export default class ImageHomePage extends Component {
 import HelloImagePage from "./HelloImagePage";
 import LoadingImagePage from "./LoadingImagePage";
 import ActionLoadingImagePage from './ActionLoadingImagePage';
-import UploadImagePage from "./UploadImagePage";
-import UploadImagesPage from "./UploadImagesPage";
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
 
@@ -87,12 +83,6 @@ export const ImagePages = {
             title: `单个图片选择`,
         }),
     },
-    UploadImagePage: {
-        screen: UploadImagePage,
-        navigationOptions: () => ({
-            title: `Image上传首页`,
-        }),
-    },
 
     ImagesChooseListExamplePage: {
         screen: ImagesChooseListExamplePage,
@@ -104,12 +94,6 @@ export const ImagePages = {
         screen: ImagesChooseListPage,
         navigationOptions: () => ({
             title: `ImagesChooseListPage`,
-        }),
-    },
-    UploadImagesPage: {
-        screen: UploadImagesPage,
-        navigationOptions: () => ({
-            title: `Image数组的上传首页`,
         }),
     },
 }

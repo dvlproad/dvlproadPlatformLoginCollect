@@ -23,7 +23,7 @@ export default class UploadImagesPage extends Component {
 
             healthCerImages:[
                 {
-                    imageSource: require('./resources/healthCerImage1.png'),
+                    imageSource: require('../image/resources/healthCerImage1.png'),
                 },
                 {
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
