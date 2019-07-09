@@ -64,7 +64,7 @@ import HUDHomePage from "./hud/HUDHomePage";
 import PhotoCameraSheetPage from "./actionSheet/PhotoCameraSheetPage";
 import ActionSheetPage from "./actionSheet/ActionSheetPage";
 
-export const ModalRoutePage = ModalHomePage;
+export const ModalRoutePage = 'ModalHomePage';
 export const ModalPages = {
     ModalHomePage: {
         screen: ModalHomePage,

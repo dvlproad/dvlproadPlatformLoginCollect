@@ -26,13 +26,13 @@ export default class LoadingImagePage extends Component {
                 <Text style={{marginTop:20}}>LoadingImage(小图)</Text>
                 <LKLoadingImage
                     style={{width: 200, height: 200, backgroundColor:'orange'}}
-                    imageSource={{uri:this.state.showingCarImageUrl}}
+                    source={{uri:this.state.showingCarImageUrl}}
                 />
 
                 <Text style={{marginTop:20}}>LoadingImage(大图)</Text>
                 <LKLoadingImage
                     style={{width: 200, height: 200, backgroundColor:'orange'}}
-                    imageSource={{uri: this.state.showingLandscapeImageUrl}}
+                    source={{uri: this.state.showingLandscapeImageUrl}}
                 />
 
                 <LKWhiteBGButton

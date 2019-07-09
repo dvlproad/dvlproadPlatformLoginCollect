@@ -210,12 +210,14 @@ export default class LKImagesChooseList extends Component {
                 renderItem={({ item, index }) => {
                     return (
                         <LKActionLoadingImage
-                            style={{marginRight:boxHorizontalInterval}}
+                            style={{
+                                marginRight: boxHorizontalInterval,
+                            }}
                             imageWidth={boxWidth}
                             imageHeight={boxHeight}
-                            imageSource={item.imageSource}
+                            source={item.imageSource}
                             defaultSource={this.props.imageDefaultSource}
-                            showImageBorder={this.props.showImageBorder}
+                            showImageBorder={this.isAddIcon(index)?false:this.props.showImageBorder}
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}

@@ -63,7 +63,7 @@ export default class ActionLoadingImagePage extends Component {
                     }}
                     imageWidth={164}
                     imageHeight={108}
-                    imageSource={this.state.imageSource}
+                    source={this.state.imageSource}
                     buttonIndex={0}
 
                     clickButtonHandle={this.clickButtonHandle}
@@ -82,7 +82,7 @@ export default class ActionLoadingImagePage extends Component {
                     }}
                     imageWidth={164}
                     imageHeight={108}
-                    imageSource={require('./resources/pickImage_blue.png')}
+                    source={require('./resources/pickImage_blue.png')}
                     buttonIndex={1}
 
                     clickButtonHandle={this.clickButtonHandle}

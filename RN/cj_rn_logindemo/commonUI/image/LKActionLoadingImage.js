@@ -7,7 +7,7 @@ import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
                 <LKActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
                                     imageWidth={164}
                                     imageHeight={108}
-                                    imageSource={this.state.imageSource}
+                                    source={this.state.imageSource}
                                     buttonIndex={buttonIndex}
 
                                     clickButtonHandle={this.clickButtonHandle}
@@ -28,7 +28,7 @@ export default class LKActionLoadingImage extends Component {
     static propTypes = {
         imageWidth: PropTypes.number.isRequired,
         imageHeight: PropTypes.number.isRequired,
-        //imageSource: PropTypes.number.isRequired,    //图片
+        //source: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
         showImageBorder: PropTypes.bool,      //是否显示图片边框(默认否)
 
@@ -43,6 +43,10 @@ export default class LKActionLoadingImage extends Component {
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度
+        // 判断图片是否已经显示出来了
+        // 只用于处理以下体验不友好的特殊情况：从本地上传的图片会得到网络图片地址，
+        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好
+        hasShow: PropTypes.bool,
 
         changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
@@ -50,7 +54,7 @@ export default class LKActionLoadingImage extends Component {
     static defaultProps = {
         imageWidth: 0,
         imageHeight: 0,
-        imageSource: require('./resources/imageDefault.png'),
+        source: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
         showImageBorder: false,
 
@@ -65,6 +69,7 @@ export default class LKActionLoadingImage extends Component {
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
+        hasShow: false,
 
         changeShowDebugMessage: false,
     };
@@ -85,7 +90,7 @@ export default class LKActionLoadingImage extends Component {
         const boxWidth = this.props.imageWidth;
         const boxHeight = this.props.imageHeight;
 
-        let imageSource = this.props.imageSource;
+        let imageSource = this.props.source;
 
         const deleteButtonWidth = 22;
         const imageWidth = boxWidth-deleteButtonWidth/2;
@@ -113,7 +118,7 @@ export default class LKActionLoadingImage extends Component {
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
                     <LKLoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
-                                    imageSource={imageSource}
+                                    source={imageSource}
                                     defaultSource={this.props.defaultSource}
                                     showImageBorder={this.props.showImageBorder}
                                     buttonIndex={buttonIndex}

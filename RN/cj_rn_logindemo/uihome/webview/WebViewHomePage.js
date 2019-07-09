@@ -51,7 +51,7 @@ import WebViewPage2 from "./WebViewPage2";
 import WebViewJSBridgePage from "./WebViewJSBridgePage";
 
 
-export const WebViewRoutePage = WebViewHomePage;
+export const WebViewRoutePage = 'WebViewHomePage';
 export const WebViewPages = {
     WebViewHomePage: {
         screen: WebViewHomePage,

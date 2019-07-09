@@ -8,6 +8,25 @@ import {
 } from 'react-navigation';
 
 
+/**
+ * 为screen自动隐藏tabar
+ * @param screen
+ */
+function autoHiddenTabbar(screen) {
+    screen.navigationOptions = ({ navigation }) => {
+        let tabBarVisible = true;
+        if (navigation.state.index > 0) {
+            tabBarVisible = false;
+        }
+        return {
+            tabBarVisible,
+        };
+    };
+
+    return screen;
+}
+
+
 //ui
 import {UIPages, UIRoutePage} from "../uihome/UIHomePage";
 
@@ -19,7 +38,7 @@ const uiscreen = createAppContainer(createStackNavigator(
 ));
 
 const uitab = {
-    screen: uiscreen,
+    screen: autoHiddenTabbar(uiscreen),
     navigationOptions: ({ navigation }) => ({
         title: 'BaseUI',
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -46,7 +65,7 @@ const foundationscreen = createAppContainer(createStackNavigator(
 ));
 
 const foundationtab = {
-    screen: foundationscreen,
+    screen: autoHiddenTabbar(foundationscreen),
     navigationOptions: ({ navigation }) => ({
         title: 'Foundation',
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -71,7 +90,7 @@ const utilscreen = createAppContainer(createStackNavigator(
 ));
 
 const utiltab = {
-    screen: utilscreen,
+    screen: autoHiddenTabbar(utilscreen),
     navigationOptions: ({ navigation }) => ({
         title: 'BaseUtil',
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -96,7 +115,7 @@ const lifecyclescreen = createAppContainer(createStackNavigator(
 ));
 
 const lifecycletab = {
-    screen: lifecyclescreen,
+    screen: autoHiddenTabbar(lifecyclescreen),
     navigationOptions: ({ navigation }) => ({
         title: 'Lifecycle',
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -122,7 +141,7 @@ const healthcerscreen = createAppContainer(createStackNavigator(
 ));
 
 const healthcertab = {
-    screen: healthcerscreen,
+    screen: autoHiddenTabbar(healthcerscreen),
     navigationOptions: ({ navigation }) => ({
         title: '健康证',
         tabBarIcon: ({ focused, tintColor }) => (
@@ -148,7 +167,7 @@ const helloscreen = createAppContainer(createStackNavigator(
 ));
 
 const hellotab = {
-    screen: helloscreen,
+    screen: autoHiddenTabbar(helloscreen),
     navigationOptions: ({ navigation }) => ({
         title: 'Hello',
         tabBarIcon: ({ focused, horizontal, tintColor }) => {

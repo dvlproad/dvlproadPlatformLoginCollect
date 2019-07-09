@@ -5,7 +5,7 @@ LKLoadingImage:图片控件(只含加载动画,但不含其他可操作事件) �
 import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
 
                 <LKLoadingImage style={{width: 200, height: 200, backgroundColor:'red'}}
-                                imageSource={{uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}}
+                                source={{uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}}
                 />
 
  */
@@ -34,7 +34,7 @@ export var ImageUploadType = {
 
 export default class LKLoadingImage extends Component {
     static propTypes = {
-        //imageSource: PropTypes.number.isRequired,    //图片
+        //source: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
         showImageBorder: PropTypes.bool,        //是否显示图片边框(默认否)
 
@@ -44,12 +44,16 @@ export default class LKLoadingImage extends Component {
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度(值范围为0到100)
+        // 判断图片是否已经显示出来了
+        // 只用于处理以下体验不友好的特殊情况：从本地上传的图片会得到网络图片地址，
+        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好
+        hasShow: PropTypes.bool,
 
         changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
-        imageSource: require('./resources/imageDefault.png'),
+        source: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
         showImageBorder: false,
 
@@ -59,6 +63,7 @@ export default class LKLoadingImage extends Component {
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
+        hasShow: false,
 
         changeShowDebugMessage: false,
     };
@@ -74,7 +79,7 @@ export default class LKLoadingImage extends Component {
     }
 
     componentWillMount(): void {
-        let isNetworkImage = this.checkIsNetworkImage(this.props.imageSource);
+        let isNetworkImage = this.checkIsNetworkImage(this.props.source);
         this.setState({
             isNetworkImage: isNetworkImage,
         })
@@ -156,6 +161,10 @@ export default class LKLoadingImage extends Component {
     getFormalImageStateText=()=> {
         let formalImageStateText = '';
         switch (this.props.uploadType) {
+            case ImageUploadType.Waiting: {
+                formalImageStateText = '准备上传';
+                break;
+            }
             case ImageUploadType.Uploading: {
                 formalImageStateText = this.changeTwoDecimal_f(this.props.uploadProgress) + '%';
                 break;
@@ -284,7 +293,11 @@ export default class LKLoadingImage extends Component {
 
         let stateComponent = (
             <View style={{backgroundColor:stateBGColor, position:'absolute', width:stateTextWidth, height:stateTextHeight}}>
-                <Text style={stateTextStyle}>{imageStateText}</Text>
+                <Text
+                    style={stateTextStyle}
+                >
+                    {imageStateText}
+                </Text>
             </View>
         );
 
@@ -292,14 +305,17 @@ export default class LKLoadingImage extends Component {
             <View style={[{flex:1}, style]} >
 
                 <Image
-                    style={{
-                        width: imageWidth,
-                        height: imageHeight,
-                        borderRadius: 6,
-                        borderWidth: this.props.showImageBorder?1:0,
-                        borderColor: "#E5E5E5",
-                    }}
-                    source={this.props.imageSource}
+                    style={[
+                        {
+                            width: imageWidth,
+                            height: imageHeight,
+                            borderRadius: 6,
+                            borderWidth: this.props.showImageBorder?1:0,
+                            borderColor: "#E5E5E5",
+                        },
+                        this.props.style
+                    ]}
+                    source={this.props.source}
                     defaultSource={this.props.defaultSource}
                     resizeMode={'stretch'}
                     onLoadStart={this.onLoadStart}
