@@ -120,7 +120,7 @@ export default class LKImagesChooseList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
+            //renderImageSources: props.imageSources, //可能在使用过程中会加入addIcon元素
             addIconCurIndex: -1,   //添加按钮的当前索引的值①等于-1代表没有添加显示；②大于imageMaxCount则不显示
 
             imageLoadedCount: 0//完成加载的图片个数

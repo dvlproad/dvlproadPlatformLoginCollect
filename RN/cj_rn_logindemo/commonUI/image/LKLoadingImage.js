@@ -301,9 +301,18 @@ export default class LKLoadingImage extends Component {
             </View>
         );
 
-        return (
-            <View style={[{flex:1}, style]} >
+        let showLoadingHUD = this.state.loadStatus == ImageLoadStatus.Loading;
+        if (typeof(this.props.hasShow) != "undefined") { //外部未设置
 
+        }
+
+        return (
+            <View
+                style={[
+                    {flex:1},
+                    style
+                ]}
+            >
                 <Image
                     style={[
                         {
@@ -313,7 +322,7 @@ export default class LKLoadingImage extends Component {
                             borderWidth: this.props.showImageBorder?1:0,
                             borderColor: "#E5E5E5",
                         },
-                        this.props.style
+                        // this.props.style
                     ]}
                     source={this.props.source}
                     defaultSource={this.props.defaultSource}
@@ -334,7 +343,7 @@ export default class LKLoadingImage extends Component {
                     }}
                     size="large"
                     color="#172991"
-                    animating={this.state.loadStatus == ImageLoadStatus.Loading}
+                    animating={showLoadingHUD}
                 />
             </View>
         );
