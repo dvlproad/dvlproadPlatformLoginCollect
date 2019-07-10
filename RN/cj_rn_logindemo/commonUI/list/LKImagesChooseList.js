@@ -254,6 +254,7 @@ export default class LKImagesChooseList extends Component {
 
                             uploadType={item.uploadType}
                             uploadProgress={item.uploadProgress}
+                            needLoadingAnimation={item.needLoadingAnimation}
 
                             changeShowDebugMessage={this.props.changeShowDebugMessage}
                         />
