@@ -233,10 +233,10 @@ export default class LKImagesChooseList extends Component {
                     return (
                         <LKActionLoadingImage
                             style={{
+                                width: boxWidth,
+                                height: boxHeight,
                                 marginRight: boxHorizontalInterval,
                             }}
-                            imageWidth={boxWidth}
-                            imageHeight={boxHeight}
                             source={item.imageSource}
                             defaultSource={this.props.imageDefaultSource}
                             imageBorderStyle={this.getImageBorderStyle(index)}

@@ -10,6 +10,7 @@ var carImageUrl = 'https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10
 var landscapeImageUrl = 'https://h1.ioliu.cn//bing/Transfagarasan_ZH-CN5760731327_1920x1080.jpg';
 var mountainroadImageUrl = 'https://h1.ioliu.cn//bing/Transfagarasan_ZH-CN5760731327_1920x1080.jpg';
 
+export const Title_LoadingImagePage1 = `LoadingImagePage1(只看加载动画)`;
 export default class LoadingImagePage1 extends Component {
     constructor(props) {
         super(props);

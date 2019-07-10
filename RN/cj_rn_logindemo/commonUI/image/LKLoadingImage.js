@@ -86,6 +86,10 @@ export default class LKLoadingImage extends Component {
         }
     }
 
+    componentDidMount(): void {
+        this.state.isNetworkImage = this.checkIsNetworkImage(this.props.source);
+    }
+
     componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
         if (this.props.source !== nextProps.source){
             let isNetworkImage = this.checkIsNetworkImage(nextProps.source);
@@ -147,7 +151,6 @@ export default class LKLoadingImage extends Component {
      * @param {*} error
      */
     onLoadError=(error) => {
-        console.log(error);
         this.setState({
             loadStatus: ImageLoadStatus.Failure
         });

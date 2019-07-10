@@ -6,6 +6,7 @@ import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
 import OtherLoadingImage from '../../commonUI/image/OtherLoadingImage';
 import {LKBlueBGButton, LKWhiteBGButton} from "../../commonUI/button/LKTextButton";
 
+export const Title_LoadingImagePage2 = `LoadingImagePage2(看模拟上传图片时候的加载动画)`;
 export default class LoadingImagePage2 extends Component {
     constructor(props) {
         super(props);

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import HomeSectionList from "../../commonUI/list/HomeSectionList";
 
+export const Title_ImageHomePage = `ImageHomePage(图片首页)`;
 export default class ImageHomePage extends Component {
 
     constructor(props) {
@@ -27,6 +28,7 @@ export default class ImageHomePage extends Component {
                     { title: "HelloImagePage", page: "HelloImagePage" },
                     { title: "LoadingImagePage1", page: "LoadingImagePage1" },
                     { title: "LoadingImagePage2", page: "LoadingImagePage2" },
+                    { title: "LoadingImagePage3", page: "LoadingImagePage3" },
                     { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
                 ]
             },
@@ -51,18 +53,19 @@ export default class ImageHomePage extends Component {
 
 //ImagePages
 import HelloImagePage from "./HelloImagePage";
-import LoadingImagePage1 from "./LoadingImagePage1";
-import LoadingImagePage2 from "./LoadingImagePage2";
+import LoadingImagePage1, {Title_LoadingImagePage1} from "./LoadingImagePage1";
+import LoadingImagePage2, {Title_LoadingImagePage2} from "./LoadingImagePage2";
 import ActionLoadingImagePage from './ActionLoadingImagePage';
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
+import LoadingImagePage3, {Title_LoadingImagePage3} from "./LoadingImagePage3";
 
 export const ImageRoutePage = 'ImageHomePage';
 export const ImagePages = {
     ImageHomePage: {
         screen: ImageHomePage,
         navigationOptions: () => ({
-            title: `ImageHomePage`,
+            title: Title_ImageHomePage,
         }),
     },
 
@@ -76,13 +79,19 @@ export const ImagePages = {
     LoadingImagePage1: {
         screen: LoadingImagePage1,
         navigationOptions: () => ({
-            title: `LoadingImagePage1(只看加载动画)`,
+            title: Title_LoadingImagePage1,
         }),
     },
     LoadingImagePage2: {
         screen: LoadingImagePage2,
         navigationOptions: () => ({
-            title: `LoadingImagePage2(看模拟上传图片时候的加载动画)`,
+            title: Title_LoadingImagePage2,
+        }),
+    },
+    LoadingImagePage3: {
+        screen: LoadingImagePage3,
+        navigationOptions: () => ({
+            title: Title_LoadingImagePage3,
         }),
     },
     ActionLoadingImagePage: {
