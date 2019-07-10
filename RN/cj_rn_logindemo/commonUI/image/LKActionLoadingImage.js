@@ -4,33 +4,44 @@ LKActionLoadingImage:图片控件(含加载动画和其他可操作事件) 的�
 
 import LKActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 
-                <LKActionLoadingImage style={{width: 164, height: 108, backgroundColor:'red'}}
-                                    imageWidth={164}
-                                    imageHeight={108}
-                                    source={this.state.imageSource}
-                                    buttonIndex={buttonIndex}
+                <LKActionLoadingImage
+                    style={{
+                        width: 164, height: 108, backgroundColor:'red', borderRadius:10,
+                        marginTop: 20,
+                    }}
+                    imageBorderStyle={{
+                        borderRadius: 6,
+                        borderWidth: 3,
+                        borderColor: "cyan",
+                    }}
+                    source={{uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562747201772&di=e5e02e2208aea4acdfd1fa92d4a10d42&imgtype=0&src=http%3A%2F%2Fimg1.ph.126.net%2FI9-_x2ze5vz07q7YorAc1Q%3D%3D%2F151715012463950227.jpg'}}
 
-                                    clickButtonHandle={this.clickButtonHandle}
-                                    deleteImageHandle={this.deleteImageHandle}
-
-                                    isEditing={true}
-                                    isAddIcon={this.isAddIcon(buttonIndex)}
+                    isEditing={true}
+                    uploadType={ImageUploadType.Uploading}
+                    uploadProgress={60}
+                    clickButtonHandle={()=>{
+                        LKToastUtil.showMessage('点击图片');
+                    }}
+                    deleteImageHandle={()=>{
+                        LKToastUtil.showMessage('点击删除');
+                    }}
                 />
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, ViewPropTypes} from 'react-native';
 import LKLoadingImage, { ImageUploadType } from './LKLoadingImage';
 import PropTypes from "prop-types";
 import {LKDeleteButton} from "../button/LKImageButton";
 
+const viewPropTypes = ViewPropTypes || View.propTypes;
+const stylePropTypes = viewPropTypes.style;
+
 export default class LKActionLoadingImage extends Component {
     static propTypes = {
-        imageWidth: PropTypes.number.isRequired,
-        imageHeight: PropTypes.number.isRequired,
         //source: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
-        showImageBorder: PropTypes.bool,      //是否显示图片边框(默认否)
+        imageBorderStyle: stylePropTypes,   //图片边框样式
 
         clickButtonHandle: PropTypes.func,
         deleteImageHandle: PropTypes.func,
@@ -43,20 +54,22 @@ export default class LKActionLoadingImage extends Component {
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度
-        // 判断图片是否已经显示出来了
-        // 只用于处理以下体验不友好的特殊情况：从本地上传的图片会得到网络图片地址，
-        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好
-        hasShow: PropTypes.bool,
+        // 是否需要加载动画(默认需要)
+        // 有以下体验不友好的情况需要特殊处理：即从本地上传的图片会得到网络图片地址，
+        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好，需要设置本属性为false
+        needLoadingAnimation: PropTypes.bool,
 
         changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
-        imageWidth: 0,
-        imageHeight: 0,
         source: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
-        showImageBorder: false,
+        imageBorderStyle: {
+            borderRadius: 6,
+            borderWidth: 0,
+            borderColor: "#E5E5E5",
+        },
 
         clickButtonHandle: (buttonIndex)=>{},
         deleteImageHandle: (buttonIndex)=>{},
@@ -69,7 +82,7 @@ export default class LKActionLoadingImage extends Component {
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
-        hasShow: false,
+        needLoadingAnimation: true,
 
         changeShowDebugMessage: false,
     };
@@ -87,45 +100,68 @@ export default class LKActionLoadingImage extends Component {
     render() {
         const { style } = this.props;
 
-        const boxWidth = this.props.imageWidth;
-        const boxHeight = this.props.imageHeight;
+        let buttonIndex = this.props.buttonIndex;
 
-        let imageSource = this.props.source;
+        const boxWidth = this.props.style.width;
+        const boxHeight = this.props.style.height;
+        let testBoxStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'red'} : null;
+        let boxStyle = [
+            {width:boxWidth},
+            style,
+            testBoxStyle
+        ];
 
+        // 图片删除按钮
         const deleteButtonWidth = 22;
+        let shouldShowDeleteButton = this.props.isEditing && !this.props.isAddIcon;
+        let deleteButtonStyle = {
+            position:'absolute',
+            width: deleteButtonWidth,
+            height: deleteButtonWidth
+        };
+        let deleteImageButton = shouldShowDeleteButton ?
+            (
+                <LKDeleteButton
+                    style={deleteButtonStyle}
+                    onPress={()=> {
+                        this.props.deleteImageHandle(this.props.buttonIndex);
+                    }}
+                />
+            )
+            :
+            null;
+
+        // 图片展示视图
         const imageWidth = boxWidth-deleteButtonWidth/2;
         const imageHeight = boxHeight-deleteButtonWidth/2;
         const imageTopRightPadding = deleteButtonWidth/2;
+        let imageStyle = {
+            width: imageWidth,
+            height: imageHeight,
+            marginTop: imageTopRightPadding,
+            marginRight:imageTopRightPadding
+        };
 
-        let buttonIndex = this.props.buttonIndex;
-
-        let deleteImageButton = this.props.isEditing && !this.props.isAddIcon ? <LKDeleteButton
-            style={{ position:'absolute', width: deleteButtonWidth, height: deleteButtonWidth}}
-            onPress={()=> {
-                this.props.deleteImageHandle(buttonIndex);
-            }}
-        /> : null;
-
-
-        let testBoxStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'red'} : null;
 
         return (
             <TouchableOpacity
-                style={[{width:boxWidth}, style, testBoxStyle]}
+                style={boxStyle}
                 onPress={()=> {
                     this.props.clickButtonHandle(buttonIndex);
                 }}
             >
                 <View style={{flex:1, flexDirection:"row-reverse"}} >
-                    <LKLoadingImage style={{width: imageWidth, height: imageHeight, marginTop: imageTopRightPadding, marginRight:imageTopRightPadding }}
-                                    source={imageSource}
-                                    defaultSource={this.props.defaultSource}
-                                    showImageBorder={this.props.showImageBorder}
-                                    buttonIndex={buttonIndex}
-                                    onLoadComplete={this.props.onLoadComplete}
-                                    uploadType={this.props.uploadType}
-                                    uploadProgress={this.props.uploadProgress}
-                                    changeShowDebugMessage={this.props.changeShowDebugMessage}
+                    <LKLoadingImage
+                        style={imageStyle}
+                        source={this.props.source}
+                        defaultSource={this.props.defaultSource}
+                        imageBorderStyle={this.props.imageBorderStyle}
+                        buttonIndex={buttonIndex}
+                        onLoadComplete={this.props.onLoadComplete}
+                        uploadType={this.props.uploadType}
+                        uploadProgress={this.props.uploadProgress}
+                        needLoadingAnimation={this.props.needLoadingAnimation}
+                        changeShowDebugMessage={this.props.changeShowDebugMessage}
                     />
                     {deleteImageButton}
                 </View>

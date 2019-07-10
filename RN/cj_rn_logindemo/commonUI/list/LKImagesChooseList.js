@@ -66,9 +66,12 @@ import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { FlatList, Text } from "react-native";
+import {FlatList, Text, View, ViewPropTypes} from "react-native";
 import LKActionLoadingImage  from '../image/LKActionLoadingImage';
 import { ImageUploadType } from '../image/LKLoadingImage';
+
+const viewPropTypes = ViewPropTypes || View.propTypes;
+const stylePropTypes = viewPropTypes.style;
 
 export default class LKImagesChooseList extends Component {
     static propTypes = {
@@ -79,7 +82,7 @@ export default class LKImagesChooseList extends Component {
 
         imageSources: PropTypes.array,
         imageDefaultSource: PropTypes.number,
-        showImageBorder: PropTypes.bool,      //是否显示图片边框(默认否)
+        imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
         browseImageHandle: PropTypes.func,
         addImageHandle: PropTypes.func,
@@ -102,7 +105,11 @@ export default class LKImagesChooseList extends Component {
 
         imageSources: [],
         //imageDefaultSource: '',
-        showImageBorder: false,
+        imageBorderStyle: {
+            borderRadius: 6,
+            borderWidth: 0,
+            borderColor: "#E5E5E5",
+        },
 
         browseImageHandle: (buttonIndex)=>{},
         addImageHandle: (buttonIndex)=>{},
@@ -163,6 +170,19 @@ export default class LKImagesChooseList extends Component {
         this.props.deleteImageHandle(index);
     }
 
+    // 获取指定位置的图片的边框(添加按钮的边框默认无)
+    getImageBorderStyle=(index)=>{
+        let imageBorderStyle = this.props.imageBorderStyle;
+        if (this.isAddIcon(index)) {
+            imageBorderStyle = {
+                borderRadius: 6,
+                borderWidth: 0,
+                borderColor: "#E5E5E5",
+            }
+        }
+        return imageBorderStyle;
+    }
+
     render() {
         const numColumns = this.props.numColumns;
         const boxHorizontalInterval = this.props.boxHorizontalInterval;
@@ -202,6 +222,8 @@ export default class LKImagesChooseList extends Component {
             }
         }
 
+
+
         return (
             <FlatList
                 style={[this.props.style, testListStyle]}
@@ -217,7 +239,7 @@ export default class LKImagesChooseList extends Component {
                             imageHeight={boxHeight}
                             source={item.imageSource}
                             defaultSource={this.props.imageDefaultSource}
-                            showImageBorder={this.isAddIcon(index)?false:this.props.showImageBorder}
+                            imageBorderStyle={this.getImageBorderStyle(index)}
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}

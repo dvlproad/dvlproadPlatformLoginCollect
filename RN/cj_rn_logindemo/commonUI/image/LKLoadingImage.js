@@ -11,8 +11,11 @@ import LKLoadingImage from '../../commonUI/image/LKLoadingImage';
  */
 
 import React, { Component } from 'react';
-import {StyleSheet, View, Image, Text, ActivityIndicator} from "react-native";
+import {StyleSheet, View, Image, Text, ActivityIndicator, ViewPropTypes} from "react-native";
 import PropTypes from "prop-types";
+
+const viewPropTypes = ViewPropTypes || View.propTypes;
+const stylePropTypes = viewPropTypes.style;
 
 /// 图片加载状态
 var ImageLoadStatus = {
@@ -32,11 +35,12 @@ export var ImageUploadType = {
 };
 
 
+
 export default class LKLoadingImage extends Component {
     static propTypes = {
         //source: PropTypes.number.isRequired,    //图片
         defaultSource: PropTypes.number,
-        showImageBorder: PropTypes.bool,        //是否显示图片边框(默认否)
+        imageBorderStyle: stylePropTypes,   //图片边框样式
 
         buttonIndex: PropTypes.number.isRequired,
 
@@ -44,10 +48,10 @@ export default class LKLoadingImage extends Component {
 
         uploadType: PropTypes.number,       //图片上传类型
         uploadProgress: PropTypes.number,   //图片上传进度(值范围为0到100)
-        // 判断图片是否已经显示出来了
-        // 只用于处理以下体验不友好的特殊情况：从本地上传的图片会得到网络图片地址，
-        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好
-        hasShow: PropTypes.bool,
+        // 是否需要加载动画(默认需要)
+        // 有以下体验不友好的情况需要特殊处理：即从本地上传的图片会得到网络图片地址，
+        // 如果此时把网络图片的地址更新上去，会导致再显示菊花loading，不大友好，需要设置本属性为false
+        needLoadingAnimation: PropTypes.bool,
 
         changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
@@ -55,7 +59,11 @@ export default class LKLoadingImage extends Component {
     static defaultProps = {
         source: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
-        showImageBorder: false,
+        imageBorderStyle: {
+            borderRadius: 6,
+            borderWidth: 0,
+            borderColor: "#E5E5E5",
+        },
 
         buttonIndex: 0,
 
@@ -63,7 +71,7 @@ export default class LKLoadingImage extends Component {
 
         uploadType: ImageUploadType.NotNeed,
         uploadProgress: 0,
-        hasShow: false,
+        needLoadingAnimation: false,
 
         changeShowDebugMessage: false,
     };
@@ -78,23 +86,14 @@ export default class LKLoadingImage extends Component {
         }
     }
 
-    componentWillMount(): void {
-        let isNetworkImage = this.checkIsNetworkImage(this.props.source);
-        this.setState({
-            isNetworkImage: isNetworkImage,
-        })
+    componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+        if (this.props.source !== nextProps.source){
+            let isNetworkImage = this.checkIsNetworkImage(nextProps.source);
+            this.setState({
+                isNetworkImage: isNetworkImage,
+            })
+        }
     }
-
-    // componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
-    //     if (this.props.imageSource !== nextProps.imageSource){
-    //         //在这里我们仍可以通过this.props来获取旧的外部状态
-    //         //通过新旧状态的对比，来决定是否进行其他方法
-    //         let isNetworkImage = this.checkIsNetworkImage(nextProps.imageSource);
-    //         this.setState({
-    //             isNetworkImage: isNetworkImage,
-    //         })
-    //     }
-    // }
 
     /**
      * 是否是网络图片
@@ -131,6 +130,7 @@ export default class LKLoadingImage extends Component {
         })
     }
 
+
     /**
      * 加载成功(当图片加载成功之后，回调该方法)
      */
@@ -147,7 +147,7 @@ export default class LKLoadingImage extends Component {
      * @param {*} error
      */
     onLoadError=(error) => {
-        console.log(error)
+        console.log(error);
         this.setState({
             loadStatus: ImageLoadStatus.Failure
         });
@@ -301,10 +301,21 @@ export default class LKLoadingImage extends Component {
             </View>
         );
 
-        let showLoadingHUD = this.state.loadStatus == ImageLoadStatus.Loading;
-        if (typeof(this.props.hasShow) != "undefined") { //外部未设置
-
+        let showLoadingHUD = false;
+        if (this.props.needLoadingAnimation) {
+            showLoadingHUD = this.state.loadStatus == ImageLoadStatus.Loading;
         }
+
+        let imageStyle = [
+            {
+                width: imageWidth,
+                height: imageHeight,
+                borderRadius: 6,
+                borderWidth: 0,
+                borderColor: "#E5E5E5",
+            },
+            this.props.imageBorderStyle
+        ];
 
         return (
             <View
@@ -314,16 +325,7 @@ export default class LKLoadingImage extends Component {
                 ]}
             >
                 <Image
-                    style={[
-                        {
-                            width: imageWidth,
-                            height: imageHeight,
-                            borderRadius: 6,
-                            borderWidth: this.props.showImageBorder?1:0,
-                            borderColor: "#E5E5E5",
-                        },
-                        // this.props.style
-                    ]}
+                    style={imageStyle}
                     source={this.props.source}
                     defaultSource={this.props.defaultSource}
                     resizeMode={'stretch'}

@@ -25,7 +25,8 @@ export default class ImageHomePage extends Component {
             { key: "image",
                 data: [
                     { title: "HelloImagePage", page: "HelloImagePage" },
-                    { title: "LoadingImagePage", page: "LoadingImagePage" },
+                    { title: "LoadingImagePage1", page: "LoadingImagePage1" },
+                    { title: "LoadingImagePage2", page: "LoadingImagePage2" },
                     { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
                 ]
             },
@@ -50,7 +51,8 @@ export default class ImageHomePage extends Component {
 
 //ImagePages
 import HelloImagePage from "./HelloImagePage";
-import LoadingImagePage from "./LoadingImagePage";
+import LoadingImagePage1 from "./LoadingImagePage1";
+import LoadingImagePage2 from "./LoadingImagePage2";
 import ActionLoadingImagePage from './ActionLoadingImagePage';
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
@@ -71,10 +73,16 @@ export const ImagePages = {
         }),
     },
 
-    LoadingImagePage: {
-        screen: LoadingImagePage,
+    LoadingImagePage1: {
+        screen: LoadingImagePage1,
         navigationOptions: () => ({
-            title: `Image加载首页`,
+            title: `LoadingImagePage1(只看加载动画)`,
+        }),
+    },
+    LoadingImagePage2: {
+        screen: LoadingImagePage2,
+        navigationOptions: () => ({
+            title: `LoadingImagePage2(看模拟上传图片时候的加载动画)`,
         }),
     },
     ActionLoadingImagePage: {
