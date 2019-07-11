@@ -90,7 +90,7 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'LoadingImagePage3';
+export const UIRoutePage = 'ComJSSingleDatePage1';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,
