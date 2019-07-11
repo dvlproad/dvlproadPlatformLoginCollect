@@ -40,7 +40,8 @@ export default class PickHomePage extends Component {
                     { title: "ComJSPickersPage", page: "ComJSPickersPage" },
                     { title: "ComJSSingleDatePage1", page: "ComJSSingleDatePage1" },
                     { title: "ComJSDatePickerPage2", page: "ComJSDatePickerPage2" },
-                    { title: "ComJSSingleDatePage2", page: "ComJSSingleDatePage2" },
+                    { title: "ComJSSingleDatePage20", page: "ComJSSingleDatePage20" },
+                    { title: "ComJSSingleDatePage21", page: "ComJSSingleDatePage21" },
                     { title: "ComJSSingleDatePage3", page: "ComJSSingleDatePage3" },
                 ]
             },
@@ -78,7 +79,7 @@ import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
 //singleDate-JS
 import ComJSSingleDatePage1 from "./ComJSSingleDatePage1";
-import ComJSSingleDatePage2 from "./ComJSSingleDatePage2";
+import ComJSSingleDatePage20 from "./ComJSSingleDatePage20";
 import ComJSSingleDatePage3 from "./ComJSSingleDatePage3";
 //rangeDate
 import PickRangeDatePage from './PickRangeDatePage';
@@ -86,6 +87,7 @@ import PickRangeDatePage from './PickRangeDatePage';
 //pickImage
 import PickImagesPage from './PickImagesPage';
 import ComJSDatePickerPage2 from "./ComJSDatePickerPage2";
+import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
 
 export const PickRoutePage = 'PickHomePage';
 export const PickPages = {
@@ -138,11 +140,18 @@ export const PickPages = {
     },
 
     ComJSSingleDatePage2: {
-        screen: ComJSSingleDatePage2,
+        screen: ComJSSingleDatePage20,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,
         }),
     },
+    ComJSSingleDatePage21: {
+        screen: ComJSSingleDatePage21,
+        navigationOptions: () => ({
+            title: `单个日期选择(统一样式RN)`,
+        }),
+    },
+
     ComJSSingleDatePage3: {
         screen: ComJSSingleDatePage3,
         navigationOptions: () => ({

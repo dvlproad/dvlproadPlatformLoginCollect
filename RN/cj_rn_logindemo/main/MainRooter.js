@@ -259,7 +259,7 @@ function m_navigator(Pages, RoutePage) {
 // import {ListPages, ListRoutePage} from '../uihome/list/ListHomePage';
 // export default createAppContainer(m_navigator(ListPages, ListRoutePage));
 
-import ComJSSingleDatePage2 from "../uihome/picker/ComJSSingleDatePage2";
+import ComJSSingleDatePage20 from "../uihome/picker/ComJSSingleDatePage20";
 import ComJSPickersPage from "../uihome/picker/ComJSPickersPage";
 // export default createAppContainer(
 //     createStackNavigator(

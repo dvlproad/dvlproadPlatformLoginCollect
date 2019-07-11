@@ -26,7 +26,7 @@ export default class ComJSDatePickerPage2 extends Component {
                     }}
                     title={dateString}
                     onPress={()=>{
-                        this.datePicker.showIt(
+                        this.datePicker.showAllEvent(
                             dateString,
                             (dateString)=>{
                                 this.setState({
