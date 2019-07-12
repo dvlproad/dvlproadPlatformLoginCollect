@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import {Text, ScrollView, TouchableOpacity, View} from 'react-native';
 import LKOwnNativeActionRangeDateText, {LKRangeDateEditingType} from '../../commonUI/date/LKOwnNativeActionRangeDateText';
 import LKRangeDateText from "../../commonUI/date/LKRangeDateText";
+import {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
+import LKDatePicker, {LKDatePickerCreateTimeType} from "../../commonUI/picker/LKDatePicker";
+import LKToastUtil from "../../commonUI/toast/LKToastUtil";
 
 export default class ComJSRangeDateTextPage extends Component {
     constructor(props) {
@@ -26,6 +29,33 @@ export default class ComJSRangeDateTextPage extends Component {
             BEBeginDateString: "2012-02-29",
             BEEndDateString: "2012-03-29",
         };
+    }
+
+
+
+    helloWorld (ready) {
+        return new Promise(function (resolve, reject) {
+            if (ready) {
+                resolve("2019-03-05");
+            } else {
+                reject("2019-06-07");
+            }
+        });
+    }
+
+    /**
+     * 测试选择 yyyyMMdd 的日期
+     */
+    chooseBirthday=()=>{
+        this.birthdayDatePicker.showWithDateString(
+            this.state.beginDateString1,
+            (dateString)=>{
+                LKToastUtil.showMessage(dateString)
+                this.setState({
+                    beginDateString1: dateString,
+                })
+            }
+        )
     }
 
     render() {
@@ -60,6 +90,8 @@ export default class ComJSRangeDateTextPage extends Component {
                                  beginDateString={beginDateString1}
                                  onBeginDateChoose={()=>{
                                      return '2019-03-05';
+                                     //TODO: 怎么取到一个异步操作的值
+
                                  }}
                                  onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                      this.setState({
@@ -69,72 +101,78 @@ export default class ComJSRangeDateTextPage extends Component {
                                  }}
                 />
 
-                <Text style={{marginTop: 22}}>初始日期：有值</Text>
-                <Text>当前选择的起始日期为：{beginDateString2}</Text>
-                <Text>当前选择的结束日期为：{endDateString2}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
-                                                beginDateString={beginDateString2}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
-                                          this.setState({
-                                              beginDateString2: beginDateString,
-                                              endDateString2: endDateString
-                                          })
-                                      }}
+                <LKDatePicker
+                    datePickShowType={LKDatePickShowType.yyyyMMdd}
+                    datePickerCreateTimeType={LKDatePickerCreateTimeType.Free}
+                    ref={ref => this.birthdayDatePicker = ref}
                 />
 
-                <Text style={{marginTop: 22}}>可编辑：None</Text>
-                <Text>当前选择的起始日期为：{NNBeginDateString}</Text>
-                <Text>当前选择的结束日期为：{NNEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.None}
-                                                beginDateString={NNBeginDateString}
-                                                endDateString={NNEndDateString}
-                />
+                {/*<Text style={{marginTop: 22}}>初始日期：有值</Text>*/}
+                {/*<Text>当前选择的起始日期为：{beginDateString2}</Text>*/}
+                {/*<Text>当前选择的结束日期为：{endDateString2}</Text>*/}
+                {/*<LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}*/}
+                {/*                                beginDateString={beginDateString2}*/}
+                {/*                                onBeginDatePickChange={ (beginDateString, endDateString)=> {*/}
+                {/*                          this.setState({*/}
+                {/*                              beginDateString2: beginDateString,*/}
+                {/*                              endDateString2: endDateString*/}
+                {/*                          })*/}
+                {/*                      }}*/}
+                {/*/>*/}
 
-                <Text style={{marginTop: 22}}>可编辑：Begin</Text>
-                <Text>当前选择的起始日期为：{BNBeginDateString}</Text>
-                <Text>当前选择的结束日期为：{BNEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
-                                                beginDateString={BNBeginDateString}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
-                                          this.setState({
-                                              BNBeginDateString: beginDateString,
-                                              BNEndDateString: endDateString
-                                          })
-                                      }}
-                />
+                {/*<Text style={{marginTop: 22}}>可编辑：None</Text>*/}
+                {/*<Text>当前选择的起始日期为：{NNBeginDateString}</Text>*/}
+                {/*<Text>当前选择的结束日期为：{NNEndDateString}</Text>*/}
+                {/*<LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.None}*/}
+                {/*                                beginDateString={NNBeginDateString}*/}
+                {/*                                endDateString={NNEndDateString}*/}
+                {/*/>*/}
 
-                <Text style={{marginTop: 22}}>可编辑：End</Text>
-                <Text>当前选择的起始日期为：{NEBeginDateString}</Text>
-                <Text>当前选择的结束日期为：{NEEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.End}
-                                                endDateString={NEEndDateString}
-                                                onEndDatePickChange={ (beginDateString, endDateString)=> {
-                                          this.setState({
-                                              NEBeginDateString: beginDateString,
-                                              NEEndDateString: endDateString
-                                          })
-                                      }}
-                />
+                {/*<Text style={{marginTop: 22}}>可编辑：Begin</Text>*/}
+                {/*<Text>当前选择的起始日期为：{BNBeginDateString}</Text>*/}
+                {/*<Text>当前选择的结束日期为：{BNEndDateString}</Text>*/}
+                {/*<LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}*/}
+                {/*                                beginDateString={BNBeginDateString}*/}
+                {/*                                onBeginDatePickChange={ (beginDateString, endDateString)=> {*/}
+                {/*                          this.setState({*/}
+                {/*                              BNBeginDateString: beginDateString,*/}
+                {/*                              BNEndDateString: endDateString*/}
+                {/*                          })*/}
+                {/*                      }}*/}
+                {/*/>*/}
 
-                <Text style={{marginTop: 22}}>可编辑：BeginEnd</Text>
-                <Text>当前选择的起始日期为：{BEBeginDateString}</Text>
-                <Text>当前选择的结束日期为：{BEEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.BeginEnd}
-                                                beginDateString={BEBeginDateString}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
-                                          this.setState({
-                                              BEBeginDateString: beginDateString,
-                                              BEEndDateString: endDateString
-                                          })
-                                      }}
-                                                endDateString={BEEndDateString}
-                                                onEndDatePickChange={ (beginDateString, endDateString)=> {
-                                          this.setState({
-                                              BEBeginDateString: beginDateString,
-                                              BEEndDateString: endDateString
-                                          })
-                                      }}
-                />
+                {/*<Text style={{marginTop: 22}}>可编辑：End</Text>*/}
+                {/*<Text>当前选择的起始日期为：{NEBeginDateString}</Text>*/}
+                {/*<Text>当前选择的结束日期为：{NEEndDateString}</Text>*/}
+                {/*<LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.End}*/}
+                {/*                                endDateString={NEEndDateString}*/}
+                {/*                                onEndDatePickChange={ (beginDateString, endDateString)=> {*/}
+                {/*                          this.setState({*/}
+                {/*                              NEBeginDateString: beginDateString,*/}
+                {/*                              NEEndDateString: endDateString*/}
+                {/*                          })*/}
+                {/*                      }}*/}
+                {/*/>*/}
+
+                {/*<Text style={{marginTop: 22}}>可编辑：BeginEnd</Text>*/}
+                {/*<Text>当前选择的起始日期为：{BEBeginDateString}</Text>*/}
+                {/*<Text>当前选择的结束日期为：{BEEndDateString}</Text>*/}
+                {/*<LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.BeginEnd}*/}
+                {/*                                beginDateString={BEBeginDateString}*/}
+                {/*                                onBeginDatePickChange={ (beginDateString, endDateString)=> {*/}
+                {/*                          this.setState({*/}
+                {/*                              BEBeginDateString: beginDateString,*/}
+                {/*                              BEEndDateString: endDateString*/}
+                {/*                          })*/}
+                {/*                      }}*/}
+                {/*                                endDateString={BEEndDateString}*/}
+                {/*                                onEndDatePickChange={ (beginDateString, endDateString)=> {*/}
+                {/*                          this.setState({*/}
+                {/*                              BEBeginDateString: beginDateString,*/}
+                {/*                              BEEndDateString: endDateString*/}
+                {/*                          })*/}
+                {/*                      }}*/}
+                {/*/>*/}
 
 
             </ScrollView>
