@@ -147,6 +147,15 @@ export default class LKImagesChooseList extends Component {
             this.state.imageLoadedCount = this.state.imageLoadedCount+1;
             let isImageAllLoaded = this.state.imageLoadedCount >= this.props.imageSources.length ? true : false;
             this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+
+
+            let message = '';
+            if (isImageAllLoaded) {
+                message = "所有图片加载完成，总张数为:" + this.state.imageLoadedCount;
+            } else {
+                message = "图片总进度加载中，当前完成张数:" + this.state.imageLoadedCount;
+            }
+            console.log(message);
         }
     }
 

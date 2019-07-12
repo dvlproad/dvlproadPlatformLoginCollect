@@ -42,12 +42,13 @@ export default class PickHomePage extends Component {
                     { title: "ComJSDatePickerPage2", page: "ComJSDatePickerPage2" },
                     { title: "ComJSSingleDatePage20", page: "ComJSSingleDatePage20" },
                     { title: "ComJSSingleDatePage21", page: "ComJSSingleDatePage21" },
-                    { title: "ComJSSingleDatePage3", page: "ComJSSingleDatePage3" },
+                    { title: "ComJSSingleDatePage30", page: "ComJSSingleDatePage30" },
                 ]
             },
             { key: "RangeDate",
                 data: [
-                    { title: "PickRangeDatePage", page: "PickRangeDatePage" },
+                    { title: "OwnNativeActionRangeDateTextPage", page: "OwnNativeActionRangeDateTextPage" },
+                    { title: "ComJSRangeDateTextPage", page: "ComJSRangeDateTextPage" },
                 ]
             },
             { key: "Image",
@@ -80,14 +81,15 @@ import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
 //singleDate-JS
 import ComJSSingleDatePage1 from "./ComJSSingleDatePage1";
 import ComJSSingleDatePage20 from "./ComJSSingleDatePage20";
-import ComJSSingleDatePage3 from "./ComJSSingleDatePage3";
+import ComJSSingleDatePage30 from "./ComJSSingleDatePage30";
 //rangeDate
-import PickRangeDatePage from './PickRangeDatePage';
+import OwnNativeActionRangeDateTextPage from './OwnNativeActionRangeDateTextPage';
 
 //pickImage
 import PickImagesPage from './PickImagesPage';
 import ComJSDatePickerPage2 from "./ComJSDatePickerPage2";
 import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
+import ComJSRangeDateTextPage from "./ComJSRangeDateTextPage";
 
 export const PickRoutePage = 'PickHomePage';
 export const PickPages = {
@@ -152,17 +154,23 @@ export const PickPages = {
         }),
     },
 
-    ComJSSingleDatePage3: {
-        screen: ComJSSingleDatePage3,
+    ComJSSingleDatePage30: {
+        screen: ComJSSingleDatePage30,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,
         }),
     },
 
-    PickRangeDatePage: {
-        screen: PickRangeDatePage,
+    OwnNativeActionRangeDateTextPage: {
+        screen: OwnNativeActionRangeDateTextPage,
         navigationOptions: () => ({
-            title: `范围日期选择`,
+            title: `范围日期选择(原生平台风格)`,
+        }),
+    },
+    ComJSRangeDateTextPage: {
+        screen: ComJSRangeDateTextPage,
+        navigationOptions: () => ({
+            title: `范围日期选择(RN统一风格)`,
         }),
     },
 

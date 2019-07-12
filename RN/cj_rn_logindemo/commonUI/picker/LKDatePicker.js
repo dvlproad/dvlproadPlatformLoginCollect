@@ -51,6 +51,7 @@ export default class LKDatePicker extends Component {
         // onPickerConfirm: PropTypes.func,    //日期选择'确认'
         // onPickerCancel: PropTypes.func,     //日期选择'取消'
         // onPickerSelect: PropTypes.func,     //日期选择'变了下'
+        onCoverPress: PropTypes.func,       //点击空白区域
     };
 
     static defaultProps = {
@@ -61,6 +62,7 @@ export default class LKDatePicker extends Component {
         // onPickerConfirm: (dateString)=>{},
         // onPickerCancel: ()=>{},
         // onPickerSelect: (dateString)=>{},
+        onCoverPress: ()=>{},
     };
 
     constructor(props) {
@@ -158,6 +160,9 @@ export default class LKDatePicker extends Component {
                 }}
                 onPickerCancel={() => {
                     this.state.onPickerCancel && this.state.onPickerCancel();
+                }}
+                onCoverPress={() => {
+                    this.props.onCoverPress && this.props.onCoverPress();
                 }}
                 ref={ref => this.datePicker = ref}
             />

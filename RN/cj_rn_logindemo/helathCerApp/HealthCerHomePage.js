@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {View, ScrollView, Text, StyleSheet, Alert, Dimensions, ActivityIndicator} from 'react-native';
 import { LKEditSubmitButton } from '../commonUI/button/LKEditSubmitButton';
-import LKRangeDateComponent, {LKRangeDateEditingType} from '../commonUI/date/LKRangeDateComponent';
+import LKOwnNativeActionRangeDateText, {LKRangeDateEditingType} from '../commonUI/date/LKOwnNativeActionRangeDateText';
 import LKImagesChooseList from '../commonUI/list/LKImagesChooseList';
 import {ImageUploadType} from '../commonUI/image/LKLoadingImage';
 import LKToastUtil from '../commonUI/toast/LKToastUtil';
@@ -381,10 +381,10 @@ export default class HealthCerHomePage extends Component {
                 />
 
                 <Text style={{marginTop: 40, fontSize:15, color: "#333333"}}>健康证有效期</Text>
-                <LKRangeDateComponent style={{marginTop: 22}}
-                                      dateRangeEditingType={dateRangeEditingType}
-                                      beginDateString={beginDateString}
-                                      onBeginDateChange={ (beginDateString, endDateString)=> {
+                <LKOwnNativeActionRangeDateText style={{marginTop: 22}}
+                                                dateRangeEditingType={dateRangeEditingType}
+                                                beginDateString={beginDateString}
+                                                onBeginDateChange={ (beginDateString, endDateString)=> {
                                           this.setState({
                                               beginDateString: beginDateString,
                                               endDateString: endDateString,

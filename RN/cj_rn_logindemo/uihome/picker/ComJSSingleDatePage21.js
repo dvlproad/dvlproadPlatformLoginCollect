@@ -18,6 +18,9 @@ export default class ComJSSingleDatePage21 extends Component {
         }
     }
 
+    /**
+     * 测试选择
+     */
     chooseDate = () => {
         this.birthdayDatePicker.showWithDateString(
             '',
@@ -27,6 +30,9 @@ export default class ComJSSingleDatePage21 extends Component {
         )
     }
 
+    /**
+     * 测试选择 yyyyMMdd 的日期
+     */
     chooseBirthday=()=>{
         this.birthdayDatePicker.showWithDateString(
             this.state.birthdayDateString,
@@ -34,6 +40,21 @@ export default class ComJSSingleDatePage21 extends Component {
                 LKToastUtil.showMessage(dateString)
                 this.setState({
                     birthdayDateString: dateString,
+                })
+            }
+        )
+    }
+
+    /**
+     * 测试选择 yyyyMMddHHmmss 的日期
+     */
+    chooseFullDate= ()=> {
+        this.fullDatePicker.showWithDateString(
+            this.state.fullDateString,
+            (dateString)=>{
+                LKToastUtil.showMessage(dateString)
+                this.setState({
+                    fullDateString: dateString,
                 })
             }
         )
@@ -68,15 +89,7 @@ export default class ComJSSingleDatePage21 extends Component {
                     isBankStyle={false}
                     allowPickDate={true}
                     onPress={()=>{
-                        this.fullDatePicker.showWithDateString(
-                            this.state.fullDateString,
-                            (dateString)=>{
-                                LKToastUtil.showMessage(dateString)
-                                this.setState({
-                                    fullDateString: dateString,
-                                })
-                            }
-                        )
+                        this.chooseFullDate();
                     }}
                 />
 

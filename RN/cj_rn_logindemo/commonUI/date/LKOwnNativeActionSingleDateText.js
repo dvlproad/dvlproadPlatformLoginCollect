@@ -1,6 +1,6 @@
-// LKOwnNativeSingleDateComponent.js
+// LKOwnNativeActionSingleDateText.jss
 /* 使用示例
-import LKOwnNativeSingleDateComponent from "../../commonUI/date/LKOwnNativeSingleDateComponent";
+import LKOwnNativeActionSingleDateText from "../../commonUI/date/LKOwnNativeActionSingleDateText";
 
 export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class OwnNativeSingleDatePage extends Component {
 
     render() {
         return (
-            <LKOwnNativeSingleDateComponent style={{flex: 1}}
+            <LKOwnNativeActionSingleDateText style={{flex: 1}}
                                    placeholder= {"选择日期"}
                                    chooseDateString={this.state.beginDateString1}
                                    allowPickDate={true}
@@ -32,7 +32,7 @@ import { StyleSheet } from 'react-native';
 import PropTypes from "prop-types";
 import DatePicker from "react-native-datepicker";
 
-export default class LKOwnNativeSingleDateComponent extends Component {
+export default class LKOwnNativeActionSingleDateText extends Component {
     static propTypes = {
         isBankStyle: PropTypes.bool,    //是否没有样式
         allowPickDate: PropTypes.bool,

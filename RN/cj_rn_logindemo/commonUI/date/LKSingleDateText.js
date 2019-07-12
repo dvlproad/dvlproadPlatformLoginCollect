@@ -40,7 +40,7 @@ export default class LKSingleDateText extends Component {
 
         placeholder: PropTypes.string,
         chooseDateString: PropTypes.string,
-        onPress: PropTypes.func,
+        onPress: PropTypes.func,        //点击日期文本执行的事件(如果是在子控件中不需要设置此属性，而是重写clickDateTextAction方法)
     };
 
     static defaultProps = {
@@ -64,8 +64,9 @@ export default class LKSingleDateText extends Component {
         if (this.props.onPress) {
             this.props.onPress();
         } else {
-            LKToastUtil.showMessage('请完善点击事件');
+            //LKToastUtil.showMessage('请完善点击事件');
         }
+
     }
 
     render() {
@@ -98,8 +99,8 @@ export default class LKSingleDateText extends Component {
                               disabled={!this.props.allowPickDate}
                               onPress={this.clickDateTextAction.bind(this)}
             >
-                {this.renderDatePicker()}
                 <Text style={textStyles}>{dateString}</Text>
+                {this.renderDatePicker()}
             </TouchableOpacity>
         )
     }
