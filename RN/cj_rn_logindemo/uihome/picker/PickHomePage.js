@@ -139,7 +139,7 @@ export const PickPages = {
         }),
     },
 
-    ComJSSingleDatePage2: {
+    ComJSSingleDatePage20: {
         screen: ComJSSingleDatePage20,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,

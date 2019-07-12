@@ -4,7 +4,8 @@ import {View} from 'react-native';
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
 import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
 import LKSingleDateText from "../../commonUI/date/LKSingleDateText";
-import LKDatePicker from "../../commonUI/picker/LKDatePicker";
+import LKDatePicker, {LKDatePickerCreateTimeType} from "../../commonUI/picker/LKDatePicker";
+import LKTextButton from "../../commonUI/button/LKTextButton";
 
 
 export default class ComJSSingleDatePage21 extends Component {
@@ -17,47 +18,71 @@ export default class ComJSSingleDatePage21 extends Component {
         }
     }
 
+    chooseDate = () => {
+        this.birthdayDatePicker.showWithDateString(
+            '',
+            (dateString)=>{
+                LKToastUtil.showMessage(dateString)
+            }
+        )
+    }
+
+    chooseBirthday=()=>{
+        this.birthdayDatePicker.showWithDateString(
+            this.state.birthdayDateString,
+            (dateString)=>{
+                LKToastUtil.showMessage(dateString)
+                this.setState({
+                    birthdayDateString: dateString,
+                })
+            }
+        )
+    }
+
+
     render() {
         return (
             <View style={{flex:1, backgroundColor: '#f9fafb', justifyContent: 'center', alignItems: 'center'}}>
+                <LKTextButton
+                    style={{ width: 180, backgroundColor:'red'}}
+                    title={'yyyyMMdd的日期选择'}
+                    onPress={()=>{
+                        this.chooseDate();
+                    }}
+                />
+
                 <LKSingleDateText style={{paddingTop: 20}}
                                   placeholder={'yyyy-MM-dd'}
                                   chooseDateString={this.state.birthdayDateString}
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                      this.birthdayDatePicker.showWithDateString(
-                                          this.state.birthdayDateString,
-                                          (dateString)=>{
-                                              LKToastUtil.showMessage(dateString)
-                                              this.setState({
-                                                  birthdayDateString: dateString,
-                                              })
-                                          }
-                                      )
+                                      this.chooseBirthday();
                                   }}
                 />
 
-                <LKSingleDateText style={{paddingVertical: 20, paddingHorizontal: 10}}
-                                  placeholder={'yyyy-MM-dd HH:mm:ss'}
-                                  chooseDateString={this.state.fullDateString}
-                                  isBankStyle={false}
-                                  allowPickDate={true}
-                                  onPress={()=>{
-                                      this.fullDatePicker.showWithDateString(
-                                          this.state.fullDateString,
-                                          (dateString)=>{
-                                              LKToastUtil.showMessage(dateString)
-                                              this.setState({
-                                                  fullDateString: dateString,
-                                              })
-                                          }
-                                      )
-                                  }}
+                <LKSingleDateText
+                    style={{paddingVertical: 20, paddingHorizontal: 10}}
+                    placeholder={'yyyy-MM-dd HH:mm:ss'}
+                    chooseDateString={this.state.fullDateString}
+                    isBankStyle={false}
+                    allowPickDate={true}
+                    onPress={()=>{
+                        this.fullDatePicker.showWithDateString(
+                            this.state.fullDateString,
+                            (dateString)=>{
+                                LKToastUtil.showMessage(dateString)
+                                this.setState({
+                                    fullDateString: dateString,
+                                })
+                            }
+                        )
+                    }}
                 />
 
                 <LKDatePicker
                     datePickShowType={LKDatePickShowType.yyyyMMdd}
+                    datePickerCreateTimeType={LKDatePickerCreateTimeType.Free}
                     ref={ref => this.birthdayDatePicker = ref}
                 />
 

@@ -2,6 +2,31 @@
 /*
 LKDatePicker:日期选择器 使用示例
 
+import LKDatePicker from "../../commonUI/picker/LKDatePicker";
+
+                // 选择日期
+                chooseDate = () => {
+                    this.birthdayDatePicker.showWithDateString(
+                        '',
+                        (dateString)=>{
+                            LKToastUtil.showMessage(dateString)
+                        }
+                    )
+                }
+
+              <LKTextButton
+                    style={{ width: 180, backgroundColor:'red'}}
+                    title={'yyyyMMdd的日期选择'}
+                    onPress={()=>{
+                        this.chooseDate();
+                    }}
+                />
+
+
+                <LKDatePicker
+                    datePickShowType={LKDatePickShowType.yyyyMMdd}
+                    ref={ref => this.birthdayDatePicker = ref}
+                />
 
  */
 
@@ -10,9 +35,17 @@ import PropTypes from "prop-types";
 import LKComJSDatePicker, {LKDatePickShowType} from "./LKComJSDatePicker";
 import LKToastUtil from "../toast/LKToastUtil";
 
+/** 日期选择器创建的时机 */
+export var LKDatePickerCreateTimeType = {
+    Free: 0,                //当空闲的时候偷偷执行
+    BeCall: 1,              //当需要调用日期选择的时候才去创建(防止进入页面时候卡顿)
+    SuperViewAppear: 2,     //当其所视图显示的时候就创建(会造成初次卡顿)
+}
+
 export default class LKDatePicker extends Component {
     static propTypes = {
-        datePickShowType: PropTypes.number, //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
+        datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
+        datePickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
         // dateString: PropTypes.string,       //选择的日期
         //
         // onPickerConfirm: PropTypes.func,    //日期选择'确认'
@@ -22,6 +55,7 @@ export default class LKDatePicker extends Component {
 
     static defaultProps = {
         datePickShowType: LKDatePickShowType.yyyyMMdd,
+        datePickerCreateTimeType: LKDatePickerCreateTimeType.Free,
         // dateString: '',
         //
         // onPickerConfirm: (dateString)=>{},
@@ -31,8 +65,11 @@ export default class LKDatePicker extends Component {
 
     constructor(props) {
         super(props);
+
+        let needCreateAtFirst = this.props.datePickerCreateTimeType == LKDatePickerCreateTimeType.SuperViewAppear;
+
         this.state = {
-            hasCreate: false,
+            hasCreate: needCreateAtFirst,
 
             dateString: '',
 
@@ -117,10 +154,10 @@ export default class LKDatePicker extends Component {
                 datePickShowType={this.props.datePickShowType}
                 dateString={this.state.dateString}
                 onPickerConfirm={(dateString) => {
-                    this.state.onPickerConfirm(dateString);
+                    this.state.onPickerConfirm && this.state.onPickerConfirm(dateString);
                 }}
                 onPickerCancel={() => {
-                    this.state.onPickerCancel();
+                    this.state.onPickerCancel && this.state.onPickerCancel();
                 }}
                 ref={ref => this.datePicker = ref}
             />
@@ -128,6 +165,14 @@ export default class LKDatePicker extends Component {
     }
 
     render() {
+        if (!this.state.hasCreate && this.props.datePickerCreateTimeType == LKDatePickerCreateTimeType.Free) {
+            setTimeout(()=>{
+                this.setState({
+                    hasCreate: true,
+                })
+            }, 500);
+        }
+
         return (
             this.getDatePicker()
         );

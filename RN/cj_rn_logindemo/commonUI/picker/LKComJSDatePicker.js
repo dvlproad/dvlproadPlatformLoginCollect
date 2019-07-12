@@ -26,7 +26,6 @@ import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKCom
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
-// import {DatePicker} from 'react-native-pickers';
 import DatePicker from '../../commonUI/react-native-pickers/DatePicker';
 
 /**
