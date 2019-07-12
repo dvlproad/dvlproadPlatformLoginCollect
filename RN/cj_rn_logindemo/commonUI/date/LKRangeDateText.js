@@ -61,7 +61,8 @@ export default class LKRangeDateText extends Component {
         keepAlwaysWaveLine: PropTypes.bool,     // 是否始终显示成波浪线(如果否，则在在某个值是输入的情况下，会显示直线)
 
 
-        onBeginDateChoose: PropTypes.func,      //选择开始日期的时间(返回值为dateString)
+        onBeginDateChoose: PropTypes.func,      //选择开始日期的时间(返回值为新的newBeginDateString)
+        onEndDateChoose: PropTypes.func,        //选择开始日期的时间(返回值为新的newEndDateString)
     };
 
     static defaultProps = {
@@ -70,6 +71,7 @@ export default class LKRangeDateText extends Component {
         keepAlwaysWaveLine: false,
 
         onBeginDateChoose: ()=>{},
+        onEndDateChoose: ()=>{},
     };
 
     // 结束日期根据开始日期自动变化(仅在LKRangeDateEditingType.Begin下有效)
@@ -164,8 +166,7 @@ export default class LKRangeDateText extends Component {
                     chooseDateString={beginDateString}
                     allowPickDate={allowPickDateForBegin}
                     onPress={()=>{
-                        LKToastUtil.showMessage('点击订单');
-                        let beginDateString = this.props.onBeginDateChoose(beginDateString);
+                        let beginDateString = this.props.onBeginDateChoose();
 
                         let endDateString = this.props.endDateString;
                         if (this.props.dateRangeEditingType == LKRangeDateEditingType.Begin) {
@@ -187,13 +188,14 @@ export default class LKRangeDateText extends Component {
                     showWave={showWave}
                 />
 
-                <LKOwnNativeActionSingleDateText
+                <LKSingleDateText
                     style={{flex: 1}}
+                    isBankStyle={false}
                     placeholder= {"自动填写"}
                     chooseDateString={endDateString}
                     allowPickDate={allowPickDateForEnd}
-                    onDateChange={ (date) => {
-                        let endDateString = date;
+                    onPress={()=>{
+                        let endDateString = this.props.onEndDateChoose();
 
                         let beginDateString = this.props.beginDateString;
                         if (this.props.dateRangeEditingType == LKRangeDateEditingType.End) {

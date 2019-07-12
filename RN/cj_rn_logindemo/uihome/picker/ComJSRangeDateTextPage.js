@@ -58,7 +58,7 @@ export default class ComJSRangeDateTextPage extends Component {
                 <Text>当前选择的结束日期为：{endDateString1}</Text>
                 <LKRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
                                  beginDateString={beginDateString1}
-                                 chooseBeginDate={()=>{
+                                 onBeginDateChoose={()=>{
                                      return '2019-03-05';
                                  }}
                                  onBeginDatePickChange={ (beginDateString, endDateString)=> {
