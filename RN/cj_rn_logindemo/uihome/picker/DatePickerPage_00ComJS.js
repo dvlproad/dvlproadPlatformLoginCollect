@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
-import LKTextButton from "../../commonUI/button/LKTextButton";
+import LKTextButton, {LKBlueBGButton} from "../../commonUI/button/LKTextButton";
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
-import DatePicker from "react-native-pickers/view/DatePicker";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
-import {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
+import DatePicker from "../../commonUI/react-native-pickers/DatePicker";
 
 var currentShowDateString = '';
 var lastShowDateSting = '';
@@ -13,7 +12,10 @@ export default class DatePickerPage_00ComJS extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
+            needCreate: false,
+            currentShowDateString: '',
+
+            rerenderFlag: false,
         }
     }
 
@@ -33,11 +35,12 @@ export default class DatePickerPage_00ComJS extends Component {
     }
 
     tryShowDatePicker() {
-        if (this.state.show) {
+        // 先判断是否已经创建了，只有创建了才能调用显示方法
+        if (this.state.needCreate) {
             this.showDatePicker();
         } else {
             this.setState({
-                show: true,
+                needCreate: true,
             }, () => {
                 this.showDatePicker();
             })
@@ -46,14 +49,29 @@ export default class DatePickerPage_00ComJS extends Component {
 
     showDatePicker() {
         if (this.birthdayDatePicker) {
+            let dateString = currentShowDateString;
+            let defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
+            let selectedValue= [
+                defaultSelectedDate.getFullYear() + '年',
+                defaultSelectedDate.getMonth() + 1 + '月',
+                defaultSelectedDate.getDate() + '日'
+            ];
+
+            this.birthdayDatePicker.updateDefaultSelectedValues(selectedValue);
+            // setTimeout(()=>{
+            //     this.birthdayDatePicker.show();
+            // }, 4000)
+
             this.birthdayDatePicker.show();
+
+
         } else {
             LKToastUtil.showMessage('Error：你还未创建日期选择器');
         }
     }
 
     getDatePicker() {
-        if (this.state.show) {
+        if (this.state.needCreate) {
             return this.createDatePicker();
         } else {
             return null;
@@ -104,6 +122,18 @@ export default class DatePickerPage_00ComJS extends Component {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {/*注意点：①DatePicker必须写在Button后，否则会出现Button重复点击问题；*/}
+                <Text>{'是否重新加载' + this.state.rerenderFlag}</Text>
+                <LKBlueBGButton style={{ width: 280}}
+                                title={'尝试重绘日期选择器重绘成功来更新弹出时候的选中日期'}
+                                onPress={()=>{
+                                    this.setState({
+                                        needCreate: false,
+                                    }, ()=> {
+                                        LKToastUtil.showMessage('日期选择器重绘成功')
+                                    })
+                                }}
+                />
+
                 <LKTextButton style={{ width: 180, backgroundColor:'red'}}
                               title={'默认选中' + '2019-05-12'}
                               onPress={()=>{
@@ -112,9 +142,9 @@ export default class DatePickerPage_00ComJS extends Component {
                               }}
                 />
                 <LKTextButton style={{ width: 180, backgroundColor:'green'}}
-                              title={'默认选中' + '2015-11-31'}
+                              title={'默认选中' + '2015-11-30'}
                               onPress={()=>{
-                                  currentShowDateString = '2015-11-31';
+                                  currentShowDateString = '2015-11-30';
                                   this.tryShowDatePicker();
                               }}
                 />

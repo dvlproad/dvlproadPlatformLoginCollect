@@ -112,11 +112,11 @@ export default class LKDatePicker extends Component {
      * 尝试弹出日期选择控制器
      */
     tryShowDatePicker() {
-        if (this.state.hasCreate) {
+        if (this.state.needCreate) {
             this.showDatePicker();
         } else {
             this.setState({
-                hasCreate: true,
+                needCreate: true,
             }, () => {
                 this.showDatePicker();
             })

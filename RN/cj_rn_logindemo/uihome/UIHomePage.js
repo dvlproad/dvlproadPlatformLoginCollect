@@ -90,7 +90,7 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'PickHomePage';
+export const UIRoutePage = 'DatePickerPage_00ComJS';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,

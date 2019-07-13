@@ -43,6 +43,24 @@ class DatePicker extends BaseDialog {
         this.state = this.getDateList();
     }
 
+    /**
+     * 更新默认选中的值
+     * @param selectedValue
+     */
+    updateDefaultSelectedValues(selectedValue) {
+        // let data = this.getDateList();
+        // this.state.pickerData = data.pickerData;
+        // this.state.selectedIndex = data.selectedIndex;
+
+        this.props.selectedValue = selectedValue;
+        let data = this.getDateList();
+        this.setState({
+            selectedValue: selectedValue,
+            pickerData: data.pickerData,
+            selectedIndex: data.selectedIndex,
+        })
+    }
+
 
     getDateList() {
         console.log(this.props)
