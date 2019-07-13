@@ -1,11 +1,11 @@
-// ComJSDatePickerPage2.js
+// DatePickerPage_01ComJS.js
 
 import React, { Component } from 'react';
 import {View} from 'react-native';
 import LKTextButton from "../../commonUI/button/LKTextButton";
 import LKDatePicker from "../../commonUI/picker/LKDatePicker";
 
-export default class ComJSDatePickerPage2 extends Component {
+export default class DatePickerPage_01ComJS extends Component {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,6 @@ export default class ComJSDatePickerPage2 extends Component {
     }
 
     render() {
-        let dateString = this.state.dateString;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 {/*注意点：①DatePicker必须写在Button后，否则会出现Button重复点击问题；*/}
@@ -24,10 +23,10 @@ export default class ComJSDatePickerPage2 extends Component {
                         width: 180,
                         backgroundColor:'red'
                     }}
-                    title={dateString}
+                    title={this.state.dateString}
                     onPress={()=>{
                         this.datePicker.showAllEvent(
-                            dateString,
+                            this.state.dateString,
                             (dateString)=>{
                                 this.setState({
                                     dateString: dateString

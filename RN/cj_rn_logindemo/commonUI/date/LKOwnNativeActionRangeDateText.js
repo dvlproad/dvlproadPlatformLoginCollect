@@ -31,16 +31,10 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
+import {LKRangeDateEditingType} from "./LKRangeDateText";
 import LKOwnNativeActionSingleDateText from "./LKOwnNativeActionSingleDateText";
 import LKToastUtil from "../toast/LKToastUtil";
 
-/**< 日期范围的编辑状态 */
-export var LKRangeDateEditingType = {
-    None: 0,     /**< 没有编辑状态的日期 */
-    Begin: 1,    /**< 编辑起始日期中 */
-    End: 2,      /**< 编辑终止日期中 */
-    BeginEnd: 3  /**< 编辑起始和终止日期中 */
-}
 
 /**
  * 范围日期选择控件

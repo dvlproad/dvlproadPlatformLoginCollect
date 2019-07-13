@@ -22,7 +22,7 @@ import {
     ToastComponent
 } from 'react-native-pickers';
 
-export default class ComJSPickersPage extends BaseComponent {
+export default class PickersPage extends BaseComponent {
 
     constructor(props) {
         super(props);

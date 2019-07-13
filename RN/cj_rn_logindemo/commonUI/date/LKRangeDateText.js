@@ -61,8 +61,8 @@ export default class LKRangeDateText extends Component {
         keepAlwaysWaveLine: PropTypes.bool,     // 是否始终显示成波浪线(如果否，则在在某个值是输入的情况下，会显示直线)
 
 
-        onBeginDateChoose: PropTypes.func,      //选择开始日期的时间(返回值为新的newBeginDateString)
-        onEndDateChoose: PropTypes.func,        //选择开始日期的时间(返回值为新的newEndDateString)
+        onBeginDateChoose: PropTypes.func,      //选择开始日期的时间(参数为callback,callback的参数为新的newBeginDateString)
+        onEndDateChoose: PropTypes.func,        //选择开始日期的时间(参数为callback,callback的参数为为新的newEndDateString)
     };
 
     static defaultProps = {
@@ -70,8 +70,8 @@ export default class LKRangeDateText extends Component {
 
         keepAlwaysWaveLine: false,
 
-        onBeginDateChoose: ()=>{},
-        onEndDateChoose: ()=>{},
+        onBeginDateChoose: null,
+        onEndDateChoose: null,
     };
 
     // 结束日期根据开始日期自动变化(仅在LKRangeDateEditingType.Begin下有效)
@@ -166,18 +166,24 @@ export default class LKRangeDateText extends Component {
                     chooseDateString={beginDateString}
                     allowPickDate={allowPickDateForBegin}
                     onPress={()=>{
-                        let beginDateString = this.props.onBeginDateChoose();
+                        if (this.props.onBeginDateChoose) {
+                            this.props.onBeginDateChoose((dateString)=>{
+                                let beginDateString = dateString;
 
-                        let endDateString = this.props.endDateString;
-                        if (this.props.dateRangeEditingType == LKRangeDateEditingType.Begin) {
-                            endDateString = this.autoUpdateEndDate(beginDateString);
-                        }
+                                let endDateString = this.props.endDateString;
+                                if (this.props.dateRangeEditingType == LKRangeDateEditingType.Begin) {
+                                    endDateString = this.autoUpdateEndDate(beginDateString);
+                                }
 
-                        let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
-                        if (allowUpdate) {
-                            this.props.onBeginDatePickChange(beginDateString, endDateString);
+                                let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
+                                if (allowUpdate) {
+                                    this.props.onBeginDatePickChange(beginDateString, endDateString);
+                                } else {
+                                    LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                                }
+                            })
                         } else {
-                            LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                            LKToastUtil.showMessage("请完善开始日期的点击事件 onBeginDateChoose");
                         }
                     }}
                 />
@@ -195,18 +201,24 @@ export default class LKRangeDateText extends Component {
                     chooseDateString={endDateString}
                     allowPickDate={allowPickDateForEnd}
                     onPress={()=>{
-                        let endDateString = this.props.onEndDateChoose();
+                        if (this.props.onEndDateChoose) {
+                            this.props.onEndDateChoose((dateString)=>{
+                                let endDateString = dateString;
 
-                        let beginDateString = this.props.beginDateString;
-                        if (this.props.dateRangeEditingType == LKRangeDateEditingType.End) {
-                            beginDateString = this.autoUpdateBeginDate(endDateString);
-                        }
+                                let beginDateString = this.props.beginDateString;
+                                if (this.props.dateRangeEditingType == LKRangeDateEditingType.End) {
+                                    beginDateString = this.autoUpdateBeginDate(endDateString);
+                                }
 
-                        let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
-                        if (allowUpdate) {
-                            this.props.onEndDatePickChange(beginDateString, endDateString);
+                                let allowUpdate = this.checkCouldUpdateDate(beginDateString, endDateString);
+                                if (allowUpdate) {
+                                    this.props.onEndDatePickChange(beginDateString, endDateString);
+                                } else {
+                                    LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                                }
+                            })
                         } else {
-                            LKToastUtil.showMessage('请重新选择，不满足起始日期小于结束日期');
+                            LKToastUtil.showMessage("请完善结束日期的点击事件 onEndDateChoose");
                         }
                     }}
                 />

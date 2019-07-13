@@ -37,7 +37,7 @@ export default class ComJSSingleDatePage21 extends Component {
         this.birthdayDatePicker.showWithDateString(
             this.state.birthdayDateString,
             (dateString)=>{
-                LKToastUtil.showMessage(dateString)
+                LKToastUtil.showMessage(dateString);
                 this.setState({
                     birthdayDateString: dateString,
                 })
@@ -63,7 +63,14 @@ export default class ComJSSingleDatePage21 extends Component {
 
     render() {
         return (
-            <View style={{flex:1, backgroundColor: '#f9fafb', justifyContent: 'center', alignItems: 'center'}}>
+            <View
+                style={{
+                    flex:1,
+                    backgroundColor: '#f9fafb',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
                 <LKTextButton
                     style={{ width: 180, backgroundColor:'red'}}
                     title={'yyyyMMdd的日期选择'}

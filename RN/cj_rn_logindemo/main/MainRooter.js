@@ -259,13 +259,13 @@ function m_navigator(Pages, RoutePage) {
 // import {ListPages, ListRoutePage} from '../uihome/list/ListHomePage';
 // export default createAppContainer(m_navigator(ListPages, ListRoutePage));
 
-import ComJSSingleDatePage20 from "../uihome/picker/ComJSSingleDatePage20";
-import ComJSPickersPage from "../uihome/picker/ComJSPickersPage";
+import SingleDateTextPage from "../uihome/picker/SingleDateTextPage";
+import PickersPage from "../uihome/picker/PickersPage";
 // export default createAppContainer(
 //     createStackNavigator(
 //         {
 //             TestPage: {
-//                 screen: ComJSPickersPage,
+//                 screen: PickersPage,
 //                 navigationOptions: () => ({
 //                     title: `测试的Page`,
 //                 }),

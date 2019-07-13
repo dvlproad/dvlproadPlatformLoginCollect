@@ -6,7 +6,7 @@ import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKCom
 import LKSingleDateText from "../../commonUI/date/LKSingleDateText";
 
 
-export default class ComJSSingleDatePage20 extends Component {
+export default class SingleDateTextPage extends Component {
 
     constructor(props) {
         super(props);

@@ -37,10 +37,11 @@ export default class PickHomePage extends Component {
             },
             { key: "SingleDate--JS",
                 data: [
-                    { title: "ComJSPickersPage", page: "ComJSPickersPage" },
-                    { title: "ComJSSingleDatePage1", page: "ComJSSingleDatePage1" },
+                    { title: "PickersPage", page: "PickersPage" },
+                    { title: "DatePickerPage_00ComJS", page: "DatePickerPage_00ComJS" },
+                    { title: "DatePickerPage_01ComJS", page: "DatePickerPage_01ComJS" },
                     { title: "ComJSDatePickerPage2", page: "ComJSDatePickerPage2" },
-                    { title: "ComJSSingleDatePage20", page: "ComJSSingleDatePage20" },
+                    { title: "SingleDateTextPage", page: "SingleDateTextPage" },
                     { title: "ComJSSingleDatePage21", page: "ComJSSingleDatePage21" },
                     { title: "ComJSSingleDatePage30", page: "ComJSSingleDatePage30" },
                 ]
@@ -48,7 +49,7 @@ export default class PickHomePage extends Component {
             { key: "RangeDate",
                 data: [
                     { title: "OwnNativeActionRangeDateTextPage", page: "OwnNativeActionRangeDateTextPage" },
-                    { title: "ComJSRangeDateTextPage", page: "ComJSRangeDateTextPage" },
+                    { title: "RangeDateTextPage", page: "RangeDateTextPage" },
                 ]
             },
             { key: "Image",
@@ -74,22 +75,22 @@ export default class PickHomePage extends Component {
 //weight
 import PickWeightPage from "./PickWeightPage";
 
-import ComJSPickersPage from "./ComJSPickersPage";
+import PickersPage from "./PickersPage";
 //singleDate-Native
 import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
 //singleDate-JS
-import ComJSSingleDatePage1 from "./ComJSSingleDatePage1";
-import ComJSSingleDatePage20 from "./ComJSSingleDatePage20";
+import DatePickerPage_00ComJS from "./DatePickerPage_00ComJS";
+import DatePickerPage_01ComJS from "./DatePickerPage_01ComJS";
+import SingleDateTextPage from "./SingleDateTextPage";
 import ComJSSingleDatePage30 from "./ComJSSingleDatePage30";
 //rangeDate
 import OwnNativeActionRangeDateTextPage from './OwnNativeActionRangeDateTextPage';
 
 //pickImage
 import PickImagesPage from './PickImagesPage';
-import ComJSDatePickerPage2 from "./ComJSDatePickerPage2";
 import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
-import ComJSRangeDateTextPage from "./ComJSRangeDateTextPage";
+import RangeDateTextPage from "./RangeDateTextPage";
 
 export const PickRoutePage = 'PickHomePage';
 export const PickPages = {
@@ -121,28 +122,28 @@ export const PickPages = {
     },
 
 
-    ComJSPickersPage: {
-        screen: ComJSPickersPage,
+    PickersPage: {
+        screen: PickersPage,
         navigationOptions: () => ({
             title: `JS写的统一样式的Pickers`,
         }),
     },
 
-    ComJSSingleDatePage1: {
-        screen: ComJSSingleDatePage1,
+    DatePickerPage_00ComJS: {
+        screen: DatePickerPage_00ComJS,
         navigationOptions: () => ({
-            title: `单个日期选择(统一样式RN)`,
+            title: `单个日期选择(统一样式RN_未封装)`,
         }),
     },
-    ComJSDatePickerPage2: {
-        screen: ComJSDatePickerPage2,
+    DatePickerPage_01ComJS: {
+        screen: DatePickerPage_01ComJS,
         navigationOptions: () => ({
-            title: `单个日期选择(统一样式RN)`,
+            title: `单个日期选择(统一样式RN_已封装)`,
         }),
     },
 
-    ComJSSingleDatePage20: {
-        screen: ComJSSingleDatePage20,
+    SingleDateTextPage: {
+        screen: SingleDateTextPage,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,
         }),
@@ -167,8 +168,8 @@ export const PickPages = {
             title: `范围日期选择(原生平台风格)`,
         }),
     },
-    ComJSRangeDateTextPage: {
-        screen: ComJSRangeDateTextPage,
+    RangeDateTextPage: {
+        screen: RangeDateTextPage,
         navigationOptions: () => ({
             title: `范围日期选择(RN统一风格)`,
         }),
