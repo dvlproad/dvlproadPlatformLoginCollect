@@ -1,4 +1,4 @@
-// LKOwnNativeActionSingleDateText.jss
+// LKOwnNativeActionSingleDateText.js
 /* 使用示例
 import LKOwnNativeActionSingleDateText from "../../commonUI/date/LKOwnNativeActionSingleDateText";
 
@@ -79,14 +79,24 @@ export default class LKOwnNativeActionSingleDateText extends Component {
         };
         let customStyles = this.props.isBankStyle ? bankCustomStyles : normalCustomStyles;
 
+        let minDate = "1900-01-01";
+        if (this.props.minDate && this.props.minDate.length > 8) {
+            minDate = this.props.minDate;
+        }
+
+        let maxDate = "2300-01-01";
+        if (this.props.maxDate && this.props.maxDate.length > 8) {
+            maxDate = this.props.maxDate;
+        }
+
         return (
             <DatePicker
                 style={[{ flex: 1 }, style]}
                 disabled={!this.props.allowPickDate}
                 placeholder={this.props.placeholder}
                 date={this.props.chooseDateString}
-                minDate="1900-01-01"
-                maxDate="2300-01-01"
+                minDate={minDate}
+                maxDate={maxDate}
 
                 mode="date"
                 // androidMode={'default'}

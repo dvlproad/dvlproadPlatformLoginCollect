@@ -28,8 +28,9 @@ import { LKWhiteBGButton } from "../button/LKTextButton";
 /// API网络请求状态
 export var LKAPILoadStatus = {
     Pending: 0,     /**< 正准备请求数据 */
-    Success: 1,     /**< 成功请求到数据 */
-    Failure: 2,     /**< 失败请求不到数据 */
+    Requesting: 1,  /**< 正在请求数据中 */
+    Success: 2,     /**< 成功请求到数据 */
+    Failure: 3,     /**< 失败请求不到数据 */
 };
 
 export default class LKEmptyNetwork extends Component {
@@ -55,6 +56,7 @@ export default class LKEmptyNetwork extends Component {
                     <Image
                         style={{ width: 130, height: 97 }}
                         source={this.props.imageSource}
+                        resizeMode={'stretch'}
                     />
 
                     <Text style={[styles.text, { marginTop: 22 }]}>{this.props.message}</Text>

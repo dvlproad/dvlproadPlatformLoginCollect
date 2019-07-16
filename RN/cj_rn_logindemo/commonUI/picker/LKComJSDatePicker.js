@@ -27,7 +27,6 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 import DatePicker from '../../commonUI/react-native-pickers/DatePicker';
-import LKToastUtil from "../toast/LKToastUtil";
 
 /**
  * 日期器的选择样式
@@ -268,13 +267,13 @@ export default class LKComJSDatePicker extends Component {
                 selectedValue={defaultSelectedValue}
                 onPickerConfirm={(value) => {
                     let dateString = this.getDateString(value);
-                    this.props.onPickerConfirm(dateString);
+                    this.props.onPickerConfirm && this.props.onPickerConfirm(dateString);
                 }}
                 onPickerCancel={() => {
-                    this.props.onPickerCancel();
+                    this.props.onPickerCancel && this.props.onPickerCancel();
                 }}
                 onCoverPress={()=>{
-                    this.props.onCoverPress();
+                    this.props.onCoverPress && this.props.onCoverPress();
                 }}
                 ref={ref => this.datePicker = ref}
             />

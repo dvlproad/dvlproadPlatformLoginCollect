@@ -52,8 +52,8 @@ export default class LKActionSheetModal extends Component {
 
         return (
             <Modal style={styles.container}
-                   transparent={true}
-                   visible={this.state.visible}
+                transparent={true}
+                visible={this.state.visible}
             >
                 <Animated.View style={styles.mask1} {...this.watcher.panHandlers}>
                 </Animated.View>
@@ -164,7 +164,7 @@ export default class LKActionSheetModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             )
@@ -178,7 +178,7 @@ export default class LKActionSheetModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             ),
@@ -186,7 +186,7 @@ export default class LKActionSheetModal extends Component {
 
         setTimeout(
             () => this.dismiss(),
-            300
+            200
         );
     }
 }

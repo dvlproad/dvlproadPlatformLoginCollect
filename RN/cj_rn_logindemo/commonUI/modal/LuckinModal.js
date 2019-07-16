@@ -276,14 +276,14 @@ export default class LuckinModal extends Component {
             Animated.timing(
                 this.state.contentHeightAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.contentHeight
                 }
             ),
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             )
@@ -296,14 +296,14 @@ export default class LuckinModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             ),
             Animated.timing(
                 this.state.contentHeightAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.contentHeight
                 }
             )
@@ -317,14 +317,14 @@ export default class LuckinModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             ),
             Animated.timing(
                 this.state.contentHeightAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.initHeight
                 }
             )
@@ -332,7 +332,7 @@ export default class LuckinModal extends Component {
 
         setTimeout(
             () => this.setState({ hide: true }),
-            300
+            200
         );
     }
 

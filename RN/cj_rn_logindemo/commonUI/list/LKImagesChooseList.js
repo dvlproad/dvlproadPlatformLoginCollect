@@ -134,6 +134,12 @@ export default class LKImagesChooseList extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+        if (this.props.imageSources !== nextProps.imageSources){
+
+        }
+    }
+
     componentDidMount(): void {
         let isImageAllLoaded = this.props.imageSources.length == 0;
         if (isImageAllLoaded) {
@@ -216,8 +222,10 @@ export default class LKImagesChooseList extends Component {
         const allowAddIconShowing = this.props.isEditing &&
             this.props.hasAddIconWhenEditing;
         if (allowAddIconShowing) {
-            let shouldAddAddIcon = renderImageSources.length < this.props.imageMaxCount;
+            let shouldAddAddIcon = this.props.imageSources.length < this.props.imageMaxCount;
             if (shouldAddAddIcon) {
+                this.state.addIconCurIndex = this.props.imageSources.length;
+
                 let addImage = {
                     imageSource: require('./resources/pickImage_blue.png'),
                     uploadType: ImageUploadType.NotNeed,
@@ -225,10 +233,12 @@ export default class LKImagesChooseList extends Component {
                     imageIndex: renderImageSources.length,
                 };
                 renderImageSources.splice(renderImageSources.length, 0, addImage);
-                this.state.addIconCurIndex = renderImageSources.length-1;
+
             } else {
                 this.state.addIconCurIndex = -1;
             }
+        } else {
+            this.state.addIconCurIndex = -1;
         }
 
 

@@ -39,7 +39,8 @@ export var ImageUploadType = {
 export default class LKLoadingImage extends Component {
     static propTypes = {
         //source: PropTypes.number.isRequired,    //图片
-        defaultSource: PropTypes.number,
+        defaultSource: PropTypes.number,    //图片加载前的默认显示图
+        errorSource: PropTypes.number,      //图片加载失败的显示图
         imageBorderStyle: stylePropTypes,   //图片边框样式
 
         buttonIndex: PropTypes.number.isRequired,
@@ -59,6 +60,7 @@ export default class LKLoadingImage extends Component {
     static defaultProps = {
         source: require('./resources/imageDefault.png'),
         defaultSource: require('./resources/imageDefault.png'),
+        errorSource: require('./resources/imageError.png'),
         imageBorderStyle: {
             borderRadius: 6,
             borderWidth: 0,
@@ -143,7 +145,11 @@ export default class LKLoadingImage extends Component {
             loadStatus: ImageLoadStatus.Success
         });
 
-        this.props.onLoadComplete(this.props.buttonIndex);
+        if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
+
+        } else {
+            this.props.onLoadComplete(this.props.buttonIndex);
+        }
     }
 
     /**
@@ -151,10 +157,19 @@ export default class LKLoadingImage extends Component {
      * @param {*} error
      */
     onLoadError=(error) => {
-        this.setState({
-            loadStatus: ImageLoadStatus.Failure
-        });
-        this.props.onLoadComplete(this.props.buttonIndex);
+        if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
+            console.log('请检查您的errorSource是否是错误的');
+            this.setState({
+                loadStatus: ImageLoadStatus.Success
+            });
+
+        } else {
+            this.setState({
+                loadStatus: ImageLoadStatus.Failure,
+                shouldShowErrorSource: true,
+            });
+            this.props.onLoadComplete(this.props.buttonIndex);
+        }
     }
 
 
@@ -320,6 +335,11 @@ export default class LKLoadingImage extends Component {
             this.props.imageBorderStyle
         ];
 
+        let showingImage = this.props.source;
+        if (this.state.shouldShowErrorSource) {
+            showingImage = this.props.errorSource;
+        }
+
         return (
             <View
                 style={[
@@ -329,7 +349,7 @@ export default class LKLoadingImage extends Component {
             >
                 <Image
                     style={imageStyle}
-                    source={this.props.source}
+                    source={showingImage}
                     defaultSource={this.props.defaultSource}
                     resizeMode={'stretch'}
                     onLoadStart={this.onLoadStart}

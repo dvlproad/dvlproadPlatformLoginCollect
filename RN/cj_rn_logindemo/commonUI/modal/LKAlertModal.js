@@ -87,7 +87,7 @@ export default class LKAlertModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             )
@@ -97,7 +97,7 @@ export default class LKAlertModal extends Component {
     renderOneBotton() {
         return <View style={styles.buttonContent}>
             <Button
-                style={{ borderWidth: 0 }}
+                style={{ borderWidth: 0, flex: 1 }}
                 titleStyle={{ color: '#172991' }}
                 type='default'
                 size='md'
@@ -114,7 +114,7 @@ export default class LKAlertModal extends Component {
     renderTowButton() {
         return <View style={styles.buttonContent}>
             <Button
-                style={{ borderWidth: 0 }}
+                style={{ borderWidth: 0, flex: 1 }}
                 titleStyle={{ color: '#666' }}
                 type='default'
                 size='md'
@@ -125,9 +125,8 @@ export default class LKAlertModal extends Component {
                     this.out();
                 }}
             />
-            <View style={{ height: 46, width: 1, backgroundColor: '#E5E5E5', position: 'absolute', left: 136, bottom: 0 }}></View>
             <Button
-                style={{ borderWidth: 0 }}
+                style={{ borderWidth: 0, flex: 1 }}
                 titleStyle={{ color: '#172991' }}
                 type='default'
                 size='md'
@@ -138,6 +137,7 @@ export default class LKAlertModal extends Component {
                     this.out();
                 }}
             />
+            <View style={{ height: 46, width: 1, backgroundColor: '#E5E5E5', position: 'absolute', left: 136, bottom: 0 }}></View>
         </View>;
     }
     /**
@@ -195,7 +195,7 @@ export default class LKAlertModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             )
@@ -209,7 +209,7 @@ export default class LKAlertModal extends Component {
             Animated.timing(
                 this.state.topAnimated,
                 {
-                    duration: 300,
+                    duration: 200,
                     toValue: this.state.top
                 }
             ),
@@ -217,7 +217,7 @@ export default class LKAlertModal extends Component {
 
         setTimeout(
             () => this.dismiss(),
-            300
+            200
         );
     }
 }
