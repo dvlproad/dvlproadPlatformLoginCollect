@@ -30,7 +30,7 @@ export default class OwnNativeSingleDatePage extends Component {
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from "prop-types";
-import DatePicker from "react-native-datepicker";
+import DatePicker from "../react-native-datepicker/datepicker";
 
 export default class LKOwnNativeActionSingleDateText extends Component {
     static propTypes = {
@@ -66,7 +66,15 @@ export default class LKOwnNativeActionSingleDateText extends Component {
                 borderWidth: this.props.allowPickDate ? 1 : 0,
                 borderColor: "#E5E5E5",
                 backgroundColor: this.props.allowPickDate ? "white" : "#F9F9F9"
-            }
+            },
+            btnTextCancel: {
+                fontSize: 14,
+                color: '#333333'
+            },
+            btnTextConfirm: {
+                fontSize: 14,
+                color: '#333333'
+            },
             // ... You can check the source to find the other keys.
         };
         let bankCustomStyles = {
@@ -74,7 +82,15 @@ export default class LKOwnNativeActionSingleDateText extends Component {
                 borderRadius: 6,
                 borderWidth: 0,
                 backgroundColor: 'transparent'
-            }
+            },
+            btnTextCancel: {
+                fontSize: 14,
+                color: '#333333'
+            },
+            btnTextConfirm: {
+                fontSize: 14,
+                color: '#333333'
+            },
             // ... You can check the source to find the other keys.
         };
         let customStyles = this.props.isBankStyle ? bankCustomStyles : normalCustomStyles;
