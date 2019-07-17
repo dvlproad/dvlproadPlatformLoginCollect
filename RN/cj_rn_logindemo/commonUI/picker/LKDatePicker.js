@@ -34,6 +34,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import LKComJSDatePicker, {LKDatePickShowType} from "./LKComJSDatePicker";
 import LKToastUtil from "../toast/LKToastUtil";
+import LKDateUtil from "../../commonUtil/LKDateUtil";
 
 /** 日期选择器创建的时机 */
 export var LKDatePickerCreateTimeType = {
@@ -113,7 +114,15 @@ export default class LKDatePicker extends Component {
      */
     tryShowDatePicker() {
         if (this.state.hasCreate) {
-            this.showDatePicker();
+            // this.showDatePicker();
+
+            // 如果不设置setState无法，重新render选择器
+            this.setState({
+                hasCreate: true,
+            }, () => {
+                this.showDatePicker();
+            })
+
         } else {
             this.setState({
                 hasCreate: true,
@@ -128,6 +137,9 @@ export default class LKDatePicker extends Component {
      */
     showDatePicker() {
         if (this.datePicker) {
+            let dateString = this.state.dateString;
+            this.datePicker.updateDefaultSelectedDateString(dateString);
+
             this.datePicker.show();
         } else {
             LKToastUtil.showMessage('Error：你还未创建日期选择器');

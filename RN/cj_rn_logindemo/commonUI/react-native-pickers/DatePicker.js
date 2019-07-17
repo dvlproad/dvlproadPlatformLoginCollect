@@ -9,6 +9,7 @@ import {
 import PickerView from './PickerView';
 
 import BaseDialog from './BaseDialog';
+import LKDateUtil from "../../commonUtil/LKDateUtil";
 
 class DatePicker extends BaseDialog {
 
@@ -41,6 +42,22 @@ class DatePicker extends BaseDialog {
     constructor(props) {
         super(props);
         this.state = this.getDateList();
+    }
+
+
+    /**
+     * 更新默认选中的日期
+     * @param dateString
+     */
+    updateDefaultSelectedDateString(dateString) {
+        let defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
+        let selectedValue = [
+            defaultSelectedDate.getFullYear() + '年',
+            defaultSelectedDate.getMonth() + 1 + '月',
+            defaultSelectedDate.getDate() + '日'
+        ];
+
+        this.updateDefaultSelectedValues(selectedValue);
     }
 
     /**

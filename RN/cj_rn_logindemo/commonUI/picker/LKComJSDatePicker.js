@@ -70,6 +70,14 @@ export default class LKComJSDatePicker extends Component {
         }
     }
 
+    /**
+     * 更新默认选中的日期
+     * @param dateString
+     */
+    updateDefaultSelectedDateString(dateString) {
+        this.datePicker.updateDefaultSelectedDateString(dateString);
+    }
+
 
     /**
      * 显示日期选择器

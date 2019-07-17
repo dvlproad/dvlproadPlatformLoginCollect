@@ -38,6 +38,13 @@ export default class DatePickerPage_00ComJS extends Component {
         // 先判断是否已经创建了，只有创建了才能调用显示方法
         if (this.state.needCreate) {
             this.showDatePicker();
+
+            // 如果不设置setState无法，重新render选择器
+            // this.setState({
+            //     needCreate: true,
+            // }, () => {
+            //     this.showDatePicker();
+            // })
         } else {
             this.setState({
                 needCreate: true,
@@ -50,17 +57,7 @@ export default class DatePickerPage_00ComJS extends Component {
     showDatePicker() {
         if (this.birthdayDatePicker) {
             let dateString = currentShowDateString;
-            let defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
-            let selectedValue= [
-                defaultSelectedDate.getFullYear() + '年',
-                defaultSelectedDate.getMonth() + 1 + '月',
-                defaultSelectedDate.getDate() + '日'
-            ];
-
-            this.birthdayDatePicker.updateDefaultSelectedValues(selectedValue);
-            // setTimeout(()=>{
-            //     this.birthdayDatePicker.show();
-            // }, 4000)
+            this.birthdayDatePicker.updateDefaultSelectedDateString(dateString);
 
             this.birthdayDatePicker.show();
 
