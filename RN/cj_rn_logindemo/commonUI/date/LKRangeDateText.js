@@ -31,7 +31,6 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
-import LKOwnNativeActionSingleDateText from "./LKOwnNativeActionSingleDateText";
 import LKToastUtil from "../toast/LKToastUtil";
 import LKSingleDateText from "./LKSingleDateText";
 

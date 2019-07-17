@@ -6,8 +6,8 @@ export default class LKDateUtil {
      * @param shortDateString   将形如'2017-06-28'转成date类
      * @returns Date
      */
-    static yyyyMMddDate(shortDateString){
-        if(shortDateString){
+    static yyyyMMddDate(shortDateString) {
+        if (shortDateString) {
             let fullDateString = shortDateString + ' ' + '00:00:00';
             return this.yyyyMMdd_hhmmssDate(fullDateString);
         } else {
@@ -20,7 +20,7 @@ export default class LKDateUtil {
      * @param fullDateString    将形如'2017-06-28 10:48:46'转成date类
      * @returns Date
      */
-    static yyyyMMdd_hhmmssDate(fullDateString){
+    static yyyyMMdd_hhmmssDate(fullDateString) {
         if (fullDateString) {
             let regEx = new RegExp("\\-", "gi");
             let validDateStr = fullDateString.replace(regEx, "/");
@@ -73,8 +73,60 @@ export default class LKDateUtil {
      */
     static addYears(sinceDate, yearsToBeAdded) {
         const newDate = sinceDate;
-        newDate.setFullYear(sinceDate.getFullYear()+yearsToBeAdded);
+        newDate.setFullYear(sinceDate.getFullYear() + yearsToBeAdded);
         return newDate;
+    }
+
+    /**
+     * 计算日期：指定日期的加上 daysToBeAdded 后的天
+     * @param sinceDate         指定日期
+     * @param daysToBeAdded     要加多少天
+     * @returns Date
+     */
+    static addDays(sinceDate, daysToBeAdded) {
+        let timestamp = sinceDate.getTime();
+        return new Date(timestamp + daysToBeAdded * 24 * 3600 * 1000);
+    }
+
+
+    /**
+     * 比较日期：判断第二个日期是否比第一个日期大
+     *
+     * @param date1
+     * @param date2
+     * @returns {boolean}
+     */
+    static compareSecondDateLater(date1, date2) {
+        const dateTime1 = date1.getTime();
+        const dateTime2 = date2.getTime();
+        if(dateTime2 > dateTime1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    /**
+     * 比较日期：判断第二个yyyyMMdd日期字符串是否比第一个yyyyMMdd日期字符串大
+     *
+     * @param yyyyMMddDateString1
+     * @param yyyyMMddDateString2
+     * @returns {boolean}
+     */
+    static compareSecondyyyyMMddDateStringLater(yyyyMMddDateString1, yyyyMMddDateString2) {
+        if (yyyyMMddDateString1 && yyyyMMddDateString1.length > 8) {
+            if (yyyyMMddDateString2 && yyyyMMddDateString2.length > 8) {
+                let yyyyMMddDate1 = LKDateUtil.yyyyMMddDate(yyyyMMddDateString1);
+                let yyyyMMddDate2 = LKDateUtil.yyyyMMddDate(yyyyMMddDateString2);
+                let isSecondDateLater = LKDateUtil.compareSecondDateLater(yyyyMMddDate1, yyyyMMddDate2);
+                return isSecondDateLater;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -86,7 +138,7 @@ export default class LKDateUtil {
     static formatDate(timestamp, formatter) {
         let date = new Date();
         date.setTime(parseInt(timestamp));
-        formatter = (formatter != null)? formatter : 'yyyy-MM-dd hh:mm';
+        formatter = (formatter != null) ? formatter : 'yyyy-MM-dd hh:mm';
         Date.prototype.Format = function (fmt) {
             var o = {
                 "M+": this.getMonth() + 1, //月
@@ -107,4 +159,29 @@ export default class LKDateUtil {
         }
         return date.Format(formatter);
     }
+
+    /**
+     * 根据时间戳获取周几
+     * @param {时间戳} dateTimeStamp 
+     */
+    static getWeekWithDate(dateTimeStamp) {
+        var date = new Date(dateTimeStamp);
+        let day = date.getDay();
+        let weekArray = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+        return weekArray[day];
+    }
+    /**
+     *获取年月日和星期
+     *
+     * @static
+     * @param {时间戳*} dateTimeStamp
+     * @returns yyyy年MM月dd日 周几
+     * @memberof LKDateUtil
+     */
+    static getDateStrAndWeek(dateTimeStamp) {
+        let dateStr = LKDateUtil.formatDate(dateTimeStamp, 'yyyy年MM月dd日');
+        let week = LKDateUtil.getWeekWithDate(dateTimeStamp);
+        return dateStr + ' ' + week;
+    }
+
 }
