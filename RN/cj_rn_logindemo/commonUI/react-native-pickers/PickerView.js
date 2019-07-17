@@ -31,7 +31,7 @@ class PickerView extends BaseComponent {
 
     constructor(props) {
         super(props);
-        list = ['', ''].concat(props.list).concat(['', '']);
+        let list = ['', ''].concat(props.list).concat(['', '']);
         this.colorPath = [];
         let length = list.length;
         for (let i = 0; i < length; i++) {
@@ -57,19 +57,19 @@ class PickerView extends BaseComponent {
 
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps) {
-            list = ['', ''].concat(nextProps.list).concat(['', '']);
-            listChange = JSON.stringify(list) != JSON.stringify(this.state.list);
-            indexChange = nextProps.selectedIndex != this.state.selectedIndex;
+            let list = ['', ''].concat(nextProps.list).concat(['', '']);
+            let listChange = JSON.stringify(list) != JSON.stringify(this.state.list);
+            let indexChange = nextProps.selectedIndex != this.state.selectedIndex;
             if (listChange || indexChange) {
                 console.log('shouldComponentUpdate');
                 this.path.setValue(-this.props.itemHeight * nextProps.selectedIndex);
-                if (listChange) {
-                    this.colorPath = [];
-                    let length = list.length;
-                    for (let i = 0; i < length; i++) {
-                        this.colorPath.push(new Animated.Value(i == (nextProps.selectedIndex + 2) ? 1 : 0));
-                    }
+
+                this.colorPath = [];
+                let length = list.length;
+                for (let i = 0; i < length; i++) {
+                    this.colorPath.push(new Animated.Value(i == (nextProps.selectedIndex + 2) ? 1 : 0));
                 }
+
                 nextState.list = list;
                 nextState.selectedIndex = nextProps.selectedIndex;
 
