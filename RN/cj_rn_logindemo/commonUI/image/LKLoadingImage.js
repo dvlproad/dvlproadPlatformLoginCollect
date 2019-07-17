@@ -23,6 +23,8 @@ var ImageLoadStatus = {
     Loading: 1,     /**< 正在加载 */
     Success: 2,     /**< 加载成功 */
     Failure: 3,     /**< 加载失败 */
+    ErrorImageSuccess: 4,     /**< 加载"加载失败时候的照片"成功 */
+    ErrorImageFailure: 5,     /**< 加载"加载失败时候的照片"也失败 */
 };
 
 /// 图片来源
@@ -85,6 +87,7 @@ export default class LKLoadingImage extends Component {
             isNetworkImage: false,
             loaded: false,
             loadStatus: ImageLoadStatus.Pending,
+            shouldShowErrorSource: false,
         }
     }
 
@@ -94,6 +97,8 @@ export default class LKLoadingImage extends Component {
 
     componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
         if (this.props.source !== nextProps.source){
+            this.state.shouldShowErrorSource = false;
+
             let isNetworkImage = this.checkIsNetworkImage(nextProps.source);
             this.setState({
                 isNetworkImage: isNetworkImage,
@@ -141,13 +146,16 @@ export default class LKLoadingImage extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        this.setState({
-            loadStatus: ImageLoadStatus.Success
-        });
-
         if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
+            this.setState({
+                loadStatus: ImageLoadStatus.ErrorImageSuccess
+            });
 
         } else {
+            this.setState({
+                loadStatus: ImageLoadStatus.Success
+            });
+
             this.props.onLoadComplete(this.props.buttonIndex);
         }
     }
@@ -158,9 +166,11 @@ export default class LKLoadingImage extends Component {
      */
     onLoadError=(error) => {
         if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
-            console.log('请检查您的errorSource是否是错误的');
+            console.log("如果当要显示的图加载失败时候，转为显示加载失败时，" +
+                "却发现连传入的图片加载失败图都是错误的，那就不处理");
+
             this.setState({
-                loadStatus: ImageLoadStatus.Success
+                loadStatus: ImageLoadStatus.ErrorImageFailure
             });
 
         } else {

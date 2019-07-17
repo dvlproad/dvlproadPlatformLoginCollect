@@ -26,9 +26,9 @@ export default class ImageHomePage extends Component {
             { key: "image",
                 data: [
                     { title: "HelloImagePage", page: "HelloImagePage" },
-                    { title: "LoadingImagePage1", page: "LoadingImagePage1" },
-                    { title: "LoadingImagePage2", page: "LoadingImagePage2" },
-                    { title: "LoadingImagePage3", page: "LoadingImagePage3" },
+                    { title: "LoadingImage1LoadingShowPage1", page: "LoadingImage1LoadingShowPage1" },
+                    { title: "LoadingImage3WhenUploadPage", page: "LoadingImage3WhenUploadPage" },
+                    { title: "LoadingImage2ErrorPage", page: "LoadingImage2ErrorPage" },
                     { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
                 ]
             },
@@ -53,12 +53,12 @@ export default class ImageHomePage extends Component {
 
 //ImagePages
 import HelloImagePage from "./HelloImagePage";
-import LoadingImagePage1, {Title_LoadingImagePage1} from "./LoadingImagePage1";
-import LoadingImagePage2, {Title_LoadingImagePage2} from "./LoadingImagePage2";
+import LoadingImage1LoadingShowPage1, {Title_LoadingImagePage1} from "./LoadingImage1LoadingShowPage1";
+import LoadingImage3WhenUploadPage, {Title_LoadingImagePage2} from "./LoadingImage3WhenUploadPage";
 import ActionLoadingImagePage from './ActionLoadingImagePage';
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
-import LoadingImagePage3, {Title_LoadingImagePage3} from "./LoadingImagePage3";
+import LoadingImage2ErrorPage, {Title_LoadingImagePage3} from "./LoadingImage2ErrorPage";
 
 export const ImageRoutePage = 'ImageHomePage';
 export const ImagePages = {
@@ -76,20 +76,20 @@ export const ImagePages = {
         }),
     },
 
-    LoadingImagePage1: {
-        screen: LoadingImagePage1,
+    LoadingImage1LoadingShowPage1: {
+        screen: LoadingImage1LoadingShowPage1,
         navigationOptions: () => ({
             title: Title_LoadingImagePage1,
         }),
     },
-    LoadingImagePage2: {
-        screen: LoadingImagePage2,
+    LoadingImage3WhenUploadPage: {
+        screen: LoadingImage3WhenUploadPage,
         navigationOptions: () => ({
             title: Title_LoadingImagePage2,
         }),
     },
-    LoadingImagePage3: {
-        screen: LoadingImagePage3,
+    LoadingImage2ErrorPage: {
+        screen: LoadingImage2ErrorPage,
         navigationOptions: () => ({
             title: Title_LoadingImagePage3,
         }),

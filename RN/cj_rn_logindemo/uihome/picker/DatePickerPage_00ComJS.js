@@ -135,9 +135,9 @@ export default class DatePickerPage_00ComJS extends Component {
                 />
 
                 <LKTextButton style={{ width: 180, backgroundColor:'red'}}
-                              title={'默认选中' + '2019-05-12'}
+                              title={'默认选中' + '2019-02-28'}
                               onPress={()=>{
-                                  currentShowDateString = '2019-05-12';
+                                  currentShowDateString = '2019-02-28';
                                   this.tryShowDatePicker();
                               }}
                 />

@@ -54,10 +54,13 @@ class DatePicker extends BaseDialog {
 
         this.props.selectedValue = selectedValue;
         let data = this.getDateList();
+
+        let pickerData = data.pickerData;
+        let selectedIndex = data.selectedIndex;
         this.setState({
             selectedValue: selectedValue,
-            pickerData: data.pickerData,
-            selectedIndex: data.selectedIndex,
+            pickerData: pickerData,
+            selectedIndex: selectedIndex,
         })
     }
 

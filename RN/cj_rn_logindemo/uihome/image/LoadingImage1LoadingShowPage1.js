@@ -1,4 +1,4 @@
-//LoadingImagePage1.js
+//LoadingImage1LoadingShowPage1.jshowPage1.js
 
 import React, { Component } from 'react'
 import {View, Text, ScrollView} from 'react-native';
@@ -11,7 +11,7 @@ var landscapeImageUrl = 'https://h1.ioliu.cn//bing/Transfagarasan_ZH-CN576073132
 var mountainroadImageUrl = 'https://h1.ioliu.cn//bing/Transfagarasan_ZH-CN5760731327_1920x1080.jpg';
 
 export const Title_LoadingImagePage1 = `LoadingImagePage1(只看加载动画)`;
-export default class LoadingImagePage1 extends Component {
+export default class LoadingImage1LoadingShowPage1 extends Component {
     constructor(props) {
         super(props);
         this.state = {

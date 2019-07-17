@@ -11,7 +11,7 @@ import {LKWhiteBGButton} from "../commonUI/button/LKTextButton";
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
 export class LKWhiteBGButton extends Component {
@@ -44,18 +44,18 @@ export class LKWhiteBGButton extends Component {
                 color={'#333333'}
                 fontSize={this.props.fontSize}
                 onPress={this.props.onPress}
-                disabled={this.props.disabled}
             />
         )
     }
 }
+
+
 
 // var enableBlueColor = '#01ADFE';
 // var disableBlueColor = '#01ADFE4C';
 var enableBlueColor = 'rgba(23, 41, 145, 1)';
 var disableBlueColor = 'rgba(23, 41, 145, 0.4)';
 
-// LKBlueBGButton:蓝色背景+白色文字的按钮(常见于操作按钮)
 export class LKBlueBGButton extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
@@ -71,55 +71,46 @@ export class LKBlueBGButton extends Component {
         disabled: false,
     };
 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+    }
+
     render() {
         const { style } = this.props;
 
+
+        let blueStateStyle = (this.props.disabled?styles.blueDisable:styles.blueEnable)
+
         return (
-            <LKTextButton
-                style={[{
-                    borderRadius: 6,
-                    backgroundColor: "#FFFFFF",
-                    borderWidth: 1,
-                    borderColor: "#E5E5E5"
-                }, style]}
-                title={this.props.title}
-                color={'#333333'}
-                fontSize={this.props.fontSize}
-                onPress={this.props.onPress}
-                disabled={this.props.disabled}
+            <LKTextButton style={[blueStateStyle, style]}
+                          title={this.props.title}
+                          color={"#FFFFFF"}
+                          fontSize={this.props.fontSize}
+                          onPress={this.props.onPress}
+                          disabled={this.props.disabled}
             />
         )
     }
 }
 
+
 const styles = StyleSheet.create({
-    submitEnable: {
+    blueEnable: {
         height: 46,
         borderRadius: 6,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
-    submitDisable: {
+    blueDisable: {
         height: 46,
         borderRadius: 6,
         backgroundColor: disableBlueColor,
         borderWidth: 0
     },
-
-    editEnable: {
-        height: 40,
-        borderRadius: 4,
-        backgroundColor: "#FFFFFF",
-        borderWidth: 1,
-        borderColor: enableBlueColor
-    },
-    editDisable: {
-        height: 40,
-        borderRadius: 4,
-        backgroundColor: "#FFFFFF4C",
-        borderWidth: 1,
-        borderColor: disableBlueColor
-    }
 });
 
 // 文本按钮
