@@ -23,6 +23,8 @@ class DatePicker extends BaseDialog {
         selectedValue: [new Date().getFullYear() + '年', new Date().getMonth() + 1 + '月', new Date().getDate() + '日'],
         startYear: 1990,
         endYear: new Date().getFullYear(),
+        minDate: '1900-01-01',
+        maxDate: '2300-12-31',
 
         confirmText: '确定',
         confirmTextSize: 14,

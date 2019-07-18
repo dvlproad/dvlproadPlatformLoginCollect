@@ -33,6 +33,28 @@ export var LKAPILoadStatus = {
     Failure: 3,     /**< 失败请求不到数据 */
 };
 
+export class LKDataEmpty extends Component {
+    static propTypes = {
+        message: PropTypes.string,      //空白页的提示文字
+    };
+
+    static defaultProps = {
+        message: '您还没有图片，快去拍照吧！',
+        imageSource: require('./resources/emptyData.png'),
+    };
+
+    render() {
+        return (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <Image source={require("./resources/emptyData.png")} />
+                <Text style={{ paddingTop: 20, color: "#999999", fontSize: 14 }}>
+                    {this.props.message}
+                </Text>
+            </View>
+        );
+    }
+}
+
 export default class LKEmptyNetwork extends Component {
     static propTypes = {
         message: PropTypes.string,      //空白页的提示文字

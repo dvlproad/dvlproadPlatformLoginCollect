@@ -50,10 +50,12 @@ export default class LKRangeDateText extends Component {
         dateRangeEditingType: PropTypes.number,
 
         beginDateString: PropTypes.string,
+        beginMaxDateString: PropTypes.string,
         onBeginDatePickChange: PropTypes.func,
         onBeginDateAutoChange: PropTypes.func,  // 开始日期根据开始日期自动变化(仅在LKRangeDateEditingType.End下有效)
 
         endDateString: PropTypes.string,
+        endMinDateString: PropTypes.string,
         onEndDatePickChange: PropTypes.func,
         onEndDateAutoChange: PropTypes.func,  // 结束日期根据开始日期自动变化(仅在LKRangeDateEditingType.Begin下有效)
 
@@ -66,6 +68,9 @@ export default class LKRangeDateText extends Component {
 
     static defaultProps = {
         dateRangeEditingType: LKRangeDateEditingType.Begin,
+
+        beginMaxDateString: "2300-01-01",
+        endMinDateString: "1900-01-01",
 
         keepAlwaysWaveLine: false,
 
@@ -152,6 +157,13 @@ export default class LKRangeDateText extends Component {
             showWave = true;
         }
 
+
+        let beginMaxDateString = this.props.beginMaxDateString;
+        let endMinDateString = this.props.endDateString;
+        let isSecondDateLater = LKDateUtil.compareSecondyyyyMMddDateStringLater(beginMaxDateString, endMinDateString);
+        if (isSecondDateLater) {
+            endMinDateString = beginMaxDateString;
+        }
 
         return (
             <View style={
