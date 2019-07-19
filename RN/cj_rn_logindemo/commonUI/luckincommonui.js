@@ -1,4 +1,4 @@
-// index.js
+// luckincommonui.js
 
 'use strict';
 
@@ -6,55 +6,85 @@
 // toast
 import LKToastUtil from "./toast/LKToastUtil";
 
+// alert
+import LKAlertModal from "./modal/LKAlertModal";
+
+// actionSheet
+import {LKActionSheet, LKPhotoCameraSheet} from "./modal/LKActionSheet";
+import LKActionSheetComponent, { LKActionDom } from "./modal/LKActionSheetComponent";
+import LKActionSheetModal from "./modal/LKActionSheetModal";
+
+// progressHUD
+import LKProgressHUD from "./hud/LKProgressHUD";
+
+// modal
+import {LKLoadingModal} from "./modal/LKLoadingModal";
+
 // button
-import LKTextButton from './button/LKTextButton';
+import LKTextButton, { LKBlueBGBottomButton, LKBlueBGButton, LKWhiteBGButton} from './button/LKTextButton';
 import {LKBackAppButton, LKBackButton, LKDeleteButton, LKImageButton} from "./button/LKImageButton";
 import {LKEditSubmitButton} from "./button/LKEditSubmitButton";
 import LKTextImageButton from "./button/LKTextImageButton";
 
 // image
-import LKLoadingImage from "./image/LKLoadingImage";
+import LKLoadingImage, { ImageUploadType } from "./image/LKLoadingImage";
 import LKActionLoadingImage from "./image/LKActionLoadingImage";
-import OtherLoadingImage from "./image/OtherLoadingImage";
-import UnDecoupleActionLoadingImage from "./image/UnDecoupleActionLoadingImage";
 
 // empty
-import LKEmptyNetwork, {LKDataEmpty} from "./empty/LKEmptyNetwork";
+import LKEmptyNetwork, {LKDataEmpty, LKAPILoadStatus} from "./empty/LKEmptyNetwork";
+
 
 // date
-import LKComJSActionSingleDateText from "./date/LKComJSActionSingleDateText";
-import LKComNativeActionSingleDateText from "./date/LKComNativeActionSingleDateText";
 import LKOwnNativeActionSingleDateText from "./date/LKOwnNativeActionSingleDateText";
-import LKOwnNativeActionRangeDateText from "./date/LKOwnNativeActionRangeDateText";
-import LKSingleDateText from "./date/LKSingleDateText";
-import LKRangeDateText from "./date/LKRangeDateText";
+// import LKRangeDateComponent, { LKRangeDateEditingType } from "./date/LKRangeDateComponent";
+
 
 // list
-import GoodsChooseList from "./list/GoodsChooseList";
-import HomeSectionList from "./list/HomeSectionList";
 import LKImagesChooseList from "./list/LKImagesChooseList";
-import {LKActionSheet} from "./modal/LKActionSheet";
-import LKAlertModal from "./modal/LKAlertModal";
+// import LKSelectListModal from "./list/LKSelectListModal";
+
 
 // picker
-import DatePicker from "./react-native-pickers/DatePicker";
-
+// import DatePicker from "./react-native-pickers/DatePicker";
 
 
 
 // import React, { Component } from 'react';
+//
 // export class Class extends Component  {
 //   render() {
-//     LKToastUtil
+//     
 //   }
 // }
 
 var LKCommonUI = {
+  // toast
   LKToastUtil,
 
-  LKTextButton,
-  LKBackAppButton,
+  // alert
+  LKAlertModal,
 
+  // sheet
+  LKActionSheet,
+  LKPhotoCameraSheet,
+  LKActionSheetComponent,
+  LKActionDom,
+  LKActionSheetModal,
+
+  // progress
+  LKProgressHUD,
+
+  // modal
+  LKLoadingModal,
+
+  // textButton
+  LKTextButton,
+  LKBlueBGBottomButton,
+  LKBlueBGButton,
+  LKWhiteBGButton,
+
+  // imageButton
+  LKBackAppButton,
   LKBackButton,
   LKDeleteButton,
   LKImageButton,
@@ -63,30 +93,25 @@ var LKCommonUI = {
 
   // image
   LKLoadingImage,
+  ImageUploadType,
   LKActionLoadingImage,
-  OtherLoadingImage,
-  UnDecoupleActionLoadingImage,
 
   // empty
   LKEmptyNetwork,
   LKDataEmpty,
+  LKAPILoadStatus,
 
   // date
-  LKComJSActionSingleDateText,
-  LKComNativeActionSingleDateText,
   LKOwnNativeActionSingleDateText,
-  LKOwnNativeActionRangeDateText,
-  LKSingleDateText,
-  LKRangeDateText,
+  // LKRangeDateComponent,
+  // LKRangeDateEditingType,
 
   // list
-  GoodsChooseList,
-  HomeSectionList,
   LKImagesChooseList,
-  LKActionSheet,
+  // LKSelectListModal,
 
   // picker
-  DatePicker,
+  // DatePicker,
 };
 
 module.exports = LKCommonUI;

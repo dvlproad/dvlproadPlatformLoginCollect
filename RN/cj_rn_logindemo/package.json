@@ -14,7 +14,6 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-native": "^0.59.8",
-    "react-native-datepicker": "^1.7.2",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-image-crop-picker": "^0.24.1",
     "react-native-image-picker": "^0.28.1",

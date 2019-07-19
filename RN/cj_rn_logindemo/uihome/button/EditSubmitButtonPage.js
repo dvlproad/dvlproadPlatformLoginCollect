@@ -1,7 +1,8 @@
 //EditSubmitButtonPage.js
 import React, {Component} from 'react';
 import {Button, Alert, Text, View, ScrollView, FlatList, TouchableWithoutFeedback} from 'react-native';
-import {LKEditSubmitButton} from "../../commonUI/button/LKEditSubmitButton";
+// import {LKEditSubmitButton} from "../../commonUI/button/LKEditSubmitButton";
+import { LKEditSubmitButton } from "../../commonUI/luckincommonui";
 
 export default class EditSubmitButtonPage extends Component {
     renderSeparator() {

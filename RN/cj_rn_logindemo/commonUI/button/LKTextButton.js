@@ -11,7 +11,10 @@ import {LKWhiteBGButton} from "../commonUI/button/LKTextButton";
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+
+let screenHeight = Dimensions.get('window').height;
+let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 0;
 
 // LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
 export class LKWhiteBGButton extends Component {
@@ -56,6 +59,59 @@ export class LKWhiteBGButton extends Component {
 var enableBlueColor = 'rgba(23, 41, 145, 1)';
 var disableBlueColor = 'rgba(23, 41, 145, 0.4)';
 
+//注意此按钮顶部阴影超出了按钮本身区域，注意放在视图上层才会显示出来；
+export class LKBlueBGBottomButton extends Component {
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+        onPress: PropTypes.func,
+        disabled: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        title: "title",
+        fontSize: 17,
+        onPress: () => { },
+        disabled: false,
+    };
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+    }
+
+    render() {
+        const { style } = this.props;
+        let blueStateStyle = (this.props.disabled ? styles.blueDisable : styles.blueEnable)
+
+        return (
+            <View style={{
+                paddingHorizontal: 15,
+                paddingTop: 8,
+                paddingBottom: 8 + screenBottomHeight,
+                backgroundColor: 'white',
+                shadowColor: 'black',
+                shadowOffset: { width: 0, height: -1 },
+                shadowOpacity: 0.1,
+                shadowRadius: 5,
+                elevation: 10,
+            }}>
+                <LKBlueBGButton
+                    style={[blueStateStyle, style]}
+                    title={this.props.title}
+                    fontSize={this.props.fontSize}
+                    onPress={this.props.onPress}
+                    disabled={this.props.disabled}
+                />
+            </View>
+        )
+    }
+
+}
+
 export class LKBlueBGButton extends Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
@@ -83,7 +139,7 @@ export class LKBlueBGButton extends Component {
         const { style } = this.props;
 
 
-        let blueStateStyle = (this.props.disabled?styles.blueDisable:styles.blueEnable)
+        let blueStateStyle = (this.props.disabled ? styles.blueDisable : styles.blueEnable)
 
         return (
             <LKTextButton style={[blueStateStyle, style]}
@@ -101,16 +157,16 @@ export class LKBlueBGButton extends Component {
 const styles = StyleSheet.create({
     blueEnable: {
         height: 46,
-        borderRadius: 6,
+        borderRadius: 3,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     blueDisable: {
         height: 46,
-        borderRadius: 6,
+        borderRadius: 3,
         backgroundColor: disableBlueColor,
         borderWidth: 0
-    },
+    }
 });
 
 // 文本按钮
@@ -146,12 +202,12 @@ export default class LKTextButton extends Component {
         //     </View>
         // )
         return (
-            <View style={[{ justifyContent: "center", height: 44 }, style]} >
-                <TouchableOpacity
-                    onPress={this.props.onPress}
-                    disabled={this.props.disabled}
-                //activeOpacity={0.4}
-                >
+            <TouchableOpacity
+                onPress={this.props.onPress}
+                disabled={this.props.disabled}
+            //activeOpacity={0.4}
+            >
+                <View style={[{ justifyContent: "center", height: 44 }, style]} >
                     <Text
                         style={{
                             textAlign: 'center',
@@ -161,8 +217,8 @@ export default class LKTextButton extends Component {
                     >
                         {this.props.title}
                     </Text>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         )
     }
 }

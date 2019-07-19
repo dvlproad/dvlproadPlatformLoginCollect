@@ -38,15 +38,15 @@ import {LKDeleteButton} from "../commonUI/button/LKImageButton";
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Image, TouchableOpacity, View} from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 
 // 返回壳App的图片按钮--每个RN app的首页都需要使用的组件
 export class LKBackAppButton extends Component {
     render() {
         return (
             <LKBackButton onPress={() => {
-                              
-                          }}
+
+            }}
             />
         )
     }
@@ -102,7 +102,7 @@ export class LKImageButton extends Component {
 
     static defaultProps = {
         source: null,
-        onPress: ()=>{},
+        onPress: () => { },
     };
 
 

@@ -90,7 +90,7 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'RangeDateTextPage';
+export const UIRoutePage = 'EditSubmitButtonPage';
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,

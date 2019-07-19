@@ -1,7 +1,7 @@
-//OwnNativeSingleDatePagege.js
+//OwnNativeSingleDatePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
-import LKOwnNativeActionSingleDateText from "../../commonUI/date/LKOwnNativeActionSingleDateText";
+import {LKOwnNativeActionSingleDateText} from "../../commonUI/luckincommonui";
 
 export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {
@@ -24,10 +24,10 @@ export default class OwnNativeSingleDatePage extends Component {
                                                  chooseDateString={beginDateString1}
                                                  allowPickDate={true}
                                                  onDateChange={ (date) => {
-                                           this.setState({
-                                               beginDateString1: date
-                                           })
-                                       }}
+                                                     this.setState({
+                                                         beginDateString1: date
+                                                     })
+                                                 }}
                                                  isBankStyle={false}
                 />
 
@@ -37,10 +37,10 @@ export default class OwnNativeSingleDatePage extends Component {
                                                  chooseDateString={beginDateString2}
                                                  allowPickDate={true}
                                                  onDateChange={ (date) => {
-                                           this.setState({
-                                               beginDateString2: date
-                                           })
-                                       }}
+                                                     this.setState({
+                                                         beginDateString2: date
+                                                     })
+                                                 }}
                                                  isBankStyle={true}
                 />
 
