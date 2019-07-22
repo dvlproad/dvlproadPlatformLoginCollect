@@ -108,6 +108,17 @@ export default class LKDateUtil {
 
 
     /**
+     * 比较日期：判断指定的yyyyMMdd日期字符串是否比今天大
+     *
+     * @param yyyyMMddDateString2
+     * @returns {boolean}
+     */
+    static compareyyyyMMddDateStringLaterToday(yyyyMMddDateString2) {
+        let yyyyMMddDateString1 = this.yyyyMMddString(new Date());
+        return this.compareSecondyyyyMMddDateStringLater(yyyyMMddDateString1, yyyyMMddDateString2);
+    }
+
+    /**
      * 比较日期：判断第二个yyyyMMdd日期字符串是否比第一个yyyyMMdd日期字符串大
      *
      * @param yyyyMMddDateString1

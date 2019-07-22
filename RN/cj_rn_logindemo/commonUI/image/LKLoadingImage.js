@@ -23,8 +23,9 @@ var ImageLoadStatus = {
     Loading: 1,     /**< 正在加载 */
     Success: 2,     /**< 加载成功 */
     Failure: 3,     /**< 加载失败 */
-    ErrorImageSuccess: 4,     /**< 加载"加载失败时候的照片"成功 */
-    ErrorImageFailure: 5,     /**< 加载"加载失败时候的照片"也失败 */
+    End:     4,     /**< 加载结束 */
+    ErrorImageSuccess: 5,     /**< 加载"加载失败时候的照片"成功 */
+    ErrorImageFailure: 6,     /**< 加载"加载失败时候的照片"也失败 */
 };
 
 /// 图片来源
@@ -88,6 +89,7 @@ export default class LKLoadingImage extends Component {
             loaded: false,
             loadStatus: ImageLoadStatus.Pending,
             shouldShowErrorSource: false,
+            isShowingErrorSource: false,
         }
     }
 
@@ -98,6 +100,7 @@ export default class LKLoadingImage extends Component {
     componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
         if (this.props.source !== nextProps.source){
             this.state.shouldShowErrorSource = false;
+            this.state.isShowingErrorSource = false;
 
             let isNetworkImage = this.checkIsNetworkImage(nextProps.source);
             this.setState({
@@ -136,8 +139,15 @@ export default class LKLoadingImage extends Component {
      * 加载结束(当加载完成回调该方法，不管图片加载成功还是失败都会调用该方法)
      */
     onLoadEnd = () => {
+        if (this.state.isShowingErrorSource) { //防止重复setState，死循环
+
+        } else {
+            this.props.onLoadComplete(this.props.buttonIndex);
+        }
+
         this.setState({
             loaded: true,
+            loadStatus: ImageLoadStatus.End
         })
     }
 
@@ -146,7 +156,7 @@ export default class LKLoadingImage extends Component {
      * 加载成功(当图片加载成功之后，回调该方法)
      */
     onLoadSuccess=() => {
-        if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
+        if (this.state.isShowingErrorSource) {
             this.setState({
                 loadStatus: ImageLoadStatus.ErrorImageSuccess
             });
@@ -155,8 +165,6 @@ export default class LKLoadingImage extends Component {
             this.setState({
                 loadStatus: ImageLoadStatus.Success
             });
-
-            this.props.onLoadComplete(this.props.buttonIndex);
         }
     }
 
@@ -165,20 +173,24 @@ export default class LKLoadingImage extends Component {
      * @param {*} error
      */
     onLoadError=(error) => {
-        if (this.state.shouldShowErrorSource) { //防止重复setState，死循环
+        if (this.state.isShowingErrorSource) {
             console.log("如果当要显示的图加载失败时候，转为显示加载失败时，" +
                 "却发现连传入的图片加载失败图都是错误的，那就不处理");
-
-            this.setState({
-                loadStatus: ImageLoadStatus.ErrorImageFailure
-            });
+            this.state.loadStatus = ImageLoadStatus.ErrorImageFailure;
 
         } else {
-            this.setState({
-                loadStatus: ImageLoadStatus.Failure,
-                shouldShowErrorSource: true,
-            });
-            this.props.onLoadComplete(this.props.buttonIndex);
+            this.state.shouldShowErrorSource = true;
+            if (this.state.isNetworkImage) {
+                console.log("加载图片失败" + '\n'
+                    + "加载的图片的地址是:" + this.props.source['uri'] + '\n'
+                    + '失败原因:' + error.nativeEvent.error);
+            } else {
+                console.log("加载图片失败" + '\n'
+                    + "加载的图片的地址是:" + "为本地图片" + '\n'
+                    + '失败原因:' + error.nativeEvent.error);
+            }
+
+            this.state.loadStatus = ImageLoadStatus.Failure;
         }
     }
 
@@ -348,6 +360,7 @@ export default class LKLoadingImage extends Component {
         let showingImage = this.props.source;
         if (this.state.shouldShowErrorSource) {
             showingImage = this.props.errorSource;
+            this.state.isShowingErrorSource = true;
         }
 
         return (

@@ -1,19 +1,34 @@
 // LKActionSheet.js
 /* LKPhotoCameraSheet:'拍摄/从手机相册选择'使用示例
 
-import {LKPhotoCameraSheet} from "../../../commonUI/modal/LKActionSheet";
+import {
+    LKPhotoCameraSheet,
+} from '../commonUI/luckincommonui';
 
-            <LKPhotoCameraSheet visible={this.state.photoCameraSheetShow}
-                                clickCancel={this.hidePhotoCameraSheet}
-                                clickTakePhoto={()=>{
-                                    this.hidePhotoCameraSheet();
-                                    alert("你点击了拍摄")
-                                }}
-                                clickChooseFromLibrary={()=>{
-                                    this.hidePhotoCameraSheet();
-                                    alert("你点击了从相册选择")
-                                }}
-            />
+import {
+    LKImagePickerUtil,
+} from '../commonUtil/luckincommonutil';
+
+
+        <LKPhotoCameraSheet ref={ref => this.photoCameraSheet = ref} />
+
+        //显示图片选择器
+        showPhotoCameraSheet = (index) => {
+            this.photoCameraSheet.showDefault(
+                () => {
+                    // '拍摄'
+                    LKImagePickerUtil.takePhoto((imageAbsolutePath, imageRelativePath)=>{
+                        this.addImageHandle(index, imageAbsolutePath, imageRelativePath);
+                    });
+
+                },
+                () => {
+                    // '从手机相册选择'
+                    LKImagePickerUtil.choosePhoto((imageAbsolutePath, imageRelativePath)=>{
+                        this.addImageHandle(index, imageAbsolutePath, imageRelativePath);
+                    });
+                });
+       }
  */
 
 /* LKActionSheet: 最基础的ActionSheet使用示例
@@ -50,28 +65,50 @@ export class LKPhotoCameraSheet extends Component {
         }
     }
 
-    dealAction = (action) => {
-        setTimeout(action, 200);
+
+    /**
+     * 显示默认的图片选择Sheet
+     *
+     * @param takePhotoBlock    '拍摄'的回调
+     * @param choosePhotoBlock  '从手机相册选择'的回调
+     */
+    showDefault(takePhotoBlock, choosePhotoBlock) {
+        this.show(this.state.actionName1, this.state.actionName2, takePhotoBlock, choosePhotoBlock);
     }
 
-    show(actionName1, actionName2, clickTakePhoto, clickChooseFromLibrary) {
+    /**
+     * 显示指定的图片选择Sheet
+     *
+     * @param actionName1
+     * @param actionName2
+     * @param takePhotoBlock    '拍摄'的回调
+     * @param choosePhotoBlock  '从手机相册选择'的回调
+     */
+    show(actionName1, actionName2, takePhotoBlock, choosePhotoBlock) {
         actionName1 = actionName1 ? actionName1 : this.state.actionName1;
         actionName2 = actionName2 ? actionName2 : this.state.actionName2;
         this.setState({
             visible: true,
             actionName1: actionName1,
             actionName2: actionName2,
-            clickTakePhoto: clickTakePhoto,
-            clickChooseFromLibrary: clickChooseFromLibrary
+            takePhotoBlock: takePhotoBlock,
+            choosePhotoBlock: choosePhotoBlock
         })
     }
 
+    /**
+     * 隐藏图片选择Sheet
+     */
     hide() {
         this.setState({
             visible: false,
-            clickTakePhoto: null,
-            clickChooseFromLibrary: null,
+            takePhotoBlock: null,
+            choosePhotoBlock: null,
         })
+    }
+
+    dealAction = (action) => {
+        action && setTimeout(action, 200);
     }
 
     render() {
@@ -81,19 +118,19 @@ export class LKPhotoCameraSheet extends Component {
                            actionTitle={''}
                            cancel={() => {
                                this.hide();
-                               // this.dealAction(this.props.clickCancel);
+                               // this.dealAction(this.state.clickCancel);
                            }}
             >
                 <LKActionDom actionName={this.state.actionName1}
                              onPress={() => {
                                  this.hide();
-                                 this.state.clickTakePhoto && setTimeout(this.state.clickTakePhoto, 200);
+                                 this.dealAction(this.state.takePhotoBlock);
                              }}
                 />
                 <LKActionDom actionName={this.state.actionName2}
                              onPress={() => {
                                  this.hide();
-                                 this.state.clickChooseFromLibrary && setTimeout(this.state.clickChooseFromLibrary, 200);
+                                 this.dealAction(this.state.choosePhotoBlock);
                              }}
                 />
             </LKActionSheet>
@@ -128,7 +165,7 @@ export class LKActionSheet extends Component {
             <Modal visible={this.props.visible}
                    animationType={this.props.animationType}
                    transparent={true}
-                   onRequestClose={() => {}}
+                   onRequestClose={() => { }}
             >
                 <LKActionSheetComponent actionTitle={this.props.actionTitle}
                                         cancel={this.props.cancel}

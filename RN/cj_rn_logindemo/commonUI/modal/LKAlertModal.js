@@ -104,7 +104,9 @@ export default class LKAlertModal extends Component {
                 title={this.state.buttonTitle1 ? this.state.buttonTitle1 : this.state.buttonTitle2}
                 onPress={() => {
                     this.isHide = true;
-                    this.state.confirmClick && this.state.confirmClick(1);
+                    this.state.confirmClick && setTimeout(() => {
+                        this.state.confirmClick(1);
+                    }, 200);
                     this.out();
                 }}
             />
@@ -121,7 +123,9 @@ export default class LKAlertModal extends Component {
                 title={this.state.buttonTitle1}
                 onPress={() => {
                     this.isHide = true;
-                    this.state.confirmClick && this.state.confirmClick(0);
+                    this.state.confirmClick && setTimeout(() => {
+                        this.state.confirmClick(0);
+                    }, 200);
                     this.out();
                 }}
             />
@@ -133,7 +137,9 @@ export default class LKAlertModal extends Component {
                 title={this.state.buttonTitle2}
                 onPress={() => {
                     this.isHide = true;
-                    this.state.confirmClick && this.state.confirmClick(1);
+                    this.state.confirmClick && setTimeout(() => {
+                        this.state.confirmClick(1);
+                    }, 200);
                     this.out();
                 }}
             />
