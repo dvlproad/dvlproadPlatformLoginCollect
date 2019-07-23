@@ -12,7 +12,7 @@ export default class LKActionSheetComponent extends Component {
     static propTypes = {
         actionTitle: PropTypes.string, //头部
         cancel: PropTypes.func,     // 取消操作
-        children: PropTypes.array,
+        children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
 
     render() {

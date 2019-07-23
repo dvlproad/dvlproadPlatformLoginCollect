@@ -10,7 +10,7 @@ import LKToastUtil from "./toast/LKToastUtil";
 import LKAlertModal from "./modal/LKAlertModal";
 
 // actionSheet
-import {LKActionSheet, LKPhotoCameraSheet} from "./modal/LKActionSheet";
+import {LKActionSheet, LKPhotoCameraSheet, LKActionSheetFactory} from "./modal/LKActionSheet";
 import LKActionSheetComponent, { LKActionDom } from "./modal/LKActionSheetComponent";
 import LKActionSheetModal from "./modal/LKActionSheetModal";
 
@@ -67,6 +67,7 @@ var LKCommonUI = {
   // sheet
   LKActionSheet,
   LKPhotoCameraSheet,
+  LKActionSheetFactory,
   LKActionSheetComponent,
   LKActionDom,
   LKActionSheetModal,

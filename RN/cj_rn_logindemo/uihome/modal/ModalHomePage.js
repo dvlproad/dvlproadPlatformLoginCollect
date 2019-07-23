@@ -37,6 +37,7 @@ export default class ModalHomePage extends Component {
             },
             { key: "ActionSheet",
                 data: [
+                    { title: "ActionSheetFactoryPage", page: "ActionSheetFactoryPage" },
                     { title: "ActionSheetPage", page: "ActionSheetPage" },
                     { title: "PhotoCameraSheetPage", page: "PhotoCameraSheetPage" },
                 ]
@@ -63,6 +64,7 @@ import HUDHomePage from "./hud/HUDHomePage";
 
 import PhotoCameraSheetPage from "./actionSheet/PhotoCameraSheetPage";
 import ActionSheetPage from "./actionSheet/ActionSheetPage";
+import ActionSheetFactoryPage from "./actionSheet/ActionSheetFactoryPage";
 
 export const ModalRoutePage = 'ModalHomePage';
 export const ModalPages = {
@@ -96,10 +98,10 @@ export const ModalPages = {
     },
 
     //actionSheet
-    RNActionSheetPage: {
-        screen: ActionSheetPage,
+    ActionSheetFactoryPage: {
+        screen: ActionSheetFactoryPage,
         navigationOptions: () => ({
-            title: `RNActionSheetPage`,
+            title: `ActionSheetFactoryPage`,
         }),
     },
     ActionSheetPage: {

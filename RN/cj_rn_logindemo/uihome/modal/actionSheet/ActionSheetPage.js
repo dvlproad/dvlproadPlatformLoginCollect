@@ -1,43 +1,69 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {LKActionSheet} from "../../../commonUI/modal/LKActionSheet";
 import {LKActionDom} from "../../../commonUI/modal/LKActionSheetComponent";
-import LKTextButton from "../../../commonUI/button/LKTextButton";
+
+import {
+    LKToastUtil,
+    LKActionSheet,
+    LKBlueBGButton,
+} from '../../../commonUI/luckincommonui';
 
 export default class ActionSheetPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAction: false
+
         };
+    }
+
+    showPhotoCameraActionSheet() {
+        this.photoCameraActionSheet.showWithItems([
+            {
+                mainTitle: "拍摄",
+                actionBlock: ()=>{
+                    console.log("你点击了'拍摄'");
+                },
+            },
+            {
+                mainTitle: "从手机相册选择",
+                actionBlock: ()=>{
+                    console.log("你点击了'从手机相册选择'");
+                },
+            },
+        ]);
+    }
+
+    showListActionSheet() {
+        let itemModels = [];
+        for (let i = 0; i < 100; i++) {
+            let itemModel = new Map();
+            itemModel.mainTitle = "标题" + i;
+            itemModel.actionBlock = () => {
+                console.log("你点击了标题" + i);
+            }
+
+            itemModels.push(itemModel);
+        }
+
+        this.listActionSheet.showWithItems(itemModels);
     }
 
     render() {
         return (
             <View style={{backgroundColor:'#f5f5f5'}}>
-                <LKTextButton title={'弹出actionSheet'}
-                              onPress={()=>{
-                                  this.setState({
-                                      showAction: !this.state.showAction
-                                  })
-                              }}
+                <LKActionSheet ref={ref => this.photoCameraActionSheet = ref} />
+                <LKBlueBGButton title={'弹出拍摄图片选择actionSheet'}
+                                onPress={()=>{
+                                    this.showPhotoCameraActionSheet();
+                                }}
                 />
 
-                <LKActionSheet actionTitle={'请选择'}
-                               visible={this.state.showAction}
-                               cancel={()=>{this.setState({showAction:false})}}
-                >
-                    <LKActionDom actionName={'我是按钮一'}
-                                 onPress={()=>{
-                                     alert("你点击了按钮一")
-                                 }}
-                    />
-                    <LKActionDom actionName={'我是按钮二'}
-                                 onPress={()=>{
-                                     alert("你点击了按钮一")
-                                 }}
-                    />
-                </LKActionSheet>
+                <LKActionSheet ref={ref => this.listActionSheet = ref} />
+                <LKBlueBGButton title={'弹出长列表actionSheet'}
+                                onPress={()=>{
+                                    this.showListActionSheet();
+                                }}
+                />
             </View>
 
         )
