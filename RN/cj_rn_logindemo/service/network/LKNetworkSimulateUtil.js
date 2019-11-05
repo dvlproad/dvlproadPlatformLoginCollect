@@ -2,10 +2,105 @@
 
 import LKDataUtil from "../../commonUtil/LKDataUtil";
 
-export default class LKNetworkSimulateUtil {
+import {
+    LKProgressHUD,
+} from '../../commonUI/luckincommonui';
 
-    /* 上传图片的使用示例
-        LKNetworkUtil.simulateUploadImage(
+export default class LKNetworkSimulateUtil {
+    /*
+    使用示例：
+        LKNetworkUtil.GET(
+            '/resource/empapi/audit/healthCardInfo',
+            {},
+            false
+        ).then((responseJSON) => {                       // msg is an Object
+            this.getHealthCardInfoSuccess(responseJSON);
+        }).catch((error) => {                    // error is an Object with key [code, msg]
+            this.getHealthCardInfoFailure(error);
+        });
+    */
+    /**
+     * GET请求
+     * @param path                  请求的path（推荐以“/”开头）,形如'/resource/empapi/audit/healthCardInfo'
+     * @param params                参数请求，以集合的方式传递
+     * @param isNeedLoading         是否需要弹出
+     * @returns {Promise<any> | Promise<*>}
+     * @constructor
+     */
+    static local_GET(apiSuffix, params, isNeedLoading) {
+        apiSuffix = 0;
+        if (apiSuffix.indexOf("/") == 0) {
+            apiSuffix.replace("/",'');
+        }
+        let jsonName = this.stringByReplacingOccurrencesOfString(apiSuffix, "/", ":");
+
+        return new Promise((resolve, reject) => {
+            if (isNeedLoading) {
+                LKProgressHUD.show();
+            }
+
+            setTimeout(()=>{
+                if (isNeedLoading) {
+                    LKProgressHUD.dismiss();
+                }
+
+                let responseJSON = {};
+                resolve(responseJSON);
+            }, 500);
+        });
+    }
+
+    /**
+     * 将字符串中的字符替换成另一个字符
+     *
+     * @param beChangeOccurrences
+     * @param toOccurrences
+     */
+    static stringByReplacingOccurrencesOfString(string, beChangeOccurrences, toOccurrences) {
+        while(string.indexOf(beChangeOccurrences) >= 0) { // 判断a字符串中是否包含'c'，如果包含就替换掉，然后继续判断是否包含C，包含就替换继续判断，不包含就结束循环
+            string = string.replace(beChangeOccurrences, toOccurrences);
+        }
+        return string;
+    }
+
+    /*
+    使用示例：
+        LKNetworkUtil.GET(
+            '/resource/empapi/audit/healthCardInfo',
+            {},
+            false
+        ).then((responseJSON) => {                       // msg is an Object
+            this.getHealthCardInfoSuccess(responseJSON);
+        }).catch((error) => {                    // error is an Object with key [code, msg]
+            this.getHealthCardInfoFailure(error);
+        });
+    */
+    /**
+     * POST请求
+     * @param path                  请求的path（推荐以“/”开头）,形如'/resource/empapi/audit/healthCardInfo'
+     * @param params                参数请求，以集合的方式传递
+     * @param isNeedLoading         是否需要弹出
+     * @returns {Promise<any> | Promise<*>}
+     * @constructor
+     */
+    static POST(path, params, isNeedLoading) {
+        return new Promise((resolve, reject) => {
+            if (isNeedLoading) {
+                LKProgressHUD.show();
+            }
+            setTimeout(()=>{
+                if (isNeedLoading) {
+                    LKProgressHUD.dismiss();
+                }
+
+                let responseJSON = {};
+                resolve(responseJSON);
+            }, 500);
+        });
+    }
+
+    /* 模拟图片上传的使用示例
+        LKNetworkSimulateUtil.simulateUploadImage(
             imageModel,
             imageRelativePath,
             progress => {
@@ -19,8 +114,6 @@ export default class LKNetworkSimulateUtil {
             this.imageUploadFailure(healthCerImage);
         });
      */
-
-
     /**
      * 模拟图片上传的方法
      *

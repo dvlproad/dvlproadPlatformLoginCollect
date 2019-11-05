@@ -1,0 +1,22 @@
+{
+  "handler": "CLIENT",
+  "content": {
+    "remark": "",
+    "healthCard1Url": "http://imgtest.luckycoffee.com/group1/M00/00/12/CmicNV02xHCAAf29AAMhB4gYZpI824.jpg",
+    "healthCardApprovalMessage": "待审核",
+    "healthCardEndTime": "2020-07-16",
+    "approvalTips": "健康证已提交，待审核中@请提醒店长审核",
+    "healthCardStartTime": "2019-07-16",
+    "healthCardStateMessage": "健康证异常",
+    "healthCardApprovalCode": 1,
+    "healthCard2Url": "http://imgtest.luckycoffee.com/group1/M00/00/17/CmicNF05TvyANQ-oABQdDKDQ26c550.jpg",
+    "healthCardStateCode": 0,
+    "overdueMessage": "您的健康证已过期，系统无法安排上班！@请及时办理并在APP上传新的证件",
+  },
+  "status": "SUCCESS",
+  "uid": "fe8b6a56-4590-497e-91a7-c9d95cc705cb1563970825480",
+  "code": 1,
+  "msg": "成功",
+  "version": "100",
+  "busiCode": "BASE000",
+}

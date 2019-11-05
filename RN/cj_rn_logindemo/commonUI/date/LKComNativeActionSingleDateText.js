@@ -1,6 +1,6 @@
 // LKComNativeSingleActionDateTextt.js
 /* 使用示例
-import LKComNativeActionSingleDateText from "../../commonUI/date/LKOwnNativeActionSingleDateText";
+import LKComNativeActionSingleDateText from "../../commonUI/date/LKRNActionSingleDateText";
 
 export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {

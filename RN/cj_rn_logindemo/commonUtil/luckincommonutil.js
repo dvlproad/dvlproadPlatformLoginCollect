@@ -5,11 +5,10 @@
 
 import LKDataUtil from  "./LKDataUtil";
 import LKDateUtil from "./LKDateUtil";
-import LKCalendarUtil from "./LKCalendarUtil";
-import LKScreenUnit from "./LKScreenUnit";
-import LKTypeFactory from "./LKTypeFactory";
-import LKNetworkTool from "./networkTool/LKNetworkTool";
-import LKImagePickerUtil from "./LKImagePickerUtil";
+// import LKCalendarUtil from "./LKCalendarUtil";
+// import LKScreenUnit from "./LKScreenUnit";
+// import LKNetworkTool from "./networkTool/LKNetworkTool";
+// import LKImagePickerUtil from "./LKImagePickerUtil";
 
 
 // import React, { Component } from 'react';
@@ -21,12 +20,11 @@ import LKImagePickerUtil from "./LKImagePickerUtil";
 
 var LKCommonUtil = {
     LKDataUtil,
-    LKImagePickerUtil,
+    // LKImagePickerUtil,
     LKDateUtil,
-    LKCalendarUtil,
-    LKScreenUnit,
-    LKTypeFactory,
-    LKNetworkTool
+    // LKCalendarUtil,
+    // LKScreenUnit,
+    // LKNetworkTool
 };
 
 module.exports = LKCommonUtil;

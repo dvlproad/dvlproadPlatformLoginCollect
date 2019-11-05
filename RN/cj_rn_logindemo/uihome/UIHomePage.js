@@ -90,7 +90,8 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'ActionSheetPage';
+// export const UIRoutePage = 'UIHomePage';
+export const UIRoutePage = PickRoutePage;
 export const UIPages = {
     UIHomePage: {
         screen: UIHomePage,
@@ -113,7 +114,7 @@ export const UIPages = {
         }),
     },
 
-    TextHome: {
+    TextHomePage: {
         screen: TextHomePage,
         navigationOptions: () => ({
             title: `Text首页`,

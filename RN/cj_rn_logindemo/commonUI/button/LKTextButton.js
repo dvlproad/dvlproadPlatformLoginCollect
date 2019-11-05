@@ -205,19 +205,18 @@ export default class LKTextButton extends Component {
             <TouchableOpacity
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}
+                style={[{ justifyContent: "center", height: 44 }, style]}
             //activeOpacity={0.4}
             >
-                <View style={[{ justifyContent: "center", height: 44 }, style]} >
-                    <Text
-                        style={{
-                            textAlign: 'center',
-                            color: this.props.color,
-                            fontSize: this.props.fontSize
-                        }}
-                    >
-                        {this.props.title}
-                    </Text>
-                </View>
+                <Text
+                    style={{
+                        textAlign: 'center',
+                        color: this.props.color,
+                        fontSize: this.props.fontSize
+                    }}
+                >
+                    {this.props.title}
+                </Text>
             </TouchableOpacity>
         )
     }

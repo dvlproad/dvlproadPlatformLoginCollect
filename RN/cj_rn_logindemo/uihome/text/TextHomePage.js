@@ -31,6 +31,17 @@ export default class TextHomePage extends Component {
                         </Text>
                     </View>
 
+                    <Text
+                        style={{
+                            fontSize: 17,
+                            textAlign: 'center',
+                            textAlignVertical: 'center',
+                            backgroundColor: "purple"
+                        }}
+                    >
+                        不设置宽高时候的，是否能居中
+                    </Text>
+
                     <Text style={[styles.normalText, {backgroundColor: "orange"}]}>
                         {normalText}
                     </Text>

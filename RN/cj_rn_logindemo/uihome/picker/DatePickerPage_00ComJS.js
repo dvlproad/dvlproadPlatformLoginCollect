@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
-import LKTextButton, {LKBlueBGButton} from "../../commonUI/button/LKTextButton";
-import LKToastUtil from "../../commonUI/toast/LKToastUtil";
-import LKDateUtil from "../../commonUtil/LKDateUtil";
+
 import DatePicker from "../../commonUI/react-native-pickers/DatePicker";
+
+import {
+    LKToastUtil,
+    LKTextButton,
+    LKBlueBGButton,
+} from '../../commonUI/luckincommonui';
+
+import {
+    LKDateUtil,
+} from '../../commonUtil/luckincommonutil';
+
 
 var currentShowDateString = '';
 var lastShowDateSting = '';
+/**
+ * 用于测试只用一个日期选择器时候，能不能根据日期来正确更新，而不是说就得多个日期选择器
+ */
 export default class DatePickerPage_00ComJS extends Component {
 
     constructor(props) {

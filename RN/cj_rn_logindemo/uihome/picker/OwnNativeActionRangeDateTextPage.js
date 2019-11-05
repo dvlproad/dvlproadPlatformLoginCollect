@@ -1,7 +1,7 @@
 //LKOwnNativeActionRangeDateTextPage.js
 import React, { Component } from 'react';
 import {Text, ScrollView, TouchableOpacity, View} from 'react-native';
-import LKOwnNativeActionRangeDateText from '../../commonUI/date/LKOwnNativeActionRangeDateText';
+import LKRNActionRangeDateText from '../../commonUI/date/LKRNActionRangeDateText';
 import {LKRangeDateEditingType} from "../../commonUI/date/LKRangeDateText";
 
 export default class OwnNativeActionRangeDateTextPage extends Component {
@@ -50,17 +50,17 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
                 <Text style={{marginTop: 22}}>可编辑：None</Text>
                 <Text>当前选择的起始日期为：{NNBeginDateString}</Text>
                 <Text>当前选择的结束日期为：{NNEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.None}
-                                                beginDateString={NNBeginDateString}
-                                                endDateString={NNEndDateString}
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.None}
+                                         beginDateString={NNBeginDateString}
+                                         endDateString={NNEndDateString}
                 />
 
                 <Text style={{marginTop: 22}}>可编辑：Begin</Text>
                 <Text>当前选择的起始日期为：{BNBeginDateString}</Text>
                 <Text>当前选择的结束日期为：{BNEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
-                                                beginDateString={BNBeginDateString}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
+                                         beginDateString={BNBeginDateString}
+                                         onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                                     this.setState({
                                                         BNBeginDateString: beginDateString,
                                                         BNEndDateString: endDateString
@@ -71,9 +71,9 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
                 <Text style={{marginTop: 22}}>可编辑：End</Text>
                 <Text>当前选择的起始日期为：{NEBeginDateString}</Text>
                 <Text>当前选择的结束日期为：{NEEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.End}
-                                                endDateString={NEEndDateString}
-                                                onEndDatePickChange={ (beginDateString, endDateString)=> {
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.End}
+                                         endDateString={NEEndDateString}
+                                         onEndDatePickChange={ (beginDateString, endDateString)=> {
                                                     this.setState({
                                                         NEBeginDateString: beginDateString,
                                                         NEEndDateString: endDateString
@@ -84,16 +84,16 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
                 <Text style={{marginTop: 22}}>可编辑：BeginEnd</Text>
                 <Text>当前选择的起始日期为：{BEBeginDateString}</Text>
                 <Text>当前选择的结束日期为：{BEEndDateString}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.BeginEnd}
-                                                beginDateString={BEBeginDateString}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.BeginEnd}
+                                         beginDateString={BEBeginDateString}
+                                         onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                                     this.setState({
                                                         BEBeginDateString: beginDateString,
                                                         BEEndDateString: endDateString
                                                     })
                                                 }}
-                                                endDateString={BEEndDateString}
-                                                onEndDatePickChange={ (beginDateString, endDateString)=> {
+                                         endDateString={BEEndDateString}
+                                         onEndDatePickChange={ (beginDateString, endDateString)=> {
                                                     this.setState({
                                                         BEBeginDateString: beginDateString,
                                                         BEEndDateString: endDateString
@@ -117,9 +117,9 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
                 <Text style={{marginTop: 22}}>初始日期：空</Text>
                 <Text>当前选择的起始日期为：{beginDateString1}</Text>
                 <Text>当前选择的结束日期为：{endDateString1}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
-                                                beginDateString={beginDateString1}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
+                                         beginDateString={beginDateString1}
+                                         onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                           this.setState({
                                               beginDateString1: beginDateString,
                                               endDateString1: endDateString
@@ -130,9 +130,9 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
                 <Text style={{marginTop: 22}}>初始日期：有值</Text>
                 <Text>当前选择的起始日期为：{beginDateString2}</Text>
                 <Text>当前选择的结束日期为：{endDateString2}</Text>
-                <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
-                                                beginDateString={beginDateString2}
-                                                onBeginDatePickChange={ (beginDateString, endDateString)=> {
+                <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
+                                         beginDateString={beginDateString2}
+                                         onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                           this.setState({
                                               beginDateString2: beginDateString,
                                               endDateString2: endDateString

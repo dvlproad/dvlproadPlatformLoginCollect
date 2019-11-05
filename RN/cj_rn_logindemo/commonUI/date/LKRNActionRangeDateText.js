@@ -1,6 +1,6 @@
-// LKOwnNativeActionRangeDateText.jsateText.js
+// LKRNActionRangeDateText.jsateText.js
 /* 使用示例
-import LKOwnNativeActionRangeDateText  from '../../commonUI/date/LKOwnNativeActionRangeDateText';
+import LKRNActionRangeDateText  from '../../commonUI/date/LKRNActionRangeDateText';
 
 export default class OwnNativeActionRangeDateTextPage extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class OwnNativeActionRangeDateTextPage extends Component {
 
     render() {
         return (
-            <LKOwnNativeActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
+            <LKRNActionRangeDateText dateRangeEditingType={LKRangeDateEditingType.Begin}
                                   beginDateString={this.state.beginDateString1}
                                   onBeginDatePickChange={ (beginDateString, endDateString)=> {
                                       this.setState({
@@ -32,14 +32,14 @@ import PropTypes from "prop-types";
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import LKDateUtil from '../../commonUtil/LKDateUtil';
 import {LKRangeDateEditingType} from "./LKRangeDateText";
-import LKOwnNativeActionSingleDateText from "./LKOwnNativeActionSingleDateText";
+import LKRNActionSingleDateText from "./LKRNActionSingleDateText";
 import LKToastUtil from "../toast/LKToastUtil";
 
 
 /**
  * 范围日期选择控件
  */
-export default class LKOwnNativeActionRangeDateText extends Component {
+export default class LKRNActionRangeDateText extends Component {
     static propTypes = {
         dateRangeEditingType: PropTypes.number,
 
@@ -145,7 +145,7 @@ export default class LKOwnNativeActionRangeDateText extends Component {
                 [{flex:1, flexDirection: 'row', justifyContent: "space-between", alignItems: "center"},
                     style]
             }>
-                <LKOwnNativeActionSingleDateText
+                <LKRNActionSingleDateText
                     style={{flex: 1}}
                     placeholder= {"选择日期"}
                     chooseDateString={beginDateString}
@@ -172,7 +172,7 @@ export default class LKOwnNativeActionRangeDateText extends Component {
                     showWave={showWave}
                 />
 
-                <LKOwnNativeActionSingleDateText
+                <LKRNActionSingleDateText
                     style={{flex: 1}}
                     placeholder= {"自动填写"}
                     chooseDateString={endDateString}

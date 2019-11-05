@@ -34,7 +34,6 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import LKComJSDatePicker, {LKDatePickShowType} from "./LKComJSDatePicker";
 import LKToastUtil from "../toast/LKToastUtil";
-import LKDateUtil from "../../commonUtil/LKDateUtil";
 
 /** 日期选择器创建的时机 */
 export var LKDatePickerCreateTimeType = {
