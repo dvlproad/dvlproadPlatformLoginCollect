@@ -15,8 +15,8 @@ class DatePicker extends BaseDialog {
 
     static defaultProps = {
         removeSubviews: false,
-        itemTextColor: 0x333333ff,
-        itemSelectedColor: 0x1097D5ff,
+        itemTextColor: 0x00000078,
+        itemSelectedColor: 0x000000ff,
         onPickerCancel: null,
         onPickerConfirm: null,
         unit: ['年', '月', '日'],
@@ -26,16 +26,25 @@ class DatePicker extends BaseDialog {
         minDate: '1900-01-01',
         maxDate: '2300-12-31',
 
-        confirmText: '确定',
-        confirmTextSize: 14,
-        confirmTextColor: '#333333',
+        confirmText: '完成',
+        confirmTextSize: 17,
+        confirmTextColor: '#172991',
 
         cancelText: '取消',
-        cancelTextSize: 14,
-        cancelTextColor: '#333333',
+        cancelTextSize: 17,
+        cancelTextColor: '#B2B2B2',
+
+        valueText: '请选择日期',
+        valueTextSize: 17,
+        valueTextColor: '#000000',
+        showValueText: true,        // 是否显示文本
+        fixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
 
         itemHeight: 40,
 
+        yyyy: true,
+        MM: true,
+        dd: true,
         HH: true,
         mm: true,
         ss: false
@@ -112,27 +121,48 @@ class DatePicker extends BaseDialog {
         }
         selectedMonth = selectedMonth.substr(0, selectedMonth.length - unit[1].length);
 
-        let d = new Date(selectedYear, selectedMonth, 0);
-        let dayCount = d.getDate();
-        for (let i = 1; i <= dayCount; i++) {
-            days.push(i + unit[2]);
+
+        let pickerData = [];
+        let selectedIndex = [];
+        if (this.props.yyyy) {
+            pickerData.push(years);
+
+            let yearSelectedIndex = years.indexOf(selectedYear + unit[0]) == -1 ? years.length - 1 : years.indexOf(selectedYear + unit[0]);
+            selectedIndex.push(yearSelectedIndex);
+
+            this.props.selectedValue[0] = years[selectedIndex[0]];
         }
 
-        let selectedDay = days[0];
-        if (this.props.selectedValue) {
-            selectedDay = this.props.selectedValue[2];
+        if (this.props.MM) {
+            pickerData.push(months);
+
+            let monthSelectedIndex = months.indexOf(selectedMonth + unit[1]);
+            selectedIndex.push(monthSelectedIndex);
+
+            this.props.selectedValue[1] = months[selectedIndex[1]];
         }
-        selectedDay = selectedDay.substr(0, selectedDay.length - unit[2].length);
 
-        let pickerData = [years, months, days];
+        if (this.props.dd) {
+            pickerData.push(days);
 
-        let selectedIndex = [
-            years.indexOf(selectedYear + unit[0]) == -1 ? years.length - 1 : years.indexOf(selectedYear + unit[0]),
-            months.indexOf(selectedMonth + unit[1]),
-            days.indexOf(selectedDay + unit[2]) == -1 ? days.length - 1 : days.indexOf(selectedDay + unit[2])];
-        this.props.selectedValue[0] = years[selectedIndex[0]];
-        this.props.selectedValue[1] = months[selectedIndex[1]];
-        this.props.selectedValue[2] = days[selectedIndex[2]];
+            let d = new Date(selectedYear, selectedMonth, 0);
+            let dayCount = d.getDate();
+            for (let i = 1; i <= dayCount; i++) {
+                days.push(i + unit[2]);
+            }
+
+            let selectedDay = days[0];
+            if (this.props.selectedValue) {
+                selectedDay = this.props.selectedValue[2];
+            }
+            selectedDay = selectedDay.substr(0, selectedDay.length - unit[2].length);
+
+
+            let daySelectedIndex = days.indexOf(selectedDay + unit[2]) == -1 ? days.length - 1 : days.indexOf(selectedDay + unit[2]);
+            selectedIndex.push(daySelectedIndex);
+            this.props.selectedValue[2] = days[selectedIndex[2]];
+        }
+
         if (this.props.HH) {
             let hours = [];
             for (let i = 0; i < 24; i++) {
@@ -145,6 +175,7 @@ class DatePicker extends BaseDialog {
                 selectedIndex.push((new Date().getHours() - 1));
             }
             this.props.selectedValue[3] = (selectedIndex[3] + 1) + '时';
+
             if (this.props.mm) {
                 let minutes = [];
                 for (let i = 0; i < 60; i++) {
@@ -157,6 +188,7 @@ class DatePicker extends BaseDialog {
                     selectedIndex.push((new Date().getMinutes() - 1));
                 }
                 this.props.selectedValue[4] = (selectedIndex[4] + 1) + '分';
+
                 if (this.props.ss) {
                     let seconds = [];
                     for (let i = 0; i < 60; i++) {
@@ -211,6 +243,15 @@ class DatePicker extends BaseDialog {
         // let data = this.getDateList();
         // this.state.pickerData = data.pickerData;
         // this.state.selectedIndex = data.selectedIndex;
+        let valueText = '';
+        if (this.props.showValueText) {
+            if (this.props.fixedValueText) {
+                valueText = this.props.valueText;
+            } else {
+                valueText = this.props.selectedValue;
+            }
+        }
+
         return <View
             style={{
                 height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44), width: this.mScreenWidth,
@@ -229,6 +270,18 @@ class DatePicker extends BaseDialog {
                     }}
                     style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+
+                    }}
+                    style={{ width: this.getSize(210), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
+                    <Text
+                        style={{ fontSize: this.props.valueTextSize, fontWeight: '400', color: this.props.valueTextColor }}
+                        allowFontScaling={true}
+                    >
+                        {valueText}
+                    </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {

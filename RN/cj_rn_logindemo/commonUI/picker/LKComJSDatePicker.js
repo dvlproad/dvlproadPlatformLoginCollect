@@ -253,6 +253,9 @@ export default class LKComJSDatePicker extends Component {
 
         return (
             <DatePicker
+                yyyy={true}
+                MM={true}
+                dd={showDays}
                 HH={showHours}
                 mm={showMinutes}
                 ss={showSeconds}
@@ -260,17 +263,17 @@ export default class LKComJSDatePicker extends Component {
                 startYear={1900}
                 endYear={2300}
 
-                confirmText={'确认'}
-                confirmTextSize={14}
-                confirmTextColor={'#333333'}
-
-                cancelText={'取消'}
-                confirmTextSize={14}
-                confirmTextColor={'#333333'}
-
-                itemHeight={40}
-                itemTextColor={0x333333ff}
-                itemSelectedColor={0x1097D5ff}
+                // confirmText={'确认'}
+                // confirmTextSize={14}
+                // confirmTextColor={'#333333'}
+                //
+                // cancelText={'取消'}
+                // confirmTextSize={14}
+                // confirmTextColor={'#333333'}
+                //
+                // itemHeight={40}
+                // itemTextColor={0x333333ff}
+                // itemSelectedColor={0x1097D5ff}
 
                 selectedValue={defaultSelectedValue}
                 onPickerConfirm={(value) => {

@@ -41,7 +41,7 @@ export default class PickHomePage extends Component {
                     { title: "DatePickerPage_00ComJS", page: "DatePickerPage_00ComJS" },
                     { title: "DatePickerPage_01ComJS", page: "DatePickerPage_01ComJS" },
                     { title: "ComJSDatePickerPage2", page: "ComJSDatePickerPage2" },
-                    { title: "SingleDateTextPage", page: "SingleDateTextPage" },
+                    { title: "各种时间样式的日期SingleDateTextPage", page: "SingleDateTextPage" },
                     { title: "ComJSSingleDatePage21", page: "ComJSSingleDatePage21" },
                     { title: "ComJSSingleDatePage30", page: "ComJSSingleDatePage30" },
                 ]
