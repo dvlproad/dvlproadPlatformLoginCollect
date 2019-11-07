@@ -55,6 +55,7 @@ export default class PickHomePage extends Component {
             { key: "Image",
                 data: [
                     { title: "PickImagesPage", page: "PickImagesPage" },
+                    { title: "ImageHomePage", page: "ImageHomePage" },
                 ]
             },
         ];
@@ -89,6 +90,7 @@ import OwnNativeActionRangeDateTextPage from './OwnNativeActionRangeDateTextPage
 
 //pickImage
 import PickImagesPage from './PickImagesPage';
+import ImageHomePage from '../image/ImageHomePage';
 import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
 import RangeDateTextPage from "./RangeDateTextPage";
 
@@ -180,6 +182,13 @@ export const PickPages = {
         screen: PickImagesPage,
         navigationOptions: () => ({
             title: `多个图片选择`,
+        }),
+    },
+
+    ImageHomePage: {
+        screen: ImageHomePage,
+        navigationOptions: () => ({
+            title: `图片选择相关`,
         }),
     },
 };

@@ -36,6 +36,7 @@ export default class ImageHomePage extends Component {
                 data: [
                     { title: "ImagesChooseListExamplePage", page: "ImagesChooseListExamplePage" },
                     { title: "ImagesChooseListPage", page: "ImagesChooseListPage" },
+                    { title: "CJUIKitBaseCollectionHomePage", page: "CJUIKitBaseCollectionHomePage" },
                 ]
             },
         ];
@@ -59,6 +60,8 @@ import ActionLoadingImagePage from './ActionLoadingImagePage';
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
 import LoadingImage2ErrorPage, {Title_LoadingImagePage3} from "./LoadingImage2ErrorPage";
+
+import CJUIKitBaseCollectionHomePage from "./CJUIKitBaseCollectionHomePage";
 
 export const ImageRoutePage = 'ImageHomePage';
 export const ImagePages = {
@@ -113,4 +116,13 @@ export const ImagePages = {
             title: `ImagesChooseListPage`,
         }),
     },
+
+    CJUIKitBaseCollectionHomePage: {
+        screen: CJUIKitBaseCollectionHomePage,
+        navigationOptions: () => ({
+            title: `CJUIKitBaseCollectionHomePage`,
+        }),
+    },
+
+
 }
