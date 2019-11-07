@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Alert, Dimensions } from 'react-native';
 import CJUIKitBaseCollectionHomeComponent from '../../commonUI/list/CJUIKitBaseCollectionHomeComponent';
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
+import PropTypes from "prop-types";
 
 
 export default class CJUIKitBaseCollectionHomePage extends Component {
@@ -23,7 +24,19 @@ export default class CJUIKitBaseCollectionHomePage extends Component {
         let moduleModels = [
             {
                 title: "模块1",
-                imageSource: require('./resources/healthCerImage1.png'),
+                imageSource: require('./img/1.jpg'),
+            },
+            {
+                title: "模块1",
+                imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+            },
+            {
+                title: "模块1",
+                imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+            },
+            {
+                title: "模块1",
+                imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
             },
             {
                 title: "模块1",
@@ -63,27 +76,27 @@ export default class CJUIKitBaseCollectionHomePage extends Component {
         const listWidth = screenWidth - 2*paddingHorizontal;
 
         return (
-            <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: paddingHorizontal}}>
-                <CJUIKitBaseCollectionHomeComponent
-                    listWidth={listWidth}
-                    numColumns={2}
-                    widthHeightRatio={164/108}
-                    boxHorizontalInterval={30}
-                    moduleModels={this.state.moduleModels}
-                    browseImageHandle={(index)=>{
-                        Alert.alert("点击浏览图片" + index);
-                    }}
-                    addImageHandle={(index)=>{
-                        Alert.alert("点击添加图片" + index);
-                    }}
-                    deleteImageHandle={this.deleteImageHandle}
-                    isEditing={this.state.isUpdatingInfo}
-                    imageMaxCount={2}
-                    imageLoadedCountChange={this.imageLoadedCountChange}
-                    changeShowDebugMessage={this.state.debug}
-                />
-
-            </ScrollView>
+            <CJUIKitBaseCollectionHomeComponent
+                listWidth={listWidth}
+                // sectionInset={{top:0, left:0, bottom:0, right:0}}
+                cellWidthFromPerRowMaxShowCount={4} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
+                // cellWidthFromFixedWidth={165}       // 通过cell的固定宽度来设置每个cell的宽度
+                widthHeightRatio={165/165}
+                minimumInteritemSpacing={15}
+                minimumLineSpacing={10}
+                moduleModels={this.state.moduleModels}
+                browseImageHandle={(index)=>{
+                    Alert.alert("点击浏览图片" + index);
+                }}
+                addImageHandle={(index)=>{
+                    Alert.alert("点击添加图片" + index);
+                }}
+                deleteImageHandle={this.deleteImageHandle}
+                isEditing={this.state.isUpdatingInfo}
+                imageMaxCount={2}
+                imageLoadedCountChange={this.imageLoadedCountChange}
+                changeShowDebugMessage={this.state.debug}
+            />
         );
     }
 }

@@ -67,26 +67,29 @@ import CJUIKitBaseCollectionHomeComponent from '../commonUI/list/LKImagesChooseL
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {FlatList, Text, View, ViewPropTypes} from "react-native";
-import CJUIKitCollectionViewComponent  from '../image/CJUIKitCollectionViewComponent';
-import { ImageUploadType } from '../image/LKLoadingImage';
+import CJUIKitCollectionViewComponent  from './CJUIKitCollectionViewComponent';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
 export default class CJUIKitBaseCollectionHomeComponent extends Component {
     static propTypes = {
-        boxHorizontalInterval: PropTypes.number,    // 水平方向上box之间的间隔
         listWidth: PropTypes.number.isRequired,
-        numColumns: PropTypes.number,               // 水平方向上的列数
+        sectionInset: PropTypes.object,
+        minimumInteritemSpacing: PropTypes.number,  // 水平方向上box之间的最少间隔
+        minimumLineSpacing: PropTypes.number,       // 竖直方向上box之间的间隔
+
+        // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
+        cellWidthFromFixedWidth: PropTypes.number,          // 通过cell的固定宽度来设置每个cell的宽度
+        cellWidthFromPerRowMaxShowCount: PropTypes.number,  // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
+
         widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
 
         moduleModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
         imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
-        browseImageHandle: PropTypes.func,
-        addImageHandle: PropTypes.func,
-        deleteImageHandle: PropTypes.func,
+        clickButtonHandle: PropTypes.func,
 
         isEditing: PropTypes.bool,
         hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
@@ -98,9 +101,17 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
     };
 
     static defaultProps = {
-        boxHorizontalInterval: 5,
         listWidth: 0,
-        numColumns: 2,
+        sectionInset: {
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+        },
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+
+        cellWidthFromPerRowMaxShowCount: 2,
         widthHeightRatio: 1.0,  //宽高的比例
 
         moduleModels: [],
@@ -111,9 +122,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
             borderColor: "#E5E5E5",
         },
 
-        browseImageHandle: (buttonIndex)=>{},
-        addImageHandle: (buttonIndex)=>{},
-        deleteImageHandle: (buttonIndex)=>{},
+        clickButtonHandle: (buttonIndex)=>{},
 
         isEditing: false,
         hasAddIconWhenEditing: true,
@@ -127,8 +136,6 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addIconCurIndex: -1,   //添加按钮的当前索引的值①等于-1代表没有添加显示；②大于imageMaxCount则不显示
-
             imageLoadedCount: 0//完成加载的图片个数
         }
     }
@@ -147,66 +154,55 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
     }
 
     onLoadComplete=(buttonIndex)=>{
-        let isAddIcon = this.isAddIcon(buttonIndex);
-        if (isAddIcon == false) {
-            this.state.imageLoadedCount = this.state.imageLoadedCount+1;
-            let isImageAllLoaded = this.state.imageLoadedCount >= this.props.moduleModels.length ? true : false;
-            this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
+        this.state.imageLoadedCount = this.state.imageLoadedCount+1;
+        let isImageAllLoaded = this.state.imageLoadedCount >= this.props.moduleModels.length ? true : false;
+        this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
 
 
-            let message = '';
-            if (isImageAllLoaded) {
-                message = "所有图片加载完成，总张数为:" + this.state.imageLoadedCount;
-            } else {
-                message = "图片总进度加载中，当前完成张数:" + this.state.imageLoadedCount;
-            }
-            console.log(message);
-        }
-    }
-
-    isAddIcon = (index)=> {
-        if (index == this.state.addIconCurIndex) {
-            return true;
+        let message = '';
+        if (isImageAllLoaded) {
+            message = "所有图片加载完成，总张数为:" + this.state.imageLoadedCount;
         } else {
-            return false;
+            message = "图片总进度加载中，当前完成张数:" + this.state.imageLoadedCount;
         }
+        console.log(message);
     }
 
     clickButtonHandle = (index)=> {
-        if (index == this.state.addIconCurIndex) {
-            this.props.addImageHandle(index);
-        } else {
-            this.props.browseImageHandle(index);
-        }
-    }
-
-    deleteImageHandle=(index) => {
-        this.props.deleteImageHandle(index);
-    }
-
-    // 获取指定位置的图片的边框(添加按钮的边框默认无)
-    getImageBorderStyle=(index)=>{
-        let imageBorderStyle = this.props.imageBorderStyle;
-        if (this.isAddIcon(index)) {
-            imageBorderStyle = {
-                borderRadius: 6,
-                borderWidth: 0,
-                borderColor: "#E5E5E5",
-            }
-        }
-        return imageBorderStyle;
+        this.props.clickButtonHandle(index);
     }
 
     render() {
-        const numColumns = this.props.numColumns;
-        const boxHorizontalInterval = this.props.boxHorizontalInterval;
-        const boxTotalWidth = this.props.listWidth-(numColumns-1)*boxHorizontalInterval;
-        const boxWidth = boxTotalWidth/numColumns;
+
+        // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
+        let perRowMaxShowCount = 0;     // 每行最后最多显示多少个
+        let boxWidth = 0;               // box的宽
+        let boxHorizontalInterval = 0;  // 水平方向上box之间的间隔
+        const sectionInset = this.props.sectionInset;
+        const validWidth = this.props.listWidth - sectionInset.left - sectionInset.right;
+        if (this.props.cellWidthFromFixedWidth > 0) { // 按固定宽时候：宽不变，列数变，间距跟着变
+            boxWidth = this.props.cellWidthFromFixedWidth;
+
+            const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
+            perRowMaxShowCount = (validWidth+minimumInteritemSpacing)/(boxWidth+minimumInteritemSpacing);
+
+            const cellsWidth = boxWidth * perRowMaxShowCount;
+            const totalInteritemSpacing = validWidth - cellsWidth;
+            boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
+        } else { // 按列数时候：列数不变，间距不变，固定为minimumInteritemSpacing；宽会变
+            perRowMaxShowCount = this.props.cellWidthFromPerRowMaxShowCount;
+
+            const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
+            const cellsWidth = validWidth-(perRowMaxShowCount-1)*minimumInteritemSpacing;
+            boxWidth = cellsWidth/perRowMaxShowCount;
+
+            boxHorizontalInterval = minimumInteritemSpacing;
+        }
         const boxHeight = boxWidth / this.props.widthHeightRatio;
 
         let listHeaderComponent = null;
         if (this.props.changeShowDebugMessage) {
-            let headerText = 'addIconCurIndex:' + this.state.addIconCurIndex;
+            let headerText = 'listHeaderText:';
             listHeaderComponent = ()=>{
                 return (
                     <Text>{headerText}</Text>
@@ -215,13 +211,21 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         }
 
         let testListStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'green'} : null;
-
+        let sectionInsetStyle = {};
+        if (this.props.sectionInset) {
+            sectionInsetStyle = {
+                paddingTop: this.props.sectionInset.top,
+                paddingLeft: this.props.sectionInset.left,
+                paddingBottom: this.props.sectionInset.bottom,
+                paddingRight: this.props.sectionInset.right,
+            }
+        }
 
         let renderModuleModels = Array.from(this.props.moduleModels);
 
         return (
             <FlatList
-                style={[this.props.style, testListStyle]}
+                style={[this.props.style, sectionInsetStyle, testListStyle]}
                 data={renderModuleModels}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
@@ -231,31 +235,28 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                                 width: boxWidth,
                                 height: boxHeight,
                                 marginRight: boxHorizontalInterval,
+                                marginBottom: this.props.minimumLineSpacing,
+                                backgroundColor: 'orange'
                             }}
+
                             moduleModel={item}
                             defaultSource={this.props.imageDefaultSource}
-                            imageBorderStyle={this.getImageBorderStyle(index)}
+                            imageBorderStyle={this.props.imageBorderStyle}
 
                             buttonIndex={index}
                             clickButtonHandle={this.clickButtonHandle}
-                            deleteImageHandle={this.deleteImageHandle}
-
-                            isEditing={this.props.isEditing}
-                            isAddIcon={this.isAddIcon(index)}
 
                             onLoadComplete={(buttonIndex)=>{
                                 this.onLoadComplete(buttonIndex)
                             }}
 
-                            uploadType={item.uploadType}
-                            uploadProgress={item.uploadProgress}
                             needLoadingAnimation={item.needLoadingAnimation}
 
                             changeShowDebugMessage={this.props.changeShowDebugMessage}
                         />
                     )
                 }}
-                numColumns={numColumns}
+                numColumns={perRowMaxShowCount}
 
                 // ListHeaderComponent={listHeaderComponent}
             />
