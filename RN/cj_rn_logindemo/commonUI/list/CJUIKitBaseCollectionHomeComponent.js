@@ -66,7 +66,7 @@ import CJUIKitBaseCollectionHomeComponent from '../commonUI/list/LKImagesChooseL
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {FlatList, Text, View, ViewPropTypes} from "react-native";
+import {FlatList, Image, Text, TouchableOpacity, View, ViewPropTypes} from "react-native";
 import CJUIKitCollectionViewComponent  from './CJUIKitCollectionViewComponent';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -172,6 +172,15 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         this.props.clickButtonHandle(index);
     }
 
+    getBoxHorizontalInterval = (index, perRowMaxShowCount, boxHorizontalInterval)=> {
+        let isLastColumn = (index+1)%perRowMaxShowCount==0;
+
+        if (isLastColumn==true) {
+            return 0;
+        }
+        return boxHorizontalInterval;
+    }
+
     render() {
 
         // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
@@ -223,6 +232,8 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
 
         let renderModuleModels = Array.from(this.props.moduleModels);
 
+
+
         return (
             <FlatList
                 style={[this.props.style, sectionInsetStyle, testListStyle]}
@@ -232,9 +243,10 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                     return (
                         <CJUIKitCollectionViewComponent
                             style={{
+                                flex: 1,
                                 width: boxWidth,
                                 height: boxHeight,
-                                marginRight: boxHorizontalInterval,
+                                marginRight: this.getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval),
                                 marginBottom: this.props.minimumLineSpacing,
                                 backgroundColor: 'orange'
                             }}

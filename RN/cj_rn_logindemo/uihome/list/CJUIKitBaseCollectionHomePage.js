@@ -77,19 +77,17 @@ export default class CJUIKitBaseCollectionHomePage extends Component {
 
         return (
             <CJUIKitBaseCollectionHomeComponent
+                // style={{paddingHorizontal: paddingHorizontal}}   //进击：这边设置
                 listWidth={listWidth}
-                // sectionInset={{top:0, left:0, bottom:0, right:0}}
-                cellWidthFromPerRowMaxShowCount={4} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
+                sectionInset={{top:0, left:15, bottom:0, right:15}}
+                cellWidthFromPerRowMaxShowCount={2} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
                 // cellWidthFromFixedWidth={165}       // 通过cell的固定宽度来设置每个cell的宽度
                 widthHeightRatio={165/165}
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
                 moduleModels={this.state.moduleModels}
-                browseImageHandle={(index)=>{
+                clickButtonHandle={(index)=>{
                     Alert.alert("点击浏览图片" + index);
-                }}
-                addImageHandle={(index)=>{
-                    Alert.alert("点击添加图片" + index);
                 }}
                 deleteImageHandle={this.deleteImageHandle}
                 isEditing={this.state.isUpdatingInfo}
