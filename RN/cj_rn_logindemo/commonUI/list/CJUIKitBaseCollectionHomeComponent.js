@@ -172,10 +172,19 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         this.props.clickButtonHandle(index);
     }
 
+    // 获取当前box与下一个box之间的水平间隔
     getBoxHorizontalInterval = (index, perRowMaxShowCount, boxHorizontalInterval)=> {
         let isLastColumn = (index+1)%perRowMaxShowCount==0;
 
         if (isLastColumn==true) {
+            return 0;
+        }
+        return boxHorizontalInterval;
+    }
+
+    // 获取当前box与下一个box之间的竖直间隔
+    getBoxVerticalInterval = (index, lastRowStartIndex, boxHorizontalInterval)=> {
+        if (index >= lastRowStartIndex) {
             return 0;
         }
         return boxHorizontalInterval;
@@ -203,7 +212,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
 
             const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
             const cellsWidth = validWidth-(perRowMaxShowCount-1)*minimumInteritemSpacing;
-            boxWidth = cellsWidth/perRowMaxShowCount;
+            boxWidth = Math.ceil(cellsWidth/perRowMaxShowCount);
 
             boxHorizontalInterval = minimumInteritemSpacing;
         }
@@ -233,6 +242,11 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         let renderModuleModels = Array.from(this.props.moduleModels);
 
 
+        let rowCount = 0;
+        if (renderModuleModels.length > 0) {
+            rowCount = Math.floor((renderModuleModels.length-1)/perRowMaxShowCount)+1;
+        }
+        let lastRowStartIndex = (rowCount-1)*perRowMaxShowCount; //最后一行的索引起点，index从0开始
 
         return (
             <FlatList
@@ -247,7 +261,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                                 width: boxWidth,
                                 height: boxHeight,
                                 marginRight: this.getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval),
-                                marginBottom: this.props.minimumLineSpacing,
+                                marginBottom: this.getBoxVerticalInterval(index, lastRowStartIndex, this.props.minimumLineSpacing),
                                 backgroundColor: 'orange'
                             }}
 
