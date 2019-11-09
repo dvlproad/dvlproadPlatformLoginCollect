@@ -302,6 +302,14 @@ export default class LKLoadingImage extends Component {
 
     render() {
         const { style } = this.props;
+        let selfStyle = style;
+        if (style.width > 0 && style.height > 0) {
+            selfStyle = style;
+        } else {
+            selfStyle = [{flex:1}, style];
+        }
+
+
 
         const imageWidth = this.props.style.width;
         const imageHeight = this.props.style.height;
@@ -365,10 +373,7 @@ export default class LKLoadingImage extends Component {
 
         return (
             <View
-                style={[
-                    {flex:1},
-                    style
-                ]}
+                style={selfStyle}
             >
                 <Image
                     style={imageStyle}

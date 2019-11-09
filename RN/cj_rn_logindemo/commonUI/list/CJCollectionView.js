@@ -1,10 +1,9 @@
-// CJUIKitBaseCollectionHomeComponent.js
+// CJCollectionViewnView:图片列表组件(可进行选择、删除等操作)
+
 /*
-CJUIKitBaseCollectionHomeComponent:图片列表组件(可进行选择、删除等操作)
+import CJCollectionView from '../commonUI/list/LKImagesChooseList';
 
-import CJUIKitBaseCollectionHomeComponent from '../commonUI/list/LKImagesChooseList';
-
-                <CJUIKitBaseCollectionHomeComponent
+                <CJCollectionView
                     style={{paddingHorizontal: 15}}
                     listWidth={Dimensions.get('window').width-2*15}
                     numColumns={3}
@@ -51,8 +50,6 @@ import CJUIKitBaseCollectionHomeComponent from '../commonUI/list/LKImagesChooseL
                     deleteImageHandle={(index)=>{
                         LKToastUtil.showMessage("点击删除图片" + index);
                     }}
-                    isEditing={true}
-                    imageMaxCount={9}
                     imageLoadedCountChange={(imageLoadedCount, isImageAllLoaded)=>{
                         let message = '';
                         if (isImageAllLoaded) {
@@ -66,13 +63,13 @@ import CJUIKitBaseCollectionHomeComponent from '../commonUI/list/LKImagesChooseL
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {FlatList, Image, Text, TouchableOpacity, View, ViewPropTypes} from "react-native";
-import CJUIKitCollectionViewComponent  from './CJUIKitCollectionViewComponent';
+import {FlatList, Text, View, ViewPropTypes} from "react-native";
+import CJCollectionCell  from './CJCollectionCell';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
-export default class CJUIKitBaseCollectionHomeComponent extends Component {
+export default class CJCollectionView extends Component {
     static propTypes = {
         listWidth: PropTypes.number.isRequired,
         sectionInset: PropTypes.object,
@@ -91,13 +88,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
 
         clickButtonHandle: PropTypes.func,
 
-        isEditing: PropTypes.bool,
-        hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
-        imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
-
         imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
-
-        changeShowDebugMessage: PropTypes.bool,    //将提示信息改为显示调试的信息，此选项默认false
     };
 
     static defaultProps = {
@@ -124,13 +115,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
 
         clickButtonHandle: (buttonIndex)=>{},
 
-        isEditing: false,
-        hasAddIconWhenEditing: true,
-        imageMaxCount: 10000,
-
         imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
-
-        changeShowDebugMessage: false,
     };
 
     constructor(props) {
@@ -218,17 +203,16 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         }
         const boxHeight = boxWidth / this.props.widthHeightRatio;
 
-        let listHeaderComponent = null;
-        if (this.props.changeShowDebugMessage) {
-            let headerText = 'listHeaderText:';
-            listHeaderComponent = ()=>{
-                return (
-                    <Text>{headerText}</Text>
-                )
-            }
-        }
+        // let listHeaderComponent = null;
+        // if (this.props.showHeader) {
+        //     let headerText = 'listHeaderText:';
+        //     listHeaderComponent = ()=>{
+        //         return (
+        //             <Text>{headerText}</Text>
+        //         )
+        //     }
+        // }
 
-        let testListStyle = this.props.changeShowDebugMessage ? {backgroundColor: 'green'} : null;
         let sectionInsetStyle = {};
         if (this.props.sectionInset) {
             sectionInsetStyle = {
@@ -250,19 +234,21 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
 
         return (
             <FlatList
-                style={[this.props.style, sectionInsetStyle, testListStyle]}
+                style={[{backgroundColor: '#F4F4F4'}, this.props.style, sectionInsetStyle]}
                 data={renderModuleModels}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     return (
-                        <CJUIKitCollectionViewComponent
+                        <CJCollectionCell
                             style={{
                                 flex: 1,
                                 width: boxWidth,
                                 height: boxHeight,
                                 marginRight: this.getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval),
                                 marginBottom: this.getBoxVerticalInterval(index, lastRowStartIndex, this.props.minimumLineSpacing),
-                                backgroundColor: 'orange'
+                                backgroundColor: '#FFFFFF',
+                                borderRadius: 6,
+                                borderWidth: 0,
                             }}
 
                             moduleModel={item}
@@ -277,8 +263,6 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                             }}
 
                             needLoadingAnimation={item.needLoadingAnimation}
-
-                            changeShowDebugMessage={this.props.changeShowDebugMessage}
                         />
                     )
                 }}
