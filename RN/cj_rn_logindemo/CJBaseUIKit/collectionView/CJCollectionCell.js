@@ -23,7 +23,7 @@ import CJCollectionCell  from '../../commonUI/image/LKActionLoadingImage';
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableOpacity, ViewPropTypes, Text, Image} from 'react-native';
-import LKLoadingImage  from '../image/LKLoadingImage';
+import CJLoadingImage  from '../image/CJLoadingImage';
 import PropTypes from "prop-types";
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -90,7 +90,7 @@ export default class CJCollectionCell extends Component {
                 }}
             >
                 <View style={{flex:1, flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
-                    <LKLoadingImage
+                    <CJLoadingImage
                         style={{
                             width: imageWidth,
                             height: imageHeight,

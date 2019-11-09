@@ -3,8 +3,11 @@ import  React, { Component } from 'react';
 import {Text, ScrollView, View, Dimensions} from 'react-native';
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
 import LKRangeDateText, {LKRangeDateEditingType} from "../../commonUI/date/LKRangeDateText";
-import LKDatePicker, {LKDatePickerCreateTimeType} from "../../commonUI/picker/LKDatePicker";
-import {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
+import {
+    LKDatePickShowType,
+    LKDatePicker,
+    LKDatePickerCreateTimeType,
+} from "../../commonUI/luckincommonui";
 
 export default class RangeDateTextPage extends Component {
     constructor(props) {

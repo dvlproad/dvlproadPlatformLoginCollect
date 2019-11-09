@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 
 import {View} from 'react-native';
 import LKToastUtil from "../../commonUI/toast/LKToastUtil";
-import LKComJSDatePicker, {LKDatePickShowType} from "../../commonUI/picker/LKComJSDatePicker";
+import {
+    LKDatePickShowType,
+    LKDatePickerCreateTimeType,
+    LKDatePicker,
+} from "../../commonUI/luckincommonui";
+
 import LKSingleDateText from "../../commonUI/date/LKSingleDateText";
-import LKDatePicker, {LKDatePickerCreateTimeType} from "../../commonUI/picker/LKDatePicker";
 import LKTextButton from "../../commonUI/button/LKTextButton";
 
 

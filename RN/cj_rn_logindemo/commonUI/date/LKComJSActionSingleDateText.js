@@ -32,10 +32,13 @@ export default class OwnNativeSingleDatePage extends Component {
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {StyleSheet, View, TouchableOpacity, Modal} from 'react-native';
-import LKComJSDatePicker, {LKDatePickShowType} from "../picker/LKComJSDatePicker";
 import LKToastUtil from "../toast/LKToastUtil";
 import LKSingleDateText from "./LKSingleDateText";
-import LKDatePicker, {LKDatePickerCreateTimeType} from "../picker/LKDatePicker";
+import {
+    LKDatePickShowType,
+    LKDatePickerCreateTimeType,
+    LKDatePicker
+} from "../luckincommonui";
 
 export default class LKComJSActionSingleDateText extends LKSingleDateText {
     static propTypes = {

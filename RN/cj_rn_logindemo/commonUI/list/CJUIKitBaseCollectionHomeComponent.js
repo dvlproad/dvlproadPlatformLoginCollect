@@ -1,7 +1,9 @@
 // CJUIKitBaseCollectionHomeComponent.js
 import React, { Component } from 'react';
 import {  Alert, Dimensions } from 'react-native';
-import CJCollectionView from '../../commonUI/list/CJCollectionView';
+import {
+    CJCollectionView
+} from '../../CJBaseUIKit/CJBaseUIKit';
 import PropTypes from "prop-types";
 
 
@@ -27,12 +29,15 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
-    clickButtonHandle= (index)=>{
+    execModuleModel= (index)=>{
         let moduleModel = this.props.moduleModels[index];
+
         if (moduleModel.clickButtonHandle) {
             moduleModel.clickButtonHandle(index, moduleModel);
+        } else if (moduleModel.nextPageName && moduleModel.nextPageName.length > 0) {
+            this.props.navigation.navigate(moduleModel.nextPageName);
         } else {
-            Alert.alert("提示：请设置moduleModel.clickButtonHandle");
+            Alert.alert("提示：请至少设置 moduleModel.clickButtonHandle 或 moduleModel.nextPageName");
         }
     }
 
@@ -53,7 +58,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
                 moduleModels={this.props.moduleModels}
-                clickButtonHandle={this.clickButtonHandle}
+                clickButtonHandle={this.execModuleModel}
                 imageLoadedCountChange={this.imageLoadedCountChange}
             />
         );

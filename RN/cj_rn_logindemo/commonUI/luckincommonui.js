@@ -42,20 +42,27 @@ import LKRNActionRangeDateText, { LKRangeDateEditingType } from "./date/LKRNActi
 // list
 import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
+import CJUIKitBaseCollectionHomeComponent from "./list/CJUIKitBaseCollectionHomeComponent";
 
 
 // picker
-import LKEasyDatePicker from "./react-native-pickers/DatePicker";
-import LKDatePicker from "./picker/LKDatePicker";
+// import {
+//   CJDatePicker as LKDatePicker,
+//   CJBaseDatePicker as LKComJSDatePicker,
+//   CJDatePickShowType as LKDatePickShowType,
+//   CJDatePickerCreateTimeType as LKDatePickerCreateTimeType
+// } from "../CJBaseUIKit/CJBaseUIKit";
 
+// import { CJDatePicker as LKDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
+// import { CJBaseDatePicker as LKComJSDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
+// import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/CJBaseUIKit";
+// import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/CJBaseUIKit";
 
-// import React, { Component } from 'react';
-//
-// export class Class extends Component  {
-//   render() {
-//     
-//   }
-// }
+import LKDatePicker from "../CJBaseUIKit/datePicker/CJDatePicker";
+import LKComJSDatePicker from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
+import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
+import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/datePicker/CJDatePicker";
+
 
 var LKCommonUI = {
   // toast
@@ -102,7 +109,6 @@ var LKCommonUI = {
   LKDataEmpty,
   LKAPILoadStatus,
 
-  // date
   LKRNActionSingleDateText,
   LKRNActionRangeDateText,
   LKRangeDateEditingType,
@@ -110,10 +116,14 @@ var LKCommonUI = {
   // list
   LKImagesChooseList,
   // LKSelectListModal,
+  CJUIKitBaseCollectionHomeComponent,
 
-  // picker
-  LKEasyDatePicker,
+  // date
+  LKDatePickShowType,
+  LKDatePickerCreateTimeType,
+  LKComJSDatePicker,
   LKDatePicker,
+
 };
 
 module.exports = LKCommonUI;

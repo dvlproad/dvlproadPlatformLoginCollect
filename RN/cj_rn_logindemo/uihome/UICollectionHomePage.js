@@ -1,24 +1,14 @@
-//UIHomePage.js
+//UICollectionHomePage.js
 import React, { Component } from 'react';
 import {View, Text, Alert} from 'react-native';
 import HomeSectionList from "../commonUI/list/HomeSectionList";
 
 
-export default class UIHomePage extends Component {
+export default class UICollectionHomePage extends Component {
     constructor(props) {
         super(props);
     }
 
-    _onPressButton = (nextPageName) => {
-        console.log(nextPageName);
-
-        if (nextPageName) {
-            this.props.navigation.navigate(nextPageName)
-        } else  {
-            //nextPageName = "Button";
-            Alert.alert(nextPageName)
-        }
-    }
 
     render() {
         let sections = [
@@ -90,12 +80,12 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 //empty
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
-export const UIRoutePage = 'UIHomePage';
+// export const UIRoutePage = 'UIHomePage';
 // export const UIRoutePage = PickRoutePage;
-// export const UIRoutePage = 'ListHomePage';
+export const UIRoutePage = 'UICollectionHomePage';
 export const UIPages = {
-    UIHomePage: {
-        screen: UIHomePage,
+    UICollectionHomePage: {
+        screen: UICollectionHomePage,
         navigationOptions: () => ({
             title: `UI首页`,
         }),

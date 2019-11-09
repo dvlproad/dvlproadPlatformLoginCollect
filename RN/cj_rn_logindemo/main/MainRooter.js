@@ -29,6 +29,7 @@ function autoHiddenTabbar(screen) {
 
 //ui
 import {UIPages, UIRoutePage} from "../uihome/UIHomePage";
+// import {UIPages, UIRoutePage} from "../uihome/UICollectionHomePage";
 
 const uiscreen = createAppContainer(createStackNavigator(
     UIPages,

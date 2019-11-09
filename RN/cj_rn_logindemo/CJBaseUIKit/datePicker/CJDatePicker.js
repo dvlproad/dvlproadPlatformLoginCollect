@@ -1,8 +1,8 @@
-// LKDatePicker
+// CJDatePicker
 /*
-LKDatePicker:日期选择器 使用示例
+CJDatePicker:日期选择器 使用示例
 
-import LKDatePicker from "../../commonUI/picker/LKDatePicker";
+import CJDatePicker from "../../commonUI/picker/LKDatePicker";
 
                 // 选择日期
                 chooseDate = () => {
@@ -23,7 +23,7 @@ import LKDatePicker from "../../commonUI/picker/LKDatePicker";
                 />
 
 
-                <LKDatePicker
+                <CJDatePicker
                     datePickShowType={LKDatePickShowType.yyyyMMdd}
                     ref={ref => this.birthdayDatePicker = ref}
                 />
@@ -32,17 +32,16 @@ import LKDatePicker from "../../commonUI/picker/LKDatePicker";
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import LKComJSDatePicker, {LKDatePickShowType} from "./LKComJSDatePicker";
-import LKToastUtil from "../toast/LKToastUtil";
+import CJBaseDatePicker, {CJDatePickShowType} from "./CJBaseDatePicker";
 
 /** 日期选择器创建的时机 */
-export var LKDatePickerCreateTimeType = {
+export var CJDatePickerCreateTimeType = {
     Free: 0,                //当空闲的时候偷偷执行
     BeCall: 1,              //当需要调用日期选择的时候才去创建(防止进入页面时候卡顿)
     SuperViewAppear: 2,     //当其所视图显示的时候就创建(会造成初次卡顿)
 }
 
-export default class LKDatePicker extends Component {
+export default class CJDatePicker extends Component {
     static propTypes = {
         datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
         datePickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
@@ -55,8 +54,8 @@ export default class LKDatePicker extends Component {
     };
 
     static defaultProps = {
-        datePickShowType: LKDatePickShowType.yyyyMMdd,
-        datePickerCreateTimeType: LKDatePickerCreateTimeType.Free,
+        datePickShowType: CJDatePickShowType.yyyyMMdd,
+        datePickerCreateTimeType: CJDatePickerCreateTimeType.Free,
         // dateString: '',
         //
         // onPickerConfirm: (dateString)=>{},
@@ -68,7 +67,7 @@ export default class LKDatePicker extends Component {
     constructor(props) {
         super(props);
 
-        let needCreateAtFirst = this.props.datePickerCreateTimeType == LKDatePickerCreateTimeType.SuperViewAppear;
+        let needCreateAtFirst = this.props.datePickerCreateTimeType == CJDatePickerCreateTimeType.SuperViewAppear;
 
         this.state = {
             hasCreate: needCreateAtFirst,
@@ -141,13 +140,13 @@ export default class LKDatePicker extends Component {
 
             this.datePicker.show();
         } else {
-            LKToastUtil.showMessage('Error：你还未创建日期选择器');
+            //LKToastUtil.showMessage('Error：你还未创建日期选择器');
         }
     }
 
     /**
      * 获取当前日期选择控制器
-     * @returns {null|LKComJSDatePicker}
+     * @returns {null|CJBaseDatePicker}
      */
     getDatePicker() {
         if (this.state.hasCreate) {
@@ -159,11 +158,11 @@ export default class LKDatePicker extends Component {
 
     /**
      * 创建弹出日期选择控制器
-     * @returns {LKComJSDatePicker}
+     * @returns {CJBaseDatePicker}
      */
     createDatePicker() {
         return (
-            <LKComJSDatePicker
+            <CJBaseDatePicker
                 datePickShowType={this.props.datePickShowType}
                 dateString={this.state.dateString}
                 onPickerConfirm={(dateString) => {
@@ -181,7 +180,7 @@ export default class LKDatePicker extends Component {
     }
 
     render() {
-        if (!this.state.hasCreate && this.props.datePickerCreateTimeType == LKDatePickerCreateTimeType.Free) {
+        if (!this.state.hasCreate && this.props.datePickerCreateTimeType == CJDatePickerCreateTimeType.Free) {
             setTimeout(()=>{
                 this.setState({
                     hasCreate: true,

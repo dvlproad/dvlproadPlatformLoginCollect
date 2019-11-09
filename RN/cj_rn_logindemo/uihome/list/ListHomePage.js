@@ -30,7 +30,7 @@ export default class ListHomePage extends Component {
                     { title: "GoodsChoosePage", page: "GoodsChoosePage" },
                     { title: "ImagesChoosePage", page: "ImagesChoosePage" },
                     { title: "ListExamplePage", page: "ListExamplePage" },
-                    { title: "CJUIKitBaseCollectionHomePage", page: "CJUIKitBaseCollectionHomePage" },
+                    { title: "ListCollectionHomePage", page: "ListCollectionHomePage" },
                 ]
             }
         ];
@@ -48,7 +48,7 @@ export default class ListHomePage extends Component {
 
 
 //list
-import CJUIKitBaseCollectionHomePage from "./CJUIKitBaseCollectionHomePage";
+import ListCollectionHomePage from "./ListCollectionHomePage";
 import FlatListEasyPage from './FlatListEasyPage';
 import FlatListNumColumnsPage from './FlatListNumColumnsPage';
 import FlatListHorizontalEasyPage from './FlatListHorizontalEasyPage';
@@ -68,10 +68,10 @@ export const ListPages = {
         }),
     },
 
-    CJUIKitBaseCollectionHomePage: {
-        screen: CJUIKitBaseCollectionHomePage,
+    ListCollectionHomePage: {
+        screen: ListCollectionHomePage,
         navigationOptions: () => ({
-            title: `CJUIKitBaseCollectionHomePage`,
+            title: `ListCollectionHomePage`,
         }),
     },
 
