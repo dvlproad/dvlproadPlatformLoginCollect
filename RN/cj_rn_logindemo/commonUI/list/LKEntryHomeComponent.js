@@ -1,13 +1,15 @@
-// CJUIKitBaseCollectionHomeComponent.js
-import React, { Component } from 'react';
+// LKEntryHomeComponent.js
+import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
 import {
     CJCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
 import PropTypes from "prop-types";
 
+import LuckinRoute from "../../commonUI/luckincommonui";
 
-export default class CJUIKitBaseCollectionHomeComponent extends Component {
+
+export default class LKEntryHomeComponent extends Component {
     static propTypes = {
         moduleModels: PropTypes.array,
     }
@@ -24,18 +26,25 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
     }
 
 
+    //导航
+    static navigationOptions = ({ navigation }) => {
+        // return LKNavigationFactory.renderNavigationOptions(`通知发货3`);
+    };
+
+
     imageLoadedCountChange= (imageLoadedCount, isImageAllLoaded)=>{
         //Alert.alert("完成加载的图片个数为:" + imageLoadedCount);
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
     execModuleModel= (index)=>{
-        let moduleModel = this.props.moduleModels[index];
+        let moduleModel = this.state.moduleModels[index];
 
         if (moduleModel.clickButtonHandle) {
             moduleModel.clickButtonHandle(index, moduleModel);
         } else if (moduleModel.nextPageName && moduleModel.nextPageName.length > 0) {
-            this.props.navigation.navigate(moduleModel.nextPageName);
+            // this.props.navigation.navigate(moduleModel.nextPageName);
+            LuckinRoute.push(this.props.navigation, moduleModel.nextPageName, {});
         } else {
             Alert.alert("提示：请至少设置 moduleModel.clickButtonHandle 或 moduleModel.nextPageName");
         }
@@ -57,7 +66,7 @@ export default class CJUIKitBaseCollectionHomeComponent extends Component {
                 widthHeightRatio={165/165}
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
-                moduleModels={this.props.moduleModels}
+                moduleModels={this.state.moduleModels}
                 clickButtonHandle={this.execModuleModel}
                 imageLoadedCountChange={this.imageLoadedCountChange}
             />

@@ -6,12 +6,12 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import PickerView from './PickerView';
+import PickerView from '../react-native-pickers/PickerView';
 
-import BaseDialog from './BaseDialog';
+import BaseDialog from '../react-native-pickers/BaseDialog';
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 
-class DatePicker extends BaseDialog {
+class CJDatePickerView extends BaseDialog {
 
     static defaultProps = {
         removeSubviews: false,
@@ -295,4 +295,4 @@ class DatePicker extends BaseDialog {
     }
 }
 
-export default DatePicker;
+export default CJDatePickerView;

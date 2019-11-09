@@ -42,7 +42,7 @@ import LKRNActionRangeDateText, { LKRangeDateEditingType } from "./date/LKRNActi
 // list
 import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
-import CJUIKitBaseCollectionHomeComponent from "./list/CJUIKitBaseCollectionHomeComponent";
+import LKEntryHomeComponent from "./list/LKEntryHomeComponent";
 
 
 // picker
@@ -62,6 +62,8 @@ import LKDatePicker from "../CJBaseUIKit/datePicker/CJDatePicker";
 import LKComJSDatePicker from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
 import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
 import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/datePicker/CJDatePicker";
+import LKNavigationFactory from "./navigation/LKNavigationFactory";
+import LuckinRoute from "./navigation/LuckinRoute";
 
 
 var LKCommonUI = {
@@ -70,6 +72,10 @@ var LKCommonUI = {
 
   // alert
   LKAlertModal,
+
+  // navigation 导航栏(含路由)
+  LKNavigationFactory,
+  LuckinRoute,
 
   // sheet
   LKActionSheet,
@@ -116,13 +122,29 @@ var LKCommonUI = {
   // list
   LKImagesChooseList,
   // LKSelectListModal,
-  CJUIKitBaseCollectionHomeComponent,
+  LKEntryHomeComponent,
 
   // date
   LKDatePickShowType,
   LKDatePickerCreateTimeType,
   LKComJSDatePicker,
   LKDatePicker,
+  /**
+   * <LKDatePicker ref={ref => this.datePicker = ref} />
+   *
+   * onPress={()=>{
+                        this.datePicker.showAllEvent(
+                            this.state.dateString2,
+                            (dateString)=>{
+                                this.setState({
+                                    dateString2: dateString
+                                })
+                            },
+                            ()=>{},
+                            ()=>{},
+                        )
+                    }}
+   */
 
 };
 

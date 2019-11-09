@@ -26,7 +26,7 @@ import CJBaseDatePicker, {CJDatePickShowType} from "../../CJBaseUIKit/datePicker
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import LKDateUtil from "../../commonUtil/LKDateUtil";
-import DatePicker from '../react-native-pickers/DatePicker';
+import CJDatePickerView from './CJDatePickerView';
 
 /**
  * 日期器的选择样式
@@ -252,7 +252,7 @@ export default class CJBaseDatePicker extends Component {
         let defaultSelectedValue = this.getSelectedValue(defaultSelectedDate);
 
         return (
-            <DatePicker
+            <CJDatePickerView
                 yyyy={true}
                 MM={true}
                 dd={showDays}

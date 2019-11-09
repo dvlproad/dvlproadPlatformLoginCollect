@@ -75,7 +75,7 @@ export default class PickersPage extends BaseComponent {
                 {this.renderButton('SimpleChooseDialog', () => { this.SimpleChooseDialog.show() })}
                 {this.renderButton('InputDialog', () => { this.InputDialog.show() })}
                 {this.renderButton('最简单的自定义picker', () => { this.CustomPicker.show() })}
-                {this.renderButton('DatePicker', () => { this.DatePicker.show() })}
+                {this.renderButton('CJDatePickerView.js', () => { this.DatePicker.show() })}
                 {this.renderButton('DatePicker1', () => { this.DatePicker1.show() })}
                 {this.renderButton('实现全屏覆盖', () => { console.log('xxxxx'); this.setState({modalVisible: true}, ()=>{this.SimpleChooseDialog1.show();}); })}
                 {this.renderButton('下载进度', () => {

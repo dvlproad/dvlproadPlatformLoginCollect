@@ -116,7 +116,7 @@ export default class LKComNativeActionSingleDateText extends Component {
 
     // render() {
     //     return (
-    //         <DatePicker
+    //         <CJDatePickerView
     //             style={[{ flex: 1 }, style]}
     //             disabled={!this.props.allowPickDate}
     //             placeholder={this.props.placeholder}

@@ -40,6 +40,7 @@ export default class UIHomePage extends Component {
             { key: "进阶",
                 data: [
                     { title: "List(列表)", page: "ListHomePage" },
+                    { title: "Collection(集合视图)", page: "CollectionHomePage" },
                     { title: "Modal(Modal)", page: "ModalHomePage" },
                     { title: "Picker(选择器)", page: "PickHomePage" },
                 ]
@@ -77,6 +78,7 @@ import TextHomePage from "./text/TextHomePage";
 import { ImagePages, ImageRoutePage } from "./image/ImageHomePage";
 //list
 import { ListPages, ListRoutePage } from "./list/ListHomePage";
+import { CollectionPages, CollectionRoutePage } from "./collection/CollectionHomePage";
 //upload
 import { UploadPages, UploadRoutePage } from "./upload/UploadHomePage";
 //picker
@@ -126,6 +128,7 @@ export const UIPages = {
 
     ...ImagePages,
     ...ListPages,
+    ...CollectionPages,
     ...UploadPages,
 
     ...PickPages,

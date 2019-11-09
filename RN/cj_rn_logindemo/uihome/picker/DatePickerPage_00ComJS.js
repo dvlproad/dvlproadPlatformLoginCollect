@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
 
-import DatePicker from "../../CJBaseUIKit/react-native-pickers/DatePicker";
+import CJDatePickerView from "../../CJBaseUIKit/datePicker/CJDatePickerView";
 
 import {
     LKToastUtil,
@@ -91,7 +91,7 @@ export default class DatePickerPage_00ComJS extends Component {
         let dateString = currentShowDateString;
         let defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
         return (
-            <DatePicker
+            <CJDatePickerView
                 HH={false}
                 mm={false}
                 ss={false}
