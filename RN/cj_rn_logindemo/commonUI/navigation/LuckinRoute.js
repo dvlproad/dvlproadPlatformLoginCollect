@@ -1,3 +1,12 @@
+/**
+ * LuckinRoute.js
+ *
+ * @author ciyouzen
+ * @email dvlproad@163.com
+ * @create date 2019-11-09 10:30:47
+ * @modify date 2019-11-09 10:30:47
+ * @desc [路由]
+ */
 import {
     CJNavigationUtil
 } from "../../CJBaseUIKit/CJBaseUIKit";
@@ -11,7 +20,13 @@ export default class LuckinRoute {
      * @param params        参数
      */
     static push(navigation, routeName = '', params = {}) {
-        CJNavigationUtil.push(navigation, routeName, params);
+        // CJNavigationUtil.push(navigation, routeName, params);
+        // navigation.navigate("FlatListHorizontalEasyPage");
+        if (!navigation) {
+            return;
+        }
+        const { navigate } = navigation;
+        navigate(routeName, params);
     }
 
     /**

@@ -1,4 +1,11 @@
-// CJImageButton.js
+/**
+ * CJImageButton.js
+ * @Description: CJImageButton
+ * @author      ciyouzen
+ * @email       dvlproad@163.com
+ * @date        2019-11-10 13:58:36
+ * Copyright (c) dvlproad. All rights reserved.
+ */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { Image, TouchableOpacity, View } from "react-native";

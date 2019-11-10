@@ -13,6 +13,7 @@ let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 
 var enableBlueColor = 'rgba(23, 41, 145, 1)';
 var disableBlueColor = 'rgba(23, 41, 145, 0.4)';
 
+
 //注意此按钮顶部阴影超出了按钮本身区域，注意放在视图上层才会显示出来；
 export class LKBlueBGBottomButton extends Component {
     static propTypes = {

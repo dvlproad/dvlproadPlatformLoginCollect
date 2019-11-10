@@ -241,7 +241,6 @@ export default class CJCollectionView extends Component {
                     return (
                         <CJCollectionCell
                             style={{
-                                flex: 1,
                                 width: boxWidth,
                                 height: boxHeight,
                                 marginRight: this.getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval),

@@ -1,12 +1,11 @@
 // LKEntryHomeComponent.js
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
+import PropTypes from "prop-types";
 import {
     CJCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import PropTypes from "prop-types";
-
-import LuckinRoute from "../../commonUI/luckincommonui";
+import LuckinRoute from "../navigation/LuckinRoute";
 
 
 export default class LKEntryHomeComponent extends Component {
@@ -18,18 +17,17 @@ export default class LKEntryHomeComponent extends Component {
         moduleModels: [],
     }
 
+    // 导航
+    // static navigationOptions = ({ navigation }) => {
+    //     return LKNavigationFactory.backPageNavigationOptions({ navigation }, `导航栏标题`)
+    // };
+
     constructor(props) {
         super(props);
         this.state = {
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
         };
     }
-
-
-    //导航
-    static navigationOptions = ({ navigation }) => {
-        // return LKNavigationFactory.renderNavigationOptions(`通知发货3`);
-    };
 
 
     imageLoadedCountChange= (imageLoadedCount, isImageAllLoaded)=>{

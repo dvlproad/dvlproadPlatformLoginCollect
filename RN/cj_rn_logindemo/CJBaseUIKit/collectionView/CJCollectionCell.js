@@ -23,7 +23,7 @@ import CJCollectionCell  from '../../commonUI/image/LKActionLoadingImage';
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableOpacity, ViewPropTypes, Text, Image} from 'react-native';
-import CJLoadingImage  from '../image/CJLoadingImage';
+import CJImageTextButton  from '../button/CJImageTextButton';
 import PropTypes from "prop-types";
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -71,62 +71,17 @@ export default class CJCollectionCell extends Component {
 
 
     render() {
-        const { style } = this.props;
-
         let buttonIndex = this.props.buttonIndex;
 
-        const boxWidth = this.props.style.width;
-        const boxHeight = this.props.style.height;
-
-        // 图片展示视图
-        const imageWidth = 42;
-        const imageHeight = 42;
-
         return (
-            <TouchableOpacity
-                style={style}
-                onPress={()=> {
-                    this.props.clickButtonHandle(buttonIndex);
-                }}
-            >
-                <View style={{flex:1, flexDirection:"column", justifyContent:"center", alignItems:"center"}} >
-                    <CJLoadingImage
-                        style={{
-                            width: imageWidth,
-                            height: imageHeight,
-                        }}
-                        source={this.props.moduleModel.imageSource}
-                        defaultSource={this.props.defaultSource}
-                        buttonIndex={buttonIndex}
-                        onLoadComplete={this.props.onLoadComplete}
-                        needLoadingAnimation={this.props.needLoadingAnimation}
-                    />
-                    <Text style={[styles.singleLineHVCenterText, {marginTop: 20}]} >
-                        {this.props.moduleModel.title}
-                    </Text>
-                </View>
-            </TouchableOpacity>
+            <CJImageTextButton style={this.props.style}
+                               imageStyle={{width: 42, height: 42}}
+                               imageSource={this.props.moduleModel.imageSource}
+                               title={this.props.moduleModel.title}
+                               onPress={()=> {
+                                   this.props.clickButtonHandle(buttonIndex);
+                               }}
+            />
         );
     }
 }
-
-
-var styles = StyleSheet.create({
-    singleLineHVCenterText: {   //单行文本水平&垂直居中
-        height: 22,
-        fontSize: 16,
-        textAlign: 'center',
-        lineHeight:22,
-    },
-    multipleLineHVCenterText: { //长文本的多行文本垂直居中
-        height: 144,
-        fontSize: 17,
-        textAlign: 'center',
-        lineHeight:144,
-        textAlignVertical: 'center',
-        // ...Platform.select({
-        //     ios: { lineHeight: 100},
-        //     android: {}
-        // })
-    },
-});

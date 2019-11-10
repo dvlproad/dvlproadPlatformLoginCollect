@@ -27,20 +27,25 @@ export default class CollectionHomePage extends LKEntryHomeComponent {
                     }
                 },
                 {
-                    title: "模块2",
+                    title: "水平列表的简单使用",
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
                     clickButtonHandle: (index, moduleModel)=> {
                         this.props.navigation.navigate("FlatListHorizontalEasyPage");
                     }
                 },
                 {
-                    title: "查询1",
+                    title: "列表的列数使用",
                     imageSource: require('./img/2.jpg'),
-                    nextPageName: "FlatListNumColumnsPage"
+                    nextPageName: "FlatListNumColumnsPage",
                 },
                 {
-                    title: "查询1",
+                    title: "一系列图片的选择",
                     imageSource: require('./img/3.jpg'),
+                    nextPageName: "ImagesChoosePage",
+                },
+                {
+                    title: "模块5",
+                    imageSource: require('./img/4.jpg'),
                 },
             ],
         }
