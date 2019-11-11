@@ -10,173 +10,173 @@
  * Copyright (c) dvlproad. All rights reserved.
  */
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import CJAreaPickerView from "./CJAreaPickerView";
+import AreaJson from "./area";
 
-import {
-    Text,
-    View,
-    Animated,
-    TouchableOpacity
-} from 'react-native';
+/** 地区选择器创建的时机 */
+export var CJAreaPickerCreateTimeType = {
+    Free: 0,                //当空闲的时候偷偷执行
+    BeCall: 1,              //当需要调用日期选择的时候才去创建(防止进入页面时候卡顿)
+    SuperViewAppear: 2,     //当其所视图显示的时候就创建(会造成初次卡顿)
+}
 
-import PickerView from '../react-native-pickers/PickerView';
-import BaseDialog from '../react-native-pickers/BaseDialog';
+/**
+ * 地区选择器的选择样式
+ */
+export var CJAreaPickShowType = {
+    ProvinceCityArea: 0,/** 显示 省份-城市-地区 */
+    ProvinceCity: 1,    /** 显示 省份-城市 */
+}
 
-export default class CJAreaPicker extends BaseDialog {
+export default class CJAreaPicker extends Component {
+    static propTypes = {
+        areaPickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
+        areaPickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
+        // dateString: PropTypes.string,       //选择的日期
+        //
+        // onPickerConfirm: PropTypes.func,    //日期选择'确认'
+        // onPickerCancel: PropTypes.func,     //日期选择'取消'
+        // onPickerSelect: PropTypes.func,     //日期选择'变了下'
+        onCoverPress: PropTypes.func,       //点击空白区域
+    };
 
     static defaultProps = {
-        removeSubviews: false,
-        selectedValue: ['香港', '香港', '中西區'],
-        areaJson: null,
-        confirmText: '确定',
-        confirmTextSize: 14,
-        confirmTextColor: '#333333',
-        cancelText: '取消',
-        cancelTextSize: 14,
-        cancelTextColor: '#333333',
-        itemTextColor: 0x333333ff,
-        itemSelectedColor: 0x1097D5ff,
-        itemHeight: 40,
-        onPickerCancel: null,
-        onPickerConfirm: null
-    }
+        areaPickShowType: CJAreaPickShowType.yyyyMMdd,
+        areaPickerCreateTimeType: CJAreaPickShowType.Free,
+        // dateString: '',
+        //
+        // onPickerConfirm: (dateString)=>{},
+        // onPickerCancel: ()=>{},
+        // onPickerSelect: (dateString)=>{},
+        onCoverPress: ()=>{},
+    };
 
     constructor(props) {
         super(props);
+
+        let needCreateAtFirst = this.props.areaPickerCreateTimeType == CJAreaPickerCreateTimeType.SuperViewAppear;
+
         this.state = {
-            areaData: this.getAreaData(),
-            path: new Animated.Value(0),
-            ...this.formatPickerData(props.selectedValue)
-        };
-    }
+            hasCreate: needCreateAtFirst,
 
-    _getContentPosition() {
-        return { justifyContent: 'flex-end', alignItems: 'center' }
-    }
+            dateString: '',
 
-    getAreaData() {
-        let area = this.props.areaJson;
-        let data = [];
-        let len = area.length;
-        for (let i = 0; i < len; i++) {
-            let city = [];
-            for (let j = 0, cityLen = area[i]['city'].length; j < cityLen; j++) {
-                let _city = {};
-                _city[area[i]['city'][j]['name']] = area[i]['city'][j]['area'];
-                city.push(_city);
-            }
-            let _data = {};
-            _data[area[i]['name']] = city;
-            data.push(_data);
+            onPickerConfirm: ()=>{ },
+            onPickerCancel: ()=>{ },
+            onPickerSelect: ()=>{ },
         }
-        return data;
     }
 
-    formatPickerData() {
-        let province = [];
-        let city = [];
-        let county = [];
-        let firstCity = null;
-        let firstCountry = null;
-        let areaData = this.getAreaData();
-        areaData.map((pitem) => {
-            for (let pname in pitem) {
-                province.push(pname)
-                if (pname == this.props.selectedValue[0]) {
-                    pitem[pname].map(citem => {
-                        for (let cname in citem) {
-                            if (firstCity == null) {
-                                firstCity = cname;
-                            }
-                            city.push(cname);
-                            if (cname == this.props.selectedValue[1]) {
-                                county = citem[cname];
-                                if (firstCountry == null) {
-                                    firstCountry = citem[cname][0];
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        });
+    /**
+     * 显示地区选择器(默认显示 ProvinceCityArea 选择器)
+     * @param selectedValues    弹出时候选中的日期(输入的字符串，依赖设置的areaPickShowType，如默认是 ProvinceCityArea，即形如['香港', '香港', '东区']')
+     * @param onPickerConfirm   确认
+     */
+    showWithAreaSelectedValues(selectedValues, onPickerConfirm) {
+        this.state.selectedValues = selectedValues;
+        this.showAllEvent(onPickerConfirm, null, null);
+    }
 
-        if (county.indexOf(this.props.selectedValue[2]) == -1) {
-            this.props.selectedValue[2] = firstCountry;
+    /**
+     * 显示地区选择器(地区默认值为上次点击"确认"的值)
+     * @param onPickerConfirm   确认
+     */
+    showWithLastAreaSelectedValues(onPickerConfirm) {
+        this.showAllEvent(onPickerConfirm, null, null);
+    }
+
+    /**
+     * 显示地区选择器(默认显示 yyyyMMdd 选择器)
+     * @param onPickerConfirm   确认
+     * @param onPickerCancel    取消
+     * @param onPickerSelect    选择过程的事件
+     */
+    showAllEvent(onPickerConfirm, onPickerCancel, onPickerSelect) {
+        this.setState({
+            onPickerConfirm: onPickerConfirm,
+            onPickerCancel: onPickerCancel,
+            onPickerSelect: onPickerSelect
+        }, ()=>{
+            this.tryShowAreaPicker();
+        })
+    }
+
+    /**
+     * 尝试弹出地区选择控制器
+     */
+    tryShowAreaPicker() {
+        if (this.state.hasCreate) {
+            // this.showDatePicker();
+
+            // 如果不设置setState无法，重新render选择器
+            this.setState({
+                hasCreate: true,
+            }, () => {
+                this.showAreaPicker();
+            })
+
+        } else {
+            this.setState({
+                hasCreate: true,
+            }, () => {
+                this.showAreaPicker();
+            })
         }
+    }
 
-        if (county.length == 0 && firstCity != null) {
-            this.props.selectedValue[1] = firstCity;
-            return this.formatPickerData();
+    /**
+     * 弹出地区选择控制器
+     */
+    showAreaPicker() {
+        if (this.areaPicker) {
+            let selectedValues = this.state.selectedValues; // ['香港', '香港', '东区'];
+            if (selectedValues && selectedValues.length > 0) {
+                this.areaPicker.updateDefaultSelectedValues(selectedValues);
+            }
+
+            this.areaPicker.show();
+        } else {
+            //LKToastUtil.showMessage('Error：你还未创建日期选择器');
         }
-
-        return {
-            pickerData: [province, city, county], visible: true
-        };
     }
 
-    renderPicker() {
-        return this.state.pickerData.map((item, pickerId) => {
-            let selectedIndex = 0;
-            let length = item.length;
-            for (let i = 0; i < length; i++) {
-                if (item[i] == this.props.selectedValue[pickerId]) {
-                    selectedIndex = i;
-                    break;
-                }
-            }
-            if (item && length > 0) {
-                return <PickerView
-                    itemTextColor={this.props.itemTextColor}
-                    itemSelectedColor={this.props.itemSelectedColor}
-                    key={'picker' + pickerId}
-                    list={item}
-                    onPickerSelected={(toValue) => {
-                        this.props.selectedValue[pickerId] = toValue;
-                        this.setState({ ...this.formatPickerData(this.props.selectedValue) });
-                    }}
-                    selectedIndex={selectedIndex}
-                    fontSize={this.getSize(14)}
-                    itemWidth={this.mScreenWidth / this.state.pickerData.length}
-                    itemHeight={this.props.itemHeight} />
-            } else {
-                return null;
-            }
-        });
+    /**
+     * 获取当前地区选择控制器
+     * @returns {null|CJAreaPickerView}
+     */
+    getAreaPicker() {
+        return this.createAreaPicker();
     }
 
-    renderContent() {
-        return <View
-            style={{
-                height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44), width: this.mScreenWidth,
-                backgroundColor: '#ffffff'
-            }}>
-            <View style={{ width: this.mScreenWidth, height: this.props.itemHeight * 5 + this.getSize(15), flexDirection: 'row', position: 'absolute', bottom: 0 }}>
-                {this.renderPicker()}
-            </View>
-            <View style={{
-                width: this.mScreenWidth, height: this.getSize(44),
-                backgroundColor: '#ffffff', flexDirection: 'row',
-                justifyContent: 'space-between', position: 'absolute', top: 0
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => {
-                            this.props.onPickerCancel && this.props.onPickerCancel();
-                        });
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => {
-                            this.props.onPickerConfirm && this.props.onPickerConfirm(this.props.selectedValue);
-                        });
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.confirmTextSize, fontWeight: '400', color: this.props.confirmTextColor }}>{this.props.confirmText}</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+    /**
+     * 创建弹出地区选择控制器
+     * @returns {CJAreaPickerView}
+     */
+    createAreaPicker() {
+        return (
+            <CJAreaPickerView
+                areaJson={AreaJson}
+                // selectedValue={this.state.selectedValue}
+                onPickerConfirm={(dateString) => {
+                    this.state.onPickerConfirm && this.state.onPickerConfirm(dateString);
+                }}
+                onPickerCancel={() => {
+                    this.state.onPickerCancel && this.state.onPickerCancel();
+                }}
+                onCoverPress={() => {
+                    this.props.onCoverPress && this.props.onCoverPress();
+                }}
+                ref={ref => this.areaPicker = ref}
+            />
+        );
+    }
+
+
+
+    render() {
+        return (
+            this.getAreaPicker()
+        );
     }
 }

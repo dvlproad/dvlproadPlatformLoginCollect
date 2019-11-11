@@ -10,8 +10,9 @@ import {
     LKDatePicker,
 } from '../../commonUI/luckincommonui';
 
-import AreaJson from '../../CJBaseUIKit/areaPicker/Area.json';
+import AreaJson from '../../CJBaseUIKit/areaPicker/area.json';
 import { CJAreaPicker } from "../../CJBaseUIKit/CJBaseUIKit";
+import CJAreaPickerView from "../../CJBaseUIKit/areaPicker/CJAreaPickerView";
 
 
 export default class AreaPickerPage extends Component {
@@ -34,9 +35,9 @@ export default class AreaPickerPage extends Component {
                         width: 180,
                         backgroundColor:'red'
                     }}
-                    title={"行政区域picker"}
+                    title={"行政区域 CJAreaPickerView"}
                     onPress={()=>{
-                        this.areaPicker.show()
+                        this.areaPickerView.show()
                     }}
                 />
 
@@ -45,30 +46,51 @@ export default class AreaPickerPage extends Component {
                         width: 180,
                         backgroundColor:'red'
                     }}
-                    title={this.state.dateString2}
+                    title={"行政区域 CJAreaPicker(弹出上次选择的地区)"}
                     onPress={()=>{
-                        this.datePicker.showAllEvent(
-                            this.state.dateString2,
-                            (dateString)=>{
-                                this.setState({
-                                    dateString2: dateString
-                                })
-                            },
-                            ()=>{},
-                            ()=>{},
-                        )
+                        this.lastValueAreaPicker.showWithLastAreaSelectedValues((selectedValues)=>{
+                            LKToastUtil.showMessage(selectedValues);
+                        });
                     }}
                 />
 
+                <LKBlueBGButton
+                    style={{
+                        width: 180,
+                        backgroundColor:'red'
+                    }}
+                    title={"行政区域 CJAreaPicker(弹出指定选择的地区)"}
+                    onPress={()=>{
+                        this.designativeValueAreaPicker.showWithAreaSelectedValues(['香港', '香港', '九龙城区']);
+                    }}
+                />
+
+
                 <LKDatePicker ref={ref => this.datePicker = ref} />
 
-                <CJAreaPicker
+                <CJAreaPickerView
                     areaJson={AreaJson}
                     onPickerCancel={() => { }}
                     onPickerConfirm={(value) => {
-                        alert(JSON.stringify(value));
+                        LKToastUtil.showMessage(value);
                     }}
-                    ref={ref => this.areaPicker = ref} />
+                    ref={ref => this.areaPickerView = ref}
+                />
+
+                <CJAreaPicker
+                    onPickerCancel={() => { }}
+                    onPickerConfirm={(value) => {
+                        LKToastUtil.showMessage(value);
+                    }}
+                    ref={ref => this.lastValueAreaPicker = ref}
+                />
+                <CJAreaPicker
+                    onPickerCancel={() => { }}
+                    onPickerConfirm={(value) => {
+                        LKToastUtil.showMessage(value);
+                    }}
+                    ref={ref => this.designativeValueAreaPicker = ref}
+                />
 
             </View>
         )

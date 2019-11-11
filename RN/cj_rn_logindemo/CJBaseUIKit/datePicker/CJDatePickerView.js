@@ -1,4 +1,4 @@
-import React, { Component, UIManager } from 'react';
+import React, { Component } from 'react';
 
 import {
     Text,
@@ -9,15 +9,20 @@ import {
 import PickerView from '../react-native-pickers/PickerView';
 import BaseDialog from '../react-native-pickers/BaseDialog';
 import LKDateUtil from "../../commonUtil/LKDateUtil";
+import PropTypes from "prop-types";
 
 class CJDatePickerView extends BaseDialog {
+    static propTypes = {
+        selectedValue: PropTypes.array.isRequired,
+        onPickerConfirm: PropTypes.func,
+    };
 
     static defaultProps = {
         removeSubviews: false,
         itemTextColor: 0x00000078,
         itemSelectedColor: 0x000000ff,
         onPickerCancel: null,
-        onPickerConfirm: null,
+        onPickerConfirm: (selectedValue) => {},
         unit: ['年', '月', '日'],
         selectedValue: [new Date().getFullYear() + '年', new Date().getMonth() + 1 + '月', new Date().getDate() + '日'],
         startYear: 1990,
