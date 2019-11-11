@@ -18,14 +18,14 @@ let actionSheetMaxHeight = screenHeight - actionSheetTop;   //整个完整的act
 
 export default class CJBaseBottomPicker extends BaseDialog {
     static propTypes = {
-        selectedValue: PropTypes.array.isRequired,
+        selectedValueText: PropTypes.string.isRequired,
         onPickerConfirm: PropTypes.func,
     };
 
     static defaultProps = {
         onPickerCancel: null,
         onPickerConfirm: (selectedValue) => {},
-        selectedValue: '请选择日期',
+        onCoverPress: null,
 
         confirmText: '完成',
         confirmTextSize: 17,
@@ -35,11 +35,12 @@ export default class CJBaseBottomPicker extends BaseDialog {
         cancelTextSize: 17,
         cancelTextColor: '#B2B2B2',
 
-        valueText: '请选择日期',
+        promptValueText: '请选择日期/地区',
+        selectedValueText: '请选择日期/地区',
         valueTextSize: 17,
         valueTextColor: '#000000',
         showValueText: true,        // 是否显示文本
-        fixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
+        shouldFixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
 
         itemHeight: 40,
     }
@@ -53,6 +54,14 @@ export default class CJBaseBottomPicker extends BaseDialog {
         return { justifyContent: 'flex-end', alignItems: 'center' }
     }
 
+    /**
+     * 获取toolbar上的文本
+     * @returns {null}
+     */
+    getSelectedValueText() {
+        return null;
+    }
+
     renderPicker() {
         return null;
     }
@@ -63,61 +72,63 @@ export default class CJBaseBottomPicker extends BaseDialog {
         // this.state.selectedIndex = data.selectedIndex;
         let valueText = '';
         if (this.props.showValueText) {
-            if (this.props.fixedValueText) {
-                valueText = this.props.valueText;
+            if (this.props.shouldFixedValueText) {
+                valueText = this.props.promptValueText;
             } else {
-                valueText = this.props.selectedValue;
+                valueText = this.getSelectedValueText();
             }
         }
 
-        return <View
-            style={{
-                height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44) + screenBottomHeight,
-                width: this.mScreenWidth,
-                backgroundColor: '#ffffff',
-            }}>
-            <View style={{
-                width: this.mScreenWidth,
-                height: this.props.itemHeight * 5 + this.getSize(15),
-                flexDirection: 'row',
-                position: 'absolute',
-                bottom: screenBottomHeight,
-            }}
-            >
-                {this.renderPicker()}
-            </View>
-            <View style={{
-                width: this.mScreenWidth, height: this.getSize(44),
-                backgroundColor: '#ffffff', flexDirection: 'row',
-                justifyContent: 'space-between', position: 'absolute', top: 0
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => this.props.onPickerCancel && this.props.onPickerCancel(this.props.selectedValue));
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
+        return (
+            <View
+                style={{
+                    height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44) + screenBottomHeight,
+                    width: this.mScreenWidth,
+                    backgroundColor: '#ffffff',
+                }}>
+                <View style={{
+                    width: this.mScreenWidth,
+                    height: this.props.itemHeight * 5 + this.getSize(15),
+                    flexDirection: 'row',
+                    position: 'absolute',
+                    bottom: screenBottomHeight,
+                }}
+                >
+                    {this.renderPicker()}
+                </View>
+                <View style={{
+                    width: this.mScreenWidth, height: this.getSize(44),
+                    backgroundColor: '#ffffff', flexDirection: 'row',
+                    justifyContent: 'space-between', position: 'absolute', top: 0
+                }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.dismiss(() => this.props.onPickerCancel && this.props.onPickerCancel(this.props.selectedValue));
+                        }}
+                        style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
 
-                    }}
-                    style={{ width: this.getSize(210), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text
-                        style={{ fontSize: this.props.valueTextSize, fontWeight: '400', color: this.props.valueTextColor }}
-                        allowFontScaling={true}
-                    >
-                        {valueText}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => this.props.onPickerConfirm && this.props.onPickerConfirm(this.props.selectedValue));
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.confirmTextSize, fontWeight: '400', color: this.props.confirmTextColor }}>{this.props.confirmText}</Text>
-                </TouchableOpacity>
+                        }}
+                        style={{ width: this.getSize(210), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
+                        <Text
+                            style={{ fontSize: this.props.valueTextSize, fontWeight: '400', color: this.props.valueTextColor }}
+                            allowFontScaling={true}
+                        >
+                            {valueText}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.dismiss(() => this.props.onPickerConfirm && this.props.onPickerConfirm(this.props.selectedValue));
+                        }}
+                        style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: this.props.confirmTextSize, fontWeight: '400', color: this.props.confirmTextColor }}>{this.props.confirmText}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        )
     }
 }

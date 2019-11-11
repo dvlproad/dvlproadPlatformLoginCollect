@@ -39,6 +39,8 @@ export default class CJAreaPicker extends Component {
         // onPickerCancel: PropTypes.func,     //日期选择'取消'
         // onPickerSelect: PropTypes.func,     //日期选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
+
+        toolbarValueText: PropTypes.string, // 顶部toolbar上的文案
     };
 
     static defaultProps = {
@@ -157,9 +159,11 @@ export default class CJAreaPicker extends Component {
         return (
             <CJAreaPickerView
                 areaJson={AreaJson}
+                promptValueText={this.props.toolbarValueText}
+                showValueText={true}
                 // selectedValue={this.state.selectedValue}
-                onPickerConfirm={(dateString) => {
-                    this.state.onPickerConfirm && this.state.onPickerConfirm(dateString);
+                onPickerConfirm={(selectedValue) => {
+                    this.state.onPickerConfirm && this.state.onPickerConfirm(selectedValue);
                 }}
                 onPickerCancel={() => {
                     this.state.onPickerCancel && this.state.onPickerCancel();

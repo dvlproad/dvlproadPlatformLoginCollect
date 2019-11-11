@@ -20,8 +20,8 @@ export default class AreaPickerPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dateString1: '2019-06-06',
-            dateString2: '2000-02-29'
+            areaSelectedValues1: ['香港', '香港', '九龙城区'],
+            areaSelectedValues2: ['香港', '香港', '九龙城区']
         }
     }
 
@@ -49,7 +49,8 @@ export default class AreaPickerPage extends Component {
                     title={"行政区域 CJAreaPicker(弹出上次选择的地区)"}
                     onPress={()=>{
                         this.lastValueAreaPicker.showWithLastAreaSelectedValues((selectedValues)=>{
-                            LKToastUtil.showMessage(selectedValues);
+                            let string = selectedValues.join('-');
+                            LKToastUtil.showMessage(string);
                         });
                     }}
                 />
@@ -61,7 +62,10 @@ export default class AreaPickerPage extends Component {
                     }}
                     title={"行政区域 CJAreaPicker(弹出指定选择的地区)"}
                     onPress={()=>{
-                        this.designativeValueAreaPicker.showWithAreaSelectedValues(['香港', '香港', '九龙城区']);
+                        this.designativeValueAreaPicker.showWithAreaSelectedValues(['香港', '香港', '九龙城区'], (selectedValues)=>{
+                            let string = selectedValues.join('-');
+                            LKToastUtil.showMessage(string);
+                        });
                     }}
                 />
 
@@ -70,21 +74,25 @@ export default class AreaPickerPage extends Component {
 
                 <CJAreaPickerView
                     areaJson={AreaJson}
+                    toolbarValueText={'选择地区'}
                     onPickerCancel={() => { }}
-                    onPickerConfirm={(value) => {
-                        LKToastUtil.showMessage(value);
+                    onPickerConfirm={(selectedValues) => {
+                        let string = selectedValues.join('-');
+                        LKToastUtil.showMessage(string);
                     }}
                     ref={ref => this.areaPickerView = ref}
                 />
 
                 <CJAreaPicker
+                    toolbarValueText={'选择地区'}
                     onPickerCancel={() => { }}
-                    onPickerConfirm={(value) => {
-                        LKToastUtil.showMessage(value);
+                    onPickerConfirm={(selectedValues) => {
+                        LKToastUtil.showMessage(selectedValues);
                     }}
                     ref={ref => this.lastValueAreaPicker = ref}
                 />
                 <CJAreaPicker
+                    toolbarValueText={'选择地区'}
                     onPickerCancel={() => { }}
                     onPickerConfirm={(value) => {
                         LKToastUtil.showMessage(value);

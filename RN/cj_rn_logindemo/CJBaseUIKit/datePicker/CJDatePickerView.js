@@ -16,7 +16,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
         itemTextColor: 0x00000078,
         itemSelectedColor: 0x000000ff,
         onPickerCancel: null,
-        onPickerConfirm: (selectedValue) => {},
+        onPickerConfirm: (selectedDateString) => {},
         unit: ['年', '月', '日'],
         selectedValue: [new Date().getFullYear() + '年', new Date().getMonth() + 1 + '月', new Date().getDate() + '日'],
         startYear: 1990,
@@ -32,11 +32,12 @@ class CJDatePickerView extends CJBaseBottomPicker {
         cancelTextSize: 17,
         cancelTextColor: '#B2B2B2',
 
-        valueText: '请选择日期',
+        promptValueText: '请选择日期',
+        selectedValueText: '请选择日期',
         valueTextSize: 17,
         valueTextColor: '#000000',
         showValueText: true,        // 是否显示文本
-        fixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
+        shouldFixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
 
         itemHeight: 40,
 
@@ -211,6 +212,10 @@ class CJDatePickerView extends CJBaseBottomPicker {
         return data;
     }
 
+    getSelectedValueText() {
+        let string = this.props.selectedValue;
+        return string;
+    }
 
     renderPicker() {
         return this.state.pickerData.map((item, pickerId) => {

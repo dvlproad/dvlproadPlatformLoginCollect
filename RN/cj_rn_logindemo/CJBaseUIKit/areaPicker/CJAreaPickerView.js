@@ -137,6 +137,11 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
         };
     }
 
+    getSelectedValueText() {
+        let string = this.props.selectedValue.join('-');
+        return string;
+    }
+
     renderPicker() {
         return this.state.pickerData.map((item, pickerId) => {
             let selectedIndex = 0;
