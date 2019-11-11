@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import {
-    Text,
-    View,
     Animated,
-    TouchableOpacity
 } from 'react-native';
-
-import PickerView from '../react-native-pickers/PickerView';
-import BaseDialog from '../react-native-pickers/BaseDialog';
 import PropTypes from "prop-types";
+import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
+import PickerView from '../react-native-pickers/PickerView';
 
-export default class CJAreaPickerView extends BaseDialog {
+export default class CJAreaPickerView extends CJBaseBottomPicker {
     static propTypes = {
         selectedValue: PropTypes.array.isRequired,
         onPickerConfirm: PropTypes.func,
@@ -75,10 +71,6 @@ export default class CJAreaPickerView extends BaseDialog {
             pickerData: pickerData,
             // selectedIndex: selectedIndex,
         })
-    }
-
-    _getContentPosition() {
-        return { justifyContent: 'flex-end', alignItems: 'center' }
     }
 
     getAreaData() {
@@ -173,41 +165,5 @@ export default class CJAreaPickerView extends BaseDialog {
                 return null;
             }
         });
-    }
-
-    renderContent() {
-        return <View
-            style={{
-                height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44), width: this.mScreenWidth,
-                backgroundColor: '#ffffff'
-            }}>
-            <View style={{ width: this.mScreenWidth, height: this.props.itemHeight * 5 + this.getSize(15), flexDirection: 'row', position: 'absolute', bottom: 0 }}>
-                {this.renderPicker()}
-            </View>
-            <View style={{
-                width: this.mScreenWidth, height: this.getSize(44),
-                backgroundColor: '#ffffff', flexDirection: 'row',
-                justifyContent: 'space-between', position: 'absolute', top: 0
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => {
-                            this.props.onPickerCancel && this.props.onPickerCancel();
-                        });
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => {
-                            this.props.onPickerConfirm && this.props.onPickerConfirm(this.props.selectedValue);
-                        });
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.confirmTextSize, fontWeight: '400', color: this.props.confirmTextColor }}>{this.props.confirmText}</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
     }
 }

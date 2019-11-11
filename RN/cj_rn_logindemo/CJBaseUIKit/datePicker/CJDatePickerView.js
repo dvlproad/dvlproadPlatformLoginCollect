@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-
-import {
-    Text,
-    View,
-    TouchableOpacity
-} from 'react-native';
-
-import PickerView from '../react-native-pickers/PickerView';
-import BaseDialog from '../react-native-pickers/BaseDialog';
-import LKDateUtil from "../../commonUtil/LKDateUtil";
 import PropTypes from "prop-types";
+import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
+import PickerView from '../react-native-pickers/PickerView';
+import LKDateUtil from "../../commonUtil/LKDateUtil";
 
-class CJDatePickerView extends BaseDialog {
+
+class CJDatePickerView extends CJBaseBottomPicker {
     static propTypes = {
         selectedValue: PropTypes.array.isRequired,
         onPickerConfirm: PropTypes.func,
@@ -217,9 +211,6 @@ class CJDatePickerView extends BaseDialog {
         return data;
     }
 
-    _getContentPosition() {
-        return { justifyContent: 'flex-end', alignItems: 'center' }
-    }
 
     renderPicker() {
         return this.state.pickerData.map((item, pickerId) => {
@@ -241,61 +232,6 @@ class CJDatePickerView extends BaseDialog {
                     itemHeight={this.props.itemHeight} />
             }
         });
-    }
-
-    renderContent() {
-        // let data = this.getDateList();
-        // this.state.pickerData = data.pickerData;
-        // this.state.selectedIndex = data.selectedIndex;
-        let valueText = '';
-        if (this.props.showValueText) {
-            if (this.props.fixedValueText) {
-                valueText = this.props.valueText;
-            } else {
-                valueText = this.props.selectedValue;
-            }
-        }
-
-        return <View
-            style={{
-                height: this.props.itemHeight * 5 + this.getSize(15) + this.getSize(44), width: this.mScreenWidth,
-            }}>
-            <View style={{ width: this.mScreenWidth, height: this.props.itemHeight * 5 + this.getSize(15), flexDirection: 'row', position: 'absolute', bottom: 0 }}>
-                {this.renderPicker()}
-            </View>
-            <View style={{
-                width: this.mScreenWidth, height: this.getSize(44),
-                backgroundColor: '#ffffff', flexDirection: 'row',
-                justifyContent: 'space-between', position: 'absolute', top: 0
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => this.props.onPickerCancel && this.props.onPickerCancel(this.props.selectedValue));
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.cancelTextSize, fontWeight: '400', color: this.props.cancelTextColor }}>{this.props.cancelText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-
-                    }}
-                    style={{ width: this.getSize(210), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text
-                        style={{ fontSize: this.props.valueTextSize, fontWeight: '400', color: this.props.valueTextColor }}
-                        allowFontScaling={true}
-                    >
-                        {valueText}
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.dismiss(() => this.props.onPickerConfirm && this.props.onPickerConfirm(this.props.selectedValue));
-                    }}
-                    style={{ width: this.getSize(60), height: this.getSize(44), justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: this.props.confirmTextSize, fontWeight: '400', color: this.props.confirmTextColor }}>{this.props.confirmText}</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
     }
 }
 
