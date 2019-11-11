@@ -3,15 +3,21 @@
  *
  * @author ciyouzen
  * @email dvlproad@163.com
- * @create date 2019-11-09 10:30:47
- * @modify date 2019-11-09 10:30:47
- * @desc [集合视图主页]
+ * @create date 2019-05-09 10:30:47
+ * @modify date 2019-05-09 10:30:47
+ * @desc [CJBaseUIKit]
  */
 
 'use strict';
 
+// button 按钮
+import CJTextButton from "./button/CJTextButton";
+import CJImageButton from "./button/CJImageButton";
+import CJTextImageButton from "./button/CJTextImageButton";
+import CJImageTextButton from "./button/CJImageTextButton";
+
 // navigation 导航栏(含路由)
-import CJNavigationFactory from "./navigation/CJNavigationFactory";
+// import CJNavigationFactory from "./navigation/CJNavigationFactory";
 import CJNavigationUtil from "./navigation/CJNavigationUtil";
 
 // collectionView 集合视图
@@ -23,8 +29,14 @@ import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicke
 import CJBaseDatePicker, {CJDatePickShowType} from "./datePicker/CJBaseDatePicker";
 
 var CJBaseUIKit = {
+  // button 按钮
+  CJTextButton,
+  CJImageButton,
+  CJTextImageButton,
+  CJImageTextButton,
+
   // navigation 导航栏(含路由)
-  CJNavigationFactory,
+  // CJNavigationFactory, //(不要引用该类，即请将该类实现复制一遍在具体APP中再自己相应修改一下即可)
   CJNavigationUtil,
 
   // collectionView 集合视图

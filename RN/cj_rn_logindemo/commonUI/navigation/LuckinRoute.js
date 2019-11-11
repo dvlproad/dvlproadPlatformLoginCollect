@@ -20,13 +20,7 @@ export default class LuckinRoute {
      * @param params        参数
      */
     static push(navigation, routeName = '', params = {}) {
-        // CJNavigationUtil.push(navigation, routeName, params);
-        // navigation.navigate("FlatListHorizontalEasyPage");
-        if (!navigation) {
-            return;
-        }
-        const { navigate } = navigation;
-        navigate(routeName, params);
+        CJNavigationUtil.push(navigation, routeName, params);
     }
 
     /**
