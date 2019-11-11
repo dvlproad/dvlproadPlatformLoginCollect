@@ -58,6 +58,12 @@ export default class PickHomePage extends Component {
                     { title: "ImageHomePage", page: "ImageHomePage" },
                 ]
             },
+            {
+                key: "Area",
+                data: [
+                    { title: "AreaPickerPage", page: "AreaPickerPage" },
+                ]
+            }
         ];
 
         return (
@@ -93,6 +99,9 @@ import PickImagesPage from './PickImagesPage';
 import ImageHomePage from '../image/ImageHomePage';
 import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
 import RangeDateTextPage from "./RangeDateTextPage";
+
+// pickArea
+import AreaPickerPage from "./AreaPickerPage";
 
 export const PickRoutePage = 'PickHomePage';
 export const PickPages = {
@@ -189,6 +198,13 @@ export const PickPages = {
         screen: ImageHomePage,
         navigationOptions: () => ({
             title: `图片选择相关`,
+        }),
+    },
+
+    AreaPickerPage: {
+        screen: AreaPickerPage,
+        navigationOptions: () => ({
+            title: `地区选择相关`,
         }),
     },
 };

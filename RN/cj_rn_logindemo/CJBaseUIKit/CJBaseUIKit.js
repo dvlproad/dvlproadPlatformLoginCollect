@@ -28,6 +28,10 @@ import CJCollectionCell from "./collectionView/CJCollectionCell";
 import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
 import CJBaseDatePicker, {CJDatePickShowType} from "./datePicker/CJBaseDatePicker";
 
+// areaPicker 地区选择器
+import CJAreaPicker from "./areaPicker/CJAreaPicker";
+
+
 var CJBaseUIKit = {
   // button 按钮
   CJTextButton,
@@ -48,6 +52,9 @@ var CJBaseUIKit = {
   CJDatePickerCreateTimeType, // 日期选择器创建的时机
   CJBaseDatePicker,
   CJDatePicker,
+
+  // areaPicker 地区选择器
+  CJAreaPicker,
 };
 
 module.exports = CJBaseUIKit;

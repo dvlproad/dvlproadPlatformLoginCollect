@@ -10,7 +10,6 @@ import {
 import {
     BaseComponent,
     BaseDialog,
-    AreaPicker,
     CustomPicker,
     DatePicker,
     InputDialog,

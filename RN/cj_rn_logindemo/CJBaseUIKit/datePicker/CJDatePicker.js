@@ -1,8 +1,18 @@
-// CJDatePicker
+/**
+ * CJDatePicker.js
+ *
+ * @Description: 日期选择器
+ *
+ * @author      ciyouzen
+ * @email       dvlproad@163.com
+ * @date        2019-06-10 11:11:57
+ *
+ * Copyright (c) dvlproad. All rights reserved.
+ */
 /*
 CJDatePicker:日期选择器 使用示例
 
-import CJDatePicker from "../../commonUI/picker/LKDatePicker";
+import { CJDatePicker } from "../../CJBaseUIKit/CJBaseUIKit";
 
                 // 选择日期
                 chooseDate = () => {
@@ -14,7 +24,7 @@ import CJDatePicker from "../../commonUI/picker/LKDatePicker";
                     )
                 }
 
-              <LKTextButton
+              <CJTextButton
                     style={{ width: 180, backgroundColor:'red'}}
                     title={'yyyyMMdd的日期选择'}
                     onPress={()=>{

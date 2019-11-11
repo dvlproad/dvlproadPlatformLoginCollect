@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import PickerView from '../react-native-pickers/PickerView';
-
 import BaseDialog from '../react-native-pickers/BaseDialog';
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 

@@ -1,4 +1,15 @@
-import React, { Component, UIManager } from 'react';
+/**
+ * CJAreaPicker.js
+ *
+ * @Description: 日期选择器
+ *
+ * @author      ciyouzen
+ * @email       dvlproad@163.com
+ * @date        2019-11-11 11:10:37
+ *
+ * Copyright (c) dvlproad. All rights reserved.
+ */
+import React, { Component } from 'react';
 
 import {
     Text,
@@ -7,11 +18,10 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import PickerView from './PickerView';
+import PickerView from '../react-native-pickers/PickerView';
+import BaseDialog from '../react-native-pickers/BaseDialog';
 
-import BaseDialog from './BaseDialog';
-
-class AreaPicker extends BaseDialog {
+export default class CJAreaPicker extends BaseDialog {
 
     static defaultProps = {
         removeSubviews: false,
@@ -170,5 +180,3 @@ class AreaPicker extends BaseDialog {
         </View>
     }
 }
-
-export default AreaPicker;
