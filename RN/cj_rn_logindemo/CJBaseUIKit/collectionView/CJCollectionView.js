@@ -63,24 +63,15 @@ import CJCollectionView from '../commonUI/list/LKImagesChooseList';
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {FlatList, Text, View, ViewPropTypes} from "react-native";
+import {View, ViewPropTypes} from "react-native";
 import CJCollectionCell  from './CJCollectionCell';
+import CJBaseCollectionView from './CJBaseCollectionView';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
-export default class CJCollectionView extends Component {
+export default class CJCollectionView extends CJBaseCollectionView {
     static propTypes = {
-        listWidth: PropTypes.number.isRequired,
-        sectionInset: PropTypes.object,
-        minimumInteritemSpacing: PropTypes.number,  // 水平方向上box之间的最少间隔
-        minimumLineSpacing: PropTypes.number,       // 竖直方向上box之间的间隔
-
-        // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
-        cellWidthFromFixedWidth: PropTypes.number,          // 通过cell的固定宽度来设置每个cell的宽度
-        cellWidthFromPerRowMaxShowCount: PropTypes.number,  // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
-
-        widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
 
         moduleModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
@@ -102,7 +93,7 @@ export default class CJCollectionView extends Component {
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 10,
 
-        cellWidthFromPerRowMaxShowCount: 2,
+        cellWidthFromPerRowMaxShowCount: 4,
         widthHeightRatio: 1.0,  //宽高的比例
 
         moduleModels: [],
@@ -143,7 +134,6 @@ export default class CJCollectionView extends Component {
         let isImageAllLoaded = this.state.imageLoadedCount >= this.props.moduleModels.length ? true : false;
         this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
 
-
         let message = '';
         if (isImageAllLoaded) {
             message = "所有图片加载完成，总张数为:" + this.state.imageLoadedCount;
@@ -157,118 +147,32 @@ export default class CJCollectionView extends Component {
         this.props.clickButtonHandle(index);
     }
 
-    // 获取当前box与下一个box之间的水平间隔
-    getBoxHorizontalInterval = (index, perRowMaxShowCount, boxHorizontalInterval)=> {
-        let isLastColumn = (index+1)%perRowMaxShowCount==0;
 
-        if (isLastColumn==true) {
-            return 0;
-        }
-        return boxHorizontalInterval;
-    }
-
-    // 获取当前box与下一个box之间的竖直间隔
-    getBoxVerticalInterval = (index, lastRowStartIndex, boxHorizontalInterval)=> {
-        if (index >= lastRowStartIndex) {
-            return 0;
-        }
-        return boxHorizontalInterval;
-    }
-
-    render() {
-
-        // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
-        let perRowMaxShowCount = 0;     // 每行最后最多显示多少个
-        let boxWidth = 0;               // box的宽
-        let boxHorizontalInterval = 0;  // 水平方向上box之间的间隔
-        const sectionInset = this.props.sectionInset;
-        const validWidth = this.props.listWidth - sectionInset.left - sectionInset.right;
-        if (this.props.cellWidthFromFixedWidth > 0) { // 按固定宽时候：宽不变，列数变，间距跟着变
-            boxWidth = this.props.cellWidthFromFixedWidth;
-
-            const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
-            perRowMaxShowCount = (validWidth+minimumInteritemSpacing)/(boxWidth+minimumInteritemSpacing);
-
-            const cellsWidth = boxWidth * perRowMaxShowCount;
-            const totalInteritemSpacing = validWidth - cellsWidth;
-            boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
-        } else { // 按列数时候：列数不变，间距不变，固定为minimumInteritemSpacing；宽会变
-            perRowMaxShowCount = this.props.cellWidthFromPerRowMaxShowCount;
-
-            const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
-            const cellsWidth = validWidth-(perRowMaxShowCount-1)*minimumInteritemSpacing;
-            boxWidth = Math.ceil(cellsWidth/perRowMaxShowCount);
-
-            boxHorizontalInterval = minimumInteritemSpacing;
-        }
-        const boxHeight = boxWidth / this.props.widthHeightRatio;
-
-        // let listHeaderComponent = null;
-        // if (this.props.showHeader) {
-        //     let headerText = 'listHeaderText:';
-        //     listHeaderComponent = ()=>{
-        //         return (
-        //             <Text>{headerText}</Text>
-        //         )
-        //     }
-        // }
-
-        let sectionInsetStyle = {};
-        if (this.props.sectionInset) {
-            sectionInsetStyle = {
-                paddingTop: this.props.sectionInset.top,
-                paddingLeft: this.props.sectionInset.left,
-                paddingBottom: this.props.sectionInset.bottom,
-                paddingRight: this.props.sectionInset.right,
-            }
-        }
-
-        let renderModuleModels = Array.from(this.props.moduleModels);
-
-
-        let rowCount = 0;
-        if (renderModuleModels.length > 0) {
-            rowCount = Math.floor((renderModuleModels.length-1)/perRowMaxShowCount)+1;
-        }
-        let lastRowStartIndex = (rowCount-1)*perRowMaxShowCount; //最后一行的索引起点，index从0开始
+    renderCollectionCell(item, index, defaultCollectCellStyle) {
+        let richCollectCellStyle = {
+            backgroundColor: '#FFFFFF',
+            borderRadius: 6,
+            borderWidth: 0,
+        };
+        let collectCellStyle = [defaultCollectCellStyle, richCollectCellStyle];
 
         return (
-            <FlatList
-                style={[{backgroundColor: '#F4F4F4'}, this.props.style, sectionInsetStyle]}
-                data={renderModuleModels}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item, index }) => {
-                    return (
-                        <CJCollectionCell
-                            style={{
-                                width: boxWidth,
-                                height: boxHeight,
-                                marginRight: this.getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval),
-                                marginBottom: this.getBoxVerticalInterval(index, lastRowStartIndex, this.props.minimumLineSpacing),
-                                backgroundColor: '#FFFFFF',
-                                borderRadius: 6,
-                                borderWidth: 0,
-                            }}
+            <CJCollectionCell
+                style={collectCellStyle}
 
-                            moduleModel={item}
-                            defaultSource={this.props.imageDefaultSource}
-                            imageBorderStyle={this.props.imageBorderStyle}
+                moduleModel={item}
+                defaultSource={this.props.imageDefaultSource}
+                imageBorderStyle={this.props.imageBorderStyle}
 
-                            buttonIndex={index}
-                            clickButtonHandle={this.clickButtonHandle}
+                buttonIndex={index}
+                clickButtonHandle={this.clickButtonHandle}
 
-                            onLoadComplete={(buttonIndex)=>{
-                                this.onLoadComplete(buttonIndex)
-                            }}
-
-                            needLoadingAnimation={item.needLoadingAnimation}
-                        />
-                    )
+                onLoadComplete={(buttonIndex)=>{
+                    this.onLoadComplete(buttonIndex)
                 }}
-                numColumns={perRowMaxShowCount}
 
-                // ListHeaderComponent={listHeaderComponent}
+                needLoadingAnimation={item.needLoadingAnimation}
             />
-        )
+        );
     }
 }
