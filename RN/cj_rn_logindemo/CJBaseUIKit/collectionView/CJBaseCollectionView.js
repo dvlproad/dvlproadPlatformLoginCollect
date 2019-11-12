@@ -28,6 +28,8 @@ export default class CJBaseCollectionView extends Component {
         cellWidthFromFixedWidth: PropTypes.number,          // 通过cell的固定宽度来设置每个cell的宽度
         cellWidthFromPerRowMaxShowCount: PropTypes.number,  // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
         widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
+
+        dataModels: PropTypes.array,
     };
 
     static defaultProps = {
@@ -40,6 +42,8 @@ export default class CJBaseCollectionView extends Component {
         cellWidthFromPerRowMaxShowCount: 2,
         // cellWidthFromFixedWidth: 165,
         widthHeightRatio: 1.0,  //宽高的比例
+
+        dataModels: [],
     };
 
     // 获取当前box与下一个box之间的水平间隔
@@ -102,8 +106,8 @@ export default class CJBaseCollectionView extends Component {
 
 
 
-        let renderModuleModels = Array.from(this.props.moduleModels);
-        let itemCount = renderModuleModels.length;
+        let renderDataModels = Array.from(this.props.dataModels);
+        let itemCount = renderDataModels.length;
         let rowCount = 0;
         if (itemCount > 0) {
             rowCount = Math.floor((itemCount-1)/perRowMaxShowCount)+1;
@@ -133,7 +137,7 @@ export default class CJBaseCollectionView extends Component {
         return (
             <FlatList
                 style={[{backgroundColor: '#F4F4F4'}, this.props.style, sectionInsetStyle]}
-                data={renderModuleModels}
+                data={renderDataModels}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
                     let cellMarginRight = this.__getBoxHorizontalInterval(index, perRowMaxShowCount, boxHorizontalInterval);

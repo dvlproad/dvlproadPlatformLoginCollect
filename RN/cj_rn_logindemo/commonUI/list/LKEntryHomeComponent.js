@@ -17,11 +17,6 @@ export default class LKEntryHomeComponent extends Component {
         moduleModels: [],
     }
 
-    // 导航
-    // static navigationOptions = ({ navigation }) => {
-    //     return LKNavigationFactory.backPageNavigationOptions({ navigation }, `导航栏标题`)
-    // };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -64,7 +59,7 @@ export default class LKEntryHomeComponent extends Component {
                 widthHeightRatio={165/165}
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
-                moduleModels={this.state.moduleModels}
+                dataModels={this.state.moduleModels}
                 clickButtonHandle={this.execModuleModel}
                 imageLoadedCountChange={this.imageLoadedCountChange}
             />

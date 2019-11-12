@@ -72,8 +72,7 @@ const stylePropTypes = viewPropTypes.style;
 
 export default class CJCollectionView extends CJBaseCollectionView {
     static propTypes = {
-
-        moduleModels: PropTypes.array,
+        dataModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
         imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
@@ -83,6 +82,7 @@ export default class CJCollectionView extends CJBaseCollectionView {
     };
 
     static defaultProps = {
+        dataModels: [],
         listWidth: 0,
         sectionInset: {
             top: 0,
@@ -96,7 +96,6 @@ export default class CJCollectionView extends CJBaseCollectionView {
         cellWidthFromPerRowMaxShowCount: 4,
         widthHeightRatio: 1.0,  //宽高的比例
 
-        moduleModels: [],
         //imageDefaultSource: '',
         imageBorderStyle: {
             borderRadius: 6,
@@ -117,13 +116,13 @@ export default class CJCollectionView extends CJBaseCollectionView {
     }
 
     componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
-        if (this.props.moduleModels !== nextProps.moduleModels){
+        if (this.props.dataModels !== nextProps.dataModels){
 
         }
     }
 
     componentDidMount(): void {
-        let isImageAllLoaded = this.props.moduleModels.length == 0;
+        let isImageAllLoaded = this.props.dataModels.length == 0;
         if (isImageAllLoaded) {
             this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
         }
@@ -131,7 +130,7 @@ export default class CJCollectionView extends CJBaseCollectionView {
 
     onLoadComplete=(buttonIndex)=>{
         this.state.imageLoadedCount = this.state.imageLoadedCount+1;
-        let isImageAllLoaded = this.state.imageLoadedCount >= this.props.moduleModels.length ? true : false;
+        let isImageAllLoaded = this.state.imageLoadedCount >= this.props.dataModels.length ? true : false;
         this.props.imageLoadedCountChange(this.state.imageLoadedCount, isImageAllLoaded);
 
         let message = '';
