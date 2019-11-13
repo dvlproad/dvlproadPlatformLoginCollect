@@ -49,9 +49,14 @@ export default class CollectionHomePage extends LKEntryHomeComponent {
                 },
 
                 {
-                    title: "图片组合",
+                    title: "图片组合(显示)",
                     imageSource: require('./img/4.jpg'),
-                    nextPageName: "ImageCollectionPage",
+                    nextPageName: "ImageLookCollectionPage",
+                },
+                {
+                    title: "图片组合(操作)",
+                    imageSource: require('./img/4.jpg'),
+                    nextPageName: "ImageActionCollectionPage",
                 },
             ],
         }
@@ -63,7 +68,8 @@ import FlatListNumColumnsPage from './FlatListNumColumnsPage';
 import FlatListHorizontalEasyPage from './FlatListHorizontalEasyPage';
 import GoodsChoosePage from './GoodsChoosePage';
 import ImagesChoosePage from './ImagesChoosePage';
-import ImageCollectionPage from './ImageCollectionPage';
+import ImageLookCollectionPage from './ImageLookCollectionPage';
+import ImageActionCollectionPage from './ImageActionCollectionPage';
 
 
 // CollectionPages
@@ -100,10 +106,16 @@ export const CollectionPages = {
             title: `一系列图片的选择`,
         }),
     },
-    ImageCollectionPage: {
-        screen: ImageCollectionPage,
+    ImageLookCollectionPage: {
+        screen: ImageLookCollectionPage,
         navigationOptions: () => ({
-            title: `图片组合视图`,
+            title: `图片显示的组合视图`,
+        }),
+    },
+    ImageActionCollectionPage: {
+        screen: ImageActionCollectionPage,
+        navigationOptions: () => ({
+            title: `图片操作的组合视图`,
         }),
     },
 };

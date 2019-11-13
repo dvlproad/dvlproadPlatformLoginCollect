@@ -40,13 +40,13 @@ import { CJImageCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, ViewPropTypes} from "react-native";
-import CJLoadingImage  from '../image/CJLoadingImage';
+import CJActionLoadingImage  from '../image/CJActionLoadingImage';
 import CJBaseCollectionView from './CJBaseCollectionView';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
-export default class CJImageCollectionView extends CJBaseCollectionView {
+export default class CJActionImageCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
@@ -113,8 +113,41 @@ export default class CJImageCollectionView extends CJBaseCollectionView {
         console.log(message);
     }
 
+    // clickButtonHandle = (index)=> {
+    //     this.props.clickButtonHandle(index);
+    // }
+
+    isAddIcon = (index)=> {
+        if (index == this.state.addIconCurIndex) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     clickButtonHandle = (index)=> {
-        this.props.clickButtonHandle(index);
+        if (index == this.state.addIconCurIndex) {
+            this.props.addImageHandle(index);
+        } else {
+            this.props.browseImageHandle(index);
+        }
+    }
+
+    deleteImageHandle=(index) => {
+        this.props.deleteImageHandle(index);
+    }
+
+    // 获取指定位置的图片的边框(添加按钮的边框默认无)
+    getImageBorderStyle=(index)=>{
+        let imageBorderStyle = this.props.imageBorderStyle;
+        if (this.isAddIcon(index)) {
+            imageBorderStyle = {
+                borderRadius: 6,
+                borderWidth: 0,
+                borderColor: "#E5E5E5",
+            }
+        }
+        return imageBorderStyle;
     }
 
 
@@ -129,12 +162,12 @@ export default class CJImageCollectionView extends CJBaseCollectionView {
         let collectCellStyle = defaultCollectCellStyle;
 
         return (
-            <CJLoadingImage
+            <CJActionLoadingImage
                 style={collectCellStyle}
 
                 source={item.imageSource}
-                defaultSource={this.props.defaultSource}
-                imageBorderStyle={this.props.imageBorderStyle}
+                defaultSource={this.props.imageDefaultSource}
+                imageBorderStyle={this.getImageBorderStyle(index)}
 
                 buttonIndex={index}
                 // onLoadComplete={this.props.onLoadComplete}
@@ -144,10 +177,14 @@ export default class CJImageCollectionView extends CJBaseCollectionView {
 
                 clickButtonHandle={this.clickButtonHandle}
 
-                uploadType={this.props.uploadType}
-                uploadProgress={this.props.uploadProgress}
+                uploadType={item.uploadType}
+                uploadProgress={item.uploadProgress}
                 needLoadingAnimation={item.needLoadingAnimation}
                 changeShowDebugMessage={this.props.changeShowDebugMessage}
+
+                isEditing={this.props.isEditing}
+                isAddIcon={this.isAddIcon(index)}
+                deleteImageHandle={this.deleteImageHandle}
             />
 
 

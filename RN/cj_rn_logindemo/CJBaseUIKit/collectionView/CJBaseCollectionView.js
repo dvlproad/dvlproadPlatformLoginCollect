@@ -82,7 +82,12 @@ export default class CJBaseCollectionView extends Component {
         let perRowMaxShowCount = 0;     // 每行最后最多显示多少个
         let boxWidth = 0;               // box的宽
         let boxHorizontalInterval = 0;  // 水平方向上box之间的间隔
-        const sectionInset = this.props.sectionInset;
+        let sectionInset = this.props.sectionInset;
+        if ( typeof sectionInset === 'undefined') {
+            sectionInset = { top: 0, left: 0, bottom: 0, right: 0 };
+        }
+
+        console.log((sectionInset))
         const validWidth = this.props.listWidth - sectionInset.left - sectionInset.right;
         if (this.props.cellWidthFromFixedWidth > 0) { // 按固定宽时候：宽不变，列数变，间距跟着变
             boxWidth = this.props.cellWidthFromFixedWidth;
@@ -95,8 +100,16 @@ export default class CJBaseCollectionView extends Component {
             boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
         } else { // 按列数时候：列数不变，间距不变，固定为minimumInteritemSpacing；宽会变
             perRowMaxShowCount = this.props.cellWidthFromPerRowMaxShowCount;
+            if (ObjectCJHelper.isNullForObject(perRowMaxShowCount) || perRowMaxShowCount == 0 ) {
+                expect.assertions(1)
+            }
 
             const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
+            if (ObjectCJHelper.isNullForObject(minimumInteritemSpacing)) {
+                console.log("Error:请设置minimumInteritemSpacing");
+                expect.assertions(1)
+            }
+
             const cellsWidth = validWidth-(perRowMaxShowCount-1)*minimumInteritemSpacing;
             boxWidth = Math.ceil(cellsWidth/perRowMaxShowCount);
 
@@ -116,12 +129,12 @@ export default class CJBaseCollectionView extends Component {
         let lastRowStartIndex = (rowCount-1)*perRowMaxShowCount; //最后一行的索引起点，index从0开始
 
         let sectionInsetStyle = {};
-        if (this.props.sectionInset) {
+        if ( typeof(sectionInset) != 'undefined') {
             sectionInsetStyle = {
-                paddingTop: this.props.sectionInset.top,
-                paddingLeft: this.props.sectionInset.left,
-                paddingBottom: this.props.sectionInset.bottom,
-                paddingRight: this.props.sectionInset.right,
+                paddingTop: sectionInset.top,
+                paddingLeft: sectionInset.left,
+                paddingBottom: sectionInset.bottom,
+                paddingRight: sectionInset.right,
             }
         }
 

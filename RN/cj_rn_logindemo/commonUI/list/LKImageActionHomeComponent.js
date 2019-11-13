@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
 import PropTypes from "prop-types";
 import {
-    CJImageCollectionView
+    CJActionImageCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
 import LuckinRoute from "../navigation/LuckinRoute";
 
 
-export default class LKImageHomeComponent extends Component {
+export default class LKImageActionHomeComponent extends Component {
     static propTypes = {
         imageModels: PropTypes.array,
     }
@@ -50,7 +50,7 @@ export default class LKImageHomeComponent extends Component {
         const listWidth = screenWidth;
 
         return (
-            <CJImageCollectionView
+            <CJActionImageCollectionView
                 // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:15, left:15, bottom:15, right:15}}
