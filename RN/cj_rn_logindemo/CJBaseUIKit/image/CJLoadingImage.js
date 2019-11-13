@@ -17,6 +17,8 @@ import PropTypes from "prop-types";
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
+import { ObjectCJHelper } from '../../CJBaseHelper/CJBaseHelper';
+
 /// 图片加载状态
 var ImageLoadStatus = {
     Pending: 0,     /**< 准备加载 */
@@ -299,20 +301,17 @@ export default class CJLoadingImage extends Component {
         return debugImageUploadStateText;
     }
 
-
     render() {
-        const { style } = this.props;
-        let selfStyle = style;
-        if (style.width > 0 && style.height > 0) {
-            selfStyle = style;
+        let selfStyle = ObjectCJHelper.dealPropStyle(this.props.style);
+
+        const imageWidth = selfStyle.width;
+        const imageHeight = selfStyle.height;
+
+        if (selfStyle.width > 0 && selfStyle.height > 0) {
+
         } else {
-            selfStyle = [{flex:1}, style];
+            selfStyle = [{flex:1}, selfStyle];
         }
-
-
-
-        const imageWidth = this.props.style.width;
-        const imageHeight = this.props.style.height;
 
 
         let imageStateText = this.getFormalImageStateText();

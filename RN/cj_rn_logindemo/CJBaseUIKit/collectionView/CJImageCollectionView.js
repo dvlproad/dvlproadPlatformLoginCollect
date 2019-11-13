@@ -1,7 +1,7 @@
 /**
- * CJCollectionView.js
+ * CJImageCollectionView.js
  *
- * @Description: 默认的集合视图（使用 CJCollectionCell,即含图片和文字竖直居中的Cell）
+ * @Description: 图片列表的集合视图（使用 CJCollectionCell,即含图片和文字竖直居中的Cell）
  *
  * @author      ciyouzen
  * @email       dvlproad@163.com
@@ -11,9 +11,9 @@
  */
 
 /*
-import { CJCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
+import { CJImageCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
 
-                <CJCollectionView
+                <CJImageCollectionView
                     // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                     listWidth={Dimensions.get('window').width}
                     sectionInset={{top:15, left:15, bottom:15, right:15}}
@@ -40,13 +40,13 @@ import { CJCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, ViewPropTypes} from "react-native";
-import CJCollectionCell  from './CJCollectionCell';
+import CJLoadingImage  from '../image/CJLoadingImage';
 import CJBaseCollectionView from './CJBaseCollectionView';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
-export default class CJCollectionView extends CJBaseCollectionView {
+export default class CJImageCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
@@ -124,24 +124,30 @@ export default class CJCollectionView extends CJBaseCollectionView {
             borderRadius: 6,
             borderWidth: 0,
         };
-        let collectCellStyle = [defaultCollectCellStyle, richCollectCellStyle];
+        // let collectCellStyle = [defaultCollectCellStyle, richCollectCellStyle];  // TODO: 请确认并修正使用此方式时候，CJLoadingImage的布局
+        Object.assign(defaultCollectCellStyle, richCollectCellStyle);
+        let collectCellStyle = defaultCollectCellStyle;
 
         return (
-            <CJCollectionCell
+            <CJLoadingImage
                 style={collectCellStyle}
 
-                moduleModel={item}
-                defaultSource={this.props.imageDefaultSource}
+                source={item.imageSource}
+                defaultSource={this.props.defaultSource}
                 imageBorderStyle={this.props.imageBorderStyle}
 
                 buttonIndex={index}
-                clickButtonHandle={this.clickButtonHandle}
-
+                // onLoadComplete={this.props.onLoadComplete}
                 onLoadComplete={(buttonIndex)=>{
                     this.onLoadComplete(buttonIndex)
                 }}
 
+                clickButtonHandle={this.clickButtonHandle}
+
+                uploadType={this.props.uploadType}
+                uploadProgress={this.props.uploadProgress}
                 needLoadingAnimation={item.needLoadingAnimation}
+                changeShowDebugMessage={this.props.changeShowDebugMessage}
             />
         );
     }

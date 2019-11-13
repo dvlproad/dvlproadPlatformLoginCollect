@@ -5,7 +5,7 @@
  *
  * @author      ciyouzen
  * @email       dvlproad@163.com
- * @date        2019-11-12 15:47:33
+ * @date        2019-07-12 15:47:33
  *
  * Copyright (c) dvlproad. All rights reserved.
  */
@@ -13,6 +13,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {FlatList, View, ViewPropTypes} from "react-native";
+import { ObjectCJHelper } from '../../CJBaseHelper/CJBaseHelper';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
@@ -39,7 +40,7 @@ export default class CJBaseCollectionView extends Component {
         minimumLineSpacing: 10,
 
         // 以下值必须二选一设置（默认cellWidthFromFixedWidth设置后，另外一个自动失效）
-        cellWidthFromPerRowMaxShowCount: 2,
+        cellWidthFromPerRowMaxShowCount: 3,
         // cellWidthFromFixedWidth: 165,
         widthHeightRatio: 1.0,  //宽高的比例
 

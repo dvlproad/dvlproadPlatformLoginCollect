@@ -47,6 +47,12 @@ export default class CollectionHomePage extends LKEntryHomeComponent {
                     title: "模块5",
                     imageSource: require('./img/4.jpg'),
                 },
+
+                {
+                    title: "图片组合",
+                    imageSource: require('./img/4.jpg'),
+                    nextPageName: "ImageCollectionPage",
+                },
             ],
         }
     }
@@ -57,6 +63,7 @@ import FlatListNumColumnsPage from './FlatListNumColumnsPage';
 import FlatListHorizontalEasyPage from './FlatListHorizontalEasyPage';
 import GoodsChoosePage from './GoodsChoosePage';
 import ImagesChoosePage from './ImagesChoosePage';
+import ImageCollectionPage from './ImageCollectionPage';
 
 
 // CollectionPages
@@ -91,6 +98,12 @@ export const CollectionPages = {
         screen: ImagesChoosePage,
         navigationOptions: () => ({
             title: `一系列图片的选择`,
+        }),
+    },
+    ImageCollectionPage: {
+        screen: ImageCollectionPage,
+        navigationOptions: () => ({
+            title: `图片组合视图`,
         }),
     },
 };

@@ -43,6 +43,7 @@ import LKRNActionRangeDateText, { LKRangeDateEditingType } from "./date/LKRNActi
 import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
 import LKEntryHomeComponent from "./list/LKEntryHomeComponent";
+import LKImageHomeComponent from "./list/LKImageHomeComponent";
 
 
 // picker
@@ -123,6 +124,7 @@ var LKCommonUI = {
   LKImagesChooseList,
   // LKSelectListModal,
   LKEntryHomeComponent,
+  LKImageHomeComponent,
 
   // date
   LKDatePickShowType,
