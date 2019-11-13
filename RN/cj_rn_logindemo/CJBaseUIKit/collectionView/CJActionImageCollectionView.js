@@ -41,6 +41,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, ViewPropTypes} from "react-native";
 import CJActionLoadingImage  from '../image/CJActionLoadingImage';
+import {ImageUploadType} from "../image/CJLoadingImage";
 import CJBaseCollectionView from './CJBaseCollectionView';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -55,6 +56,15 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         clickButtonHandle: PropTypes.func,
 
         imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
+
+
+        browseImageHandle: PropTypes.func,
+        addImageHandle: PropTypes.func,
+        deleteImageHandle: PropTypes.func,
+
+        isEditing: PropTypes.bool,
+        hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
+        imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
     };
 
     static defaultProps = {
@@ -77,6 +87,15 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         clickButtonHandle: (buttonIndex)=>{},
 
         imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
+
+
+        browseImageHandle: (buttonIndex)=>{},
+        addImageHandle: (buttonIndex)=>{},
+        deleteImageHandle: (buttonIndex)=>{},
+
+        isEditing: false,
+        hasAddIconWhenEditing: true,
+        imageMaxCount: 10000,
     };
 
     constructor(props) {
@@ -150,6 +169,34 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         return imageBorderStyle;
     }
 
+    getRenderDataModels(dataModels): * {
+        // return super.getRenderDataModels(dataModels);
+
+        let renderImageCount = dataModels.length;
+        let renderImageSources = Array.from(dataModels);
+        const allowAddIconShowing = this.props.isEditing &&
+            this.props.hasAddIconWhenEditing;
+        if (allowAddIconShowing) {
+            let shouldAddAddIcon = renderImageCount < this.props.imageMaxCount;
+            if (shouldAddAddIcon) {
+                this.state.addIconCurIndex = renderImageCount;
+
+                let addImage = {
+                    imageSource: require('./resources/pickImage_blue.png'),
+                    uploadType: ImageUploadType.NotNeed,
+                    uploadProgress: 0,
+                    imageIndex: renderImageCount,
+                };
+                renderImageSources.splice(renderImageCount, 0, addImage);
+
+            } else {
+                this.state.addIconCurIndex = -1;
+            }
+        } else {
+            this.state.addIconCurIndex = -1;
+        }
+        return renderImageSources;
+    }
 
     renderCollectionCell(item, index, defaultCollectCellStyle) {
         let richCollectCellStyle = {

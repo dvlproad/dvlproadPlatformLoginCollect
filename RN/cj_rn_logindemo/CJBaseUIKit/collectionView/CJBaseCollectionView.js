@@ -66,7 +66,7 @@ export default class CJBaseCollectionView extends Component {
     }
 
     /**
-     * 子类重绘cell
+     * 子类必须重写：子类重绘cell
      *
      * @param item
      * @param index
@@ -75,6 +75,15 @@ export default class CJBaseCollectionView extends Component {
      */
     renderCollectionCell(item, index, defaultCollectCellStyle) {
         return null;
+    }
+
+    /**
+     * 子类一般不用重写，即使用父类的即可；特例，如图片列表界面中的添加按钮，我们就需要额外为数据加一个addImageModel
+     * @param dataMRodels   集合视图中的数据
+     */
+    getRenderDataModels(dataModels) {
+        let renderDataModels = Array.from(dataModels);
+        return renderDataModels;
     }
 
     render() {
@@ -86,8 +95,8 @@ export default class CJBaseCollectionView extends Component {
         if ( typeof sectionInset === 'undefined') {
             sectionInset = { top: 0, left: 0, bottom: 0, right: 0 };
         }
+        console.log((sectionInset));
 
-        console.log((sectionInset))
         const validWidth = this.props.listWidth - sectionInset.left - sectionInset.right;
         if (this.props.cellWidthFromFixedWidth > 0) { // 按固定宽时候：宽不变，列数变，间距跟着变
             boxWidth = this.props.cellWidthFromFixedWidth;
@@ -120,7 +129,7 @@ export default class CJBaseCollectionView extends Component {
 
 
 
-        let renderDataModels = Array.from(this.props.dataModels);
+        let renderDataModels = this.getRenderDataModels(this.props.dataModels);
         let itemCount = renderDataModels.length;
         let rowCount = 0;
         if (itemCount > 0) {

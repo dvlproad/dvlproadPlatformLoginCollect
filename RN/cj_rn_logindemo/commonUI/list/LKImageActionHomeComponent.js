@@ -1,27 +1,16 @@
 // LKImageHomeComponent.js
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
-import PropTypes from "prop-types";
 import {
     CJActionImageCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import LuckinRoute from "../navigation/LuckinRoute";
-import CJActionLoadingImage from "../../CJBaseUIKit/image/CJActionLoadingImage";
-import LKImagesChooseList from "./LKImagesChooseList";
 
 
 export default class LKImageActionHomeComponent extends Component {
-    static propTypes = {
-        imageModels: PropTypes.array,
-    }
-
-    static defaultProps = {
-        imageModels: [],
-    }
-
     constructor(props) {
         super(props);
         this.state = {
+            imageModels: [],
             isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
         };
     }
@@ -32,18 +21,6 @@ export default class LKImageActionHomeComponent extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
-    execModuleModel= (index)=>{
-        let moduleModel = this.state.imageModels[index];
-
-        if (moduleModel.clickButtonHandle) {
-            moduleModel.clickButtonHandle(index, moduleModel);
-        } else if (moduleModel.nextPageName && moduleModel.nextPageName.length > 0) {
-            // this.props.navigation.navigate(moduleModel.nextPageName);
-            LuckinRoute.push(this.props.navigation, moduleModel.nextPageName, {});
-        } else {
-            Alert.alert("提示：请至少设置 moduleModel.clickButtonHandle 或 moduleModel.nextPageName");
-        }
-    }
 
     browseImageHandle=(index) => {
         Alert.alert("浏览图片" + index);
@@ -51,24 +28,22 @@ export default class LKImageActionHomeComponent extends Component {
 
     addImageHandle=(index) => {
         Alert.alert("添加图片" + index);
-        let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
+        let imageModel = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
 
-        let healthCerImages = this.state.healthCerImages;
-        healthCerImages.splice(index-1, 0, healthCerImage);
+        let imageModels = this.state.imageModels;
+        imageModels.splice(index-1, 0, imageModel);
         this.setState({
-                healthCerImages: healthCerImages
-            }
-        )
+            imageModels: imageModels
+        })
     }
 
     deleteImageHandle=(index) => {
         // Alert.alert("删除图片" + index);
-        let healthCerImages = this.state.healthCerImages;
-        healthCerImages.splice(index,1);
+        let imageModels = this.state.imageModels;
+        imageModels.splice(index,1);
         this.setState({
-                healthCerImages: healthCerImages
-            }
-        )
+            imageModels: imageModels
+        })
     }
 
 
@@ -81,7 +56,7 @@ export default class LKImageActionHomeComponent extends Component {
                 // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:15, left:15, bottom:15, right:15}}
-                cellWidthFromPerRowMaxShowCount={4} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
+                cellWidthFromPerRowMaxShowCount={3} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
                 // cellWidthFromFixedWidth={165}       // 通过cell的固定宽度来设置每个cell的宽度
                 widthHeightRatio={165/165}
                 minimumInteritemSpacing={30}
