@@ -31,9 +31,9 @@ import CJActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableOpacity, ViewPropTypes} from 'react-native';
 import CJLoadingImage, { ImageUploadType } from './CJLoadingImage';
-import PropTypes from "prop-types";
 import CJImageButton from "../button/CJImageButton";
 
+import PropTypes from "prop-types";
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 

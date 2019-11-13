@@ -5,6 +5,8 @@ import {
     CJImageButton,
     CJNavigationUtil
 } from "../../CJBaseUIKit/CJBaseUIKit";
+import {Button} from "react-native";
+import {CJBackButtonFactory} from "../../CJBaseUIKit/navigation/CJNavigationFactory";
 // import MiniApp from "../../bridge_modules_js/MiniApp";
 
 export default class LKNavigationFactory {
@@ -42,6 +44,35 @@ export default class LKNavigationFactory {
             },
             headerLeft: (
                 LKBackButtonFactory.backPageButton({ navigation })
+            ),
+        };
+        return navigationOptions;
+    };
+
+    /**
+     * 创建放回RN包内上一页且有右键的导航栏
+     *
+     * @param navigation            导航栏
+     * @param title                 导航栏标题
+     * @param rightButtonText       导航栏右键的标题
+     * @param rightButtonOnPress    导航栏右键的按钮事件
+     * @returns {{title: *, headerLeft: *, headerStyle: {backgroundColor: string}}}
+     */
+    static backPageWithRightButtonNavigationOptions = ({ navigation }, title, rightButtonText, rightButtonOnPress) => {
+        let navigationOptions = {
+            title: title,
+            headerStyle: {                                 //导航栏样式设置
+                backgroundColor: '#ffffff',
+            },
+            headerLeft: (
+                CJBackButtonFactory.backPageButton({ navigation })
+                // <CJBackPageButton />
+            ),
+            headerRight: (
+                <Button
+                    title={rightButtonText}
+                    onPress={rightButtonOnPress}
+                />
             ),
         };
         return navigationOptions;

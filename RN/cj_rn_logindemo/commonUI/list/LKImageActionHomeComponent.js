@@ -6,6 +6,8 @@ import {
     CJActionImageCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
 import LuckinRoute from "../navigation/LuckinRoute";
+import CJActionLoadingImage from "../../CJBaseUIKit/image/CJActionLoadingImage";
+import LKImagesChooseList from "./LKImagesChooseList";
 
 
 export default class LKImageActionHomeComponent extends Component {
@@ -43,6 +45,31 @@ export default class LKImageActionHomeComponent extends Component {
         }
     }
 
+    browseImageHandle=(index) => {
+        Alert.alert("浏览图片" + index);
+    }
+
+    addImageHandle=(index) => {
+        Alert.alert("添加图片" + index);
+        let healthCerImage = {imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'}};
+
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index-1, 0, healthCerImage);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+    }
+
+    deleteImageHandle=(index) => {
+        // Alert.alert("删除图片" + index);
+        let healthCerImages = this.state.healthCerImages;
+        healthCerImages.splice(index,1);
+        this.setState({
+                healthCerImages: healthCerImages
+            }
+        )
+    }
 
 
     render() {
@@ -57,11 +84,16 @@ export default class LKImageActionHomeComponent extends Component {
                 cellWidthFromPerRowMaxShowCount={4} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
                 // cellWidthFromFixedWidth={165}       // 通过cell的固定宽度来设置每个cell的宽度
                 widthHeightRatio={165/165}
-                minimumInteritemSpacing={15}
+                minimumInteritemSpacing={30}
                 minimumLineSpacing={10}
                 dataModels={this.state.imageModels}
-                clickButtonHandle={this.execModuleModel}
+
                 imageLoadedCountChange={this.imageLoadedCountChange}
+
+                isEditing={this.state.isEditing}
+                browseImageHandle={this.browseImageHandle}
+                addImageHandle={this.addImageHandle}
+                deleteImageHandle={this.deleteImageHandle}
             />
         );
     }

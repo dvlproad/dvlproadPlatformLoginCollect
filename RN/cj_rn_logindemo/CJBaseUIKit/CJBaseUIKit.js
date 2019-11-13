@@ -24,6 +24,7 @@ import CJNavigationUtil from "./navigation/CJNavigationUtil";
 import CJCollectionView from "./collectionView/CJCollectionView";
 import CJCollectionCell from "./collectionView/CJCollectionCell";
 import CJImageCollectionView from "./collectionView/CJImageCollectionView";
+import CJActionImageCollectionView from "./collectionView/CJActionImageCollectionView";
 
 // datePicker 日期选择器
 import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
@@ -48,6 +49,7 @@ var CJBaseUIKit = {
   CJCollectionView,
   CJCollectionCell,
   CJImageCollectionView,
+  CJActionImageCollectionView,
 
   // datePicker 日期选择器
   CJDatePickShowType,         // 日期器的选择样式
