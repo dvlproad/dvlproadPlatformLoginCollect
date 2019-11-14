@@ -1,14 +1,13 @@
-// LKImageHomeComponent.js
+// LKImageLookHomeComponent.js
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
 import PropTypes from "prop-types";
 import {
-    CJImageCollectionView
+    CJImageLookCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import LuckinRoute from "../Navigation/LuckinRoute";
 
 
-export default class LKImageHomeComponent extends Component {
+export default class LKImageLookHomeComponent extends Component {
     static propTypes = {
         imageModels: PropTypes.array,
     }
@@ -30,17 +29,9 @@ export default class LKImageHomeComponent extends Component {
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
 
-    execModuleModel= (index)=>{
-        let moduleModel = this.state.imageModels[index];
-
-        if (moduleModel.clickButtonHandle) {
-            moduleModel.clickButtonHandle(index, moduleModel);
-        } else if (moduleModel.nextPageName && moduleModel.nextPageName.length > 0) {
-            // this.props.navigation.navigate(moduleModel.nextPageName);
-            LuckinRoute.push(this.props.navigation, moduleModel.nextPageName, {});
-        } else {
-            Alert.alert("提示：请至少设置 moduleModel.clickButtonHandle 或 moduleModel.nextPageName");
-        }
+    clickButtonHandle= (index)=>{
+        let imageModel = this.state.imageModels[index];
+        Alert.alert("您正在点击图片");
     }
 
 
@@ -50,7 +41,7 @@ export default class LKImageHomeComponent extends Component {
         const listWidth = screenWidth;
 
         return (
-            <CJImageCollectionView
+            <CJImageLookCollectionView
                 // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:15, left:15, bottom:15, right:15}}
@@ -60,7 +51,7 @@ export default class LKImageHomeComponent extends Component {
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
                 dataModels={this.state.imageModels}
-                clickButtonHandle={this.execModuleModel}
+                clickButtonHandle={this.clickButtonHandle}
                 imageLoadedCountChange={this.imageLoadedCountChange}
             />
         );

@@ -1,7 +1,7 @@
 /**
- * CJImageCollectionView.js
+ * CJImageLookCollectionViewView.js
  *
- * @Description: 图片列表的集合视图（使用 CJCollectionCell,即含图片和文字竖直居中的Cell）
+ * @Description: 图片列表【只显示】的集合视图（使用 CJLoadingImage）
  *
  * @author      ciyouzen
  * @email       dvlproad@163.com
@@ -11,9 +11,9 @@
  */
 
 /*
-import { CJImageCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
+import { CJImageLookCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
 
-                <CJImageCollectionView
+                <CJImageLookCollectionView
                     // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                     listWidth={Dimensions.get('window').width}
                     sectionInset={{top:15, left:15, bottom:15, right:15}}
@@ -46,7 +46,7 @@ import CJBaseCollectionView from './CJBaseCollectionView';
 const viewPropTypes = ViewPropTypes || View.propTypes;
 const stylePropTypes = viewPropTypes.style;
 
-export default class CJImageCollectionView extends CJBaseCollectionView {
+export default class CJImageLookCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,

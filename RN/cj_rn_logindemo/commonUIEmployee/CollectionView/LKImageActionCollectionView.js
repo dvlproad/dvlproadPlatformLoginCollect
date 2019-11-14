@@ -67,7 +67,7 @@
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
 import {
-    CJActionImageCollectionView
+    CJImageActionCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
 import PropTypes from "prop-types";
 
@@ -157,7 +157,7 @@ export default class LKImageActionCollectionView extends Component {
         const listWidth = screenWidth;
 
         return (
-            <CJActionImageCollectionView
+            <CJImageActionCollectionView
                 style={[{backgroundColor:'#FFFFFF'}, this.props.style]}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:5, left:15, bottom:15, right:15}}

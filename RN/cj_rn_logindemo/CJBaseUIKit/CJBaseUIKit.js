@@ -26,9 +26,8 @@ import CJNavigationUtil from "./navigation/CJNavigationUtil";
 // collectionView 集合视图
 import CJCollectionView from "./collectionView/CJCollectionView";
 import CJCollectionCell from "./collectionView/CJCollectionCell";
-import CJImageCollectionView from "./collectionView/CJImageCollectionView";
-import CJActionImageCollectionView from "./collectionView/CJActionImageCollectionView";
-import CJImageActionHomeComponent from "./collectionView/CJImageActionHomeComponent";
+import CJImageLookCollectionView from "./collectionView/CJImageLookCollectionView";
+import CJImageActionCollectionView from "./collectionView/CJImageActionCollectionView";
 
 // datePicker 日期选择器
 import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
@@ -55,9 +54,8 @@ var CJBaseUIKit = {
   // collectionView 集合视图
   CJCollectionView,
   CJCollectionCell,
-  CJImageCollectionView,
-  CJActionImageCollectionView,
-  CJImageActionHomeComponent,
+  CJImageLookCollectionView,
+  CJImageActionCollectionView,
 
   // datePicker 日期选择器
   CJDatePickShowType,         // 日期器的选择样式

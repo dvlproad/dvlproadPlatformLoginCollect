@@ -1,10 +1,12 @@
-// LKImageHomeComponent.js
+// LKImageLookHomeComponent.js
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
-import CJActionImageCollectionView from './CJActionImageCollectionView';
+import {
+    CJImageActionCollectionView
+} from '../../CJBaseUIKit/CJBaseUIKit';
 
 
-export default class CJImageActionHomeComponent extends Component {
+export default class LKImageActionHomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +52,7 @@ export default class CJImageActionHomeComponent extends Component {
         const listWidth = screenWidth;
 
         return (
-            <CJActionImageCollectionView
+            <CJImageActionCollectionView
                 // style={{paddingHorizontal: 40}}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:15, left:15, bottom:15, right:15}}

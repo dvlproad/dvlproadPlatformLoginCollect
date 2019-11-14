@@ -2,15 +2,17 @@
 
 'use strict';
 
+// base Page的基类
+import LKEntryHomeComponent from "./Base/LKEntryHomeComponent";
+import LKImageLookHomeComponent from "./Base/LKImageLookHomeComponent";
+import LKImageActionHomeComponent from "./Base/LKImageActionHomeComponent";
+
 // navigation 导航栏(含路由)
 import LKNavigationFactory from "./Navigation/LKNavigationFactory";
 import LuckinRoute from "./Navigation/LuckinRoute";
 
 // CollectionView
-import LKEntryHomeComponent from "./CollectionView/LKEntryHomeComponent";
-import LKImageHomeComponent from "./CollectionView/LKImageHomeComponent";
 import LKImageActionCollectionView from "./CollectionView/LKImageActionCollectionView";
-import LKImageActionHomeComponent from "./CollectionView/LKImageActionHomeComponent";
 
 
 
@@ -42,7 +44,7 @@ var LKCommonUI = {
 
     // list
     LKEntryHomeComponent,
-    LKImageHomeComponent,
+    LKImageHomeComponent: LKImageLookHomeComponent,
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
 
