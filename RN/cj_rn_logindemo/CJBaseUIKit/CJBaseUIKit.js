@@ -10,6 +10,9 @@
 
 'use strict';
 
+// text 文本
+import CJCenterText from "./text/CJText";
+
 // button 按钮
 import CJTextButton from "./button/CJTextButton";
 import CJImageButton from "./button/CJImageButton";
@@ -25,6 +28,7 @@ import CJCollectionView from "./collectionView/CJCollectionView";
 import CJCollectionCell from "./collectionView/CJCollectionCell";
 import CJImageCollectionView from "./collectionView/CJImageCollectionView";
 import CJActionImageCollectionView from "./collectionView/CJActionImageCollectionView";
+import CJImageActionHomeComponent from "./collectionView/CJImageActionHomeComponent";
 
 // datePicker 日期选择器
 import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
@@ -35,6 +39,9 @@ import CJAreaPicker from "./areaPicker/CJAreaPicker";
 
 
 var CJBaseUIKit = {
+  // text 文本
+  CJCenterText,
+
   // button 按钮
   CJTextButton,
   CJImageButton,
@@ -50,6 +57,7 @@ var CJBaseUIKit = {
   CJCollectionCell,
   CJImageCollectionView,
   CJActionImageCollectionView,
+  CJImageActionHomeComponent,
 
   // datePicker 日期选择器
   CJDatePickShowType,         // 日期器的选择样式

@@ -44,6 +44,7 @@ import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
 import LKEntryHomeComponent from "./list/LKEntryHomeComponent";
 import LKImageHomeComponent from "./list/LKImageHomeComponent";
+import LKImageActionCollectionView from "./list/LKImageActionCollectionView";
 import LKImageActionHomeComponent from "./list/LKImageActionHomeComponent";
 
 
@@ -127,6 +128,7 @@ var LKCommonUI = {
   // LKSelectListModal,
   LKEntryHomeComponent,
   LKImageHomeComponent,
+  LKImageActionCollectionView,
   LKImageActionHomeComponent,
 
   // date

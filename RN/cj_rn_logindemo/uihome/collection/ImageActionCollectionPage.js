@@ -6,7 +6,11 @@
  * @desc [集合视图主页]
  */
 import React, { Component } from 'react';
-import { LKNavigationFactory, LKImageActionHomeComponent, ImageUploadType } from '../../commonUI/luckincommonui';
+import {
+    LKNavigationFactory,
+    LKImageActionHomeComponent,
+    ImageUploadType
+} from '../../commonUI/luckincommonui';
 
 export default class ImageActionCollectionPage extends LKImageActionHomeComponent {
     static navigationOptions = ({ navigation }) => {

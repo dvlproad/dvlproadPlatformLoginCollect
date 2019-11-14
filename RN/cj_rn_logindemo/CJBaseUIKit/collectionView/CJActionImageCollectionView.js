@@ -54,6 +54,8 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
         clickButtonHandle: PropTypes.func,
+        deleteButtonWidth: PropTypes.number,    // 删除按钮的大小
+        imageTopRightForDeleteButtonCenterOffset: PropTypes.number, // 图片右上角坐标与删除按钮中心坐标的偏移(平时默认两个点是重合的，即此值为0；若此需要图片右上角坐标往删除按钮中心的右上角靠，此时图片区域会变大，请填正数；反之，填负数)
 
         imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
 
@@ -85,6 +87,8 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         },
 
         clickButtonHandle: (buttonIndex)=>{},
+        deleteButtonWidth: 24,
+        imageTopRightForDeleteButtonCenterOffset: 2,
 
         imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
 
@@ -200,8 +204,8 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
 
     renderCollectionCell(item, index, defaultCollectCellStyle) {
         let richCollectCellStyle = {
-            backgroundColor: '#FFFFFF',
-            borderRadius: 6,
+            backgroundColor: 'transparent',
+            borderRadius: 4,
             borderWidth: 0,
         };
         // let collectCellStyle = [defaultCollectCellStyle, richCollectCellStyle];  // TODO: 请确认并修正使用此方式时候，CJLoadingImage的布局
@@ -232,6 +236,8 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
                 isEditing={this.props.isEditing}
                 isAddIcon={this.isAddIcon(index)}
                 deleteImageHandle={this.deleteImageHandle}
+                deleteButtonWidth={this.props.deleteButtonWidth}
+                imageTopRightForDeleteButtonCenterOffset={this.props.imageTopRightForDeleteButtonCenterOffset}
             />
 
 

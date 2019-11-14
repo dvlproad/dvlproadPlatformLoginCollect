@@ -29,6 +29,7 @@ export default class CJBaseCollectionView extends Component {
         cellWidthFromFixedWidth: PropTypes.number,          // 通过cell的固定宽度来设置每个cell的宽度
         cellWidthFromPerRowMaxShowCount: PropTypes.number,  // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
         widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
+        forceBoxHorizontalIntervalEqualMinimumInteritemSpacing: PropTypes.boolean,  //强制水平方向上box之间的间隔固定为最小间隔的值
 
         dataModels: PropTypes.array,
     };
@@ -43,6 +44,7 @@ export default class CJBaseCollectionView extends Component {
         cellWidthFromPerRowMaxShowCount: 3,
         // cellWidthFromFixedWidth: 165,
         widthHeightRatio: 1.0,  //宽高的比例
+        forceBoxHorizontalIntervalEqualMinimumInteritemSpacing: false,
 
         dataModels: [],
     };
@@ -103,10 +105,16 @@ export default class CJBaseCollectionView extends Component {
 
             const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
             perRowMaxShowCount = (validWidth+minimumInteritemSpacing)/(boxWidth+minimumInteritemSpacing);
+            perRowMaxShowCount = Math.floor(perRowMaxShowCount);
 
-            const cellsWidth = boxWidth * perRowMaxShowCount;
-            const totalInteritemSpacing = validWidth - cellsWidth;
-            boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
+            if (this.props.forceBoxHorizontalIntervalEqualMinimumInteritemSpacing) {
+                boxHorizontalInterval = minimumInteritemSpacing;
+            } else {
+                const cellsWidth = boxWidth * perRowMaxShowCount;
+                const totalInteritemSpacing = validWidth - cellsWidth;
+                boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
+            }
+
         } else { // 按列数时候：列数不变，间距不变，固定为minimumInteritemSpacing；宽会变
             perRowMaxShowCount = this.props.cellWidthFromPerRowMaxShowCount;
             if (ObjectCJHelper.isNullForObject(perRowMaxShowCount) || perRowMaxShowCount == 0 ) {

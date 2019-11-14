@@ -44,6 +44,8 @@ export default class CJActionLoadingImage extends Component {
         imageBorderStyle: stylePropTypes,   //图片边框样式
 
         clickButtonHandle: PropTypes.func,
+        deleteButtonWidth: PropTypes.number,    // 删除按钮的大小
+        imageTopRightForDeleteButtonCenterOffset: PropTypes.number, // 图片右上角坐标与删除按钮中心坐标的偏移(平时默认两个点是重合的，即此值为0；若此需要图片右上角坐标往删除按钮中心的右上角靠，此时图片区域会变大，请填正数；反之，填负数)
         deleteImageHandle: PropTypes.func,
         buttonIndex: PropTypes.number,
 
@@ -72,6 +74,8 @@ export default class CJActionLoadingImage extends Component {
         },
 
         clickButtonHandle: (buttonIndex)=>{},
+        deleteButtonWidth: 24,
+        imageTopRightForDeleteButtonCenterOffset: 2,
         deleteImageHandle: (buttonIndex)=>{},
         buttonIndex: 0,
 
@@ -112,7 +116,7 @@ export default class CJActionLoadingImage extends Component {
         ];
 
         // 图片删除按钮
-        const deleteButtonWidth = 22;
+        const deleteButtonWidth = this.props.deleteButtonWidth;
         let shouldShowDeleteButton = this.props.isEditing && !this.props.isAddIcon;
         let deleteButtonStyle = {
             position:'absolute',
@@ -132,9 +136,10 @@ export default class CJActionLoadingImage extends Component {
             null;
 
         // 图片展示视图
-        const imageWidth = boxWidth-deleteButtonWidth/2;
-        const imageHeight = boxHeight-deleteButtonWidth/2;
-        const imageTopRightPadding = deleteButtonWidth/2;
+        const imageTopRightPadding = deleteButtonWidth/2 - this.props.imageTopRightForDeleteButtonCenterOffset;
+        const imageWidth = boxWidth-imageTopRightPadding;
+        const imageHeight = boxHeight-imageTopRightPadding;
+
         let imageStyle = {
             width: imageWidth,
             height: imageHeight,
