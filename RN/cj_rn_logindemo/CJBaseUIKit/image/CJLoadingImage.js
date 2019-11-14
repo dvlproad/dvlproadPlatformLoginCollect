@@ -88,7 +88,6 @@ export default class CJLoadingImage extends Component {
 
         this.state = {
             isNetworkImage: false,
-            loaded: false,
             loadStatus: ImageLoadStatus.Pending,
             shouldShowErrorSource: false,
             isShowingErrorSource: false,
@@ -131,7 +130,6 @@ export default class CJLoadingImage extends Component {
     onLoadStart = () => {
         let loadStatus = this.state.isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
         this.setState({
-            loaded: false,
             loadStatus: loadStatus,
         })
     }
@@ -148,7 +146,6 @@ export default class CJLoadingImage extends Component {
         }
 
         this.setState({
-            loaded: true,
             loadStatus: ImageLoadStatus.End
         })
     }
@@ -159,14 +156,9 @@ export default class CJLoadingImage extends Component {
      */
     onLoadSuccess=() => {
         if (this.state.isShowingErrorSource) {
-            this.setState({
-                loadStatus: ImageLoadStatus.ErrorImageSuccess
-            });
-
+            this.state.loadStatus = ImageLoadStatus.ErrorImageSuccess;
         } else {
-            this.setState({
-                loadStatus: ImageLoadStatus.Success
-            });
+            this.state.loadStatus = ImageLoadStatus.Success;
         }
     }
 

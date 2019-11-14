@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+var defaultBorderRadius = 3;
+var defaultFontSize = 14;
+
 
 let screenHeight = Dimensions.get('window').height;
 let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 0;
@@ -25,7 +28,7 @@ export class LKBlueBGBottomButton extends Component {
 
     static defaultProps = {
         title: "title",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -77,7 +80,7 @@ export class LKBlueBGButton extends Component {
 
     static defaultProps = {
         title: "title",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -112,13 +115,13 @@ export class LKBlueBGButton extends Component {
 const styles = StyleSheet.create({
     blueEnable: {
         height: 46,
-        borderRadius: 3,
+        borderRadius: defaultBorderRadius,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     blueDisable: {
         height: 46,
-        borderRadius: 3,
+        borderRadius: defaultBorderRadius,
         backgroundColor: disableBlueColor,
         borderWidth: 0
     }
@@ -137,7 +140,7 @@ export default class CJTextButton extends Component {
     static defaultProps = {
         title: "title",
         color: "#01ADFE",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -160,7 +163,7 @@ export default class CJTextButton extends Component {
             <TouchableOpacity
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}
-                style={[{ justifyContent: "center", height: 44 }, style]}
+                style={[{ justifyContent: "center", height: 40 }, style]}
                 //activeOpacity={0.4}
             >
                 <Text

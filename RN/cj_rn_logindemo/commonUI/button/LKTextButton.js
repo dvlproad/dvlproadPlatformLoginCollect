@@ -15,6 +15,8 @@ import {Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View} from "re
 
 let screenHeight = Dimensions.get('window').height;
 let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 0;
+var defaultBorderRadius = 3;
+var defaultFontSize = 14;
 
 // LKWhiteBGButton:白色背景+黑色文字的按钮(常见于'刷新'按钮)
 export class LKWhiteBGButton extends Component {
@@ -27,7 +29,7 @@ export class LKWhiteBGButton extends Component {
 
     static defaultProps = {
         title: "title",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -38,7 +40,7 @@ export class LKWhiteBGButton extends Component {
         return (
             <LKTextButton
                 style={[{
-                    borderRadius: 6,
+                    borderRadius: defaultBorderRadius,
                     backgroundColor: "#FFFFFF",
                     borderWidth: 1,
                     borderColor: "#E5E5E5"
@@ -70,7 +72,7 @@ export class LKBlueBGBottomButton extends Component {
 
     static defaultProps = {
         title: "title",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -122,7 +124,7 @@ export class LKBlueBGButton extends Component {
 
     static defaultProps = {
         title: "title",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -143,11 +145,11 @@ export class LKBlueBGButton extends Component {
 
         return (
             <LKTextButton style={[blueStateStyle, style]}
-                          title={this.props.title}
-                          color={"#FFFFFF"}
-                          fontSize={this.props.fontSize}
-                          onPress={this.props.onPress}
-                          disabled={this.props.disabled}
+                title={this.props.title}
+                color={"#FFFFFF"}
+                fontSize={this.props.fontSize}
+                onPress={this.props.onPress}
+                disabled={this.props.disabled}
             />
         )
     }
@@ -157,13 +159,13 @@ export class LKBlueBGButton extends Component {
 const styles = StyleSheet.create({
     blueEnable: {
         height: 46,
-        borderRadius: 3,
+        borderRadius: defaultBorderRadius,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     blueDisable: {
         height: 46,
-        borderRadius: 3,
+        borderRadius: defaultBorderRadius,
         backgroundColor: disableBlueColor,
         borderWidth: 0
     }
@@ -182,7 +184,7 @@ export default class LKTextButton extends Component {
     static defaultProps = {
         title: "title",
         color: "#01ADFE",
-        fontSize: 17,
+        fontSize: defaultFontSize,
         onPress: () => { },
         disabled: false,
     };
@@ -205,7 +207,7 @@ export default class LKTextButton extends Component {
             <TouchableOpacity
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}
-                style={[{ justifyContent: "center", height: 44 }, style]}
+                style={[{ justifyContent: "center", height: 40 }, style]}
             //activeOpacity={0.4}
             >
                 <Text

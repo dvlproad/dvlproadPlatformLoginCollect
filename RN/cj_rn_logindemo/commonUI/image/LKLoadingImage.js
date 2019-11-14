@@ -86,7 +86,6 @@ export default class LKLoadingImage extends Component {
 
         this.state = {
             isNetworkImage: false,
-            loaded: false,
             loadStatus: ImageLoadStatus.Pending,
             shouldShowErrorSource: false,
             isShowingErrorSource: false,
@@ -129,7 +128,6 @@ export default class LKLoadingImage extends Component {
     onLoadStart = () => {
         let loadStatus = this.state.isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
         this.setState({
-            loaded: false,
             loadStatus: loadStatus,
         })
     }
@@ -139,6 +137,7 @@ export default class LKLoadingImage extends Component {
      * 加载结束(当加载完成回调该方法，不管图片加载成功还是失败都会调用该方法)
      */
     onLoadEnd = () => {
+        console.log("LKLoadingImage图片加载结束");
         if (this.state.isShowingErrorSource) { //防止重复setState，死循环
 
         } else {
@@ -146,7 +145,6 @@ export default class LKLoadingImage extends Component {
         }
 
         this.setState({
-            loaded: true,
             loadStatus: ImageLoadStatus.End
         })
     }
@@ -157,14 +155,9 @@ export default class LKLoadingImage extends Component {
      */
     onLoadSuccess=() => {
         if (this.state.isShowingErrorSource) {
-            this.setState({
-                loadStatus: ImageLoadStatus.ErrorImageSuccess
-            });
-
+            this.state.loadStatus = ImageLoadStatus.ErrorImageSuccess;
         } else {
-            this.setState({
-                loadStatus: ImageLoadStatus.Success
-            });
+            this.state.loadStatus = ImageLoadStatus.Success;
         }
     }
 
@@ -340,7 +333,7 @@ export default class LKLoadingImage extends Component {
         }
 
         let stateComponent = (
-            <View style={{backgroundColor:stateBGColor, position:'absolute', width:stateTextWidth, height:stateTextHeight}}>
+            <View style={{backgroundColor:stateBGColor, position:'absolute', width:stateTextWidth, height:stateTextHeight,borderRadius:2}}>
                 <Text
                     style={stateTextStyle}
                 >

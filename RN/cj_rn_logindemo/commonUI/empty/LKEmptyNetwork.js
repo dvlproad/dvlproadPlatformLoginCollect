@@ -85,7 +85,7 @@ export default class LKEmptyNetwork extends Component {
 
                     <LKWhiteBGButton style={{ width: 105, height: 34, marginTop: 60 }}
                                      title={'刷新'}
-                                     fontSize={15}
+                                     fontSize={14}
                                      onPress={this.props.refreshHandle}
                     />
                 </View>

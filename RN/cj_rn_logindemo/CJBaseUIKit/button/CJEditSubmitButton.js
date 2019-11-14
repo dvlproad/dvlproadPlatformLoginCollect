@@ -86,27 +86,27 @@ export class CJEditSubmitButton extends Component {
 const styles = StyleSheet.create({
     submitEnable: {
         height: 46,
-        borderRadius: 6,
+        borderRadius: 3,
         backgroundColor: enableBlueColor,
         borderWidth: 0
     },
     submitDisable: {
         height: 46,
-        borderRadius: 6,
+        borderRadius: 3,
         backgroundColor: disableBlueColor,
         borderWidth: 0
     },
 
     editEnable: {
         height: 40,
-        borderRadius: 4,
+        borderRadius: 3,
         backgroundColor: "#FFFFFF",
         borderWidth: 1,
         borderColor: enableBlueColor
     },
     editDisable: {
         height: 40,
-        borderRadius: 4,
+        borderRadius: 3,
         backgroundColor: "#FFFFFF4C",
         borderWidth: 1,
         borderColor: disableBlueColor

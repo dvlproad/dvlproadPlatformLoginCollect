@@ -59,14 +59,14 @@ export class LKBackButton extends Component {
     };
 
     static defaultProps = {
-        onPress: () => {},
+        onPress: () => { },
     };
 
     render() {
         return (
-            <LKImageButton style={this.props.style}
-                           source={require('./resources/nav_back.png')}
-                           onPress={this.props.onPress}
+            <LKImageButton style={{ marginLeft: 4 }}
+                source={require('./resources/nav_back.png')}
+                onPress={this.props.onPress}
             />
         )
     }
