@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import {
     CJImageCollectionView
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import LuckinRoute from "../navigation/LuckinRoute";
+import LuckinRoute from "../Navigation/LuckinRoute";
 
 
 export default class LKImageHomeComponent extends Component {

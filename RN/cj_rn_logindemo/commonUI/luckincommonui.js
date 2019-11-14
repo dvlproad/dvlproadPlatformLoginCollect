@@ -42,32 +42,21 @@ import LKRNActionRangeDateText, { LKRangeDateEditingType } from "./date/LKRNActi
 // list
 import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
-import LKEntryHomeComponent from "./list/LKEntryHomeComponent";
-import LKImageHomeComponent from "./list/LKImageHomeComponent";
-import LKImageActionCollectionView from "./list/LKImageActionCollectionView";
-import LKImageActionHomeComponent from "./list/LKImageActionHomeComponent";
 
+import {
+  LKNavigationFactory,
+  LuckinRoute,
 
+  LKEntryHomeComponent,
+  LKImageHomeComponent,
+  LKImageActionCollectionView,
+  LKImageActionHomeComponent,
 
-// picker
-// import {
-//   CJDatePicker as LKDatePicker,
-//   CJBaseDatePicker as LKComJSDatePicker,
-//   CJDatePickShowType as LKDatePickShowType,
-//   CJDatePickerCreateTimeType as LKDatePickerCreateTimeType
-// } from "../CJBaseUIKit/CJBaseUIKit";
-
-// import { CJDatePicker as LKDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
-// import { CJBaseDatePicker as LKComJSDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
-// import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/CJBaseUIKit";
-// import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/CJBaseUIKit";
-
-import LKDatePicker from "../CJBaseUIKit/datePicker/CJDatePicker";
-import LKComJSDatePicker from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
-import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
-import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/datePicker/CJDatePicker";
-import LKNavigationFactory from "./navigation/LKNavigationFactory";
-import LuckinRoute from "./navigation/LuckinRoute";
+  LKDatePickShowType,
+  LKDatePickerCreateTimeType,
+  LKComJSDatePicker,
+  LKDatePicker,
+} from "../commonUIEmployee/commonUIEmployee";
 
 
 var LKCommonUI = {
