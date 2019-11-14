@@ -51,13 +51,13 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
         imageDefaultSource: PropTypes.number,
-        imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
+        imageBorderStyle: stylePropTypes,       // 非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
         clickButtonHandle: PropTypes.func,
         deleteButtonWidth: PropTypes.number,    // 删除按钮的大小
         imageTopRightForDeleteButtonCenterOffset: PropTypes.number, // 图片右上角坐标与删除按钮中心坐标的偏移(平时默认两个点是重合的，即此值为0；若此需要图片右上角坐标往删除按钮中心的右上角靠，此时图片区域会变大，请填正数；反之，填负数)
 
-        imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
+        imageLoadedCountChange: PropTypes.func, // 完成加载的图片个数发生变化的回调
 
 
         browseImageHandle: PropTypes.func,
@@ -65,8 +65,9 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         deleteImageHandle: PropTypes.func,
 
         isEditing: PropTypes.bool,
-        hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
-        imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
+        hasAddIconWhenEditing: PropTypes.bool,  // 在编辑时候是否显示添加图片的按钮
+        imageMaxCount: PropTypes.number,        // 最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
+        addImageSource: PropTypes.number,       // 添加图片的数据源
     };
 
     static defaultProps = {
@@ -100,6 +101,7 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
         isEditing: false,
         hasAddIconWhenEditing: true,
         imageMaxCount: 10000,
+        addImageSource: require('./resources/addImage_common.png'),
     };
 
     constructor(props) {
@@ -186,7 +188,7 @@ export default class CJActionImageCollectionView extends CJBaseCollectionView {
                 this.state.addIconCurIndex = renderImageCount;
 
                 let addImage = {
-                    imageSource: require('./resources/pickImage_blue.png'),
+                    imageSource: this.props.addImageSource,
                     uploadType: ImageUploadType.NotNeed,
                     uploadProgress: 0,
                     imageIndex: renderImageCount,
