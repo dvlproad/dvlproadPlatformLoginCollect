@@ -1,4 +1,69 @@
-// LKImageActionCollectionView.js
+/**
+ * LKImageActionCollectionView.js
+ *
+ * @Description: 图片上传列表
+ *
+ * @author      chaoqian.li
+ * @email       chaoqian.li@luckincoffee.com
+ * @date        2019-11-14 15:07:19
+ *
+ * Copyright (c) luckinteam. All rights reserved.
+ */
+/*  使用示例：
+                <LKImageActionCollectionView
+                    imageModels={[
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.NotNeed,
+                            uploadProgress: 0,
+                            imageIndex: 0,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Uploading,
+                            uploadProgress: 20,
+                            imageIndex: 1,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Uploading,
+                            uploadProgress: 60,
+                            imageIndex: 2,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Success,
+                            uploadProgress: 100,
+                            imageIndex: 3,
+                        },
+                        {
+                            imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
+                            uploadType: ImageUploadType.Failure,
+                            uploadProgress: 77,
+                            imageIndex: 4,
+                        },
+                    ]}
+                    imageMaxCount={5}
+
+                    imageLoadedCountChange={(imageLoadedCount, isImageAllLoaded)=>{
+                        //Alert.alert("完成加载的图片个数为:" + imageLoadedCount);
+                        this.state.isImageAllLoaded = isImageAllLoaded;
+                    }}
+
+                    isEditing={this.state.isEditing}
+                    browseImageHandle={(index) => {
+                        Alert.alert("浏览图片" + index);
+                    }}
+                    addImageHandle={(index) => {
+                        Alert.alert("添加图片" + index);
+                    }}
+                    deleteImageCompleteBlock={(imageModels)=>{
+                        this.setState({
+                            imageModels: imageModels
+                        })
+                    }}
+                />
+ */
 import React, {Component} from 'react';
 import {  Alert, Dimensions } from 'react-native';
 import {
@@ -6,55 +71,47 @@ import {
 } from '../../CJBaseUIKit/CJBaseUIKit';
 import PropTypes from "prop-types";
 
-import {View, ViewPropTypes} from "react-native";
-const viewPropTypes = ViewPropTypes || View.propTypes;
-const stylePropTypes = viewPropTypes.style;
-
 
 export default class LKImageActionCollectionView extends Component {
     static propTypes = {
         imageModels: PropTypes.array,
-
+        imageMaxCount: PropTypes.number,        //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
         imageLoadedCountChange: PropTypes.func, //完成加载的图片个数发生变化的回调
 
+        isEditing: PropTypes.bool,
 
         browseImageHandle: PropTypes.func,
         addImageCompleteBlock: PropTypes.func,
         deleteImageCompleteBlock: PropTypes.func,
-
-        isEditing: PropTypes.bool,
-        hasAddIconWhenEditing: PropTypes.bool,      //在编辑时候是否显示添加图片的按钮
-        imageMaxCount: PropTypes.number,    //最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
     };
 
     static defaultProps = {
         imageModels: [],
-
+        imageMaxCount: 8,
         imageLoadedCountChange: (imageLoadedCount, isImageAllLoaded)=>{},
+
+        isEditing: false,
 
         browseImageHandle: (buttonIndex)=>{},
         addImageCompleteBlock: (imageModels)=>{},
         deleteImageCompleteBlock: (imageModels)=>{},
-
-        isEditing: false,
-        hasAddIconWhenEditing: true,
-        imageMaxCount: 10000,
     };
 
 
     constructor(props) {
         super(props);
         this.state = {
-            imageModels: [],
-            isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
+
         };
     }
 
 
+    /*
     imageLoadedCountChange= (imageLoadedCount, isImageAllLoaded)=>{
         //Alert.alert("完成加载的图片个数为:" + imageLoadedCount);
         this.state.isImageAllLoaded = isImageAllLoaded;
     }
+
 
 
     browseImageHandle=(index) => {
@@ -77,6 +134,7 @@ export default class LKImageActionCollectionView extends Component {
             // })
         }
     }
+    */
 
     deleteImageHandle=(index) => {
         // Alert.alert("删除图片" + index);
@@ -100,7 +158,7 @@ export default class LKImageActionCollectionView extends Component {
 
         return (
             <CJActionImageCollectionView
-                style={[{backgroundColor:'red'}, this.props.style]}   //谨记：这边设置无效
+                style={[{backgroundColor:'#FFFFFF'}, this.props.style]}   //谨记：这边设置无效
                 listWidth={listWidth}
                 sectionInset={{top:5, left:15, bottom:15, right:15}}
                 // cellWidthFromPerRowMaxShowCount={4} // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
@@ -110,12 +168,14 @@ export default class LKImageActionCollectionView extends Component {
                 minimumLineSpacing={0}
                 forceBoxHorizontalIntervalEqualMinimumInteritemSpacing={true}
                 dataModels={this.props.imageModels}
+                imageMaxCount={this.props.imageMaxCount}
 
-                imageLoadedCountChange={this.imageLoadedCountChange}
+                imageLoadedCountChange={this.props.imageLoadedCountChange}
+                imageDefaultSource={require('./resources/common_AddImage.png')}
 
                 isEditing={this.props.isEditing}
-                browseImageHandle={this.browseImageHandle}
-                addImageHandle={this.addImageHandle}
+                browseImageHandle={this.props.browseImageHandle}
+                addImageHandle={this.props.addImageHandle}
                 deleteImageHandle={this.deleteImageHandle}
                 deleteButtonWidth={24}
                 imageTopRightForDeleteButtonCenterOffset={2}

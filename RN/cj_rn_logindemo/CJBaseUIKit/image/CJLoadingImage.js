@@ -338,8 +338,18 @@ export default class CJLoadingImage extends Component {
             stateTextStyle = [stateTextStyle, {lineHeight: stateTextHeight}];
         }
 
+        let stateComponentStyle = [
+            {
+                backgroundColor:stateBGColor,
+                position:'absolute',
+                width:stateTextWidth,
+                height:stateTextHeight
+            },
+            this.props.imageBorderStyle
+        ];
+
         let stateComponent = (
-            <View style={{backgroundColor:stateBGColor, position:'absolute', width:stateTextWidth, height:stateTextHeight}}>
+            <View style={stateComponentStyle}>
                 <Text
                     style={stateTextStyle}
                 >
