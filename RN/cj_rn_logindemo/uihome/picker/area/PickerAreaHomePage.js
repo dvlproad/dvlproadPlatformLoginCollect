@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import {
     LKNavigationFactory,
     LKDemoTableHomeComponent
-} from "../../commonUI/luckincommonui";
+} from "../../../commonUI/luckincommonui";
 
-export default class PickHomePage extends LKDemoTableHomeComponent {
+export default class PickerAreaHomePage extends LKDemoTableHomeComponent {
     static navigationOptions = ({ navigation }) => {
         return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
     };

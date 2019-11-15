@@ -8,11 +8,11 @@ import {
     LKTextButton,
     LKBlueBGButton,
     LKDatePicker,
-} from '../../commonUI/luckincommonui';
+} from '../../../commonUI/luckincommonui';
 
-import AreaJson from '../../CJBaseUIKit/areaPicker/area.json';
-import { CJAreaPicker } from "../../CJBaseUIKit/CJBaseUIKit";
-import CJAreaPickerView from "../../CJBaseUIKit/areaPicker/CJAreaPickerView";
+import AreaJson from '../../../CJBaseUIKit/areaPicker/area.json';
+import { CJAreaPicker } from "../../../CJBaseUIKit/CJBaseUIKit";
+import CJAreaPickerView from "../../../CJBaseUIKit/areaPicker/CJAreaPickerView";
 
 
 export default class AreaPickerPage extends Component {

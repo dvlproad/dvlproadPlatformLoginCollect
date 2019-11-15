@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
 
-import CJDatePickerView from "../../CJBaseUIKit/datePicker/CJDatePickerView";
+import CJDatePickerView from "../../../CJBaseUIKit/datePicker/CJDatePickerView";
 
 import {
     LKToastUtil,
     LKTextButton,
     LKBlueBGButton,
-} from '../../commonUI/luckincommonui';
+} from '../../../commonUI/luckincommonui';
 
 import {
     LKDateUtil,
-} from '../../commonUtil/luckincommonutil';
+} from '../../../commonUtil/luckincommonutil';
 
 
 var currentShowDateString = '';

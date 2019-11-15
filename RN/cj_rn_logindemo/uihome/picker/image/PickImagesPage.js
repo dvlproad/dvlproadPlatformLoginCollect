@@ -1,12 +1,7 @@
 //PickImagesPage.js
 import React, { Component } from 'react';
 import {View, ScrollView, Image, Platform, Button, StyleSheet, Alert, TouchableOpacity, Dimensions} from 'react-native';
-
 import ImagePicker from 'react-native-image-crop-picker';
-// import ActionSheet from '../../components/ActionSheet/ActionSheet'
-// import Config from '../../../Config'
-//
-// import ModalProgress from '../../components/Progress/ModalProgress'
 
 //存放数组
 var dataToPost = [];

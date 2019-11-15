@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
     LKNavigationFactory,
     LKDemoTableHomeComponent
-} from "../../commonUI/luckincommonui";
+} from "../../../commonUI/luckincommonui";
 
 export default class PickerDateHomePage extends LKDemoTableHomeComponent {
     static navigationOptions = ({ navigation }) => {

@@ -47,11 +47,11 @@ export default class PickerAllHomePage extends LKDemoCollectionHomeComponent {
 
 
 //PickPages
-import PickersPage from "./PickersPage";
-import PickerImageHomePage, {PickerImageChildPages } from "./PickerImageHomePage";
-import PickerDateHomePage, {PickerDateChildPages } from "./PickerDateHomePage";
-import PickerAreaHomePage, {PickerAreaChildPages } from "./PickerAreaHomePage";
-import PickerItemHomePage, {PickerItemChildPages } from "./PickerItemHomePage";
+import PickersPage from "./react-native-pickers/PickersPage";
+import PickerImageHomePage, {PickerImageChildPages } from "../image/PickerImageHomePage";
+import PickerDateHomePage, {PickerDateChildPages } from "./date/PickerDateHomePage";
+import PickerAreaHomePage, {PickerAreaChildPages } from "./area/PickerAreaHomePage";
+import PickerItemHomePage, {PickerItemChildPages } from "./item/PickerItemHomePage";
 
 export const PickRoutePage = 'PickerAllHomePage';
 export const PickerAllHomePages = {

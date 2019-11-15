@@ -20,24 +20,24 @@ import LKImageActionCollectionView from "./CollectionView/LKImageActionCollectio
 
 
 
-// picker
+// 日期选择
 // import {
-//   CJDatePicker as LKDatePicker,
 //   CJBaseDatePicker as LKComJSDatePicker,
 //   CJDatePickShowType as LKDatePickShowType,
 //   CJDatePickerCreateTimeType as LKDatePickerCreateTimeType
 // } from "../CJBaseUIKit/CJBaseUIKit";
 
-// import { CJDatePicker as LKDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
 // import { CJBaseDatePicker as LKComJSDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
 // import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/CJBaseUIKit";
 // import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/CJBaseUIKit";
 
-import LKDatePicker from "../CJBaseUIKit/datePicker/CJDatePicker";
+import LKDatePicker from "./Pickers/LKDatePicker";
 import LKComJSDatePicker from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
 import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
 import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/datePicker/CJDatePicker";
 
+// 地区选择
+import LKAreaPicker from "./Pickers/LKAreaPicker";
 
 
 var LKCommonUI = {
@@ -55,7 +55,7 @@ var LKCommonUI = {
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
 
-    // date
+    // 日期选择
     LKDatePickShowType,
     LKDatePickerCreateTimeType,
     LKComJSDatePicker,
@@ -77,6 +77,9 @@ var LKCommonUI = {
                     }}
      */
 
+
+    // 地区选择
+    LKAreaPicker,
 };
 
 module.exports = LKCommonUI;

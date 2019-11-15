@@ -1,9 +1,9 @@
-//OwnNativeSingleDatePage.js
+//ComNativeSingleDatePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
-import {LKOwnNativeActionSingleDateText} from "../../commonUI/luckincommonui";
+import LKComNativeActionSingleDateText from "../../../commonUI/date/LKComNativeActionSingleDateText";
 
-export default class OwnNativeSingleDatePage extends Component {
+export default class ComNativeSingleDatePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +12,7 @@ export default class OwnNativeSingleDatePage extends Component {
         };
     }
 
+
     render() {
         let beginDateString1 = this.state.beginDateString1;
         let beginDateString2 = this.state.beginDateString2;
@@ -19,28 +20,28 @@ export default class OwnNativeSingleDatePage extends Component {
         return (
             <ScrollView style={{backgroundColor:"#f5f5f5", paddingHorizontal: 15}}>
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString1}</Text>
-                <LKOwnNativeActionSingleDateText style={{flex: 1, marginTop: 10}}
+                <LKComNativeActionSingleDateText style={{flex: 1, marginTop: 10}}
                                                  placeholder= {"选择日期"}
                                                  chooseDateString={beginDateString1}
                                                  allowPickDate={true}
                                                  onDateChange={ (date) => {
-                                                     this.setState({
-                                                         beginDateString1: date
-                                                     })
-                                                 }}
+                                              this.setState({
+                                                  beginDateString1: date
+                                              })
+                                          }}
                                                  isBankStyle={false}
                 />
 
                 <Text style={{marginTop: 22}}>当前选择的起始日期为：{beginDateString2}</Text>
-                <LKOwnNativeActionSingleDateText style={{flex: 1, marginTop: 10}}
+                <LKComNativeActionSingleDateText style={{flex: 1, marginTop: 10}}
                                                  placeholder= {"选择日期"}
                                                  chooseDateString={beginDateString2}
                                                  allowPickDate={true}
                                                  onDateChange={ (date) => {
-                                                     this.setState({
-                                                         beginDateString2: date
-                                                     })
-                                                 }}
+                                              this.setState({
+                                                  beginDateString2: date
+                                              })
+                                          }}
                                                  isBankStyle={true}
                 />
 

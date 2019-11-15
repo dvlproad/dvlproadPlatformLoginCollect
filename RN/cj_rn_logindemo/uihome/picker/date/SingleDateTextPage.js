@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import {View} from 'react-native';
-import LKToastUtil from "../../commonUI/toast/LKToastUtil";
-import LKSingleDateText from "../../commonUI/date/LKSingleDateText";
+import LKToastUtil from "../../../commonUI/toast/LKToastUtil";
+import LKSingleDateText from "../../../commonUI/date/LKSingleDateText";
 
 import {
     LKDatePickShowType,
     LKComJSDatePicker
-} from "../../commonUI/luckincommonui";
+} from "../../../commonUI/luckincommonui";
 
 export default class SingleDateTextPage extends Component {
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import {Dimensions, View, Text, TouchableOpacity} from 'react-native';
-import LKComJSActionSingleDateText from "../../commonUI/date/LKComJSActionSingleDateText";
+import LKComJSActionSingleDateText from "../../../commonUI/date/LKComJSActionSingleDateText";
 
 
 export default class ComJSSingleDatePage30 extends Component {

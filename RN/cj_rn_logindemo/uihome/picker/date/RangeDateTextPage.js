@@ -1,13 +1,14 @@
 // RangeDateTextPage
 import  React, { Component } from 'react';
 import {Text, ScrollView, View, Dimensions} from 'react-native';
-import LKToastUtil from "../../commonUI/toast/LKToastUtil";
-import LKRangeDateText, {LKRangeDateEditingType} from "../../commonUI/date/LKRangeDateText";
+import LKRangeDateText, {LKRangeDateEditingType} from "../../../commonUI/date/LKRangeDateText";
 import {
+    LKToastUtil,
+
     LKDatePickShowType,
     LKDatePicker,
     LKDatePickerCreateTimeType,
-} from "../../commonUI/luckincommonui";
+} from "../../../commonUI/luckincommonui";
 
 export default class RangeDateTextPage extends Component {
     constructor(props) {

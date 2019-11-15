@@ -8,7 +8,7 @@ import {
     LKTextButton,
     LKBlueBGButton,
     LKDatePicker,
-} from '../../commonUI/luckincommonui';
+} from '../../../commonUI/luckincommonui';
 
 
 

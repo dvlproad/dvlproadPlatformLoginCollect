@@ -1,8 +1,8 @@
 //LKOwnNativeActionRangeDateTextPage.js
 import React, { Component } from 'react';
 import {Text, ScrollView, TouchableOpacity, View} from 'react-native';
-import LKRNActionRangeDateText from '../../commonUI/date/LKRNActionRangeDateText';
-import {LKRangeDateEditingType} from "../../commonUI/date/LKRangeDateText";
+import LKRNActionRangeDateText from '../../../commonUI/date/LKRNActionRangeDateText';
+import {LKRangeDateEditingType} from "../../../commonUI/date/LKRangeDateText";
 
 export default class OwnNativeActionRangeDateTextPage extends Component {
     constructor(props) {
