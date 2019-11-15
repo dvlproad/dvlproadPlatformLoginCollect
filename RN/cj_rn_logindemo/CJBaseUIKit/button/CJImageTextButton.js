@@ -18,8 +18,8 @@ export default class CJImageTextButton extends Component {
         onPress: PropTypes.func,
 
         imageStyle: PropTypes.object,
-        imageSource: PropTypes.number,
-        imageDefaultSource: PropTypes.number,
+        imageSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+        imageDefaultSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         onLoadComplete: PropTypes.func, //图片加载结束的回调
         // 是否需要加载动画(默认需要)
         // 有以下体验不友好的情况需要特殊处理：即从本地上传的图片会得到网络图片地址，

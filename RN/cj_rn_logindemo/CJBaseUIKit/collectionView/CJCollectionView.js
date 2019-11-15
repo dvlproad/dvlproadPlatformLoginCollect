@@ -49,7 +49,7 @@ const stylePropTypes = viewPropTypes.style;
 export default class CJCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
-        imageDefaultSource: PropTypes.number,
+        imageDefaultSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         imageBorderStyle: stylePropTypes,       //非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
         clickButtonHandle: PropTypes.func,

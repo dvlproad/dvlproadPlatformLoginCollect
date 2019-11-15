@@ -44,8 +44,8 @@ export var ImageUploadType = {
 export default class CJLoadingImage extends Component {
     static propTypes = {
         //source: PropTypes.number.isRequired,    //图片
-        defaultSource: PropTypes.number,    //图片加载前的默认显示图
-        errorSource: PropTypes.number,      //图片加载失败的显示图
+        defaultSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),    //图片加载前的默认显示图
+        errorSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),      //图片加载失败的显示图
         imageBorderStyle: stylePropTypes,   //图片边框样式
 
         buttonIndex: PropTypes.number.isRequired,

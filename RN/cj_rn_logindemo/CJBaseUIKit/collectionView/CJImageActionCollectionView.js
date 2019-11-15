@@ -50,7 +50,7 @@ const stylePropTypes = viewPropTypes.style;
 export default class CJImageActionCollectionView extends CJBaseCollectionView {
     static propTypes = {
         dataModels: PropTypes.array,
-        imageDefaultSource: PropTypes.number,
+        imageDefaultSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         imageBorderStyle: stylePropTypes,       // 非添加按钮的图片的边框样式(添加按钮的边框默认无)
 
         clickButtonHandle: PropTypes.func,
@@ -67,7 +67,7 @@ export default class CJImageActionCollectionView extends CJBaseCollectionView {
         isEditing: PropTypes.bool,
         hasAddIconWhenEditing: PropTypes.bool,  // 在编辑时候是否显示添加图片的按钮
         imageMaxCount: PropTypes.number,        // 最大显示的图片个数(当达到指定图片最大量后，添加图片按钮不在显示)
-        addImageSource: PropTypes.number,       // 添加图片的数据源
+        addImageSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),       // 添加图片的数据源
     };
 
     static defaultProps = {

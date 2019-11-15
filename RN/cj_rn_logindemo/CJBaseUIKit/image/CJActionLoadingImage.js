@@ -40,7 +40,7 @@ const stylePropTypes = viewPropTypes.style;
 export default class CJActionLoadingImage extends Component {
     static propTypes = {
         //source: PropTypes.number.isRequired,    //图片
-        defaultSource: PropTypes.number,
+        defaultSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         imageBorderStyle: stylePropTypes,   //图片边框样式
 
         clickButtonHandle: PropTypes.func,

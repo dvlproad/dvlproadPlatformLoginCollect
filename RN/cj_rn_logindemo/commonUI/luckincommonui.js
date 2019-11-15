@@ -66,10 +66,6 @@ var LKCommonUI = {
   // alert
   LKAlertModal,
 
-  // navigation 导航栏(含路由)
-  LKNavigationFactory,
-  LuckinRoute,
-
   // sheet
   LKActionSheet,
   LKPhotoCameraSheet,
@@ -115,6 +111,12 @@ var LKCommonUI = {
   // list
   LKImagesChooseList,
   // LKSelectListModal,
+
+
+  // navigation 导航栏(含路由)
+  LKNavigationFactory,
+  LuckinRoute,
+
   LKEntryHomeComponent,
   LKImageHomeComponent,
   LKImageActionCollectionView,

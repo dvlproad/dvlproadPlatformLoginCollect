@@ -14,7 +14,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 // 图片按钮
 export default class CJImageButton extends Component {
     static propTypes = {
-        source: PropTypes.number,
+        source: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         onPress: PropTypes.func
     };
 
