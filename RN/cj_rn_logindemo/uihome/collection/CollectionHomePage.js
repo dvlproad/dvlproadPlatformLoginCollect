@@ -9,10 +9,10 @@ import React, { Component } from 'react';
 import {  Alert } from 'react-native';
 import {
     LKNavigationFactory,
-    LKEntryHomeComponent
+    LKDemoCollectionHomeComponent
 } from '../../commonUI/luckincommonui';
 
-export default class CollectionHomePage extends LKEntryHomeComponent {
+export default class CollectionHomePage extends LKDemoCollectionHomeComponent {
     static navigationOptions = ({ navigation }) => {
         return LKNavigationFactory.backPageNavigationOptions({ navigation }, `集合视图`)
     };

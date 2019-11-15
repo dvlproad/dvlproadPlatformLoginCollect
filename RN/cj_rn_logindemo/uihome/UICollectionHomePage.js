@@ -31,7 +31,7 @@ export default class UICollectionHomePage extends Component {
                 data: [
                     { title: "List(列表)", page: "ListHomePage" },
                     { title: "Modal(Modal)", page: "ModalHomePage" },
-                    { title: "Picker(选择器)", page: "PickHomePage" },
+                    { title: "Picker(选择器)", page: "PickerAllHomePage" },
                 ]
             },
         ];
@@ -70,7 +70,7 @@ import { ListPages, ListRoutePage } from "./list/ListHomePage";
 //upload
 import { UploadPages, UploadRoutePage } from "./upload/UploadHomePage";
 //picker
-import { PickPages, PickRoutePage } from "./picker/PickHomePage";
+import { PickerAllHomePages, PickRoutePage } from "./picker/PickerAllHomePage";
 //modal
 import { ModalPages, ModalRoutePage } from "./modal/ModalHomePage";
 
@@ -118,7 +118,7 @@ export const UIPages = {
     ...ListPages,
     ...UploadPages,
 
-    ...PickPages,
+    ...PickerAllHomePages,
     ...ModalPages,
 
     ...WebViewPages,

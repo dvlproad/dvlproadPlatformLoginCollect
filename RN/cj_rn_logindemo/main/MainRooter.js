@@ -251,7 +251,7 @@ function m_navigator(Pages, RoutePage) {
     )
 }
 
-// import {PickPages, PickRoutePage} from "../uihome/picker/PickHomePage";
+// import {PickerAllPages, PickRoutePage} from "../uihome/picker/PickerAllHomePage";
 // export default createAppContainer(m_navigator(PickPages, PickRoutePage));
 
 // import {ImagePages, ImageRoutePage} from "../uihome/image/ImageHomePage";

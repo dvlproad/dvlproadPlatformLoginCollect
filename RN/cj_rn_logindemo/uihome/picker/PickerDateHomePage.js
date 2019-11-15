@@ -1,4 +1,4 @@
-//PickHomePage.js
+//PickerDateHomePage.js
 import React, { Component } from 'react';
 
 import {
@@ -6,9 +6,9 @@ import {
     LKDemoTableHomeComponent
 } from "../../commonUI/luckincommonui";
 
-export default class PickHomePage extends LKDemoTableHomeComponent {
+export default class PickerDateHomePage extends LKDemoTableHomeComponent {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
+        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `选择日期`)
     };
 
     constructor(props) {
@@ -16,12 +16,6 @@ export default class PickHomePage extends LKDemoTableHomeComponent {
 
         this.state = {
             sectionDataModels: [
-                {
-                    key: "Weight",
-                    data: [
-                        {title: "PickWeightPage", nextPageName: "PickWeightPage"},
-                    ]
-                },
                 {
                     key: "SingleDate--Native",
                     data: [
@@ -48,30 +42,13 @@ export default class PickHomePage extends LKDemoTableHomeComponent {
                         {title: "RangeDateTextPage", nextPageName: "RangeDateTextPage"},
                     ]
                 },
-                {
-                    key: "Image",
-                    data: [
-                        {title: "PickImagesPage", nextPageName: "PickImagesPage"},
-                        {title: "ImageHomePage", nextPageName: "ImageHomePage"},
-                    ]
-                },
-                {
-                    key: "Area",
-                    data: [
-                        {title: "AreaPickerPage", nextPageName: "AreaPickerPage"},
-                    ]
-                }
             ]
         }
     }
 }
 
 
-//PickPages
-//weight
-import PickWeightPage from "./PickWeightPage";
-
-import PickersPage from "./PickersPage";
+// PickerDateChildPages
 //singleDate-Native
 import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
@@ -83,31 +60,11 @@ import ComJSSingleDatePage30 from "./ComJSSingleDatePage30";
 //rangeDate
 import OwnNativeActionRangeDateTextPage from './OwnNativeActionRangeDateTextPage';
 
-//pickImage
-import PickImagesPage from './PickImagesPage';
-import ImageHomePage from '../image/ImageHomePage';
 import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
 import RangeDateTextPage from "./RangeDateTextPage";
 
-// pickArea
-import AreaPickerPage from "./AreaPickerPage";
 
-export const PickRoutePage = 'PickHomePage';
-export const PickPages = {
-    PickHomePage: {
-        screen: PickHomePage,
-        navigationOptions: () => ({
-            title: `PickHomePage`,
-        }),
-    },
-
-    PickWeightPage: {
-        screen: PickWeightPage,
-        navigationOptions: () => ({
-            title: `体重选择`,
-        }),
-    },
-
+export const PickerDateChildPages = {
     OwnNativeSingleDatePage: {
         screen: OwnNativeSingleDatePage,
         navigationOptions: () => ({
@@ -121,13 +78,6 @@ export const PickPages = {
         }),
     },
 
-
-    PickersPage: {
-        screen: PickersPage,
-        navigationOptions: () => ({
-            title: `JS写的统一样式的Pickers`,
-        }),
-    },
 
     DatePickerPage_00ComJS: {
         screen: DatePickerPage_00ComJS,
@@ -172,28 +122,6 @@ export const PickPages = {
         screen: RangeDateTextPage,
         navigationOptions: () => ({
             title: `范围日期选择(RN统一风格)`,
-        }),
-    },
-
-
-    PickImagesPage: {
-        screen: PickImagesPage,
-        navigationOptions: () => ({
-            title: `多个图片选择`,
-        }),
-    },
-
-    ImageHomePage: {
-        screen: ImageHomePage,
-        navigationOptions: () => ({
-            title: `图片选择相关`,
-        }),
-    },
-
-    AreaPickerPage: {
-        screen: AreaPickerPage,
-        navigationOptions: () => ({
-            title: `地区选择相关`,
         }),
     },
 };

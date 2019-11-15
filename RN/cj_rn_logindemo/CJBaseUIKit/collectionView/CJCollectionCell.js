@@ -65,7 +65,7 @@ const stylePropTypes = viewPropTypes.style;
 
 export default class CJCollectionCell extends Component {
     static propTypes = {
-        moduleModel: PropTypes.array,
+        moduleModel: PropTypes.object,
         clickButtonHandle: PropTypes.func,
         buttonIndex: PropTypes.number,
     };
