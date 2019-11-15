@@ -7,7 +7,10 @@
  */
 import React, { Component } from 'react';
 import {  Alert } from 'react-native';
-import { LKNavigationFactory, LKEntryHomeComponent } from '../../commonUI/luckincommonui';
+import {
+    LKNavigationFactory,
+    LKEntryHomeComponent
+} from '../../commonUI/luckincommonui';
 
 export default class CollectionHomePage extends LKEntryHomeComponent {
     static navigationOptions = ({ navigation }) => {

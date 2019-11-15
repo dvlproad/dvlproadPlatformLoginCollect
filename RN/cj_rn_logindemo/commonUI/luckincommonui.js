@@ -44,16 +44,21 @@ import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
 
 import {
-  LKEntryTableHomeComponent,
+  // demo base Page的基类
+  LKDemoTableHomeComponent,
+  LKDemoCollectionHomeComponent,
 
+  // navigation 导航栏(含路由)
   LKNavigationFactory,
   LuckinRoute,
 
+  // collection
   LKEntryHomeComponent,
   LKImageLookHomeComponent,
   LKImageActionCollectionView,
   LKImageActionHomeComponent,
 
+  // date
   LKDatePickShowType,
   LKDatePickerCreateTimeType,
   LKComJSDatePicker,
@@ -115,13 +120,15 @@ var LKCommonUI = {
   // LKSelectListModal,
 
 
-  // demo
-  LKEntryTableHomeComponent,
+  // demo base Page的基类
+  LKDemoTableHomeComponent,
+  LKDemoCollectionHomeComponent,
 
   // navigation 导航栏(含路由)
   LKNavigationFactory,
   LuckinRoute,
 
+  // collection
   LKEntryHomeComponent,
   LKImageLookHomeComponent,
   LKImageActionCollectionView,

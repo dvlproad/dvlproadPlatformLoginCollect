@@ -1,10 +1,10 @@
 //ButtonHomePage.js
 import React, { Component } from 'react';
 import {
-    LKEntryTableHomeComponent
+    LKDemoTableHomeComponent
 } from "../../commonUI/luckincommonui";
 
-export default class ButtonHomePage extends LKEntryTableHomeComponent {
+export default class ButtonHomePage extends LKDemoTableHomeComponent {
     static navigationOptions = ({ navigation }) => {
         return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
     };
