@@ -1,79 +1,68 @@
-//UtilHomePage.js
+//PickHomePage.js
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
-import HomeSectionList from "../../commonUI/list/HomeSectionList";
 
+import {
+    LKNavigationFactory,
+    LKDemoTableHomeComponent
+} from "../../commonUI/luckincommonui";
 
-export default class PickHomePage extends Component {
+export default class PickHomePage extends LKDemoTableHomeComponent {
+    static navigationOptions = ({ navigation }) => {
+        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
+    };
 
     constructor(props) {
         super(props);
-    }
 
-    _onPressButton = (nextPageName) => {
-        console.log(nextPageName);
-
-        if (nextPageName) {
-            this.props.navigation.navigate(nextPageName)
-        } else  {
-            //nextPageName = "Button";
-            Alert.alert(nextPageName)
+        this.state = {
+            sectionDataModels: [
+                {
+                    key: "Weight",
+                    data: [
+                        {title: "PickWeightPage", nextPageName: "PickWeightPage"},
+                    ]
+                },
+                {
+                    key: "SingleDate--Native",
+                    data: [
+                        {title: "OwnNativeSingleDatePage", nextPageName: "OwnNativeSingleDatePage"},
+                        {title: "ComNativeSingleDatePage", nextPageName: "ComNativeSingleDatePage"},
+                    ]
+                },
+                {
+                    key: "SingleDate--JS",
+                    data: [
+                        {title: "PickersPage", nextPageName: "PickersPage"},
+                        {title: "DatePickerPage_00ComJS", nextPageName: "DatePickerPage_00ComJS"},
+                        {title: "DatePickerPage_01ComJS", nextPageName: "DatePickerPage_01ComJS"},
+                        {title: "ComJSDatePickerPage2", nextPageName: "ComJSDatePickerPage2"},
+                        {title: "各种时间样式的日期SingleDateTextPage", nextPageName: "SingleDateTextPage"},
+                        {title: "ComJSSingleDatePage21", nextPageName: "ComJSSingleDatePage21"},
+                        {title: "ComJSSingleDatePage30", nextPageName: "ComJSSingleDatePage30"},
+                    ]
+                },
+                {
+                    key: "RangeDate",
+                    data: [
+                        {title: "OwnNativeActionRangeDateTextPage", nextPageName: "OwnNativeActionRangeDateTextPage"},
+                        {title: "RangeDateTextPage", nextPageName: "RangeDateTextPage"},
+                    ]
+                },
+                {
+                    key: "Image",
+                    data: [
+                        {title: "PickImagesPage", nextPageName: "PickImagesPage"},
+                        {title: "ImageHomePage", nextPageName: "ImageHomePage"},
+                    ]
+                },
+                {
+                    key: "Area",
+                    data: [
+                        {title: "AreaPickerPage", nextPageName: "AreaPickerPage"},
+                    ]
+                }
+            ]
         }
-    }
-
-
-    render() {
-        let sections = [
-            { key: "Weight",
-                data: [
-                    { title: "PickWeightPage", page: "PickWeightPage" },
-                ]
-            },
-            { key: "SingleDate--Native",
-                data: [
-                    { title: "OwnNativeSingleDatePage", page: "OwnNativeSingleDatePage" },
-                    { title: "ComNativeSingleDatePage", page: "ComNativeSingleDatePage" },
-                ]
-            },
-            { key: "SingleDate--JS",
-                data: [
-                    { title: "PickersPage", page: "PickersPage" },
-                    { title: "DatePickerPage_00ComJS", page: "DatePickerPage_00ComJS" },
-                    { title: "DatePickerPage_01ComJS", page: "DatePickerPage_01ComJS" },
-                    { title: "ComJSDatePickerPage2", page: "ComJSDatePickerPage2" },
-                    { title: "各种时间样式的日期SingleDateTextPage", page: "SingleDateTextPage" },
-                    { title: "ComJSSingleDatePage21", page: "ComJSSingleDatePage21" },
-                    { title: "ComJSSingleDatePage30", page: "ComJSSingleDatePage30" },
-                ]
-            },
-            { key: "RangeDate",
-                data: [
-                    { title: "OwnNativeActionRangeDateTextPage", page: "OwnNativeActionRangeDateTextPage" },
-                    { title: "RangeDateTextPage", page: "RangeDateTextPage" },
-                ]
-            },
-            { key: "Image",
-                data: [
-                    { title: "PickImagesPage", page: "PickImagesPage" },
-                    { title: "ImageHomePage", page: "ImageHomePage" },
-                ]
-            },
-            {
-                key: "Area",
-                data: [
-                    { title: "AreaPickerPage", page: "AreaPickerPage" },
-                ]
-            }
-        ];
-
-        return (
-            <View style={{ flex: 1 }}>
-                <HomeSectionList
-                    sections={sections}
-                    onPress={this._onPressButton}
-                />
-            </View>
-        );
     }
 }
 

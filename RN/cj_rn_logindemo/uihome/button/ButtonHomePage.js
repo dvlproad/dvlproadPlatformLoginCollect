@@ -1,6 +1,7 @@
 //ButtonHomePage.js
 import React, { Component } from 'react';
 import {
+    LKNavigationFactory,
     LKDemoTableHomeComponent
 } from "../../commonUI/luckincommonui";
 
@@ -11,7 +12,6 @@ export default class ButtonHomePage extends LKDemoTableHomeComponent {
 
     constructor(props) {
         super(props);
-
 
         this.state = {
             sectionDataModels: [
@@ -41,7 +41,6 @@ export default class ButtonHomePage extends LKDemoTableHomeComponent {
 import RNButtonPage from "./RNButtonPage";
 import EditSubmitButtonPage from "./EditSubmitButtonPage";
 import ButtonColorPage from "./ButtonColorPage";
-import {LKNavigationFactory} from "../../commonUI/luckincommonui";
 
 export const ButtonPages = {
     ButtonHomePage: {
