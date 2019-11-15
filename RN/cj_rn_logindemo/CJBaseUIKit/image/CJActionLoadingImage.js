@@ -1,6 +1,6 @@
 // CJActionLoadingImage.js
 /*
-LKActionLoadingImage:图片控件(含加载动画和其他可操作事件) 的使用示例
+CJActionLoadingImage:图片控件(含加载动画和其他可操作事件) 的使用示例
 
 import CJActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 
@@ -17,7 +17,7 @@ import CJActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
                     source={{uri: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562747201772&di=e5e02e2208aea4acdfd1fa92d4a10d42&imgtype=0&src=http%3A%2F%2Fimg1.ph.126.net%2FI9-_x2ze5vz07q7YorAc1Q%3D%3D%2F151715012463950227.jpg'}}
 
                     isEditing={true}
-                    uploadType={ImageUploadType.Uploading}
+                    uploadType={CJImageUploadType.Uploading}
                     uploadProgress={60}
                     clickButtonHandle={()=>{
                         LKToastUtil.showMessage('点击图片');
@@ -30,7 +30,7 @@ import CJActionLoadingImage  from '../../commonUI/image/LKActionLoadingImage';
 
 import React, { Component } from 'react';
 import {StyleSheet, View, TouchableOpacity, ViewPropTypes} from 'react-native';
-import CJLoadingImage, { ImageUploadType } from './CJLoadingImage';
+import CJLoadingImage, { CJImageUploadType } from './CJLoadingImage';
 import CJImageButton from "../button/CJImageButton";
 
 import PropTypes from "prop-types";
@@ -84,7 +84,7 @@ export default class CJActionLoadingImage extends Component {
 
         onLoadComplete: (buttonIndex)=>{},
 
-        uploadType: ImageUploadType.NotNeed,
+        uploadType: CJImageUploadType.NotNeed,
         uploadProgress: 0,
         needLoadingAnimation: true,
 

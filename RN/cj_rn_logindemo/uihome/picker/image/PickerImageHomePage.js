@@ -20,7 +20,6 @@ export default class PickerImageHomePage extends LKDemoTableHomeComponent {
                     key: "Image",
                     data: [
                         {title: "PickImagesPage", nextPageName: "PickImagesPage"},
-                        {title: "ImageHomePage", nextPageName: "ImageHomePage"},
                     ]
                 },
             ]
@@ -31,20 +30,12 @@ export default class PickerImageHomePage extends LKDemoTableHomeComponent {
 
 // PickerImageChildPages
 import PickImagesPage from './PickImagesPage';
-import ImageHomePage from '../image/ImageHomePage';
 
 export const PickerImageChildPages = {
     PickImagesPage: {
         screen: PickImagesPage,
         navigationOptions: () => ({
             title: `多个图片选择`,
-        }),
-    },
-
-    ImageHomePage: {
-        screen: ImageHomePage,
-        navigationOptions: () => ({
-            title: `图片选择相关`,
         }),
     },
 };

@@ -48,7 +48,7 @@ export default class PickerAllHomePage extends LKDemoCollectionHomeComponent {
 
 //PickPages
 import PickersPage from "./react-native-pickers/PickersPage";
-import PickerImageHomePage, {PickerImageChildPages } from "../image/PickerImageHomePage";
+import PickerImageHomePage, {PickerImageChildPages } from "./image/PickerImageHomePage";
 import PickerDateHomePage, {PickerDateChildPages } from "./date/PickerDateHomePage";
 import PickerAreaHomePage, {PickerAreaChildPages } from "./area/PickerAreaHomePage";
 import PickerItemHomePage, {PickerItemChildPages } from "./item/PickerItemHomePage";

@@ -109,7 +109,7 @@ export default class CJAreaPicker extends Component {
      */
     tryShowAreaPicker() {
         if (this.state.hasCreate) {
-            // this.showDatePicker();
+            // this.showAreaPicker();
 
             // 如果不设置setState无法，重新render选择器
             this.setState({

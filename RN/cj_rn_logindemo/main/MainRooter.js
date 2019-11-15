@@ -260,8 +260,6 @@ function m_navigator(Pages, RoutePage) {
 // import {ListPages, ListRoutePage} from '../uihome/list/ListHomePage';
 // export default createAppContainer(m_navigator(ListPages, ListRoutePage));
 
-import SingleDateTextPage from "../uihome/picker/SingleDateTextPage";
-import PickersPage from "../uihome/picker/PickersPage";
 // export default createAppContainer(
 //     createStackNavigator(
 //         {

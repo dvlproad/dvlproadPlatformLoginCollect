@@ -59,7 +59,7 @@ export  default class PickImagesPage extends Component {
     }
 
     createImageItem(){
-        let imageSource = require('../list/img/topic.jpg');
+        let imageSource = {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'};
         let mainView;
         if(this.state.images!=null&&this.state.images.length>=9){
             mainView=null;

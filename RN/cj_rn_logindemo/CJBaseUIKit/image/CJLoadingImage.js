@@ -20,7 +20,7 @@ const stylePropTypes = viewPropTypes.style;
 import { ObjectCJHelper } from '../../CJBaseHelper/CJBaseHelper';
 
 /// 图片加载状态
-var ImageLoadStatus = {
+var CJImageLoadStatus = {
     Pending: 0,     /**< 准备加载 */
     Loading: 1,     /**< 正在加载 */
     Success: 2,     /**< 加载成功 */
@@ -31,7 +31,7 @@ var ImageLoadStatus = {
 };
 
 /// 图片来源
-export var ImageUploadType = {
+export var CJImageUploadType = {
     NotNeed: 0,     /**< 不需要上传 */
     Waiting: 1,     /**< 等待上传 */
     Uploading: 2,   /**< 正在上传 */
@@ -76,7 +76,7 @@ export default class CJLoadingImage extends Component {
 
         onLoadComplete: (buttonIndex)=>{},
 
-        uploadType: ImageUploadType.NotNeed,
+        uploadType: CJImageUploadType.NotNeed,
         uploadProgress: 0,
         needLoadingAnimation: false,
 
@@ -88,7 +88,7 @@ export default class CJLoadingImage extends Component {
 
         this.state = {
             isNetworkImage: false,
-            loadStatus: ImageLoadStatus.Pending,
+            loadStatus: CJImageLoadStatus.Pending,
             shouldShowErrorSource: false,
             isShowingErrorSource: false,
         }
@@ -128,7 +128,7 @@ export default class CJLoadingImage extends Component {
      * 开始加载(当开始加载图片调用该方法)
      */
     onLoadStart = () => {
-        let loadStatus = this.state.isNetworkImage ? ImageLoadStatus.Loading : ImageLoadStatus.Success;
+        let loadStatus = this.state.isNetworkImage ? CJImageLoadStatus.Loading : CJImageLoadStatus.Success;
         this.setState({
             loadStatus: loadStatus,
         })
@@ -146,7 +146,7 @@ export default class CJLoadingImage extends Component {
         }
 
         this.setState({
-            loadStatus: ImageLoadStatus.End
+            loadStatus: CJImageLoadStatus.End
         })
     }
 
@@ -156,9 +156,9 @@ export default class CJLoadingImage extends Component {
      */
     onLoadSuccess=() => {
         if (this.state.isShowingErrorSource) {
-            this.state.loadStatus = ImageLoadStatus.ErrorImageSuccess;
+            this.state.loadStatus = CJImageLoadStatus.ErrorImageSuccess;
         } else {
-            this.state.loadStatus = ImageLoadStatus.Success;
+            this.state.loadStatus = CJImageLoadStatus.Success;
         }
     }
 
@@ -170,7 +170,7 @@ export default class CJLoadingImage extends Component {
         if (this.state.isShowingErrorSource) {
             console.log("如果当要显示的图加载失败时候，转为显示加载失败时，" +
                 "却发现连传入的图片加载失败图都是错误的，那就不处理");
-            this.state.loadStatus = ImageLoadStatus.ErrorImageFailure;
+            this.state.loadStatus = CJImageLoadStatus.ErrorImageFailure;
 
         } else {
             this.state.shouldShowErrorSource = true;
@@ -184,7 +184,7 @@ export default class CJLoadingImage extends Component {
                     + '失败原因:' + error.nativeEvent.error);
             }
 
-            this.state.loadStatus = ImageLoadStatus.Failure;
+            this.state.loadStatus = CJImageLoadStatus.Failure;
         }
     }
 
@@ -195,19 +195,19 @@ export default class CJLoadingImage extends Component {
     getFormalImageStateText=()=> {
         let formalImageStateText = '';
         switch (this.props.uploadType) {
-            case ImageUploadType.Waiting: {
+            case CJImageUploadType.Waiting: {
                 formalImageStateText = '准备上传';
                 break;
             }
-            case ImageUploadType.Uploading: {
+            case CJImageUploadType.Uploading: {
                 formalImageStateText = this.changeTwoDecimal_f(this.props.uploadProgress) + '%';
                 break;
             }
-            case ImageUploadType.Success: {
+            case CJImageUploadType.Success: {
                 formalImageStateText = '上传成功';
                 break;
             }
-            case ImageUploadType.Failure: {
+            case CJImageUploadType.Failure: {
                 formalImageStateText = '重新上传';
                 break;
             }
@@ -265,23 +265,23 @@ export default class CJLoadingImage extends Component {
     getDebugImageUploadStateText=()=> {
         let debugImageUploadStateText = '';
         switch (this.props.uploadType) {
-            case ImageUploadType.NotNeed: {
+            case CJImageUploadType.NotNeed: {
                 debugImageUploadStateText += '\n' + '不需要上传';
                 break;
             }
-            case ImageUploadType.Waiting: {
+            case CJImageUploadType.Waiting: {
                 debugImageUploadStateText += '\n' + '等待上传';
                 break;
             }
-            case ImageUploadType.Uploading: {
+            case CJImageUploadType.Uploading: {
                 debugImageUploadStateText += '\n' + 'uploadProgress:' + this.props.uploadProgress;
                 break;
             }
-            case ImageUploadType.Success: {
+            case CJImageUploadType.Success: {
                 debugImageUploadStateText += '\n' + '上传成功';
                 break;
             }
-            case ImageUploadType.Failure: {
+            case CJImageUploadType.Failure: {
                 debugImageUploadStateText += '\n' + '上传失败';
                 break;
             }
@@ -319,7 +319,7 @@ export default class CJLoadingImage extends Component {
         let stateTextStyle ={flex: 1, textAlign: 'center', fontSize: 17, color: '#FFFFFF'};
         let stateTextWidth = imageWidth;
         let stateTextHeight = imageHeight;
-        if (this.props.uploadType == ImageUploadType.Success) {
+        if (this.props.uploadType == CJImageUploadType.Success) {
             stateTextHeight = 0;
         }
         //let stateTextHeight = imageHeight * (1-this.props.uploadProgress/100);
@@ -352,7 +352,7 @@ export default class CJLoadingImage extends Component {
 
         let showLoadingHUD = false;
         if (this.props.needLoadingAnimation) {
-            showLoadingHUD = this.state.loadStatus == ImageLoadStatus.Loading;
+            showLoadingHUD = this.state.loadStatus == CJImageLoadStatus.Loading;
         }
 
         let imageStyle = [
