@@ -1,6 +1,13 @@
-// LKEntryHomeComponent.js
+/**
+ * LKEntryHomeComponent.js
+ *
+ * @Description: RN模块里常见的首页集合视图
+ *
+ * @author      chaoqian.li
+ * @date        2019-11-07 13:02:02
+ */
 import React, {Component} from 'react';
-import {  Alert, Dimensions } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import PropTypes from "prop-types";
 import {
     CJCollectionView
@@ -20,17 +27,11 @@ export default class LKEntryHomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isImageAllLoaded: false,    //图片是否全部加载完成，如果没有，则不允许点击修改按钮来切换为编辑状态
+
         };
     }
 
-
-    imageLoadedCountChange= (imageLoadedCount, isImageAllLoaded)=>{
-        //Alert.alert("完成加载的图片个数为:" + imageLoadedCount);
-        this.state.isImageAllLoaded = isImageAllLoaded;
-    }
-
-    execModuleModel= (index)=>{
+    _execModuleModel= (index)=>{
         let moduleModel = this.state.moduleModels[index];
 
         if (moduleModel.clickButtonHandle) {
@@ -60,8 +61,7 @@ export default class LKEntryHomeComponent extends Component {
                 minimumInteritemSpacing={15}
                 minimumLineSpacing={10}
                 dataModels={this.state.moduleModels}
-                clickButtonHandle={this.execModuleModel}
-                imageLoadedCountChange={this.imageLoadedCountChange}
+                clickButtonHandle={this._execModuleModel}
             />
         );
     }

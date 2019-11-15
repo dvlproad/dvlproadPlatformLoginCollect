@@ -1,44 +1,39 @@
 //ButtonHomePage.js
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
-import HomeSectionList from "../../commonUI/list/HomeSectionList";
+import {
+    LKEntryTableHomeComponent
+} from "../../commonUI/luckincommonui";
 
-export default class ButtonHomePage extends Component {
+export default class ButtonHomePage extends LKEntryTableHomeComponent {
+    static navigationOptions = ({ navigation }) => {
+        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
+    };
 
     constructor(props) {
         super(props);
-    }
 
-    _onPressButton = (nextPageName) => {
-        console.log(nextPageName);
 
-        if (nextPageName) {
-            this.props.navigation.navigate(nextPageName)
-        } else  {
-            //nextPageName = "Button";
-            Alert.alert(nextPageName)
+        this.state = {
+            sectionDataModels: [
+                {
+                    key: "Button",
+                    data: [
+                        {
+                            title: "RNButtonPage",
+                            nextPageName: "RNButtonPage"
+                        },
+                        {
+                            title: "EditSubmitButtonPage",
+                            nextPageName: "EditSubmitButtonPage"
+                        },
+                        {
+                            title: "ButtonColorPage",
+                            nextPageName: "ButtonColorPage"
+                        },
+                    ]
+                },
+            ],
         }
-    }
-
-    render() {
-        let sections = [
-            { key: "Button",
-                data: [
-                    { title: "RNButtonPage", page: "RNButtonPage" },
-                    { title: "EditSubmitButtonPage", page: "EditSubmitButtonPage" },
-                    { title: "ButtonColorPage", page: "ButtonColorPage" },
-                ]
-            },
-        ];
-
-        return (
-            <View style={{ flex: 1 }}>
-                <HomeSectionList
-                    sections={sections}
-                    onPress={this._onPressButton}
-                />
-            </View>
-        );
     }
 }
 
@@ -46,6 +41,7 @@ export default class ButtonHomePage extends Component {
 import RNButtonPage from "./RNButtonPage";
 import EditSubmitButtonPage from "./EditSubmitButtonPage";
 import ButtonColorPage from "./ButtonColorPage";
+import {LKNavigationFactory} from "../../commonUI/luckincommonui";
 
 export const ButtonPages = {
     ButtonHomePage: {

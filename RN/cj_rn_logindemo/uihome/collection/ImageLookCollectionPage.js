@@ -6,10 +6,13 @@
  * @desc [集合视图主页]
  */
 import React, { Component } from 'react';
-import {  Alert } from 'react-native';
-import {LKNavigationFactory, LKImageHomeComponent, ImageUploadType} from '../../commonUI/luckincommonui';
+import {
+    LKNavigationFactory,
+    LKImageLookHomeComponent,
+    ImageUploadType
+} from '../../commonUI/luckincommonui';
 
-export default class ImageLookCollectionPage extends LKImageHomeComponent {
+export default class ImageLookCollectionPage extends LKImageLookHomeComponent {
     static navigationOptions = ({ navigation }) => {
         return LKNavigationFactory.backPageNavigationOptions({ navigation }, `图片集合视图`)
     };

@@ -2,6 +2,9 @@
 
 'use strict';
 
+// demo base Page的基类
+import LKDemoTableHomeComponent from "./Demo/LKDemoTableHomeComponent";
+
 // base Page的基类
 import LKEntryHomeComponent from "./Base/LKEntryHomeComponent";
 import LKImageLookHomeComponent from "./Base/LKImageLookHomeComponent";
@@ -37,14 +40,16 @@ import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJB
 
 
 var LKCommonUI = {
+    // demo base Page的基类
+    LKDemoTableHomeComponent,
+
     // navigation 导航栏(含路由)
     LKNavigationFactory,
     LuckinRoute,
 
-
     // list
     LKEntryHomeComponent,
-    LKImageHomeComponent: LKImageLookHomeComponent,
+    LKImageLookHomeComponent,
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
 

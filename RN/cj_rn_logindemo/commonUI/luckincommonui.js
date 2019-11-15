@@ -44,11 +44,13 @@ import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
 
 import {
+  LKEntryTableHomeComponent,
+
   LKNavigationFactory,
   LuckinRoute,
 
   LKEntryHomeComponent,
-  LKImageHomeComponent,
+  LKImageLookHomeComponent,
   LKImageActionCollectionView,
   LKImageActionHomeComponent,
 
@@ -113,12 +115,15 @@ var LKCommonUI = {
   // LKSelectListModal,
 
 
+  // demo
+  LKEntryTableHomeComponent,
+
   // navigation 导航栏(含路由)
   LKNavigationFactory,
   LuckinRoute,
 
   LKEntryHomeComponent,
-  LKImageHomeComponent,
+  LKImageLookHomeComponent,
   LKImageActionCollectionView,
   LKImageActionHomeComponent,
 

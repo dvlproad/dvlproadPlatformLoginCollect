@@ -113,10 +113,6 @@ export default class CJCollectionView extends CJBaseCollectionView {
         console.log(message);
     }
 
-    clickButtonHandle = (index)=> {
-        this.props.clickButtonHandle(index);
-    }
-
 
     renderCollectionCell(item, index, defaultCollectCellStyle) {
         let richCollectCellStyle = {
@@ -135,7 +131,7 @@ export default class CJCollectionView extends CJBaseCollectionView {
                 imageBorderStyle={this.props.imageBorderStyle}
 
                 buttonIndex={index}
-                clickButtonHandle={this.clickButtonHandle}
+                clickButtonHandle={this.props.clickButtonHandle}
 
                 onLoadComplete={(buttonIndex)=>{
                     this.onLoadComplete(buttonIndex)

@@ -23,7 +23,10 @@ import CJImageTextButton from "./button/CJImageTextButton";
 // import CJNavigationFactory from "./navigation/CJNavigationFactory";
 import CJNavigationUtil from "./navigation/CJNavigationUtil";
 
-// collectionView 集合视图
+// TableView 列表视图
+import CJSectionTableView from "./TableView/CJSectionTableView";
+
+// CollectionView 集合视图
 import CJCollectionView from "./collectionView/CJCollectionView";
 import CJCollectionCell from "./collectionView/CJCollectionCell";
 import CJImageLookCollectionView from "./collectionView/CJImageLookCollectionView";
@@ -51,7 +54,10 @@ var CJBaseUIKit = {
   // CJNavigationFactory, //(不要引用该类，即请将该类实现复制一遍在具体APP中再自己相应修改一下即可)
   CJNavigationUtil,
 
-  // collectionView 集合视图
+  // TableView 列表视图
+  CJSectionTableView,
+
+  // CollectionView 集合视图
   CJCollectionView,
   CJCollectionCell,
   CJImageLookCollectionView,
