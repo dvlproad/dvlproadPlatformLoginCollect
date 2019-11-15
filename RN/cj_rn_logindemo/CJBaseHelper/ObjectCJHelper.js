@@ -33,6 +33,16 @@ export default class ObjectCJHelper {
         }
     }
 
+    /**
+     * 怎么判断一个数是否是NaN
+     * @param number
+     * @returns {boolean}
+     */
+    static isNaN(number) {
+        return isNaN(number);
+        //附：错误判断：如果你用 if (number === NaN) 得到的始终会是false
+    }
+
 
     /**
      * 判断是否是数组

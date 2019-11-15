@@ -9,22 +9,35 @@ import PickerView from '../react-native-pickers/PickerView';
 export default class CJAreaPickerView extends CJBaseBottomPicker {
     static propTypes = {
         selectedValue: PropTypes.array.isRequired,
-        onPickerConfirm: PropTypes.func,
+
     };
 
     static defaultProps = {
         removeSubviews: false,
-        selectedValue: ['香港', '香港', '中西区'],
+        selectedValue: ['北京', '北京', '东城区'],
         areaJson: null,
+
+        toolbarHeight: 44,
+
         confirmText: '确定',
-        confirmTextSize: 14,
-        confirmTextColor: '#333333',
+        confirmTextSize: 17,
+        confirmTextColor: '#2F7DE1',
+
         cancelText: '取消',
-        cancelTextSize: 14,
-        cancelTextColor: '#333333',
-        itemTextColor: 0x333333ff,
-        itemSelectedColor: 0x1097D5ff,
+        cancelTextSize: 17,
+        cancelTextColor: '#2F7DE1',
+
+        promptValueText: '请选择城市',
+        selectedValueText: '请选择城市',
+        valueTextSize: 17,
+        valueTextColor: '#000000',
+        showValueText: true,            // 是否显示文本
+        shouldFixedValueText: false,    // 是否固定文本(默认false，即会根据选择的值显示)
+
         itemHeight: 40,
+        itemTextColor: 0x33333378,
+        itemSelectedColor: 0x333333ff,
+
         onPickerCancel: null,
         onPickerConfirm: (selectedValue) => {},
     }

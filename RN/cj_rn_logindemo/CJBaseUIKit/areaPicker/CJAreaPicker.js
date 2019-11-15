@@ -46,6 +46,8 @@ export default class CJAreaPicker extends Component {
     static defaultProps = {
         areaPickShowType: CJAreaPickShowType.yyyyMMdd,
         areaPickerCreateTimeType: CJAreaPickShowType.Free,
+
+        toolbarHeight: 40,
         // dateString: '',
         //
         // onPickerConfirm: (dateString)=>{},

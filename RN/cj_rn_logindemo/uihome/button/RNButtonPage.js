@@ -1,11 +1,13 @@
 //RNButtonPages.js
 import React, {Component} from 'react';
-import {Button, Alert, Text, View, ScrollView, FlatList, TouchableWithoutFeedback} from 'react-native';
+import {ScrollView, Button, Text, View, TouchableWithoutFeedback} from 'react-native';
+import {
+    LKDemoScrollHomeComponent
+} from '../../commonUIEmployee/commonUIEmployee';
 
 export default class RNButtonPage extends Component {
     render() {
         return (
-
             <ScrollView style={{backgroundColor: "#f2f2f2", paddingHorizontal: 15}}>
                 <View style={{backgroundColor: "#01ADFE", marginTop: 20}}>
                     <Button
@@ -71,7 +73,6 @@ export default class RNButtonPage extends Component {
                     <Text style={{color:'#fff', fontSize:24, textAlign:'center', backgroundColor:"green"}}>1</Text>
                 </View>
             </ScrollView>
-
         );
     }
 }

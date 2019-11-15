@@ -3,6 +3,7 @@
 'use strict';
 
 // demo base Page的基类
+import LKDemoScrollHomeComponent from "./Demo/LKDemoScrollHomeComponent";
 import LKDemoTableHomeComponent from "./Demo/LKDemoTableHomeComponent";
 import LKDemoCollectionHomeComponent from "./Demo/LKDemoCollectionHomeComponent";
 
@@ -42,6 +43,7 @@ import LKAreaPicker from "./Pickers/LKAreaPicker";
 
 var LKCommonUI = {
     // demo base Page的基类
+    LKDemoScrollHomeComponent,
     LKDemoTableHomeComponent,
     LKDemoCollectionHomeComponent,
 

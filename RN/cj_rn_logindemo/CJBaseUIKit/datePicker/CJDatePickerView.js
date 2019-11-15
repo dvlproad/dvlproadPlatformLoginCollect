@@ -13,8 +13,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
 
     static defaultProps = {
         removeSubviews: false,
-        itemTextColor: 0x00000078,
-        itemSelectedColor: 0x000000ff,
+
         onPickerCancel: null,
         onPickerConfirm: (selectedDateString) => {},
         unit: ['年', '月', '日'],
@@ -40,6 +39,8 @@ class CJDatePickerView extends CJBaseBottomPicker {
         shouldFixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
 
         itemHeight: 40,
+        itemTextColor: 0x00000078,
+        itemSelectedColor: 0x000000ff,
 
         yyyy: true,
         MM: true,
