@@ -6,13 +6,23 @@ import PropTypes from "prop-types";
 import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
 import PickerView from '../react-native-pickers/PickerView';
 
+/**
+ * 地区选择器的选择样式
+ */
+export var CJAreaPickShowType = {
+    ProvinceCityArea: 0,/** 显示 省份-城市-地区 */
+    ProvinceCity: 1,    /** 显示 省份-城市 */
+}
+
 export default class CJAreaPickerView extends CJBaseBottomPicker {
     static propTypes = {
+        areaPickShowType: PropTypes.number,         //地区选择器的选择样式(默认yyyyMMdd,即只显示年月日)
         selectedValue: PropTypes.array.isRequired,
-
     };
 
     static defaultProps = {
+        areaPickShowType: CJAreaPickShowType.ProvinceCityArea,
+
         removeSubviews: false,
         selectedValue: ['北京', '北京', '东城区'],
         areaJson: null,

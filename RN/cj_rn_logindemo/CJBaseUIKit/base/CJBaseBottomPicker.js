@@ -27,16 +27,16 @@ export default class CJBaseBottomPicker extends BaseDialog {
 
         confirmText: PropTypes.string,
         confirmTextSize: PropTypes.number,
-        confirmTextColor: PropTypes.color,
+        // confirmTextColor: PropTypes.color,
 
         cancelText: PropTypes.string,
         cancelTextSize: PropTypes.number,
-        cancelTextColor: PropTypes.color,
+        // cancelTextColor: PropTypes.color,
 
         promptValueText: PropTypes.string,
         selectedValueText: PropTypes.string.isRequired,
         valueTextSize: PropTypes.number,
-        valueTextColor: PropTypes.color,
+        // valueTextColor: PropTypes.color,
         showValueText: PropTypes.boolean,           // 是否显示文本
         shouldFixedValueText: PropTypes.boolean,    // 是否固定文本(默认false，即会根据选择的值显示)
     };

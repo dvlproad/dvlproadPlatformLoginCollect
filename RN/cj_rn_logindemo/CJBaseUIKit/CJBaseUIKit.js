@@ -33,10 +33,11 @@ import CJImageLookCollectionView from "./collectionView/CJImageLookCollectionVie
 import CJImageActionCollectionView from "./collectionView/CJImageActionCollectionView";
 
 // datePicker 日期选择器
-import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
 import CJBaseDatePicker, {CJDatePickShowType} from "./datePicker/CJBaseDatePicker";
+import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
 
 // areaPicker 地区选择器
+import {CJAreaPickShowType} from "./areaPicker/CJAreaPickerView";
 import CJAreaPicker from "./areaPicker/CJAreaPicker";
 
 
@@ -70,6 +71,7 @@ var CJBaseUIKit = {
   CJDatePicker,
 
   // areaPicker 地区选择器
+  CJAreaPickShowType,
   CJAreaPicker,
 };
 

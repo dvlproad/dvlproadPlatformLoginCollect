@@ -1,10 +1,31 @@
 import React, {Component} from 'react';
-import {  Alert, Dimensions } from 'react-native';
+import PropTypes from "prop-types";
 import {
-    CJAreaPicker
+    CJAreaPicker,
+    CJAreaPickShowType
 } from '../../CJBaseUIKit/CJBaseUIKit';
 
 
 export default class LKAreaPicker extends CJAreaPicker {
+    static propTypes = {
+
+    };
+
+    static defaultProps = {
+        areaPickShowType: CJAreaPickShowType.ProvinceCity,
+        areaPickerCreateTimeType: CJAreaPickShowType.Free,
+
+        toolbarHeight: 40,
+        // dateString: '',
+        //
+        // onPickerConfirm: (dateString)=>{},
+        // onPickerCancel: ()=>{},
+        // onPickerSelect: (dateString)=>{},
+        onCoverPress: ()=>{},
+
+        showToolbarValueText: true,
+        toolbarValueText: '意向城市',
+        toolbarValueFixed: true,
+    };
 
 }

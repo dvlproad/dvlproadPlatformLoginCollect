@@ -213,8 +213,9 @@ class CJDatePickerView extends CJBaseBottomPicker {
         return data;
     }
 
+
     getSelectedValueText() {
-        let string = this.props.selectedValue;
+        let string = this.props.selectedValue.join('-');
         return string;
     }
 

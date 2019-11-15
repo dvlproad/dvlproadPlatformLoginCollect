@@ -40,13 +40,13 @@ export var CJDatePickShowType = {
 
 export default class CJBaseDatePicker extends Component {
     static propTypes = {
-        datePickShowType: PropTypes.number,  //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
-        dateString: PropTypes.string,   //选择的日期
+        datePickShowType: PropTypes.number, //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
+        dateString: PropTypes.string,       //选择的日期
 
-        onPickerConfirm: PropTypes.func, //日期选择'确认'
-        onPickerCancel: PropTypes.func, //日期选择'取消'
-        onPickerSelect: PropTypes.func, //日期选择'变了下'
-        onCoverPress: PropTypes.func,   //点击空白区域
+        onPickerConfirm: PropTypes.func,    //日期选择'确认'
+        onPickerCancel: PropTypes.func,     //日期选择'取消'
+        onPickerSelect: PropTypes.func,     //日期选择'变了下'
+        onCoverPress: PropTypes.func,       //点击空白区域
     };
 
     static defaultProps = {

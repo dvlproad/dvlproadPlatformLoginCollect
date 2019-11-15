@@ -60,9 +60,11 @@ import {
 
   // date
   LKDatePickShowType,
-  LKDatePickerCreateTimeType,
   LKComJSDatePicker,
   LKDatePicker,
+
+  // area 地区选择
+  LKAreaPicker,
 } from "../commonUIEmployee/commonUIEmployee";
 
 
@@ -136,7 +138,6 @@ var LKCommonUI = {
 
   // date
   LKDatePickShowType,
-  LKDatePickerCreateTimeType,
   LKComJSDatePicker,
   LKDatePicker,
   /**
@@ -156,6 +157,8 @@ var LKCommonUI = {
                     }}
    */
 
+  // area 地区选择
+  LKAreaPicker,
 };
 
 module.exports = LKCommonUI;

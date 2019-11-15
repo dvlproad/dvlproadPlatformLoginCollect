@@ -11,7 +11,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import CJAreaPickerView from "./CJAreaPickerView";
+import CJAreaPickerView, { CJAreaPickShowType } from "./CJAreaPickerView";
 import AreaJson from "./area";
 
 /** 地区选择器创建的时机 */
@@ -21,18 +21,10 @@ export var CJAreaPickerCreateTimeType = {
     SuperViewAppear: 2,     //当其所视图显示的时候就创建(会造成初次卡顿)
 }
 
-/**
- * 地区选择器的选择样式
- */
-export var CJAreaPickShowType = {
-    ProvinceCityArea: 0,/** 显示 省份-城市-地区 */
-    ProvinceCity: 1,    /** 显示 省份-城市 */
-}
-
 export default class CJAreaPicker extends Component {
     static propTypes = {
-        areaPickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
-        areaPickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
+        areaPickShowType: PropTypes.number,         //地区选择器的选择样式(默认yyyyMMdd,即只显示年月日)
+        areaPickerCreateTimeType: PropTypes.number, //地区选择器创建的时机
         // dateString: PropTypes.string,       //选择的日期
         //
         // onPickerConfirm: PropTypes.func,    //日期选择'确认'
@@ -40,11 +32,13 @@ export default class CJAreaPicker extends Component {
         // onPickerSelect: PropTypes.func,     //日期选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
 
-        toolbarValueText: PropTypes.string, // 顶部toolbar上的文案
+        showToolbarValueText: PropTypes.boolean,        // 是否显示文本
+        toolbarValueText: PropTypes.string,             // 顶部toolbar上的文案
+        toolbarValueFixed: PropTypes.boolean,           // 是否固定文本(默认false，即会根据选择的值显示)
     };
 
     static defaultProps = {
-        areaPickShowType: CJAreaPickShowType.yyyyMMdd,
+        areaPickShowType: CJAreaPickShowType.ProvinceCityArea,
         areaPickerCreateTimeType: CJAreaPickShowType.Free,
 
         toolbarHeight: 40,
@@ -54,6 +48,10 @@ export default class CJAreaPicker extends Component {
         // onPickerCancel: ()=>{},
         // onPickerSelect: (dateString)=>{},
         onCoverPress: ()=>{},
+
+        showToolbarValueText: true,
+        toolbarValueText: '请选择城市',
+        toolbarValueFixed: false,
     };
 
     constructor(props) {
@@ -162,6 +160,7 @@ export default class CJAreaPicker extends Component {
             <CJAreaPickerView
                 areaJson={AreaJson}
                 promptValueText={this.props.toolbarValueText}
+                shouldFixedValueText={this.props.toolbarValueFixed}
                 showValueText={true}
                 // selectedValue={this.state.selectedValue}
                 onPickerConfirm={(selectedValue) => {

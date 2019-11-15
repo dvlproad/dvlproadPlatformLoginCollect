@@ -19,15 +19,15 @@ export default class CJBottomToolbar extends Component {
 
         confirmText: PropTypes.string,
         confirmTextSize: PropTypes.number,
-        confirmTextColor: PropTypes.color,
+        // confirmTextColor: PropTypes.color,
 
         cancelText: PropTypes.string,
         cancelTextSize: PropTypes.number,
-        cancelTextColor: PropTypes.color,
+        // cancelTextColor: PropTypes.color,
 
         valueText: PropTypes.string,
         valueTextSize: PropTypes.number,
-        valueTextColor: PropTypes.color,
+        // valueTextColor: PropTypes.color,
     };
 
     static defaultProps = {

@@ -7,13 +7,13 @@ import {
     LKToastUtil,
     LKTextButton,
     LKBlueBGButton,
-    LKDatePicker,
 } from '../../../commonUI/luckincommonui';
 
 import AreaJson from '../../../CJBaseUIKit/areaPicker/area.json';
-import { CJAreaPicker } from "../../../CJBaseUIKit/CJBaseUIKit";
 import CJAreaPickerView from "../../../CJBaseUIKit/areaPicker/CJAreaPickerView";
-
+import {
+    LKAreaPicker,
+} from "../../../commonUI/luckincommonui";
 
 export default class AreaPickerPage extends Component {
 
@@ -69,9 +69,6 @@ export default class AreaPickerPage extends Component {
                     }}
                 />
 
-
-                <LKDatePicker ref={ref => this.datePicker = ref} />
-
                 <CJAreaPickerView
                     areaJson={AreaJson}
                     toolbarValueText={'选择地区'}
@@ -83,16 +80,16 @@ export default class AreaPickerPage extends Component {
                     ref={ref => this.areaPickerView = ref}
                 />
 
-                <CJAreaPicker
-                    toolbarValueText={'选择地区'}
+                <LKAreaPicker
+                    toolbarValueText={'意向城市'}
                     onPickerCancel={() => { }}
                     onPickerConfirm={(selectedValues) => {
                         LKToastUtil.showMessage(selectedValues);
                     }}
                     ref={ref => this.lastValueAreaPicker = ref}
                 />
-                <CJAreaPicker
-                    toolbarValueText={'选择地区'}
+                <LKAreaPicker
+                    toolbarValueText={'选择地区(默认选中的未固定固定)'}
                     onPickerCancel={() => { }}
                     onPickerConfirm={(value) => {
                         LKToastUtil.showMessage(value);
