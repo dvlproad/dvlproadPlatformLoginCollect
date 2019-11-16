@@ -47,6 +47,7 @@ import {
   // demo base Page的基类
   LKDemoTableHomeComponent,
   LKDemoCollectionHomeComponent,
+  LKDemoChooseBasePage,
 
   // navigation 导航栏(含路由)
   LKNavigationFactory,
@@ -125,6 +126,7 @@ var LKCommonUI = {
   // demo base Page的基类
   LKDemoTableHomeComponent,
   LKDemoCollectionHomeComponent,
+  LKDemoChooseBasePage,
 
   // navigation 导航栏(含路由)
   LKNavigationFactory,

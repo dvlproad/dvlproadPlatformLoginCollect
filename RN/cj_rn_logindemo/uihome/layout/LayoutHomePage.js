@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 
-import { EnableBlueButton } from '../../commonUI/button/LKEditSubmitButton'
+import { LKEditSubmitButton } from '../../commonUI/button/LKEditSubmitButton'
 
 export default class LayoutHomePage extends Component {
     render() {
         return (
             <View style={{flex: 1, flexDirection: "column", justifyContent: "flex-start"}}>
                 <View style={{backgroundColor: "#ff88ee", height: 150 }}>
-                    <EnableBlueButton style={styles.button} submitTitle={"column"} />
+                    <LKEditSubmitButton style={styles.button} submitTitle={"column"} />
                 </View>
                 <View style={{backgroundColor: "#6600ff", flex: 5, flexDirection: "column", justifyContent: "center" }}>
                     <Text style={[styles.text, {backgroundColor: "red"}]}>1</Text>

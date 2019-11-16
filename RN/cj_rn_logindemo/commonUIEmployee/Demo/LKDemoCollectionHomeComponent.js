@@ -19,18 +19,10 @@ import LuckinRoute from "../Navigation/LuckinRoute";
 
 
 export default class LKDemoCollectionHomeComponent extends Component {
-    static propTypes = {
-        moduleModels: PropTypes.array,
-    }
-
-    static defaultProps = {
-        moduleModels: [],
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-
+            moduleModels: [],
         };
     }
 

@@ -6,6 +6,7 @@
 import LKDemoScrollHomeComponent from "./Demo/LKDemoScrollHomeComponent";
 import LKDemoTableHomeComponent from "./Demo/LKDemoTableHomeComponent";
 import LKDemoCollectionHomeComponent from "./Demo/LKDemoCollectionHomeComponent";
+import LKDemoChooseBasePage from "./Demo/LKDemoChooseBasePage";
 
 // base Page的基类
 import LKEntryHomeComponent from "./Base/LKEntryHomeComponent";
@@ -46,6 +47,7 @@ var LKCommonUI = {
     LKDemoScrollHomeComponent,
     LKDemoTableHomeComponent,
     LKDemoCollectionHomeComponent,
+    LKDemoChooseBasePage,
 
     // navigation 导航栏(含路由)
     LKNavigationFactory,

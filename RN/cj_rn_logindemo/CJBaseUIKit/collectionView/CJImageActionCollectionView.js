@@ -41,7 +41,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import {View, ViewPropTypes} from "react-native";
 import CJActionLoadingImage  from '../image/CJActionLoadingImage';
-import {ImageUploadType} from "../image/CJLoadingImage";
+import {CJImageUploadType} from "../image/CJLoadingImage";
 import CJBaseCollectionView from './CJBaseCollectionView';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -189,7 +189,7 @@ export default class CJImageActionCollectionView extends CJBaseCollectionView {
 
                 let addImage = {
                     imageSource: this.props.addImageSource,
-                    uploadType: ImageUploadType.NotNeed,
+                    uploadType: CJImageUploadType.NotNeed,
                     uploadProgress: 0,
                     imageIndex: renderImageCount,
                 };

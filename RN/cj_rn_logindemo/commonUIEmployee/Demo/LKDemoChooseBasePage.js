@@ -1,11 +1,11 @@
 /**
- * LKDemoTableHomeComponent.js
+ * LKDemoChooseBasePage.js
  *
- * @Description: 用于测试各种功能的列表视图
+ * @Description: 用于测试各种选择的列表视图
  *
  * @author      ciyouzen
  * @email       dvlproad@163.com
- * @date        2019-07-02 14:17:50
+ * @date        2019-07-26 09:48:50
  *
  * Copyright (c) dvlproad. All rights reserved.
  */
@@ -17,7 +17,7 @@ import {
 import LuckinRoute from "../Navigation/LuckinRoute";
 
 
-export default class LKDemoTableHomeComponent extends Component {
+export default class LKDemoChooseBasePage extends Component {
     constructor(props) {
         super(props);
         this.state = {

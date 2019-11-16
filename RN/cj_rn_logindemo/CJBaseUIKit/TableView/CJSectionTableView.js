@@ -29,7 +29,8 @@ export default class CJSectionTableView extends Component {
 
         return (
             <CJTableViewCell
-                showTitle={moduleModel.title}
+                text={moduleModel.title}
+                detailText={moduleModel.valueText}
                 clickAction={() => (
                     this.props.clickModuleModel(moduleModel)
                 )}

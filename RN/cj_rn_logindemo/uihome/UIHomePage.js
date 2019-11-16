@@ -1,61 +1,41 @@
 //UIHomePage.js
 import React, { Component } from 'react';
-import {View, Text, Alert} from 'react-native';
-import HomeSectionList from "../commonUI/list/HomeSectionList";
+import {
+    LKDemoTableHomeComponent
+} from "../commonUI/luckincommonui";
 
-
-export default class UIHomePage extends Component {
+export default class UIHomePage extends LKDemoTableHomeComponent {
     constructor(props) {
         super(props);
-    }
 
-    _onPressButton = (nextPageName) => {
-        console.log(nextPageName);
-
-        if (nextPageName) {
-            this.props.navigation.navigate(nextPageName)
-        } else  {
-            //nextPageName = "Button";
-            Alert.alert(nextPageName)
-        }
-    }
-
-    render() {
-        let sections = [
-            { key: "布局/跳转",
-                data: [
-                    { title: "LayoutHomePage", page: "LayoutHomePage" },
-                    { title: "Navigation", page: "NavigationHome" },
+        this.state = {
+            sectionDataModels: [
+                { key: "布局/跳转",
+                    data: [
+                        { title: "LayoutHomePage", nextPageName: "LayoutHomePage" },
+                        { title: "Navigation", nextPageName: "NavigationHome" },
                     ]
-            },
-            { key: "组件",
-                data: [
-                    { title: "Button", page: "ButtonHomePage" },
-                    { title: "Text", page: "TextHome" },
-                    { title: "Image", page: "ImageHomePage" },
-                    { title: "Empty", page: "EmptyNetworkPage" },
-                    { title: "WebView", page: "WebViewHomePage" },
-                ]
-            },
-            { key: "进阶",
-                data: [
-                    { title: "List(列表)", page: "ListHomePage" },
-                    { title: "Collection(集合视图)", page: "CollectionHomePage" },
-                    { title: "Modal(Modal)", page: "ModalHomePage" },
-                    { title: "ToolBar(工具器)", page: "ToolBarHomePage" },
-                    { title: "Picker(选择器)", page: "PickerAllHomePage" },
-                ]
-            },
-        ];
-
-        return (
-            <View style={{ flex: 1 }}>
-                <HomeSectionList
-                    sections={sections}
-                    onPress={this._onPressButton}
-                />
-            </View>
-        );
+                },
+                { key: "组件",
+                    data: [
+                        { title: "Button", nextPageName: "ButtonHomePage" },
+                        { title: "Text", nextPageName: "TextHomePage" },
+                        { title: "Image", nextPageName: "ImageHomePage" },
+                        { title: "Empty", nextPageName: "EmptyNetworkPage" },
+                        { title: "WebView", nextPageName: "WebViewHomePage" },
+                    ]
+                },
+                { key: "进阶",
+                    data: [
+                        { title: "Table(列表视图)", nextPageName: "ListHomePage" },
+                        { title: "Collection(集合视图)", nextPageName: "CollectionHomePage" },
+                        { title: "Modal(Modal)", nextPageName: "ModalHomePage" },
+                        { title: "ToolBar(工具器)", nextPageName: "ToolBarHomePage" },
+                        { title: "Picker(选择器)", nextPageName: "PickerAllHomePage" },
+                    ]
+                },
+            ],
+        }
     }
 }
 
