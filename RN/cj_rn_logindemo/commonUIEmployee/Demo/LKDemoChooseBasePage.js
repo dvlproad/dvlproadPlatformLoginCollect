@@ -10,11 +10,10 @@
  * Copyright (c) dvlproad. All rights reserved.
  */
 import React, {Component} from 'react';
-import { Alert, Dimensions } from 'react-native';
+import { View, Alert, Dimensions } from 'react-native';
 import {
     CJSectionTableView
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import LuckinRoute from "../Navigation/LuckinRoute";
 
 
 export default class LKDemoChooseBasePage extends Component {
@@ -28,12 +27,13 @@ export default class LKDemoChooseBasePage extends Component {
     _execModuleModel= (moduleModel)=>{
         if (moduleModel.clickButtonHandle) {
             moduleModel.clickButtonHandle(moduleModel);
-        } else if (moduleModel.nextPageName && moduleModel.nextPageName.length > 0) {
-            // this.props.navigation.navigate(moduleModel.nextPageName);
-            LuckinRoute.push(this.props.navigation, moduleModel.nextPageName, {});
         } else {
             Alert.alert("提示：请至少设置 moduleModel.clickButtonHandle 或 moduleModel.nextPageName");
         }
+    }
+
+    renderChooseComponents() {
+        return null;
     }
 
 
@@ -42,10 +42,14 @@ export default class LKDemoChooseBasePage extends Component {
         const listWidth = screenWidth;
 
         return (
-            <CJSectionTableView
-                sectionDataModels={this.state.sectionDataModels}
-                clickModuleModel={this._execModuleModel}
-            />
+            <View>
+                <CJSectionTableView
+                    sectionDataModels={this.state.sectionDataModels}
+                    clickModuleModel={this._execModuleModel}
+                />
+
+                {this.renderChooseComponents()}
+            </View>
         );
     }
 }

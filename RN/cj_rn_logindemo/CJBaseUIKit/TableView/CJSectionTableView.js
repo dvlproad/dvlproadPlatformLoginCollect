@@ -41,7 +41,7 @@ export default class CJSectionTableView extends Component {
     _sectionComp = (info) => {
         let txt = info.section.key;
         return <Text
-            style={{ height: 50, textAlign: 'center', textAlignVertical: 'center', backgroundColor: '#9CEBBC', color: 'white', fontSize: 30 }}>{txt}</Text>
+            style={{ height: 50, lineHeight: 50, textAlign: 'center', textAlignVertical: 'center', backgroundColor: '#9CEBBC', color: 'white', fontSize: 30 }}>{txt}</Text>
     }
 
     render() {

@@ -23,15 +23,20 @@ export default class UIHomePage extends LKDemoTableHomeComponent {
                         { title: "Image", nextPageName: "ImageHomePage" },
                         { title: "Empty", nextPageName: "EmptyNetworkPage" },
                         { title: "WebView", nextPageName: "WebViewHomePage" },
+                        { title: "ToolBar(工具器)", nextPageName: "ToolBarHomePage" },
+                    ]
+                },
+                { key: "弹窗/蒙层",
+                    data: [
+                        { title: "ActionSheet", nextPageName: "TSActionSheetPage" },
+                        { title: "Modal(弹窗/蒙层)", nextPageName: "ModalHomePage" },
+                        { title: "Picker(选择器)", nextPageName: "PickerAllHomePage" },
                     ]
                 },
                 { key: "进阶",
                     data: [
                         { title: "Table(列表视图)", nextPageName: "ListHomePage" },
                         { title: "Collection(集合视图)", nextPageName: "CollectionHomePage" },
-                        { title: "Modal(Modal)", nextPageName: "ModalHomePage" },
-                        { title: "ToolBar(工具器)", nextPageName: "ToolBarHomePage" },
-                        { title: "Picker(选择器)", nextPageName: "PickerAllHomePage" },
                     ]
                 },
             ],
@@ -68,6 +73,9 @@ import ToolBarHomePage from "./toolbar/ToolBarHomePage";
 
 //picker
 import { PickerAllHomePages, PickRoutePage } from "./picker/PickerAllHomePage";
+
+// 弹窗
+import TSActionSheetPage from "./actionsheet/TSActionSheetPage";
 //modal
 import { ModalPages, ModalRoutePage } from "./modal/ModalHomePage";
 
@@ -122,6 +130,15 @@ export const UIPages = {
             title: `ToolBarHomePage`,
         }),
     },
+
+    // 弹窗
+    TSActionSheetPage: {
+        screen: TSActionSheetPage,
+        navigationOptions: () => ({
+            title: `弹窗首页`,
+        }),
+    },
+
     ...PickerAllHomePages,
     ...ModalPages,
 
