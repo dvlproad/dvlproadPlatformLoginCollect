@@ -63,7 +63,6 @@ import ActivityIndicatorPage from "./hud/ActivityIndicatorPage";
 import HUDHomePage from "./hud/HUDHomePage";
 
 import PhotoCameraSheetPage from "./actionSheet/PhotoCameraSheetPage";
-import ActionSheetPage from "./actionSheet/ActionSheetPage";
 import ActionSheetFactoryPage from "./actionSheet/ActionSheetFactoryPage";
 
 export const ModalRoutePage = 'ModalHomePage';
@@ -102,12 +101,6 @@ export const ModalPages = {
         screen: ActionSheetFactoryPage,
         navigationOptions: () => ({
             title: `ActionSheetFactoryPage`,
-        }),
-    },
-    ActionSheetPage: {
-        screen: ActionSheetPage,
-        navigationOptions: () => ({
-            title: `ActionSheetPage`,
         }),
     },
     PhotoCameraSheetPage: {

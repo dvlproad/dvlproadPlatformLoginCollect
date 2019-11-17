@@ -17,6 +17,13 @@ import LKImageActionHomeComponent from "./Base/LKImageActionHomeComponent";
 import LKNavigationFactory from "./Navigation/LKNavigationFactory";
 import LuckinRoute from "./Navigation/LuckinRoute";
 
+// Toast
+import LKToast from "../CJBaseUIKit/toast/CJToast";
+
+// ActionSheet
+import { CJActionSheet as LKActionSheet } from "../CJBaseUIKit/ActionSheet/CJActionSheet";
+import { CJMultipleChooseActionSheet as LKMultipleChooseActionSheet } from "../CJBaseUIKit/ActionSheet/CJMultipleChooseActionSheet";
+
 // CollectionView
 import LKImageActionCollectionView from "./CollectionView/LKImageActionCollectionView";
 
@@ -52,6 +59,13 @@ var LKCommonUI = {
     // navigation 导航栏(含路由)
     LKNavigationFactory,
     LuckinRoute,
+
+    // Toast
+    LKToast,
+
+    // ActionSheet
+    LKActionSheet,
+    LKMultipleChooseActionSheet,
 
     // collection
     LKEntryHomeComponent,

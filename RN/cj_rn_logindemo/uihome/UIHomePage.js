@@ -29,6 +29,7 @@ export default class UIHomePage extends LKDemoTableHomeComponent {
                 { key: "弹窗/蒙层",
                     data: [
                         { title: "ActionSheet", nextPageName: "TSActionSheetPage" },
+                        { title: "PopupManager(弹窗管理)", nextPageName: "TSPopupManagerPage" },
                         { title: "Modal(弹窗/蒙层)", nextPageName: "ModalHomePage" },
                         { title: "Picker(选择器)", nextPageName: "PickerAllHomePage" },
                     ]
@@ -76,6 +77,8 @@ import { PickerAllHomePages, PickRoutePage } from "./picker/PickerAllHomePage";
 
 // 弹窗
 import TSActionSheetPage from "./actionsheet/TSActionSheetPage";
+import TSPopupManagerPage from "./actionsheet/TSPopupManagerPage";
+
 //modal
 import { ModalPages, ModalRoutePage } from "./modal/ModalHomePage";
 
@@ -136,6 +139,12 @@ export const UIPages = {
         screen: TSActionSheetPage,
         navigationOptions: () => ({
             title: `弹窗首页`,
+        }),
+    },
+    TSPopupManagerPage: {
+        screen: TSPopupManagerPage,
+        navigationOptions: () => ({
+            title: `弹窗管理`,
         }),
     },
 
