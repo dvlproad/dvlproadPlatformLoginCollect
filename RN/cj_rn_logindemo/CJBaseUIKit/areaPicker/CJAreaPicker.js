@@ -25,11 +25,11 @@ export default class CJAreaPicker extends Component {
     static propTypes = {
         areaPickShowType: PropTypes.number,         //地区选择器的选择样式(默认yyyyMMdd,即只显示年月日)
         areaPickerCreateTimeType: PropTypes.number, //地区选择器创建的时机
-        // dateString: PropTypes.string,       //选择的日期
+        // selectedValue: PropTypes.array,       //选择的日期
         //
-        // onPickerConfirm: PropTypes.func,    //日期选择'确认'
-        // onPickerCancel: PropTypes.func,     //日期选择'取消'
-        // onPickerSelect: PropTypes.func,     //日期选择'变了下'
+        onPickerConfirm: PropTypes.func,    //地区选择'确认'
+        onPickerCancel: PropTypes.func,     //地区选择'取消'
+        // onPickerSelect: PropTypes.func,     //地区选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
 
         showToolbarValueText: PropTypes.boolean,        // 是否显示文本
@@ -42,11 +42,11 @@ export default class CJAreaPicker extends Component {
         areaPickerCreateTimeType: CJAreaPickShowType.Free,
 
         toolbarHeight: 40,
-        // dateString: '',
+        // selectedValue: [],
         //
-        // onPickerConfirm: (dateString)=>{},
-        // onPickerCancel: ()=>{},
-        // onPickerSelect: (dateString)=>{},
+        onPickerConfirm: (selectedValue)=>{},
+        onPickerCancel: ()=>{},
+        // onPickerSelect: (selectedValue)=>{},
         onCoverPress: ()=>{},
 
         showToolbarValueText: true,
@@ -63,46 +63,25 @@ export default class CJAreaPicker extends Component {
             hasCreate: needCreateAtFirst,
 
             dateString: '',
-
-            onPickerConfirm: ()=>{ },
-            onPickerCancel: ()=>{ },
-            onPickerSelect: ()=>{ },
         }
     }
 
     /**
      * 显示地区选择器(默认显示 ProvinceCityArea 选择器)
-     * @param selectedValues    弹出时候选中的日期(输入的字符串，依赖设置的areaPickShowType，如默认是 ProvinceCityArea，即形如['香港', '香港', '东区']')
-     * @param onPickerConfirm   确认
+     * @param selectedValues    弹出时候选中的地区(输入的字符串，依赖设置的areaPickShowType，如默认是 ProvinceCityArea，即形如['香港', '香港', '东区']')
      */
-    showWithAreaSelectedValues(selectedValues, onPickerConfirm) {
+    showWithAreaSelectedValues(selectedValues) {
         this.state.selectedValues = selectedValues;
-        this.showAllEvent(onPickerConfirm, null, null);
+        this.tryShowAreaPicker();
     }
 
     /**
      * 显示地区选择器(地区默认值为上次点击"确认"的值)
-     * @param onPickerConfirm   确认
      */
-    showWithLastAreaSelectedValues(onPickerConfirm) {
-        this.showAllEvent(onPickerConfirm, null, null);
+    showWithLastAreaSelectedValues() {
+        this.tryShowAreaPicker();
     }
 
-    /**
-     * 显示地区选择器(默认显示 yyyyMMdd 选择器)
-     * @param onPickerConfirm   确认
-     * @param onPickerCancel    取消
-     * @param onPickerSelect    选择过程的事件
-     */
-    showAllEvent(onPickerConfirm, onPickerCancel, onPickerSelect) {
-        this.setState({
-            onPickerConfirm: onPickerConfirm,
-            onPickerCancel: onPickerCancel,
-            onPickerSelect: onPickerSelect
-        }, ()=>{
-            this.tryShowAreaPicker();
-        })
-    }
 
     /**
      * 尝试弹出地区选择控制器
@@ -164,10 +143,10 @@ export default class CJAreaPicker extends Component {
                 showValueText={true}
                 // selectedValue={this.state.selectedValue}
                 onPickerConfirm={(selectedValue) => {
-                    this.state.onPickerConfirm && this.state.onPickerConfirm(selectedValue);
+                    this.props.onPickerConfirm && this.props.onPickerConfirm(selectedValue);
                 }}
                 onPickerCancel={() => {
-                    this.state.onPickerCancel && this.state.onPickerCancel();
+                    this.props.onPickerCancel && this.props.onPickerCancel();
                 }}
                 onCoverPress={() => {
                     this.props.onCoverPress && this.props.onCoverPress();

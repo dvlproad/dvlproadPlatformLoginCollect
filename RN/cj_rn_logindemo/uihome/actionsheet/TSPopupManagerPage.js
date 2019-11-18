@@ -31,13 +31,15 @@ export default class TSPopupManagerPage extends LKDemoChooseBasePage {
                         {
                             title: "弹出长列表actionSheet",
                             clickButtonHandle: (moduleModel) => {
-                                this._showPopupViewWithType(LKPopupType.ActionSheet);
+                                this.popupManager.showWithItems(this.state.itemModels);
                             },
                         },
                         {
                             title: "弹出多选的列表actionSheet",
                             clickButtonHandle: (moduleModel) => {
-                                this._showPopupViewWithType(LKPopupType.MultipleChooseActionSheet);
+                                this.popupManager.showMutipleChooseWithItems(this.state.itemModels, (selectedResultString)=>{
+                                    LKToast.showMessage(selectedResultString);
+                                });
                             },
                         },
                     ]
@@ -46,15 +48,11 @@ export default class TSPopupManagerPage extends LKDemoChooseBasePage {
         }
     }
 
-    _showPopupViewWithType(popupType) {
-        this.popupManager.showWithItems(popupType, this.state.itemModels);
-    }
-
-
 
     renderChooseComponents() {
         return (
-            <LKPopupManager ref={ref => this.popupManager = ref} />
+            <LKPopupManager ref={ref => this.popupManager = ref}
+            />
         )
     }
 }

@@ -40,8 +40,9 @@ export var CJDatePickShowType = {
 
 export default class CJBaseDatePicker extends Component {
     static propTypes = {
-        datePickShowType: PropTypes.number, //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
-        dateString: PropTypes.string,       //选择的日期
+        datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
+        dateString: PropTypes.string,               //选择的日期
+        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
 
         onPickerConfirm: PropTypes.func,    //日期选择'确认'
         onPickerCancel: PropTypes.func,     //日期选择'取消'
@@ -52,6 +53,7 @@ export default class CJBaseDatePicker extends Component {
     static defaultProps = {
         datePickShowType: CJDatePickShowType.yyyyMMdd,
         dateString: '',
+        shouldCreateItRightNow: false,
 
         onPickerConfirm: (dateString)=>{},
         onPickerCancel: ()=>{},
@@ -84,6 +86,13 @@ export default class CJBaseDatePicker extends Component {
      */
     show() {
         this.datePicker.show();
+    }
+
+    /**
+     * 弹出日期选择器，并且不带背景
+     */
+    showWithNoCover() {
+        this.datePicker.showWithNoCover();
     }
 
     /**
@@ -253,6 +262,8 @@ export default class CJBaseDatePicker extends Component {
 
         return (
             <CJDatePickerView
+                shouldCreateItRightNow={this.props.shouldCreateItRightNow}
+
                 yyyy={true}
                 MM={true}
                 dd={showDays}

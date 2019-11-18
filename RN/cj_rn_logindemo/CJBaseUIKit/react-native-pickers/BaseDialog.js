@@ -24,7 +24,8 @@ export default class BaseDialog extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            _isShow: false
+            _isShow: false,
+            _isNoCover: false,  // 默认false,即有背景蒙层
         }
     }
 
@@ -33,7 +34,10 @@ export default class BaseDialog extends BaseComponent {
     }
 
     show(callback, state = {}) {
-        this.setState({ _isShow: true, ...state }, () => {
+        this.setState({
+            _isShow: true,
+            ...state
+        }, () => {
             if (!this.props.showAnimationType || this.props.showAnimationType == 'spring') {
                 Animated.spring(this._path, { toValue: 1 }).start(() => {
                     callback && callback();
@@ -46,6 +50,11 @@ export default class BaseDialog extends BaseComponent {
         });
     }
 
+    showWithNoCover(callback, state = {}) {
+        this.state._isNoCover = true;
+        this.show(callback, state);
+    }
+
     dismiss(callback) {
         Animated.timing(this._path, { toValue: 0, duration: 200 }).start(() => {
             this.setState({ _isShow: false }, () => {
@@ -56,7 +65,7 @@ export default class BaseDialog extends BaseComponent {
 
     /**
      * 重写前景动画效果
-     * @param {*} path 
+     * @param {*} path
      */
     _getContentInterpolate(path) {
         return [
@@ -87,25 +96,42 @@ export default class BaseDialog extends BaseComponent {
     }
 
     render() {
+        let viewStyle = {
+            top: 0,
+            backgroundColor: 0x00000050
+        };
+        if (this.state._isNoCover) {
+            viewStyle = {
+                top: 0,
+                backgroundColor: 'transparent'
+            }
+        }
         if (this.state._isShow || (this.props && this.props.removeSubviews === false)) {
             return <Animated.View
-                style={{
-                    position: 'absolute', left: 0, right: 0, top: 0, bottom: 0,
-                    backgroundColor: 0x00000050, opacity: this._path.interpolate({
-                        inputRange: [0, 0.5, 1],
-                        outputRange: [0, 1, 1]
-                    }), ...this._getContentPosition(),
-                    transform: [
+                style={
+                    [
                         {
-                            translateX: this._path.interpolate(
+                            position: 'absolute',
+                            left: 0, right: 0, bottom: 0,
+                            opacity: this._path.interpolate({
+                                inputRange: [0, 0.5, 1],
+                                outputRange: [0, 1, 1]
+                            }),
+                            ...this._getContentPosition(),
+                            transform: [
                                 {
-                                    inputRange: [0, 0.01, 1],
-                                    outputRange: [-this.mScreenWidth, 0, 0]
+                                    translateX: this._path.interpolate(
+                                        {
+                                            inputRange: [0, 0.01, 1],
+                                            outputRange: [-this.mScreenWidth, 0, 0]
+                                        }
+                                    )
                                 }
-                            )
-                        }
+                            ]
+                        },
+                        viewStyle
                     ]
-                }}>
+                }>
                 <TouchableOpacity
                     onPress={() => {
                         if (!this.props || (this.props.coverClickable || this.props.coverClickable == null)) {

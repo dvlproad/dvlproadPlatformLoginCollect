@@ -6,13 +6,6 @@ import PropTypes from 'prop-types';
 // ActionSheet
 import { CJActionSheet as LKActionSheet } from "../../CJBaseUIKit/ActionSheet/CJActionSheet";
 import { CJMultipleChooseActionSheet as LKMultipleChooseActionSheet } from "../../CJBaseUIKit/ActionSheet/CJMultipleChooseActionSheet";
-import {LKToast} from "../../lkcui/lkcui";
-
-// import {
-//     // ActionSheet
-//     LKActionSheet,
-//     LKMultipleChooseActionSheet,
-// } from "../commonUIEmployee/commonUIEmployee";
 
 
 export var LKPopupType = {
@@ -25,22 +18,30 @@ export class LKPopupManager extends Component {
         super(props);
         this.state = {
             showingComponent: null,
+            confirmHandle: (selectedResultString)=>{},
         }
+    }
+
+
+    /**
+     * 显示多个选择项的Sheet
+     *
+     * @param itemModels    数据模型数组(包含'标题'mainTitle及'点击该标题的回调'actionBlock)
+     */
+    showWithItems(itemModels) {
+        this.singleActionSheet.showWithItems(itemModels);
     }
 
     /**
      * 显示多个选择项的Sheet
      *
-     * @param popupType     弹窗类型
      * @param itemModels    数据模型数组(包含'标题'mainTitle及'点击该标题的回调'actionBlock)
      */
-    showWithItems(popupType, itemModels) {
-        if (popupType == LKPopupType.ActionSheet) {
-            this.singleActionSheet.showWithItems(itemModels);
-        } else if (popupType == LKPopupType.MultipleChooseActionSheet) {
-            this.multipleActionSheet.showWithItems(itemModels);
-        }
+    showMutipleChooseWithItems(itemModels, confirmHandle) {
+        this.state.confirmHandle = confirmHandle;
+        this.multipleActionSheet.showWithItems(itemModels);
     }
+
 
 
     render() {
@@ -56,7 +57,9 @@ export class LKPopupManager extends Component {
                                                      selectedItemTitles.push(selectedItemModel.mainTitle);
                                                  }
                                                  let selectedResultString = selectedItemTitles.join('/');
-                                                 LKToast.showMessage(selectedResultString);
+                                                 if (this.state.confirmHandle) {
+                                                     this.state.confirmHandle(selectedResultString);
+                                                 }
                                              }}
                 />
             </View>

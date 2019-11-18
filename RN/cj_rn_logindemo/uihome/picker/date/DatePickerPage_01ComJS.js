@@ -7,8 +7,13 @@ import {
     LKToastUtil,
     LKTextButton,
     LKBlueBGButton,
-    LKDatePicker,
 } from '../../../commonUI/luckincommonui';
+
+import {
+    LKDatePicker,
+} from '../../../lkcui/lkcui';
+
+import CJBaseBottomPiker from '../../../CJBaseUIKit/base/CJBaseBottomPicker';
 
 
 
@@ -17,6 +22,7 @@ export default class DatePickerPage_01ComJS extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            dealIndex: 0,
             dateString1: '2019-06-06',
             dateString2: '2000-02-29'
         }
@@ -33,16 +39,8 @@ export default class DatePickerPage_01ComJS extends Component {
                     }}
                     title={this.state.dateString1}
                     onPress={()=>{
-                        this.datePicker.showAllEvent(
-                            this.state.dateString1,
-                            (dateString)=>{
-                                this.setState({
-                                    dateString1: dateString
-                                })
-                            },
-                            ()=>{},
-                            ()=>{},
-                        )
+                        this.state.dealIndex = 0;
+                        this.datePicker.showWithDateString(this.state.dateString1);
                     }}
                 />
 
@@ -53,20 +51,38 @@ export default class DatePickerPage_01ComJS extends Component {
                     }}
                     title={this.state.dateString2}
                     onPress={()=>{
-                        this.datePicker.showAllEvent(
-                            this.state.dateString2,
-                            (dateString)=>{
-                                this.setState({
-                                    dateString2: dateString
-                                })
-                            },
-                            ()=>{},
-                            ()=>{},
-                        )
+                        this.state.dealIndex = 1;
+                        this.datePicker.show();
                     }}
                 />
 
-                <LKDatePicker ref={ref => this.datePicker = ref} />
+                <LKBlueBGButton
+                    style={{
+                        width: 180,
+                        backgroundColor:'red'
+                    }}
+                    title={this.state.dateString2}
+                    onPress={()=>{
+                        this.state.dealIndex = 1;
+                        this.datePicker.showWithNoCover();
+                    }}
+                />
+
+                <LKDatePicker ref={ref => this.datePicker = ref}
+                              onPickerConfirm={(dateString)=>{
+                                  if (this.state.dealIndex == 0) {
+                                      this.setState({
+                                          dateString1: dateString
+                                      })
+                                  } else if (this.state.dealIndex == 1) {
+                                      this.setState({
+                                          dateString2: dateString
+                                      })
+                                  }
+                              }}
+                />
+
+
 
             </View>
         )

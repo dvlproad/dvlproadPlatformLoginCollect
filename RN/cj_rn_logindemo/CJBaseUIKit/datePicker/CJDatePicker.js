@@ -56,11 +56,13 @@ export default class CJDatePicker extends Component {
         datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
         datePickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
         // dateString: PropTypes.string,       //选择的日期
-        //
-        // onPickerConfirm: PropTypes.func,    //日期选择'确认'
-        // onPickerCancel: PropTypes.func,     //日期选择'取消'
+
+        onPickerConfirm: PropTypes.func,    //日期选择'确认'
+        onPickerCancel: PropTypes.func,     //日期选择'取消'
         // onPickerSelect: PropTypes.func,     //日期选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
+
+        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
     };
 
     static defaultProps = {
@@ -68,10 +70,12 @@ export default class CJDatePicker extends Component {
         datePickerCreateTimeType: CJDatePickerCreateTimeType.Free,
         // dateString: '',
         //
-        // onPickerConfirm: (dateString)=>{},
-        // onPickerCancel: ()=>{},
+        onPickerConfirm: (dateString)=>{},
+        onPickerCancel: ()=>{},
         // onPickerSelect: (dateString)=>{},
         onCoverPress: ()=>{},
+
+        shouldCreateItRightNow: false,
     };
 
     constructor(props) {
@@ -81,37 +85,35 @@ export default class CJDatePicker extends Component {
 
         this.state = {
             hasCreate: needCreateAtFirst,
+            noCover: false,
 
-            dateString: '',
-
-            onPickerConfirm: ()=>{ },
-            onPickerCancel: ()=>{ },
-            onPickerSelect: ()=>{ },
+            dateString: '2017-06-30',
         }
     }
 
     /**
      * 显示日期选择器(默认显示 yyyyMMdd 选择器)
-     * @param dateString        弹出时候选中的日期(输入的字符串，依赖设置的datePickShowType，如默认是yyyyMMdd，即形如'2000-02-29')
-     * @param onPickerConfirm   确认
      */
-    showWithDateString(dateString, onPickerConfirm) {
-        this.showAllEvent(dateString, onPickerConfirm, null, null);
+    show() {
+        this.tryShowDatePicker();
+    }
+
+
+    /**
+     * 弹出日期选择器，并且不带背景
+     */
+    showWithNoCover() {
+        this.state.noCover = true;
+        this.tryShowDatePicker();
     }
 
     /**
      * 显示日期选择器(默认显示 yyyyMMdd 选择器)
-     * @param dateString        弹出时候选中的日期(输入的字符串，依赖设置的datePickShowType，如默认是yyyyMMdd，即形如'2000-02-29')
-     * @param onPickerConfirm   确认
-     * @param onPickerCancel    取消
-     * @param onPickerSelect    选择过程的事件
+     * @param dateString    弹出时候选中的日期(输入的字符串，依赖设置的datePickShowType，如默认是yyyyMMdd，即形如'2000-02-29')
      */
-    showAllEvent(dateString, onPickerConfirm, onPickerCancel, onPickerSelect) {
+    showWithDateString(dateString) {
         this.setState({
             dateString: dateString,
-            onPickerConfirm: onPickerConfirm,
-            onPickerCancel: onPickerCancel,
-            onPickerSelect: onPickerSelect
         }, ()=>{
             this.tryShowDatePicker();
         })
@@ -148,7 +150,12 @@ export default class CJDatePicker extends Component {
             let dateString = this.state.dateString;
             this.datePicker.updateDefaultSelectedDateString(dateString);
 
-            this.datePicker.show();
+            if (this.state.noCover) {
+                this.datePicker.showWithNoCover();
+            } else {
+                this.datePicker.show();
+            }
+
         } else {
             //LKToastUtil.showMessage('Error：你还未创建日期选择器');
         }
@@ -175,11 +182,12 @@ export default class CJDatePicker extends Component {
             <CJBaseDatePicker
                 datePickShowType={this.props.datePickShowType}
                 dateString={this.state.dateString}
+                shouldCreateItRightNow={this.props.shouldCreateItRightNow}
                 onPickerConfirm={(dateString) => {
-                    this.state.onPickerConfirm && this.state.onPickerConfirm(dateString);
+                    this.props.onPickerConfirm && this.props.onPickerConfirm(dateString);
                 }}
                 onPickerCancel={() => {
-                    this.state.onPickerCancel && this.state.onPickerCancel();
+                    this.props.onPickerCancel && this.props.onPickerCancel();
                 }}
                 onCoverPress={() => {
                     this.props.onCoverPress && this.props.onCoverPress();

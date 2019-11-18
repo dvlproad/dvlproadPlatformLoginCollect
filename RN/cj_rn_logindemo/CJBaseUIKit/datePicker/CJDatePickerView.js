@@ -12,6 +12,8 @@ class CJDatePickerView extends CJBaseBottomPicker {
     };
 
     static defaultProps = {
+        shouldCreateItRightNow: false,
+
         removeSubviews: false,
 
         onPickerCancel: null,

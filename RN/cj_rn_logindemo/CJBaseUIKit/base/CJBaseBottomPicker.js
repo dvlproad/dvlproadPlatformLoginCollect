@@ -19,6 +19,8 @@ let actionSheetMaxHeight = screenHeight - actionSheetTop;   //整个完整的act
 
 export default class CJBaseBottomPicker extends BaseDialog {
     static propTypes = {
+        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
+
         onPickerCancel: PropTypes.func,
         onPickerConfirm: PropTypes.func,
         onCoverPress: PropTypes.func,
@@ -42,6 +44,8 @@ export default class CJBaseBottomPicker extends BaseDialog {
     };
 
     static defaultProps = {
+        shouldCreateItRightNow: false,
+
         onPickerCancel: ()=>{},
         onPickerConfirm: (selectedValue) => {},
         onCoverPress: null,
@@ -185,5 +189,13 @@ export default class CJBaseBottomPicker extends BaseDialog {
                 {/*</View>*/}
             </View>
         )
+    }
+
+    render() {
+        if (this.props.shouldCreateItRightNow) {
+            return this.renderContent();
+        } else {
+            return super.render();
+        }
     }
 }
