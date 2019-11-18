@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import CJBottomToolbar from './CJBottomToolbar';
-import BaseDialog from '../react-native-pickers/BaseDialog';
+import CJBaseDialog from '../PickerView/CJBaseDialog';
 import PropTypes from "prop-types";
 
 let screenWidth = Dimensions.get('window').width;
@@ -17,7 +17,7 @@ let screenBottomHeight = Platform.OS === 'ios' ? screenHeight >= 812 ? 34 : 0 : 
 let actionSheetTop = 120;
 let actionSheetMaxHeight = screenHeight - actionSheetTop;   //整个完整的actionSheet的最大允许高度
 
-export default class CJBaseBottomPicker extends BaseDialog {
+export default class CJBaseBottomPicker extends CJBaseDialog {
     static propTypes = {
         shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
 

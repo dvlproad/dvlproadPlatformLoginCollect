@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import PropTypes from "prop-types";
 import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
-import PickerView from '../react-native-pickers/PickerView';
+import CJPickerView from '../PickerView/CJPickerView';
 
 /**
  * 地区选择器的选择样式
@@ -176,7 +176,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
                 }
             }
             if (item && length > 0) {
-                return <PickerView
+                return <CJPickerView
                     itemTextColor={this.props.itemTextColor}
                     itemSelectedColor={this.props.itemSelectedColor}
                     key={'picker' + pickerId}

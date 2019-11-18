@@ -7,9 +7,9 @@ import {
     Platform
 } from 'react-native';
 
-import BaseComponent from './BaseComponent';
+import CJBaseComponent from './CJBaseComponent';
 
-export default class BaseDialog extends BaseComponent {
+export default class CJBaseDialog extends CJBaseComponent {
 
     static defaultProps = {
         removeSubviews: true,   //隐藏时，是否回收前景控件，false 更流畅，true：初始化更快，dismiss后就回收

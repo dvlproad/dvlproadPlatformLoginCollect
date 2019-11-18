@@ -7,7 +7,7 @@ import {
     PanResponder
 } from 'react-native';
 
-import BaseComponent from './BaseComponent';
+import CJBaseComponent from './CJBaseComponent';
 
 import Svg, {
     LinearGradient,
@@ -15,7 +15,7 @@ import Svg, {
     Stop
 } from 'react-native-svg';
 
-class PickerView extends BaseComponent {
+class CJPickerView extends CJBaseComponent {
 
     static defaultProps = {
         itemTextColor: 0x333333ff,
@@ -341,4 +341,4 @@ class PickerView extends BaseComponent {
     }
 }
 
-export default PickerView;
+export default CJPickerView;

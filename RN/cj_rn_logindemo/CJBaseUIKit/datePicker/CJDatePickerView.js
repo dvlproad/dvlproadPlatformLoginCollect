@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
-import PickerView from '../react-native-pickers/PickerView';
+import CJPickerView from '../PickerView/CJPickerView';
 import LKDateUtil from "../../commonUtil/LKDateUtil";
 
 
@@ -224,7 +224,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
     renderPicker() {
         return this.state.pickerData.map((item, pickerId) => {
             if (item) {
-                return <PickerView
+                return <CJPickerView
                     key={'picker' + pickerId}
                     itemTextColor={this.props.itemTextColor}
                     itemSelectedColor={this.props.itemSelectedColor}

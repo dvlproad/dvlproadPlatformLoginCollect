@@ -6,7 +6,7 @@ import {
     PixelRatio
 } from 'react-native';
 
-class BaseComponent extends Component {
+class CJBaseComponent extends Component {
 
     mScreenWidth = Dimensions.get('window').width;
 
@@ -29,4 +29,4 @@ class BaseComponent extends Component {
 
 }
 
-export default BaseComponent;
+export default CJBaseComponent;
