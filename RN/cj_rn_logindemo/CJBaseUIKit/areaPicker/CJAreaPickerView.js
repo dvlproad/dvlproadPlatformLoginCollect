@@ -17,14 +17,14 @@ export var CJAreaPickShowType = {
 export default class CJAreaPickerView extends CJBaseBottomPicker {
     static propTypes = {
         areaPickShowType: PropTypes.number,         //地区选择器的选择样式(默认yyyyMMdd,即只显示年月日)
-        selectedValue: PropTypes.array.isRequired,
+        selectedValues: PropTypes.array.isRequired,
     };
 
     static defaultProps = {
         areaPickShowType: CJAreaPickShowType.ProvinceCityArea,
 
         removeSubviews: false,
-        selectedValue: ['北京', '北京', '东城区'],
+        selectedValues: ['北京', '北京', '东城区'],
         areaJson: null,
 
         toolbarHeight: 44,
@@ -49,7 +49,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
         itemSelectedColor: 0x333333ff,
 
         onPickerCancel: null,
-        onPickerConfirm: (selectedValue) => {},
+        onPickerConfirm: (selectedValues) => {},
     }
 
     constructor(props) {
@@ -57,7 +57,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
         this.state = {
             areaData: this.getAreaData(),
             path: new Animated.Value(0),
-            ...this.formatPickerData(props.selectedValue)
+            ...this.formatPickerData(props.selectedValues)
         };
     }
 
@@ -66,23 +66,23 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
      * @param areaString    地区字符串(形如'province-city-area',如'香港-香港-中西区')
      */
     updateDefaultSelectedAreaString(areaString) {
-        let selectedValue = areaString.split("-");
-        this.updateDefaultSelectedValues(selectedValue);
+        let selectedValues = areaString.split("-");
+        this.updateDefaultSelectedValues(selectedValues);
     }
 
     /**
      * 更新默认选中的值
-     * @param selectedValue
+     * @param selectedValues
      */
-    updateDefaultSelectedValues(selectedValue) {
+    updateDefaultSelectedValues(selectedValues) {
         // let data = this.getDateList();
         // this.state.pickerData = data.pickerData;
         // this.state.selectedIndex = data.selectedIndex;
 
-        this.props.selectedValue = selectedValue;   // 不知道为什么此行设置无效，而在CJDatePickerView中设置却有效
-        let selectedValueLength = selectedValue.length;
+        this.props.selectedValues = selectedValues;   // 不知道为什么此行设置无效，而在CJDatePickerView中设置却有效
+        let selectedValueLength = selectedValues.length;
         for (let i = 0; i < selectedValueLength; i++) {
-            this.props.selectedValue[i] = selectedValue[i];
+            this.props.selectedValues[i] = selectedValues[i];
         }
 
         let data = this.formatPickerData();
@@ -90,7 +90,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
         let pickerData = data.pickerData;
         // let selectedIndex = data.selectedIndex;
         this.setState({
-            selectedValue: selectedValue,
+            selectedValues: selectedValues,
             pickerData: pickerData,
             // selectedIndex: selectedIndex,
         })
@@ -124,14 +124,14 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
         areaData.map((pitem) => {
             for (let pname in pitem) {
                 province.push(pname)
-                if (pname == this.props.selectedValue[0]) {
+                if (pname == this.props.selectedValues[0]) {
                     pitem[pname].map(citem => {
                         for (let cname in citem) {
                             if (firstCity == null) {
                                 firstCity = cname;
                             }
                             city.push(cname);
-                            if (cname == this.props.selectedValue[1]) {
+                            if (cname == this.props.selectedValues[1]) {
                                 county = citem[cname];
                                 if (firstCountry == null) {
                                     firstCountry = citem[cname][0];
@@ -143,12 +143,12 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
             }
         });
 
-        if (county.indexOf(this.props.selectedValue[2]) == -1) {
-            this.props.selectedValue[2] = firstCountry;
+        if (county.indexOf(this.props.selectedValues[2]) == -1) {
+            this.props.selectedValues[2] = firstCountry;
         }
 
         if (county.length == 0 && firstCity != null) {
-            this.props.selectedValue[1] = firstCity;
+            this.props.selectedValues[1] = firstCity;
             return this.formatPickerData();
         }
 
@@ -161,7 +161,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
     }
 
     getSelectedValueText() {
-        let string = this.props.selectedValue.join('-');
+        let string = this.props.selectedValues.join('-');
         return string;
     }
 
@@ -170,7 +170,7 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
             let selectedIndex = 0;
             let length = item.length;
             for (let i = 0; i < length; i++) {
-                if (item[i] == this.props.selectedValue[pickerId]) {
+                if (item[i] == this.props.selectedValues[pickerId]) {
                     selectedIndex = i;
                     break;
                 }
@@ -182,8 +182,8 @@ export default class CJAreaPickerView extends CJBaseBottomPicker {
                     key={'picker' + pickerId}
                     list={item}
                     onPickerSelected={(toValue) => {
-                        this.props.selectedValue[pickerId] = toValue;
-                        this.setState({ ...this.formatPickerData(this.props.selectedValue) });
+                        this.props.selectedValues[pickerId] = toValue;
+                        this.setState({ ...this.formatPickerData(this.props.selectedValues) });
                     }}
                     selectedIndex={selectedIndex}
                     fontSize={this.getSize(14)}

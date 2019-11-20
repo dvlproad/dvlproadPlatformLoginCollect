@@ -25,18 +25,8 @@ import CJBaseDatePicker, {CJDatePickShowType} from "../../CJBaseUIKit/datePicker
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import LKDateUtil from "../../commonUtil/LKDateUtil";
 import CJDatePickerView from './CJDatePickerView';
-
-/**
- * 日期器的选择样式
- */
-export var CJDatePickShowType = {
-    yyyyMMdd: 0,        /** 只显示年月日 */
-    yyyyMMddHHmm: 1,    /** 只显示年月日时分 */
-    yyyyMMddHHmmss: 2,  /** 只显示年月日时分秒 */
-    yyyyMM: 3,          /** 只显示年月(目前2019.07.06不支持) */
-}
+import { CJDatePickerUtil, CJDatePickShowType } from './CJDatePickerUtil';
 
 export default class CJBaseDatePicker extends Component {
     static propTypes = {
@@ -53,22 +43,47 @@ export default class CJBaseDatePicker extends Component {
     static defaultProps = {
         datePickShowType: CJDatePickShowType.yyyyMMdd,
         dateString: '',
+
         shouldCreateItRightNow: false,
 
-        onPickerConfirm: (dateString)=>{},
-        onPickerCancel: ()=>{},
-        onPickerSelect: (dateString)=>{},
+        removeSubviews: false,
+
+        onPickerCancel: (selectedValues)=>{},
+        onPickerConfirm: (selectedValues) => {},
         onCoverPress: ()=>{},
+
+        unit: ['年', '月', '日'],
+        selectedValue: [new Date().getFullYear() + '年', new Date().getMonth() + 1 + '月', new Date().getDate() + '日'],
+        startYear: 1990,
+        endYear: new Date().getFullYear(),
+        minDate: '1900-01-01',
+        maxDate: '2300-12-31',
+
+        confirmText: '完成',
+        confirmTextSize: 17,
+        confirmTextColor: '#172991',
+
+        cancelText: '取消',
+        cancelTextSize: 17,
+        cancelTextColor: '#B2B2B2',
+
+        promptValueText: '请选择日期',
+        selectedValueText: '请选择日期',
+        valueTextSize: 17,
+        valueTextColor: '#000000',
+        showValueText: true,        // 是否显示文本
+        shouldFixedValueText: false,      // 是否固定文本(默认false，即会根据选择的值显示)
+
+        itemHeight: 40,
+        itemTextColor: 0x00000078,
+        itemSelectedColor: 0x000000ff,
     };
 
     constructor(props) {
         super(props);
 
         this.state={
-            showDays: true,     //是否显示'天'
-            showHours: false,   //是否显示'时'
-            showMinutes: false, //是否显示'分'
-            showSeconds: false, //是否显示'秒'
+
         }
     }
 
@@ -95,170 +110,40 @@ export default class CJBaseDatePicker extends Component {
         this.datePicker.showWithNoCover();
     }
 
-    /**
-     * 根据picker选中的数组值，得到日期字符串(形如'2000-02-29')
-     * @param pickedValue
-     * @returns {string}
-     */
-    getDateString=(pickedValue)=>{
-        let year = pickedValue[0].split('年')[0];
-
-        let month = pickedValue[1].split('月')[0];
-        month = month < 10 ? ('0' + month) : month;
-
-        let day = pickedValue[2].split('日')[0];
-        day = day < 10 ? ('0' + day) : day;
-
-        let hour = '00';
-        if (pickedValue.length > 3) {
-            hour = pickedValue[3].split('时')[0];
-            hour = hour < 10 ? ('0' + hour) : hour;
-        }
-
-        let minute = '00';
-        if (pickedValue.length > 4) {
-            minute = pickedValue[4].split('分')[0];
-            minute = minute < 10 ? ('0' + minute) : minute;
-        }
-
-
-        let second = '00';
-        if (pickedValue.length > 5) {
-            second = pickedValue[5].split('秒')[0];
-            second = second < 10 ? ('0' + second) : second;
-        }
-
-        let dateString = '';
-        switch (this.props.datePickShowType) {
-            case CJDatePickShowType.yyyyMMdd: {
-                dateString = year + '-' + month + '-' + day;
-                break;
-            }
-            case CJDatePickShowType.yyyyMMddHHmm: {
-                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
-                break;
-            }
-            case CJDatePickShowType.yyyyMMddHHmmss: {
-                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-                break;
-            }
-            case CJDatePickShowType.yyyyMM: {
-                dateString = year + '-' + month;
-                break;
-            }
-            default: {
-                dateString = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-                break;
-            }
-        }
-
-        return dateString;
-    }
-
-    /**
-     * 获取选定指定日期(如'2000-02-29')时候，picker所要选中的数组值
-     * @param date          选中的日期
-     * @returns {string[]}
-     */
-    getSelectedValue = (date)=>{
-        let selectedValue = [];
-
-        let year = date.getFullYear();
-        selectedValue.push(year+'年');
-
-        let month = date.getMonth()+1;
-        //month = month < 10 ? ('0' + month) : month;
-        selectedValue.push(month+'月');
-
-        if (this.state.showDays) {
-            let day = date.getDate();
-            //day = day < 10 ? ('0' + day) : day;
-            selectedValue.push(day+'日');
-        }
-
-        if (this.state.showHours) {
-            let hours = date.getHours();
-            hours = hours < 10 ? ('0' + hours) : hours;
-            selectedValue.push(hours+'时');
-        }
-
-        if (this.state.showMinutes) {
-            let minutes = date.getMinutes();
-            minutes = minutes < 10 ? ('0' + minutes) : minutes;
-            selectedValue.push(minutes+'分');
-        }
-
-        if (this.state.showSeconds) {
-            let seconds = date.getSeconds();
-            seconds = seconds < 10 ? ('0' + seconds) : seconds;
-            selectedValue.push(seconds+'秒');
-        }
-
-
-        return selectedValue;
-    }
 
     render() {
         let unit = ['年', '月', '日'];
-        let showDays = true;
-        let showHours = false;
-        let showMinutes = false;
-        let showSeconds = false;
 
         switch (this.props.datePickShowType) {
             case CJDatePickShowType.yyyyMMdd: {
                 unit = ['年', '月', '日'];
-                showDays = true;
-                showHours = false;
-                showMinutes = false;
-                showSeconds = false;
                 break;
             }
             case CJDatePickShowType.yyyyMMddHHmm: {
                 unit = ['年', '月', '日', '时', '分'];
-                showDays = true;
-                showHours = true;
-                showMinutes = true;
-                showSeconds = false;
                 break;
             }
             case CJDatePickShowType.yyyyMMddHHmmss: {
                 unit = ['年', '月', '日', '时', '分', '秒'];
-                showDays = true;
-                showHours = true;
-                showMinutes = true;
-                showSeconds = true;
                 break;
             }
             case CJDatePickShowType.yyyyMM: {
                 unit = ['年', '月'];
-                showDays = false;
-                showHours = false;
-                showMinutes = false;
-                showSeconds = false;
                 break;
             }
         }
-        this.state.showDays = showDays;
-        this.state.showHours = showHours;
-        this.state.showMinutes = showMinutes;
-        this.state.showSeconds = showSeconds;
 
 
         let dateString = this.props.dateString;
 
         let pickerTitleText = '';
-        let defaultSelectedDate = new Date();
         if (dateString == null || dateString.length < 8) {
             pickerTitleText = '请选择日期';
-            defaultSelectedDate = new Date();
         } else {
             pickerTitleText = dateString;
-            defaultSelectedDate = LKDateUtil.yyyyMMdd_hhmmssDate(dateString);
         }
-
-        ///let defaultSelectedValue = ['2019年', '08月', '08日'];
-        let defaultSelectedValue = this.getSelectedValue(defaultSelectedDate);
+        let defaultSelectedValue = CJDatePickerUtil.getSelectedValue(date, this.props.datePickShowType);
+        // let defaultSelectedValue = ['2019年', '08月', '08日'];
 
         return (
             <CJDatePickerView
@@ -287,12 +172,12 @@ export default class CJBaseDatePicker extends Component {
                 // itemSelectedColor={0x1097D5ff}
 
                 selectedValue={defaultSelectedValue}
-                onPickerConfirm={(value) => {
-                    let dateString = this.getDateString(value);
-                    this.props.onPickerConfirm && this.props.onPickerConfirm(dateString);
+                onPickerConfirm={(selectedValues) => {
+                    let selectedDateString = CJDatePickerUtil.getDateString(this.props.datePickShowType, selectedValues);
+                    this.props.onPickerConfirm && this.props.onPickerConfirm(selectedDateString);
                 }}
-                onPickerCancel={() => {
-                    this.props.onPickerCancel && this.props.onPickerCancel();
+                onPickerCancel={(selectedValues) => {
+                    this.props.onPickerCancel && this.props.onPickerCancel(selectedValues);
                 }}
                 onCoverPress={()=>{
                     this.props.onCoverPress && this.props.onCoverPress();

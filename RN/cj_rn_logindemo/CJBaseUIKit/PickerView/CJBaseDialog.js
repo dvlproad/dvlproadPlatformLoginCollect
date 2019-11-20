@@ -33,6 +33,9 @@ export default class CJBaseDialog extends CJBaseComponent {
         return this.state._isShow;
     }
 
+    /**
+     * 显示选择器
+     */
     show(callback, state = {}) {
         this.setState({
             _isShow: true,
@@ -50,6 +53,9 @@ export default class CJBaseDialog extends CJBaseComponent {
         });
     }
 
+    /**
+     * 弹出选择器，并且不带背景
+     */
     showWithNoCover(callback, state = {}) {
         this.state._isNoCover = true;
         this.show(callback, state);

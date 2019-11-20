@@ -42,7 +42,9 @@ import { CJDatePicker } from "../../CJBaseUIKit/CJBaseUIKit";
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import CJBaseDatePicker, {CJDatePickShowType} from "./CJBaseDatePicker";
+import CJBaseDatePicker from "./CJBaseDatePicker";
+import CJDatePickerView from "./CJDatePickerView";
+import {CJDatePickerUtil, CJDatePickShowType} from "./CJDatePickerUtil";
 
 /** 日期选择器创建的时机 */
 export var CJDatePickerCreateTimeType = {
@@ -55,27 +57,76 @@ export default class CJDatePicker extends Component {
     static propTypes = {
         datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
         datePickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
-        // dateString: PropTypes.string,       //选择的日期
+        initDateString: PropTypes.string,       //选择的日期
+
+        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
+
+        selectedValues: PropTypes.array.isRequired,
 
         onPickerConfirm: PropTypes.func,    //日期选择'确认'
         onPickerCancel: PropTypes.func,     //日期选择'取消'
         // onPickerSelect: PropTypes.func,     //日期选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
 
-        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
+        toolbarHeight: PropTypes.number,
+
+        confirmText: PropTypes.string,
+        confirmTextSize: PropTypes.number,
+        // confirmTextColor: PropTypes.color,
+
+        cancelText: PropTypes.string,
+        cancelTextSize: PropTypes.number,
+        // cancelTextColor: PropTypes.color,
+
+        promptValueText: PropTypes.string,
+        selectedValueText: PropTypes.string.isRequired,
+        valueTextSize: PropTypes.number,
+        // valueTextColor: PropTypes.color,
+        showValueText: PropTypes.boolean,           // 是否显示文本
+        shouldFixedValueText: PropTypes.boolean,    // 是否固定文本(默认false，即会根据选择的值显示)
     };
 
     static defaultProps = {
-        datePickShowType: CJDatePickShowType.yyyyMMdd,
         datePickerCreateTimeType: CJDatePickerCreateTimeType.Free,
-        // dateString: '',
-        //
-        onPickerConfirm: (dateString)=>{},
-        onPickerCancel: ()=>{},
-        // onPickerSelect: (dateString)=>{},
-        onCoverPress: ()=>{},
+        initDateString: '',
+
 
         shouldCreateItRightNow: false,
+
+        datePickShowType: CJDatePickShowType.yyyyMMdd,
+        formatDateStringFromSelectedValue:(selectedValues)=>{},
+
+        removeSubviews: false,
+
+        onPickerCancel: (selectedValues)=>{},
+        onPickerConfirm: (selectedValues) => {},
+        onCoverPress: ()=>{},
+
+        unit: ['年', '月', '日'],
+        selectedValues: [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()],
+        startYear: 1990,
+        endYear: new Date().getFullYear(),
+        minDate: '1900-01-01',
+        maxDate: '2300-12-31',
+
+        confirmText: '完成',
+        confirmTextSize: 17,
+        confirmTextColor: '#172991',
+
+        cancelText: '取消',
+        cancelTextSize: 17,
+        cancelTextColor: '#B2B2B2',
+
+        promptValueText: '请选择日期',
+        selectedValueText: '请选择日期',
+        valueTextSize: 17,
+        valueTextColor: '#000000',
+        showValueText: true,                // 是否显示文本
+        shouldFixedValueText: false,        // 是否固定文本(默认false，即会根据选择的值显示)
+
+        itemHeight: 40,
+        itemTextColor: 0x00000078,
+        itemSelectedColor: 0x000000ff,
     };
 
     constructor(props) {
@@ -87,7 +138,7 @@ export default class CJDatePicker extends Component {
             hasCreate: needCreateAtFirst,
             noCover: false,
 
-            dateString: '2017-06-30',
+            selectedValues: ['2017', '6', '30'],    // 注意：目前月份不能成06
         }
     }
 
@@ -108,15 +159,26 @@ export default class CJDatePicker extends Component {
     }
 
     /**
-     * 显示日期选择器(默认显示 yyyyMMdd 选择器)
-     * @param dateString    弹出时候选中的日期(输入的字符串，依赖设置的datePickShowType，如默认是yyyyMMdd，即形如'2000-02-29')
+     * 显示日期选择器
+     * @param date    弹出时候选中的日期(new Date())
      */
-    showWithDateString(dateString) {
+    showWithDate(date) {
+        let selectedValues = CJDatePickerUtil.getSelectedValueFromDate(date, this.props.datePickShowType);
+
         this.setState({
-            dateString: dateString,
+            selectedValues: selectedValues,
         }, ()=>{
             this.tryShowDatePicker();
         })
+    }
+
+    /**
+     * 弹出日期选择器，并且不带背景
+     * @param date    弹出时候选中的日期(new Date())
+     */
+    showNoCoverWithDate(date) {
+        this.state.noCover = true;
+        this.showWithDate(date);
     }
 
     /**
@@ -147,8 +209,8 @@ export default class CJDatePicker extends Component {
      */
     showDatePicker() {
         if (this.datePicker) {
-            let dateString = this.state.dateString;
-            this.datePicker.updateDefaultSelectedDateString(dateString);
+            let selectedValues = this.state.selectedValues;
+            this.datePicker.updateDefaultSelectedValues(selectedValues);
 
             if (this.state.noCover) {
                 this.datePicker.showWithNoCover();
@@ -175,16 +237,45 @@ export default class CJDatePicker extends Component {
 
     /**
      * 创建弹出日期选择控制器
-     * @returns {CJBaseDatePicker}
+     * @returns {CJDatePickerView}
      */
     createDatePicker() {
+
+
         return (
-            <CJBaseDatePicker
+            <CJDatePickerView
+                ref={ref => this.datePicker = ref}
                 datePickShowType={this.props.datePickShowType}
-                dateString={this.state.dateString}
+                selectedValues={this.state.selectedValues}
                 shouldCreateItRightNow={this.props.shouldCreateItRightNow}
-                onPickerConfirm={(dateString) => {
-                    this.props.onPickerConfirm && this.props.onPickerConfirm(dateString);
+                unit={this.props.unit}
+                startYear={this.props.startYear}
+                endYear={this.props.endYear}
+                minDate={this.props.minDate}
+                maxDate={this.props.maxDate}
+                confirmText={this.props.confirmText}
+                confirmTextSize={this.props.confirmTextSize}
+                confirmTextColor={this.props.confirmTextColor}
+                cancelText={this.props.cancelText}
+                cancelTextSize={this.props.cancelTextSize}
+                cancelTextColor={this.props.cancelTextColor}
+                promptValueText={this.props.promptValueText}
+                selectedValueText={this.props.selectedValueText}
+                valueTextSize={this.props.valueTextSize}
+                valueTextColor={this.props.valueTextColor}
+                showValueText={this.props.showValueText}
+                shouldFixedValueText={this.props.shouldFixedValueText}
+                itemHeight={this.props.itemHeight}
+                itemTextColor={this.props.itemTextColor}
+                itemSelectedColor={this.props.itemSelectedColor}
+
+                formatDateStringFromSelectedValue={(selectedValues)=>{
+                    let selectedDateString = CJDatePickerUtil.getFormatDateString(selectedValues, this.props.datePickShowType);
+                    return selectedDateString;
+                }}
+                onPickerConfirm={(selectedValues) => {
+                    let selectedDateString = CJDatePickerUtil.getFormatDateString(selectedValues, this.props.datePickShowType);
+                    this.props.onPickerConfirm && this.props.onPickerConfirm(selectedDateString);
                 }}
                 onPickerCancel={() => {
                     this.props.onPickerCancel && this.props.onPickerCancel();
@@ -192,7 +283,6 @@ export default class CJDatePicker extends Component {
                 onCoverPress={() => {
                     this.props.onCoverPress && this.props.onCoverPress();
                 }}
-                ref={ref => this.datePicker = ref}
             />
         );
     }
