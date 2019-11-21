@@ -6,8 +6,11 @@ import LKSingleDateText from "../../../commonUI/date/LKSingleDateText";
 
 import {
     LKDatePickShowType,
-    LKComJSDatePicker
 } from "../../../commonUI/luckincommonui";
+
+import
+    LKComJSDatePicker
+ from "../../../CJBaseUIKit/datePicker/CJDatePickerView";
 
 export default class SingleDateTextPage extends Component {
 

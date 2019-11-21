@@ -33,7 +33,6 @@ import CJImageLookCollectionView from "./collectionView/CJImageLookCollectionVie
 import CJImageActionCollectionView from "./collectionView/CJImageActionCollectionView";
 
 // datePicker 日期选择器
-import CJBaseDatePicker from "./datePicker/CJBaseDatePicker";
 import {CJDatePickShowType} from "./datePicker/CJDatePickerUtil";
 import CJDatePicker, {CJDatePickerCreateTimeType} from "./datePicker/CJDatePicker";
 
@@ -68,7 +67,6 @@ var CJBaseUIKit = {
   // datePicker 日期选择器
   CJDatePickShowType,         // 日期器的选择样式
   CJDatePickerCreateTimeType, // 日期选择器创建的时机
-  CJBaseDatePicker,
   CJDatePicker,
 
   // areaPicker 地区选择器

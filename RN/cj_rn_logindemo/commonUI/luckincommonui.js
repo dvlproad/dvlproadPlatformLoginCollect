@@ -61,7 +61,6 @@ import {
 
   // date
   LKDatePickShowType,
-  LKComJSDatePicker,
   LKDatePicker,
 
   // area 地区选择
@@ -140,7 +139,6 @@ var LKCommonUI = {
 
   // date
   LKDatePickShowType,
-  LKComJSDatePicker,
   LKDatePicker,
   /**
    * <LKDatePicker ref={ref => this.datePicker = ref} />

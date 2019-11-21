@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {  Alert, Dimensions } from 'react-native';
 import {
     CJDatePicker
 } from '../../CJBaseUIKit/CJBaseUIKit';
@@ -50,6 +49,37 @@ export default class LKDatePicker extends CJDatePicker {
         itemTextColor: 0x00000078,
         itemSelectedColor: 0x000000ff,
     };
+
+    /**
+     * 显示日期选择器(默认显示 yyyyMMdd 选择器)
+     */
+    show() {
+        super.show();
+    }
+
+
+    /**
+     * 弹出日期选择器，并且不带背景
+     */
+    showWithNoCover() {
+        super.showWithNoCover();
+    }
+
+    /**
+     * 显示日期选择器
+     * @param date    弹出时候选中的日期(new Date())
+     */
+    showWithDate(date) {
+        super.showWithDate();
+    }
+
+    /**
+     * 弹出日期选择器，并且不带背景
+     * @param date    弹出时候选中的日期(new Date())
+     */
+    showNoCoverWithDate(date) {
+        super.showNoCoverWithDate(date);
+    }
 
     /**
      * 显示日期选择器(默认显示 yyyyMMdd 选择器)

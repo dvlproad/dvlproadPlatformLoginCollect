@@ -29,7 +29,6 @@ import {
     // 日期选择
     LKDatePickShowType,
     LKDatePickerCreateTimeType,
-    LKComJSDatePicker,
     LKDatePicker,
 
     // 地区选择
@@ -64,7 +63,6 @@ var LKCUI = {
     // 日期选择
     LKDatePickShowType,
     LKDatePickerCreateTimeType,
-    LKComJSDatePicker,
     LKDatePicker,
     /**
      * <LKDatePicker ref={ref => this.datePicker = ref} />

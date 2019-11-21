@@ -31,18 +31,15 @@ import LKImageActionCollectionView from "./CollectionView/LKImageActionCollectio
 
 // 日期选择
 // import {
-//   CJBaseDatePicker as LKComJSDatePicker,
 //   CJDatePickShowType as LKDatePickShowType,
 //   CJDatePickerCreateTimeType as LKDatePickerCreateTimeType
 // } from "../CJBaseUIKit/CJBaseUIKit";
 
-// import { CJBaseDatePicker as LKComJSDatePicker } from "../CJBaseUIKit/CJBaseUIKit";
 // import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/CJBaseUIKit";
 // import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/CJBaseUIKit";
 
 import LKDatePicker from "./Pickers/LKDatePicker";
-import LKComJSDatePicker from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
-import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJBaseDatePicker";
+import { CJDatePickShowType as LKDatePickShowType } from "../CJBaseUIKit/datePicker/CJDatePickerUtil";
 import { CJDatePickerCreateTimeType as LKDatePickerCreateTimeType } from "../CJBaseUIKit/datePicker/CJDatePicker";
 
 // 地区选择
@@ -76,7 +73,6 @@ var LKCommonUI = {
     // 日期选择
     LKDatePickShowType,
     LKDatePickerCreateTimeType,
-    LKComJSDatePicker,
     LKDatePicker,
     /**
      * <LKDatePicker ref={ref => this.datePicker = ref} />

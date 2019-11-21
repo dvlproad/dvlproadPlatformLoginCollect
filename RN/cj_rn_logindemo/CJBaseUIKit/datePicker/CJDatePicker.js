@@ -42,7 +42,6 @@ import { CJDatePicker } from "../../CJBaseUIKit/CJBaseUIKit";
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import CJBaseDatePicker from "./CJBaseDatePicker";
 import CJDatePickerView from "./CJDatePickerView";
 import {CJDatePickerUtil, CJDatePickShowType} from "./CJDatePickerUtil";
 
@@ -225,7 +224,7 @@ export default class CJDatePicker extends Component {
 
     /**
      * 获取当前日期选择控制器
-     * @returns {null|CJBaseDatePicker}
+     * @returns {null|CJDatePickerView}
      */
     getDatePicker() {
         if (this.state.hasCreate) {
@@ -240,8 +239,6 @@ export default class CJDatePicker extends Component {
      * @returns {CJDatePickerView}
      */
     createDatePicker() {
-
-
         return (
             <CJDatePickerView
                 ref={ref => this.datePicker = ref}
