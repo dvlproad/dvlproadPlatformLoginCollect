@@ -89,7 +89,8 @@ import { WebViewPages, WebViewRoutePage } from './webview/WebViewHomePage';
 import EmptyNetworkPage from "./empty/EmptyNetworkPage";
 
 // export const UIRoutePage = 'UIHomePage';
-export const UIRoutePage = 'PickerDateHomePage';
+export const UIRoutePage = 'DescriptionsPage';
+// export const UIRoutePage = 'PickerDateHomePage';
 // export const UIRoutePage = 'ListHomePage';
 export const UIPages = {
     UIHomePage: {

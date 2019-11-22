@@ -39,7 +39,7 @@ import { CJImageLookCollectionView } from '../../CJBaseUIKit/CJBaseUIKit';
  */
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {View, ViewPropTypes} from "react-native";
+import {TouchableOpacity, View, ViewPropTypes} from "react-native";
 import CJLoadingImage  from '../image/CJLoadingImage';
 import CJBaseCollectionView from './CJBaseCollectionView';
 
@@ -113,9 +113,6 @@ export default class CJImageLookCollectionView extends CJBaseCollectionView {
         console.log(message);
     }
 
-    clickButtonHandle = (index)=> {
-        this.props.clickButtonHandle(index);
-    }
 
 
     renderCollectionCell(item, index, defaultCollectCellStyle) {
@@ -129,28 +126,31 @@ export default class CJImageLookCollectionView extends CJBaseCollectionView {
         let collectCellStyle = defaultCollectCellStyle;
 
         return (
-            <CJLoadingImage
+            <TouchableOpacity
                 style={collectCellStyle}
-
-                source={item.imageSource}
-                defaultSource={this.props.defaultSource}
-                imageBorderStyle={this.props.imageBorderStyle}
-
-                buttonIndex={index}
-                // onLoadComplete={this.props.onLoadComplete}
-                onLoadComplete={(buttonIndex)=>{
-                    this.onLoadComplete(buttonIndex)
+                onPress={()=> {
+                    this.props.clickButtonHandle(index);
                 }}
+            >
+                <CJLoadingImage
+                    style={collectCellStyle}
 
-                clickButtonHandle={this.clickButtonHandle}
+                    source={item.imageSource}
+                    defaultSource={this.props.defaultSource}
+                    imageBorderStyle={this.props.imageBorderStyle}
 
-                uploadType={this.props.uploadType}
-                uploadProgress={this.props.uploadProgress}
-                needLoadingAnimation={item.needLoadingAnimation}
-                changeShowDebugMessage={this.props.changeShowDebugMessage}
-            />
+                    buttonIndex={index}
+                    // onLoadComplete={this.props.onLoadComplete}
+                    onLoadComplete={(buttonIndex)=>{
+                        this.onLoadComplete(buttonIndex)
+                    }}
 
-
+                    uploadType={this.props.uploadType}
+                    uploadProgress={this.props.uploadProgress}
+                    needLoadingAnimation={item.needLoadingAnimation}
+                    changeShowDebugMessage={this.props.changeShowDebugMessage}
+                />
+            </TouchableOpacity>
         );
     }
 }

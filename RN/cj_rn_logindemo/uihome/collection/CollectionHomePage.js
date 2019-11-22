@@ -66,6 +66,11 @@ export default class CollectionHomePage extends LKDemoCollectionHomeComponent {
                     imageSource: require('./img/4.jpg'),
                     nextPageName: "ImageActionContainPage",
                 },
+                {
+                    title: "介绍视图",
+                    imageSource: require('./img/4.jpg'),
+                    nextPageName: "DescriptionsPage",
+                },
             ],
         }
     }
@@ -79,7 +84,7 @@ import ImagesChoosePage from './ImagesChoosePage';
 import ImageLookCollectionPage from './ImageLookCollectionPage';
 import ImageActionCollectionPage from './ImageActionCollectionPage';
 import ImageActionContainPage from './ImageActionContainPage';
-
+import DescriptionsPage from './DescriptionsPage';
 
 // CollectionPages
 export const CollectionRoutePage = 'CollectionHomePage';
@@ -131,6 +136,12 @@ export const CollectionPages = {
         screen: ImageActionContainPage,
         navigationOptions: () => ({
             title: `图片操作的组合视图2`,
+        }),
+    },
+    DescriptionsPage: {
+        screen: DescriptionsPage,
+        navigationOptions: () => ({
+            title: `介绍的描述视图列表`,
         }),
     },
 };

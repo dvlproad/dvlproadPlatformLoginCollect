@@ -25,6 +25,7 @@ import {
     LKImageLookHomeComponent,
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
+    LKDescriptionBasePage,
 
     // 日期选择
     LKDatePickShowType,
@@ -59,6 +60,7 @@ var LKCUI = {
     LKImageLookHomeComponent,
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
+    LKDescriptionBasePage,
 
     // 日期选择
     LKDatePickShowType,

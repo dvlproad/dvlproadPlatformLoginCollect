@@ -12,6 +12,7 @@ import LKDemoChooseBasePage from "./Demo/LKDemoChooseBasePage";
 import LKEntryHomeComponent from "./Base/LKEntryHomeComponent";
 import LKImageLookHomeComponent from "./Base/LKImageLookHomeComponent";
 import LKImageActionHomeComponent from "./Base/LKImageActionHomeComponent";
+import LKDescriptionBasePage from "./Base/LKDescriptionBasePage";
 
 // navigation 导航栏(含路由)
 import LKNavigationFactory from "./Navigation/LKNavigationFactory";
@@ -69,6 +70,7 @@ var LKCommonUI = {
     LKImageLookHomeComponent,
     LKImageActionCollectionView,
     LKImageActionHomeComponent,
+    LKDescriptionBasePage,
 
     // 日期选择
     LKDatePickShowType,
