@@ -32,9 +32,9 @@ export default class CJAreaPicker extends Component {
         // onPickerSelect: PropTypes.func,     //地区选择'变了下'
         onCoverPress: PropTypes.func,       //点击空白区域
 
-        showToolbarValueText: PropTypes.boolean,        // 是否显示文本
+        showToolbarValueText: PropTypes.bool,        // 是否显示文本
         toolbarValueText: PropTypes.string,             // 顶部toolbar上的文案
-        toolbarValueFixed: PropTypes.boolean,           // 是否固定文本(默认false，即会根据选择的值显示)
+        toolbarValueFixed: PropTypes.bool,           // 是否固定文本(默认false，即会根据选择的值显示)
     };
 
     static defaultProps = {
@@ -44,10 +44,10 @@ export default class CJAreaPicker extends Component {
         toolbarHeight: 40,
         // selectedValue: [],
         //
-        onPickerConfirm: (selectedValue)=>{},
-        onPickerCancel: ()=>{},
+        onPickerConfirm: (selectedValue) => { },
+        onPickerCancel: () => { },
         // onPickerSelect: (selectedValue)=>{},
-        onCoverPress: ()=>{},
+        onCoverPress: () => { },
 
         showToolbarValueText: true,
         toolbarValueText: '请选择城市',

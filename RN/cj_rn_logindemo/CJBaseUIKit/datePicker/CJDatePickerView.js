@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import CJBaseBottomPicker from '../base/CJBaseBottomPicker';
 import CJPickerView from '../PickerView/CJPickerView';
 import { CJDatePickerUtil, CJDatePickShowType } from './CJDatePickerUtil';
-import {Dimensions} from "react-native";
+import { Dimensions } from "react-native";
 
 class CJDatePickerView extends CJBaseBottomPicker {
     static propTypes = {
@@ -21,13 +21,13 @@ class CJDatePickerView extends CJBaseBottomPicker {
         shouldCreateItRightNow: false,
 
         datePickShowType: CJDatePickShowType.yyyyMMdd,
-        formatDateStringFromSelectedValue:(selectedValues)=>{},
+        formatDateStringFromSelectedValue: (selectedValues) => { },
 
         removeSubviews: false,
 
-        onPickerCancel: (selectedValues)=>{},
-        onPickerConfirm: (selectedValues) => {},
-        onCoverPress: ()=>{},
+        onPickerCancel: (selectedValues) => { },
+        onPickerConfirm: (selectedValues) => { },
+        onCoverPress: () => { },
 
         unit: ['年', '月', '日'],
         selectedValues: [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()],
@@ -178,7 +178,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
                 days.push(i + unit[2]);
             }
 
-            let selectedDay = CJDatePickerUtil.removeUnit(days[0],unit[2]);
+            let selectedDay = CJDatePickerUtil.removeUnit(days[0], unit[2]);
             if (this.props.selectedValues) {
                 selectedDay = this.props.selectedValues[2];
             }
@@ -248,7 +248,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
 
     getSelectedValueText() {
         // let string = this.props.selectedValues.join('-');
-        let string =this.props.formatDateStringFromSelectedValue(this.props.selectedValues);
+        let string = this.props.formatDateStringFromSelectedValue(this.props.selectedValues);
         return string;
     }
 

@@ -19,7 +19,7 @@ let actionSheetMaxHeight = screenHeight - actionSheetTop;   //整个完整的act
 
 export default class CJBaseBottomPicker extends CJBaseDialog {
     static propTypes = {
-        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
+        shouldCreateItRightNow: PropTypes.bool,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
 
         selectedValues: PropTypes.array.isRequired,
 
@@ -41,17 +41,17 @@ export default class CJBaseBottomPicker extends CJBaseDialog {
         selectedValueText: PropTypes.string.isRequired,
         valueTextSize: PropTypes.number,
         // valueTextColor: PropTypes.color,
-        showValueText: PropTypes.boolean,           // 是否显示文本
-        shouldFixedValueText: PropTypes.boolean,    // 是否固定文本(默认false，即会根据选择的值显示)
+        showValueText: PropTypes.bool,           // 是否显示文本
+        shouldFixedValueText: PropTypes.bool,    // 是否固定文本(默认false，即会根据选择的值显示)
     };
 
     static defaultProps = {
         shouldCreateItRightNow: false,
         selectedValues: [],
 
-        onPickerCancel: (selectedValues)=>{},
-        onPickerConfirm: (selectedValues) => {},
-        onCoverPress: ()=>{},
+        onPickerCancel: (selectedValues) => { },
+        onPickerConfirm: (selectedValues) => { },
+        onCoverPress: () => { },
 
         toolbarHeight: 44,
 
@@ -137,7 +137,7 @@ export default class CJBaseBottomPicker extends CJBaseDialog {
                         top: 0
                     }}
 
-                    onPickerCancel={()=>{
+                    onPickerCancel={() => {
                         this.dismiss(() => this.props.onPickerCancel && this.props.onPickerCancel(this.props.selectedValues));
                     }}
                     onPickerConfirm={() => {

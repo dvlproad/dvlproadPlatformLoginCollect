@@ -43,7 +43,7 @@ import { CJDatePicker } from "../../CJBaseUIKit/CJBaseUIKit";
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import CJDatePickerView from "./CJDatePickerView";
-import {CJDatePickerUtil, CJDatePickShowType} from "./CJDatePickerUtil";
+import { CJDatePickerUtil, CJDatePickShowType } from "./CJDatePickerUtil";
 
 /** 日期选择器创建的时机 */
 export var CJDatePickerCreateTimeType = {
@@ -58,7 +58,7 @@ export default class CJDatePicker extends Component {
         datePickerCreateTimeType: PropTypes.number, //日期选择器创建的时机
         initDateString: PropTypes.string,       //选择的日期
 
-        shouldCreateItRightNow: PropTypes.boolean,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
+        shouldCreateItRightNow: PropTypes.bool,  // 是否应该马上创建它(常用于日期选择器不是从底部弹出，而是自己控制位置的场景)
 
         selectedValues: PropTypes.array.isRequired,
 
@@ -81,8 +81,8 @@ export default class CJDatePicker extends Component {
         selectedValueText: PropTypes.string.isRequired,
         valueTextSize: PropTypes.number,
         // valueTextColor: PropTypes.color,
-        showValueText: PropTypes.boolean,           // 是否显示文本
-        shouldFixedValueText: PropTypes.boolean,    // 是否固定文本(默认false，即会根据选择的值显示)
+        showValueText: PropTypes.bool,           // 是否显示文本
+        shouldFixedValueText: PropTypes.bool,    // 是否固定文本(默认false，即会根据选择的值显示)
     };
 
     static defaultProps = {
@@ -93,13 +93,13 @@ export default class CJDatePicker extends Component {
         shouldCreateItRightNow: false,
 
         datePickShowType: CJDatePickShowType.yyyyMMdd,
-        formatDateStringFromSelectedValue:(selectedValues)=>{},
+        formatDateStringFromSelectedValue: (selectedValues) => { },
 
         removeSubviews: false,
 
-        onPickerCancel: (selectedValues)=>{},
-        onPickerConfirm: (selectedValues) => {},
-        onCoverPress: ()=>{},
+        onPickerCancel: (selectedValues) => { },
+        onPickerConfirm: (selectedValues) => { },
+        onCoverPress: () => { },
 
         unit: ['年', '月', '日'],
         selectedValues: [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()],
@@ -166,7 +166,7 @@ export default class CJDatePicker extends Component {
 
         this.setState({
             selectedValues: selectedValues,
-        }, ()=>{
+        }, () => {
             this.tryShowDatePicker();
         })
     }
@@ -266,7 +266,7 @@ export default class CJDatePicker extends Component {
                 itemTextColor={this.props.itemTextColor}
                 itemSelectedColor={this.props.itemSelectedColor}
 
-                formatDateStringFromSelectedValue={(selectedValues)=>{
+                formatDateStringFromSelectedValue={(selectedValues) => {
                     let selectedDateString = CJDatePickerUtil.getFormatDateString(selectedValues, this.props.datePickShowType);
                     return selectedDateString;
                 }}
@@ -286,7 +286,7 @@ export default class CJDatePicker extends Component {
 
     render() {
         if (!this.state.hasCreate && this.props.datePickerCreateTimeType == CJDatePickerCreateTimeType.Free) {
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.setState({
                     hasCreate: true,
                 })

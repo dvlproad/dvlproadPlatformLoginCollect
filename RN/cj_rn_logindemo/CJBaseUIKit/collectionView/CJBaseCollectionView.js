@@ -12,7 +12,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {FlatList, View, ViewPropTypes} from "react-native";
+import { FlatList, View, ViewPropTypes } from "react-native";
 import { ObjectCJHelper } from '../../CJBaseHelper/CJBaseHelper';
 
 const viewPropTypes = ViewPropTypes || View.propTypes;
@@ -29,7 +29,7 @@ export default class CJBaseCollectionView extends Component {
         cellWidthFromFixedWidth: PropTypes.number,          // 通过cell的固定宽度来设置每个cell的宽度
         cellWidthFromPerRowMaxShowCount: PropTypes.number,  // 水平方向上的列数 & 通过每行可显示的最多个数来设置每个cell的宽度
         widthHeightRatio: PropTypes.number,         // 宽高的比例（默认1:1，即1.0）
-        forceBoxHorizontalIntervalEqualMinimumInteritemSpacing: PropTypes.boolean,  //强制水平方向上box之间的间隔固定为最小间隔的值
+        forceBoxHorizontalIntervalEqualMinimumInteritemSpacing: PropTypes.bool,  //强制水平方向上box之间的间隔固定为最小间隔的值
 
         dataModels: PropTypes.array,
     };
@@ -50,17 +50,17 @@ export default class CJBaseCollectionView extends Component {
     };
 
     // 获取当前box与下一个box之间的水平间隔
-    __getBoxHorizontalInterval = (index, perRowMaxShowCount, boxHorizontalInterval)=> {
-        let isLastColumn = (index+1)%perRowMaxShowCount==0;
+    __getBoxHorizontalInterval = (index, perRowMaxShowCount, boxHorizontalInterval) => {
+        let isLastColumn = (index + 1) % perRowMaxShowCount == 0;
 
-        if (isLastColumn==true) {
+        if (isLastColumn == true) {
             return 0;
         }
         return boxHorizontalInterval;
     }
 
     // 获取当前box与下一个box之间的竖直间隔
-    __getBoxVerticalInterval = (index, lastRowStartIndex, boxHorizontalInterval)=> {
+    __getBoxVerticalInterval = (index, lastRowStartIndex, boxHorizontalInterval) => {
         if (index >= lastRowStartIndex) {
             return 0;
         }
@@ -94,7 +94,7 @@ export default class CJBaseCollectionView extends Component {
         let boxWidth = 0;               // box的宽
         let boxHorizontalInterval = 0;  // 水平方向上box之间的间隔
         let sectionInset = this.props.sectionInset;
-        if ( typeof sectionInset === 'undefined') {
+        if (typeof sectionInset === 'undefined') {
             sectionInset = { top: 0, left: 0, bottom: 0, right: 0 };
         }
         console.log((sectionInset));
@@ -104,7 +104,7 @@ export default class CJBaseCollectionView extends Component {
             boxWidth = this.props.cellWidthFromFixedWidth;
 
             const minimumInteritemSpacing = this.props.minimumInteritemSpacing;
-            perRowMaxShowCount = (validWidth+minimumInteritemSpacing)/(boxWidth+minimumInteritemSpacing);
+            perRowMaxShowCount = (validWidth + minimumInteritemSpacing) / (boxWidth + minimumInteritemSpacing);
             perRowMaxShowCount = Math.floor(perRowMaxShowCount);
 
             if (this.props.forceBoxHorizontalIntervalEqualMinimumInteritemSpacing) {
@@ -112,12 +112,12 @@ export default class CJBaseCollectionView extends Component {
             } else {
                 const cellsWidth = boxWidth * perRowMaxShowCount;
                 const totalInteritemSpacing = validWidth - cellsWidth;
-                boxHorizontalInterval = totalInteritemSpacing/(perRowMaxShowCount-1);
+                boxHorizontalInterval = totalInteritemSpacing / (perRowMaxShowCount - 1);
             }
 
         } else { // 按列数时候：列数不变，间距不变，固定为minimumInteritemSpacing；宽会变
             perRowMaxShowCount = this.props.cellWidthFromPerRowMaxShowCount;
-            if (ObjectCJHelper.isNullForObject(perRowMaxShowCount) || perRowMaxShowCount == 0 ) {
+            if (ObjectCJHelper.isNullForObject(perRowMaxShowCount) || perRowMaxShowCount == 0) {
                 expect.assertions(1)
             }
 
@@ -127,8 +127,8 @@ export default class CJBaseCollectionView extends Component {
                 expect.assertions(1)
             }
 
-            const cellsWidth = validWidth-(perRowMaxShowCount-1)*minimumInteritemSpacing;
-            boxWidth = Math.ceil(cellsWidth/perRowMaxShowCount);
+            const cellsWidth = validWidth - (perRowMaxShowCount - 1) * minimumInteritemSpacing;
+            boxWidth = Math.ceil(cellsWidth / perRowMaxShowCount);
 
             boxHorizontalInterval = minimumInteritemSpacing;
         }
@@ -141,12 +141,12 @@ export default class CJBaseCollectionView extends Component {
         let itemCount = renderDataModels.length;
         let rowCount = 0;
         if (itemCount > 0) {
-            rowCount = Math.floor((itemCount-1)/perRowMaxShowCount)+1;
+            rowCount = Math.floor((itemCount - 1) / perRowMaxShowCount) + 1;
         }
-        let lastRowStartIndex = (rowCount-1)*perRowMaxShowCount; //最后一行的索引起点，index从0开始
+        let lastRowStartIndex = (rowCount - 1) * perRowMaxShowCount; //最后一行的索引起点，index从0开始
 
         let sectionInsetStyle = {};
-        if ( typeof(sectionInset) != 'undefined') {
+        if (typeof (sectionInset) != 'undefined') {
             sectionInsetStyle = {
                 paddingTop: sectionInset.top,
                 paddingLeft: sectionInset.left,
@@ -167,7 +167,7 @@ export default class CJBaseCollectionView extends Component {
 
         return (
             <FlatList
-                style={[{backgroundColor: '#F4F4F4'}, this.props.style, sectionInsetStyle]}
+                style={[{ backgroundColor: '#F4F4F4' }, this.props.style, sectionInsetStyle]}
                 data={renderDataModels}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
@@ -190,7 +190,7 @@ export default class CJBaseCollectionView extends Component {
                 }}
                 numColumns={perRowMaxShowCount}
 
-                // ListHeaderComponent={listHeaderComponent}
+            // ListHeaderComponent={listHeaderComponent}
             />
         )
     }

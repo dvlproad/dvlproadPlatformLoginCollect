@@ -14,15 +14,26 @@ import Svg, {
     Rect,
     Stop
 } from 'react-native-svg';
+import PropTypes from 'prop-types'
 
 class CJPickerView extends CJBaseComponent {
+
+    static propTypes = {
+        itemTextColor: PropTypes.number,
+        itemSelectedColor: PropTypes.number,
+        itemHeight: PropTypes.number,
+        onPickerSelected: PropTypes.func,
+        selectedIndex: PropTypes.number,
+        forceUpdate: PropTypes.bool
+    }
 
     static defaultProps = {
         itemTextColor: 0x333333ff,
         itemSelectedColor: 0x1097D5ff,
         itemHeight: 40,
         onPickerSelected: null,
-        selectedIndex: 0
+        selectedIndex: 0,
+        forceUpdate: false
     }
 
     _previousTop = 0;
@@ -60,7 +71,8 @@ class CJPickerView extends CJBaseComponent {
             let list = ['', ''].concat(nextProps.list).concat(['', '']);
             let listChange = JSON.stringify(list) != JSON.stringify(this.state.list);
             let indexChange = nextProps.selectedIndex != this.state.selectedIndex;
-            if (listChange || indexChange) {
+            let forceUpdate = nextProps.forceUpdate;
+            if (listChange || indexChange || forceUpdate) {
                 console.log('shouldComponentUpdate');
                 this.path.setValue(-this.props.itemHeight * nextProps.selectedIndex);
 
