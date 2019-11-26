@@ -145,7 +145,11 @@ export default class CJDatePicker extends Component {
      * 显示日期选择器(默认显示 yyyyMMdd 选择器)
      */
     show() {
-        this.tryShowDatePicker();
+        this.setState({
+            noCover: false,
+        }, () => {
+            this.tryShowDatePicker();
+        })
     }
 
 
@@ -153,8 +157,11 @@ export default class CJDatePicker extends Component {
      * 弹出日期选择器，并且不带背景
      */
     showWithNoCover() {
-        this.state.noCover = true;
-        this.tryShowDatePicker();
+        this.setState({
+            noCover: true,
+        }, () => {
+            this.tryShowDatePicker();
+        })
     }
 
     /**
@@ -162,13 +169,7 @@ export default class CJDatePicker extends Component {
      * @param date    弹出时候选中的日期(new Date())
      */
     showWithDate(date) {
-        let selectedValues = CJDatePickerUtil.getSelectedValueFromDate(date, this.props.datePickShowType);
-
-        this.setState({
-            selectedValues: selectedValues,
-        }, () => {
-            this.tryShowDatePicker();
-        })
+        this._showWithDate(date, false);
     }
 
     /**
@@ -176,8 +177,22 @@ export default class CJDatePicker extends Component {
      * @param date    弹出时候选中的日期(new Date())
      */
     showNoCoverWithDate(date) {
-        this.state.noCover = true;
-        this.showWithDate(date);
+        this._showWithDate(date, true);
+    }
+
+    /**
+     * 显示日期选择器
+     * @param date    弹出时候选中的日期(new Date())
+     */
+    _showWithDate(date, noCover) {
+        let selectedValues = CJDatePickerUtil.getSelectedValueFromDate(date, this.props.datePickShowType);
+
+        this.setState({
+            noCover: noCover,
+            selectedValues: selectedValues,
+        }, () => {
+            this.tryShowDatePicker();
+        })
     }
 
     /**
@@ -218,7 +233,7 @@ export default class CJDatePicker extends Component {
             }
 
         } else {
-            //LKToastUtil.showMessage('Error：你还未创建日期选择器');
+            //CJToastUtil.showMessage('Error：你还未创建日期选择器');
         }
     }
 

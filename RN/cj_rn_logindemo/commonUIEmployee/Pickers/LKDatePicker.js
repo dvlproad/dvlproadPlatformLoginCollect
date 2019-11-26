@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     CJDatePicker
 } from '../../CJBaseUIKit/CJBaseUIKit';
-import {CJDatePickShowType} from "../../CJBaseUIKit/datePicker/CJDatePickerUtil";
-import {CJDatePickerCreateTimeType} from "../../CJBaseUIKit/datePicker/CJDatePicker";
+import { CJDatePickShowType } from "../../CJBaseUIKit/datePicker/CJDatePickerUtil";
+import { CJDatePickerCreateTimeType } from "../../CJBaseUIKit/datePicker/CJDatePicker";
 
 
 export default class LKDatePicker extends CJDatePicker {
@@ -15,18 +15,18 @@ export default class LKDatePicker extends CJDatePicker {
         shouldCreateItRightNow: false,
 
         datePickShowType: CJDatePickShowType.yyyyMMdd,
-        formatDateStringFromSelectedValue:(selectedValues)=>{},
+        formatDateStringFromSelectedValue: (selectedValues) => { },
 
         removeSubviews: false,
 
-        onPickerCancel: (selectedValues)=>{},
-        onPickerConfirm: (selectedValues) => {},
-        onCoverPress: ()=>{},
+        onPickerCancel: (selectedValues) => { },
+        onPickerConfirm: (selectedValues) => { },
+        onCoverPress: () => { },
 
         unit: ['年', '月', '日'],
         selectedValues: [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()],
         startYear: 1990,
-        endYear: new Date().getFullYear(),
+        endYear: 2300,
         minDate: '1900-01-01',
         maxDate: '2300-12-31',
 
