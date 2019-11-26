@@ -233,7 +233,8 @@ class CJPickerView extends CJBaseComponent {
                     item.setValue(0);
                 }
             })
-            this.props.onPickerSelected && this.props.onPickerSelected(this.state.list[selectedIndex]);
+            let toValue = this.state.list[selectedIndex];
+            this.props.onPickerSelected && this.props.onPickerSelected(toValue);
         }, 20));
     }
 

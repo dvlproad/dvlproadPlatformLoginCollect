@@ -9,6 +9,8 @@ class CJDatePickerView extends CJBaseBottomPicker {
     static propTypes = {
         datePickShowType: PropTypes.number,         //日期器的选择样式(默认yyyyMMdd,即只显示年月日)
         selectedValues: PropTypes.array.isRequired, //初始化创建后第一次选择的日期
+        minValidValues: PropTypes.array,            //最小可选择的有效日期数组(太小，会滚动到这个最小)
+        maxValidValues: PropTypes.array,            //最大可选择的有效日期数组(太大，会滚动到这个最大)
         formatDateStringFromSelectedValue: PropTypes.func,
 
 
@@ -35,6 +37,8 @@ class CJDatePickerView extends CJBaseBottomPicker {
         endYear: new Date().getFullYear(),
         minDate: '1900-01-01',
         maxDate: '2300-12-31',
+        minValidValues: ['1900', '01', '01'],
+        maxValidValues: ['2300', '12', '31'],
 
         confirmText: '完成',
         confirmTextSize: 17,
@@ -100,11 +104,21 @@ class CJDatePickerView extends CJBaseBottomPicker {
             selectedValues: selectedValues,
             pickerData: pickerData,
             selectedIndex: selectedIndex,
+            forceUpdate: false
         })
     }
 
-
     getDateList() {
+        return this.updateDateList(false);
+    }
+
+
+    /**
+     * 更新日期列表
+     * @param forceUpdate   是否强制更新
+     * @returns {{pickerData: Array, forceUpdate: *, selectedIndex: Array}}
+     */
+    updateDateList(forceUpdate) {
         console.log(this.props);
         if (this.props.selectedValues.length < 2) {
             this.props.selectedValues = [new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()];
@@ -241,6 +255,7 @@ class CJDatePickerView extends CJBaseBottomPicker {
         let data = {
             pickerData: pickerData,
             selectedIndex: selectedIndex,
+            forceUpdate: forceUpdate
         };
         return data;
     }
@@ -262,12 +277,75 @@ class CJDatePickerView extends CJBaseBottomPicker {
                     itemTextColor={this.props.itemTextColor}
                     itemSelectedColor={this.props.itemSelectedColor}
                     list={item}
+                    forceUpdate={this.state.forceUpdate}
                     onPickerSelected={(toValue) => {
                         //是否联动的实现位置
                         let selectedValue = CJDatePickerUtil.removeUnit(toValue, this.props.unit[pickerId]); //去除选择时候的单位
+
+                        // 原本方法
                         this.props.selectedValues[pickerId] = selectedValue;
                         console.log('====')
                         this.setState({ ...this.getDateList() });
+
+                        // 有日期范围的判断
+                        // let forceUpdate = false;
+                        // let maxValidValues = ['2020', '01', '01'];
+                        // // let currentComponentMaxValue = this.props.maxValidValues[pickerId];
+                        // let currentComponentMaxValue = maxValidValues[pickerId];
+                        //
+                        // if (parseInt(selectedValue) < parseInt(currentComponentMaxValue)) {
+                        //     this.props.selectedValues[pickerId] = selectedValue;
+                        //
+                        // } else if (parseInt(selectedValue) > parseInt(currentComponentMaxValue)) {
+                        //     if (this.props.selectedValues[pickerId] == currentComponentMaxValue) {
+                        //         forceUpdate = true;
+                        //     }
+                        //     this.props.selectedValues[pickerId] = currentComponentMaxValue;
+                        //
+                        // } else if (parseInt(selectedValue) == parseInt(currentComponentMaxValue)) {
+                        //     let componentCount = this.state.selectedValues.length;
+                        //
+                        //     for (let i = pickerId; i < componentCount-1; i++) {
+                        //         let iComponentOldValue = this.props.selectedValues[i];
+                        //         iComponentOldValue = parseInt(iComponentOldValue);
+                        //         let nextComponentOldValue = this.props.selectedValues[i+1];
+                        //         nextComponentOldValue = parseInt(nextComponentOldValue);
+                        //         if (iComponentOldValue < nextComponentOldValue) {
+                        //             break;
+                        //         } else if (iComponentOldValue == nextComponentOldValue) {
+                        //             continue;
+                        //         } else {
+                        //             this.props.selectedValues[i] = iComponentOldValue;
+                        //         }
+                        //     }
+                        // }
+                        // this.setState({ ...this.updateDateList(forceUpdate) });
+
+                        // 外部可能需要的方法
+                        // let maxDateString = this.props.maxDate;
+                        // let maxDate = this.yyyyMMddDate(maxDateString)
+                        //
+                        // let minDateString = this.props.minDate;
+                        // let minDate = this.yyyyMMddDate(minDateString)
+                        //
+                        // let oldSelectedValues = [...this.props.selectedValues];
+                        //
+                        // oldSelectedValues[pickerId] = parseInt(selectedValue);
+                        //
+                        //
+                        // let newDateStr = oldSelectedValues.join("-")
+                        // let newDate = this.yyyyMMddDate(newDateStr)
+                        //
+                        //
+                        // let overMax = !this.compareSecondDateLater(newDate, maxDate)
+                        // let belowMin = this.compareSecondDateLater(newDate, minDate)
+                        // if (overMax || belowMin) {
+                        //     forceUpdate = true;
+                        // } else {
+                        //     this.props.selectedValues[pickerId] = selectedValue;
+                        // }
+                        //
+                        // this.setState({ ...this.updateDateList(forceUpdate) });
                     }}
                     selectedIndex={this.state.selectedIndex[pickerId]}
                     fontSize={this.getSize(14)}
