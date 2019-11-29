@@ -283,43 +283,43 @@ class CJDatePickerView extends CJBaseBottomPicker {
                         let selectedValue = CJDatePickerUtil.removeUnit(toValue, this.props.unit[pickerId]); //去除选择时候的单位
 
                         // 原本方法
-                        this.props.selectedValues[pickerId] = selectedValue;
-                        console.log('====')
-                        this.setState({ ...this.getDateList() });
+                        // this.props.selectedValues[pickerId] = selectedValue;
+                        // console.log('====')
+                        // this.setState({ ...this.getDateList() });
 
                         // 有日期范围的判断
-                        // let forceUpdate = false;
-                        // let maxValidValues = ['2020', '01', '01'];
-                        // // let currentComponentMaxValue = this.props.maxValidValues[pickerId];
-                        // let currentComponentMaxValue = maxValidValues[pickerId];
-                        //
-                        // if (parseInt(selectedValue) < parseInt(currentComponentMaxValue)) {
-                        //     this.props.selectedValues[pickerId] = selectedValue;
-                        //
-                        // } else if (parseInt(selectedValue) > parseInt(currentComponentMaxValue)) {
-                        //     if (this.props.selectedValues[pickerId] == currentComponentMaxValue) {
-                        //         forceUpdate = true;
-                        //     }
-                        //     this.props.selectedValues[pickerId] = currentComponentMaxValue;
-                        //
-                        // } else if (parseInt(selectedValue) == parseInt(currentComponentMaxValue)) {
-                        //     let componentCount = this.state.selectedValues.length;
-                        //
-                        //     for (let i = pickerId; i < componentCount-1; i++) {
-                        //         let iComponentOldValue = this.props.selectedValues[i];
-                        //         iComponentOldValue = parseInt(iComponentOldValue);
-                        //         let nextComponentOldValue = this.props.selectedValues[i+1];
-                        //         nextComponentOldValue = parseInt(nextComponentOldValue);
-                        //         if (iComponentOldValue < nextComponentOldValue) {
-                        //             break;
-                        //         } else if (iComponentOldValue == nextComponentOldValue) {
-                        //             continue;
-                        //         } else {
-                        //             this.props.selectedValues[i] = iComponentOldValue;
-                        //         }
-                        //     }
-                        // }
-                        // this.setState({ ...this.updateDateList(forceUpdate) });
+                        let forceUpdate = false;
+                        let maxValidValues = ['2020', '01', '01'];
+                        // let currentComponentMaxValue = this.props.maxValidValues[pickerId];
+                        let currentComponentMaxValue = maxValidValues[pickerId];
+
+                        if (parseInt(selectedValue) < parseInt(currentComponentMaxValue)) {
+                            this.props.selectedValues[pickerId] = selectedValue;
+
+                        } else if (parseInt(selectedValue) > parseInt(currentComponentMaxValue)) {
+                            if (this.props.selectedValues[pickerId] == currentComponentMaxValue) {
+                                forceUpdate = true;
+                            }
+                            this.props.selectedValues[pickerId] = currentComponentMaxValue;
+
+                        } else if (parseInt(selectedValue) == parseInt(currentComponentMaxValue)) {
+                            let componentCount = this.state.selectedValues.length;
+
+                            for (let i = pickerId; i < componentCount-1; i++) {
+                                let iComponentOldValue = this.props.selectedValues[i];
+                                iComponentOldValue = parseInt(iComponentOldValue);
+                                let nextComponentOldValue = this.props.selectedValues[i+1];
+                                nextComponentOldValue = parseInt(nextComponentOldValue);
+                                if (iComponentOldValue < nextComponentOldValue) {
+                                    break;
+                                } else if (iComponentOldValue == nextComponentOldValue) {
+                                    continue;
+                                } else {
+                                    this.props.selectedValues[i] = iComponentOldValue;
+                                }
+                            }
+                        }
+                        this.setState({ ...this.updateDateList(forceUpdate) });
 
                         // 外部可能需要的方法
                         // let maxDateString = this.props.maxDate;
