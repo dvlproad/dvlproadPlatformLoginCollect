@@ -75,6 +75,7 @@ export default class DatePickerPage_01ComJS extends Component {
                               cancelTextSize={17}
                               cancelTextColor={'#172991'}
                               minDate={'2000-01-01'}
+                              maxDate={'2020-01-01'}
 
                               onCoverPress={()=>{
                                   LKToast.showMessage('点击空白区域');

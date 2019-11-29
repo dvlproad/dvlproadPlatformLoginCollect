@@ -56,7 +56,15 @@ class LKActionTitle extends Component {
                 borderBottomWidth: 1,
                 borderBottomColor: '#eee',
             }}>
-                <Text style={styles.titleText}>
+                <Text
+                    style={{
+                        height: 44,
+                        fontSize: 14,
+                        textAlign: 'center',
+                        lineHeight:44,
+                        color: '#aaa'
+                    }}
+                >
                     {this.props.actionTitle}
                 </Text>
             </View>
@@ -95,7 +103,15 @@ export class LKActionDom extends Component {
                 }, this.props.style]}
                 onPress={this.props.onPress}
             >
-                <Text style={styles.actionText}>
+                <Text
+                    style={{
+                        height: actionCellHeight,
+                        fontSize: 17,
+                        textAlign: 'center',
+                        lineHeight:actionCellHeight,
+                        color: '#333333'
+                    }}
+                >
                     {this.props.actionName}
                 </Text>
             </TouchableOpacity>
@@ -111,12 +127,5 @@ const styles = StyleSheet.create({
         lineHeight:44,
         color: '#aaa'
     },
-    actionText: {
-        height: 44,
-        fontSize: 17,
-        textAlign: 'center',
-        lineHeight:44,
-        color: '#333333'
-    }
 
 });

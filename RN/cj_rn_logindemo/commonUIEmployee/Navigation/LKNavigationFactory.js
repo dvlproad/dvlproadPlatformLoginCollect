@@ -1,13 +1,13 @@
 // LKNavigationFactory.js
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     CJImageButton,
     CJNavigationUtil
 } from "../../CJBaseUIKit/CJBaseUIKit";
-import {Button} from "react-native";
-import {CJBackButtonFactory} from "../../CJBaseUIKit/navigation/CJNavigationFactory";
 // import MiniApp from "../../bridge_modules_js/MiniApp";
+import { Button } from "react-native";
+import { CJBackButtonFactory } from "../../CJBaseUIKit/navigation/CJNavigationFactory";
 
 export default class LKNavigationFactory {
     /**
@@ -90,7 +90,8 @@ export class LKBackButtonFactory {
      */
     static backAppButton() {
         return (
-            <CJImageButton source={require('./resources/nav_back.png')}
+            <CJImageButton style={{ marginLeft: 4 }}
+                           source={require('./resources/nav_back.png')}
                            onPress={() => { // 返回原生APP的点击事件
                                this.__onPressBackApp();
                            }}
@@ -104,7 +105,7 @@ export class LKBackButtonFactory {
      * @param navigation
      * @returns {*}
      */
-    static backPageButton({navigation}) {
+    static backPageButton({ navigation }) {
         return (
             <CJImageButton source={require('./resources/nav_back.png')}
                            onPress={() => {
