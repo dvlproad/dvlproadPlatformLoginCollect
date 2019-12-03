@@ -23,13 +23,10 @@ export default class UIHomePage extends LKDemoTableHomeComponent {
                         { title: "Image", nextPageName: "ImageHomePage" },
                         { title: "Empty", nextPageName: "EmptyNetworkPage" },
                         { title: "WebView", nextPageName: "WebViewHomePage" },
-                        { title: "ToolBar(工具器)", nextPageName: "ToolBarHomePage" },
                     ]
                 },
                 { key: "弹窗/蒙层",
                     data: [
-                        { title: "ActionSheet", nextPageName: "TSActionSheetPage" },
-                        { title: "PopupManager(弹窗管理)", nextPageName: "TSPopupManagerPage" },
                         { title: "Modal(弹窗/蒙层)", nextPageName: "ModalHomePage" },
                         { title: "Picker(选择器)", nextPageName: "PickerAllHomePage" },
                     ]
@@ -69,15 +66,8 @@ import { CollectionPages, CollectionRoutePage } from "./collection/CollectionHom
 //upload
 import { UploadPages, UploadRoutePage } from "./upload/UploadHomePage";
 
-//toolbar
-import ToolBarHomePage from "./toolbar/ToolBarHomePage";
-
 //picker
 import { PickerAllHomePages, PickRoutePage } from "./picker/PickerAllHomePage";
-
-// 弹窗
-import TSActionSheetPage from "./actionsheet/TSActionSheetPage";
-import TSPopupManagerPage from "./actionsheet/TSPopupManagerPage";
 
 //modal
 import { ModalPages, ModalRoutePage } from "./modal/ModalHomePage";
@@ -127,27 +117,6 @@ export const UIPages = {
     ...ListPages,
     ...CollectionPages,
     ...UploadPages,
-
-    ToolBarHomePage: {
-        screen: ToolBarHomePage,
-        navigationOptions: () => ({
-            title: `ToolBarHomePage`,
-        }),
-    },
-
-    // 弹窗
-    TSActionSheetPage: {
-        screen: TSActionSheetPage,
-        navigationOptions: () => ({
-            title: `弹窗首页`,
-        }),
-    },
-    TSPopupManagerPage: {
-        screen: TSPopupManagerPage,
-        navigationOptions: () => ({
-            title: `弹窗管理`,
-        }),
-    },
 
     ...PickerAllHomePages,
     ...ModalPages,

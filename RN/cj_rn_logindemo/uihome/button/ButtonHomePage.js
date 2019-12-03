@@ -23,10 +23,6 @@ export default class ButtonHomePage extends LKDemoTableHomeComponent {
                             nextPageName: "RNButtonPage"
                         },
                         {
-                            title: "EditSubmitButtonPage",
-                            nextPageName: "EditSubmitButtonPage"
-                        },
-                        {
                             title: "ButtonColorPage",
                             nextPageName: "ButtonColorPage"
                         },
@@ -39,7 +35,6 @@ export default class ButtonHomePage extends LKDemoTableHomeComponent {
 
 //ButtonPages
 import RNButtonPage from "./RNButtonPage";
-import EditSubmitButtonPage from "./EditSubmitButtonPage";
 import ButtonColorPage from "./ButtonColorPage";
 
 export const ButtonPages = {
@@ -53,12 +48,6 @@ export const ButtonPages = {
         screen: RNButtonPage,
         navigationOptions: () => ({
             title: `RNButtonPage`,
-        }),
-    },
-    EditSubmitButtonPage: {
-        screen: EditSubmitButtonPage,
-        navigationOptions: () => ({
-            title: `EditSubmitButtonPage`,
         }),
     },
     ButtonColorPage: {
