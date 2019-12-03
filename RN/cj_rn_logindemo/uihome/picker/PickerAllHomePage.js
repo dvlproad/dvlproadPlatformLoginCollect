@@ -31,11 +31,6 @@ export default class PickerAllHomePage extends LKDemoCollectionHomeComponent {
                     nextPageName: "PickerImageHomePage",
                 },
                 {
-                    title: "地区选择",
-                    imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
-                    nextPageName: "PickerAreaHomePage",
-                },
-                {
                     title: "事项选择(单选、多选)",
                     imageSource: {uri: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3460118221,780234760&fm=26&gp=0.jpg'},
                     nextPageName: "PickerItemHomePage",
@@ -50,7 +45,6 @@ export default class PickerAllHomePage extends LKDemoCollectionHomeComponent {
 import PickersPage from "./react-native-pickers/PickersPage";
 import PickerImageHomePage, {PickerImageChildPages } from "./image/PickerImageHomePage";
 import PickerDateHomePage, {PickerDateChildPages } from "./date/PickerDateHomePage";
-import PickerAreaHomePage, {PickerAreaChildPages } from "./area/PickerAreaHomePage";
 import PickerItemHomePage, {PickerItemChildPages } from "./item/PickerItemHomePage";
 
 export const PickRoutePage = 'PickerAllHomePage';
@@ -88,15 +82,6 @@ export const PickerAllHomePages = {
         }),
     },
     ...PickerImageChildPages,
-
-    // 选择地区
-    PickerAreaHomePage: {
-        screen: PickerAreaHomePage,
-        navigationOptions: () => ({
-            title: `PickerArea首页`,
-        }),
-    },
-    ...PickerAreaChildPages,
 
     // 选择事项(单选：如体重、多选：如支持的运营商)
     PickerItemHomePage: {
