@@ -43,30 +43,6 @@ import LKRNActionRangeDateText, { LKRangeDateEditingType } from "./date/LKRNActi
 import LKImagesChooseList from "./list/LKImagesChooseList";
 // import LKSelectListModal from "./list/LKSelectListModal";
 
-import {
-  // demo base Page的基类
-  LKDemoTableHomeComponent,
-  LKDemoCollectionHomeComponent,
-  LKDemoChooseBasePage,
-
-  // navigation 导航栏(含路由)
-  LKNavigationFactory,
-  LuckinRoute,
-
-  // collection
-  LKEntryHomeComponent,
-  LKImageLookHomeComponent,
-  LKImageActionCollectionView,
-  LKImageActionHomeComponent,
-
-  // date
-  LKDatePickShowType,
-  LKDatePicker,
-
-  // area 地区选择
-  LKAreaPicker,
-} from "../commonUIEmployee/commonUIEmployee";
-
 
 var LKCommonUI = {
   // toast
@@ -120,45 +96,6 @@ var LKCommonUI = {
   // list
   LKImagesChooseList,
   // LKSelectListModal,
-
-
-  // demo base Page的基类
-  LKDemoTableHomeComponent,
-  LKDemoCollectionHomeComponent,
-  LKDemoChooseBasePage,
-
-  // navigation 导航栏(含路由)
-  LKNavigationFactory,
-  LuckinRoute,
-
-  // collection
-  LKEntryHomeComponent,
-  LKImageLookHomeComponent,
-  LKImageActionCollectionView,
-  LKImageActionHomeComponent,
-
-  // date
-  LKDatePickShowType,
-  LKDatePicker,
-  /**
-   * <LKDatePicker ref={ref => this.datePicker = ref} />
-   *
-   * onPress={()=>{
-                        this.datePicker.showAllEvent(
-                            this.state.dateString2,
-                            (dateString)=>{
-                                this.setState({
-                                    dateString2: dateString
-                                })
-                            },
-                            ()=>{},
-                            ()=>{},
-                        )
-                    }}
-   */
-
-  // area 地区选择
-  LKAreaPicker,
 };
 
 module.exports = LKCommonUI;

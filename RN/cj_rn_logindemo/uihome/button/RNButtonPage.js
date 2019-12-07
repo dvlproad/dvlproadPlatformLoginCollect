@@ -1,9 +1,6 @@
 //RNButtonPages.js
 import React, {Component} from 'react';
 import {ScrollView, Button, Text, View, TouchableWithoutFeedback} from 'react-native';
-import {
-    LKDemoScrollHomeComponent
-} from '../../commonUIEmployee/commonUIEmployee';
 
 export default class RNButtonPage extends Component {
     render() {
