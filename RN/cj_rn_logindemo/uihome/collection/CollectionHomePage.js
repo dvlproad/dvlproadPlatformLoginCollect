@@ -50,27 +50,6 @@ export default class CollectionHomePage extends LKDemoCollectionHomeComponent {
                     title: "模块5",
                     imageSource: require('./img/4.jpg'),
                 },
-
-                {
-                    title: "图片组合(显示)",
-                    imageSource: require('./img/4.jpg'),
-                    nextPageName: "ImageLookCollectionPage",
-                },
-                {
-                    title: "图片组合(操作1)",
-                    imageSource: require('./img/4.jpg'),
-                    nextPageName: "ImageActionCollectionPage",
-                },
-                {
-                    title: "图片组合(操作2)",
-                    imageSource: require('./img/4.jpg'),
-                    nextPageName: "ImageActionContainPage",
-                },
-                {
-                    title: "介绍视图",
-                    imageSource: require('./img/4.jpg'),
-                    nextPageName: "DescriptionsPage",
-                },
             ],
         }
     }
@@ -81,10 +60,6 @@ import FlatListNumColumnsPage from './FlatListNumColumnsPage';
 import FlatListHorizontalEasyPage from './FlatListHorizontalEasyPage';
 import GoodsChoosePage from './GoodsChoosePage';
 import ImagesChoosePage from './ImagesChoosePage';
-import ImageLookCollectionPage from './ImageLookCollectionPage';
-import ImageActionCollectionPage from './ImageActionCollectionPage';
-import ImageActionContainPage from './ImageActionContainPage';
-import DescriptionsPage from './DescriptionsPage';
 
 // CollectionPages
 export const CollectionRoutePage = 'CollectionHomePage';
@@ -118,30 +93,6 @@ export const CollectionPages = {
         screen: ImagesChoosePage,
         navigationOptions: () => ({
             title: `一系列图片的选择`,
-        }),
-    },
-    ImageLookCollectionPage: {
-        screen: ImageLookCollectionPage,
-        navigationOptions: () => ({
-            title: `图片显示的组合视图`,
-        }),
-    },
-    ImageActionCollectionPage: {
-        screen: ImageActionCollectionPage,
-        navigationOptions: () => ({
-            title: `图片操作的组合视图1`,
-        }),
-    },
-    ImageActionContainPage: {
-        screen: ImageActionContainPage,
-        navigationOptions: () => ({
-            title: `图片操作的组合视图2`,
-        }),
-    },
-    DescriptionsPage: {
-        screen: DescriptionsPage,
-        navigationOptions: () => ({
-            title: `介绍的描述视图列表`,
         }),
     },
 };
