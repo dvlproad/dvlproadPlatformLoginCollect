@@ -20,7 +20,7 @@ import {
     LKEditSubmitButton,
     LKEmptyNetwork,
     LKAPILoadStatus,
-} from '../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 
 import {

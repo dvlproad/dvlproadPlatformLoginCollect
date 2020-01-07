@@ -8,7 +8,7 @@ import {
     LKDatePickShowType,
     LKDatePicker,
     LKDatePickerCreateTimeType,
-} from "../../../commonUI/luckincommonui";
+} from "cjrn-demo-base";
 
 export default class RangeDateTextPage extends Component {
     constructor(props) {

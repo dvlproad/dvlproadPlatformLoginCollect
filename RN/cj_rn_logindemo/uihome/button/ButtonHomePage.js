@@ -1,13 +1,13 @@
 //ButtonHomePage.js
 import React, { Component } from 'react';
 import {
-    LKNavigationFactory,
-    LKDemoTableHomeComponent
-} from "../../commonUI/luckincommonui";
+    CJTSNavigationFactory,
+    CJTSTableHomeBasePage
+} from "cjrn-demo-base";
 
-export default class ButtonHomePage extends LKDemoTableHomeComponent {
+export default class ButtonHomePage extends CJTSTableHomeBasePage {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
+        return CJTSNavigationFactory.backPageNavigationOptions({ navigation }, `按钮`)
     };
 
     constructor(props) {

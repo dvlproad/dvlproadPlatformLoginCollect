@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 
 import {
-    LKNavigationFactory,
-    LKDemoTableHomeComponent
-} from "../../../commonUI/luckincommonui";
+    CJTSNavigationFactory,
+    CJTSTableHomeBasePage
+} from "cjrn-demo-base";
 
-export default class PickerDateHomePage extends LKDemoTableHomeComponent {
+export default class PickerDateHomePage extends CJTSTableHomeBasePage {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `选择日期`)
+        return CJTSNavigationFactory.backPageNavigationOptions({ navigation }, `选择日期`)
     };
 
     constructor(props) {
@@ -27,11 +27,7 @@ export default class PickerDateHomePage extends LKDemoTableHomeComponent {
                     key: "SingleDate--JS",
                     data: [
                         {title: "PickersPage", nextPageName: "PickersPage"},
-                        {title: "DatePickerPage_00ComJS", nextPageName: "DatePickerPage_00ComJS"},
-                        {title: "ComJSDatePickerPage2", nextPageName: "ComJSDatePickerPage2"},
                         {title: "各种时间样式的日期SingleDateTextPage", nextPageName: "SingleDateTextPage"},
-                        {title: "ComJSSingleDatePage21", nextPageName: "ComJSSingleDatePage21"},
-                        {title: "ComJSSingleDatePage30", nextPageName: "ComJSSingleDatePage30"},
                     ]
                 },
                 {
@@ -52,13 +48,10 @@ export default class PickerDateHomePage extends LKDemoTableHomeComponent {
 import OwnNativeSingleDatePage from "./OwnNativeSingleDatePage";
 import ComNativeSingleDatePage from "./ComNativeSingleDatePage";
 //singleDate-JS
-import DatePickerPage_00ComJS from "./DatePickerPage_00ComJS";
 import SingleDateTextPage from "./SingleDateTextPage";
-import ComJSSingleDatePage30 from "./ComJSSingleDatePage30";
 //rangeDate
 import OwnNativeActionRangeDateTextPage from './OwnNativeActionRangeDateTextPage';
 
-import ComJSSingleDatePage21 from "./ComJSSingleDatePage21";
 import RangeDateTextPage from "./RangeDateTextPage";
 
 
@@ -76,29 +69,8 @@ export const PickerDateChildPages = {
         }),
     },
 
-
-    DatePickerPage_00ComJS: {
-        screen: DatePickerPage_00ComJS,
-        navigationOptions: () => ({
-            title: `单个日期选择(统一样式RN_未封装)`,
-        }),
-    },
-
     SingleDateTextPage: {
         screen: SingleDateTextPage,
-        navigationOptions: () => ({
-            title: `单个日期选择(统一样式RN)`,
-        }),
-    },
-    ComJSSingleDatePage21: {
-        screen: ComJSSingleDatePage21,
-        navigationOptions: () => ({
-            title: `单个日期选择(统一样式RN)`,
-        }),
-    },
-
-    ComJSSingleDatePage30: {
-        screen: ComJSSingleDatePage30,
         navigationOptions: () => ({
             title: `单个日期选择(统一样式RN)`,
         }),

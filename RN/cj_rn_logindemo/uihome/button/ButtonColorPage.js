@@ -13,7 +13,7 @@ import {
     LKBlueBGButton,
 }
 
-from "../../commonUI/luckincommonui"
+from "cjrn-demo-base"
 
 export default class ButtonColorPage extends Component {
     render() {

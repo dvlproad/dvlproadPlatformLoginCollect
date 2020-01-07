@@ -4,7 +4,7 @@ import Network from '../../bridge_modules_js/Network';
 
 import {
     LKProgressHUD,
-} from '../../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 
 /**
@@ -132,9 +132,9 @@ export default class LKNetworkUtil {
     */
     /**
      * 文件上传请求
-     * @param {参数 json} params 
+     * @param {参数 json} params
      * @param {文件上传参数*} files
-     * @param {是否需要loading} isNeedLoading 
+     * @param {是否需要loading} isNeedLoading
      * @param {进度回调*} handleProgress
      * @returns
      * @memberof LKNetworkUtil

@@ -5,7 +5,7 @@ LKActionSheet: 最基础的ActionSheet使用示例
 
 import {
     LKActionSheet,
-} from '../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 
 <LKActionSheet ref={ref => this.photoCameraSheet = ref} />
@@ -34,7 +34,7 @@ import {
 import {
     LKActionSheetFactory,
     LKActionDom,
-} from '../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
                 <LKActionSheetFactory actionTitle={'请选择'}
                                       visible={this.state.showAction}

@@ -8,13 +8,14 @@
 import React, { Component } from 'react';
 import {  Alert } from 'react-native';
 import {
-    LKNavigationFactory,
-    LKDemoCollectionHomeComponent
-} from '../../commonUI/luckincommonui';
+    CJTSNavigationFactory,
+    CJTSTableHomeBasePage,
+    CJTSCollectionHomeBasePage,
+} from "cjrn-demo-base";
 
-export default class CollectionHomePage extends LKDemoCollectionHomeComponent {
+export default class CollectionHomePage extends CJTSCollectionHomeBasePage {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `集合视图`)
+        return CJTSNavigationFactory.backPageNavigationOptions({ navigation }, `集合视图`)
     };
 
     constructor(props) {

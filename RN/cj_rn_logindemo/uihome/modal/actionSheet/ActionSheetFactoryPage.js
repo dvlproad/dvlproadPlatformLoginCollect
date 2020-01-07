@@ -6,7 +6,7 @@ import {
     LKActionSheetFactory,
     LKActionDom,
     LKBlueBGButton,
-} from '../../../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 export default class ActionSheetFactory extends Component {
     constructor(props) {

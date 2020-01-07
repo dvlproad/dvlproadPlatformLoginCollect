@@ -6,7 +6,7 @@ import {
     LKActionSheet,
     LKPhotoCameraSheet,
     LKBlueBGButton,
-} from '../../../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 export default class PhotoCameraSheetPage extends Component {
     constructor(props) {

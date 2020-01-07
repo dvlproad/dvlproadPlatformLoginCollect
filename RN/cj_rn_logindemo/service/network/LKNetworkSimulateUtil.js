@@ -4,7 +4,7 @@ import LKDataUtil from "../../commonUtil/LKDataUtil";
 
 import {
     LKProgressHUD,
-} from '../../commonUI/luckincommonui';
+} from 'cjrn-demo-base';
 
 export default class LKNetworkSimulateUtil {
     /*

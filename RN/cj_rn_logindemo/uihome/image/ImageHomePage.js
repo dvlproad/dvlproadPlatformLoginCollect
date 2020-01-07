@@ -26,10 +26,7 @@ export default class ImageHomePage extends Component {
             { key: "image",
                 data: [
                     { title: "HelloImagePage", page: "HelloImagePage" },
-                    { title: "LoadingImage1LoadingShowPage1", page: "LoadingImage1LoadingShowPage1" },
-                    { title: "LoadingImage3WhenUploadPage", page: "LoadingImage3WhenUploadPage" },
-                    { title: "LoadingImage2ErrorPage", page: "LoadingImage2ErrorPage" },
-                    { title: "ActionLoadingImagePage", page: "ActionLoadingImagePage" },
+                    { title: "OtherLoadingShowPage1", page: "OtherLoadingShowPage1" },
                 ]
             },
             { key: "images",
@@ -53,12 +50,9 @@ export default class ImageHomePage extends Component {
 
 //ImagePages
 import HelloImagePage from "./HelloImagePage";
-import LoadingImage1LoadingShowPage1, {Title_LoadingImagePage1} from "./LoadingImage1LoadingShowPage1";
-import LoadingImage3WhenUploadPage, {Title_LoadingImagePage2} from "./LoadingImage3WhenUploadPage";
-import ActionLoadingImagePage from './ActionLoadingImagePage';
+import OtherLoadingShowPage1, {Title_LoadingImagePage1} from "./OtherLoadingShowPage1";
 import ImagesChooseListPage from "./ImagesChooseListPage";
 import ImagesChooseListExamplePage from "./ImagesChooseListExamplePage";
-import LoadingImage2ErrorPage, {Title_LoadingImagePage3} from "./LoadingImage2ErrorPage";
 
 
 export const ImageRoutePage = 'ImageHomePage';
@@ -77,28 +71,10 @@ export const ImagePages = {
         }),
     },
 
-    LoadingImage1LoadingShowPage1: {
-        screen: LoadingImage1LoadingShowPage1,
+    OtherLoadingShowPage1: {
+        screen: OtherLoadingShowPage1,
         navigationOptions: () => ({
             title: Title_LoadingImagePage1,
-        }),
-    },
-    LoadingImage3WhenUploadPage: {
-        screen: LoadingImage3WhenUploadPage,
-        navigationOptions: () => ({
-            title: Title_LoadingImagePage2,
-        }),
-    },
-    LoadingImage2ErrorPage: {
-        screen: LoadingImage2ErrorPage,
-        navigationOptions: () => ({
-            title: Title_LoadingImagePage3,
-        }),
-    },
-    ActionLoadingImagePage: {
-        screen: ActionLoadingImagePage,
-        navigationOptions: () => ({
-            title: `单个图片选择`,
         }),
     },
 

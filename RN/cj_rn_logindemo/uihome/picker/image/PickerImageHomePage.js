@@ -2,13 +2,14 @@
 import React, { Component } from 'react';
 
 import {
-    LKNavigationFactory,
-    LKDemoTableHomeComponent
-} from "../../../commonUI/luckincommonui";
+    CJTSNavigationFactory,
+    CJTSTableHomeBasePage,
+    CJTSCollectionHomeBasePage,
+} from "cjrn-demo-base";
 
-export default class PickerImageHomePage extends LKDemoTableHomeComponent {
+export default class PickerImageHomePage extends CJTSTableHomeBasePage {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `选择图片`)
+        return CJTSNavigationFactory.backPageNavigationOptions({ navigation }, `选择图片`)
     };
 
     constructor(props) {

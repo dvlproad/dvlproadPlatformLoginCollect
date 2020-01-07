@@ -1,7 +1,7 @@
 //OwnNativeSingleDatePage.js
 import React, { Component } from 'react';
 import {Text, ScrollView} from 'react-native';
-import {LKOwnNativeActionSingleDateText} from "../../../commonUI/luckincommonui";
+import {LKOwnNativeActionSingleDateText} from "cjrn-demo-base";
 
 export default class OwnNativeSingleDatePage extends Component {
     constructor(props) {

@@ -4,13 +4,7 @@ import {View} from 'react-native';
 import LKToastUtil from "../../../commonUI/toast/LKToastUtil";
 import LKSingleDateText from "../../../commonUI/date/LKSingleDateText";
 
-import {
-    LKDatePickShowType,
-} from "../../../commonUI/luckincommonui";
 
-import
-    LKComJSDatePicker
- from "../../../CJBaseUIKit/datePicker/CJDatePickerView";
 
 export default class SingleDateTextPage extends Component {
 
@@ -34,7 +28,7 @@ export default class SingleDateTextPage extends Component {
                                   allowPickDate={true}
                                   onPress={()=>{
                                       LKToastUtil.showMessage('fdfd');
-                                      this.yyyyMMddDatePicker.show()
+                                      // this.yyyyMMddDatePicker.show()
                                   }}
                 />
 
@@ -44,7 +38,7 @@ export default class SingleDateTextPage extends Component {
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                      this.yyyyMMddHHmmDatePicker.show()
+                                      // this.yyyyMMddHHmmDatePicker.show()
                                   }}
                 />
 
@@ -54,7 +48,7 @@ export default class SingleDateTextPage extends Component {
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                      this.yyyyMMddHHmmssDatePicker.show()
+                                      // this.yyyyMMddHHmmssDatePicker.show()
                                   }}
                 />
 
@@ -64,66 +58,8 @@ export default class SingleDateTextPage extends Component {
                                   isBankStyle={false}
                                   allowPickDate={true}
                                   onPress={()=>{
-                                      this.yyyyMMDatePicker.show()
+                                      // this.yyyyMMDatePicker.show()
                                   }}
-                />
-
-
-                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMdd}
-                                   dateString={this.state.yyyyMMddDateString}
-                                   onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString)
-                                       this.setState({
-                                           yyyyMMddDateString: dateString,
-                                       })
-                                   }}
-                                   onPickerCancel={() => {
-                                       LKToastUtil.showMessage('取消《年月日》的选择');
-                                   }}
-                                   ref={ref => this.yyyyMMddDatePicker = ref}
-                />
-
-
-                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMddHHmm}
-                                   dateString={this.state.yyyyMMddHHmmDateString}
-                                   onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString)
-                                       this.setState({
-                                           yyyyMMddHHmmDateString: dateString,
-                                       })
-                                   }}
-                                   onPickerCancel={() => {
-                                       LKToastUtil.showMessage('取消《年月日时分》的选择');
-                                   }}
-                                   ref={ref => this.yyyyMMddHHmmDatePicker = ref}
-                />
-
-                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMMddHHmmss}
-                                   dateString={this.state.yyyyMMddHHmmssDateString}
-                                   onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString)
-                                       this.setState({
-                                           yyyyMMddHHmmssDateString: dateString,
-                                       })
-                                   }}
-                                   onPickerCancel={() => {
-                                       LKToastUtil.showMessage('取消《年月日时分秒》的选择');
-                                   }}
-                                   ref={ref => this.yyyyMMddHHmmssDatePicker = ref}
-                />
-
-                <LKComJSDatePicker datePickShowType={LKDatePickShowType.yyyyMM}
-                                   dateString={this.state.yyyyMMDateString}
-                                   onPickerConfirm={(dateString) => {
-                                       LKToastUtil.showMessage(dateString)
-                                       this.setState({
-                                           yyyyMMDateString: dateString,
-                                       })
-                                   }}
-                                   onPickerCancel={() => {
-                                       LKToastUtil.showMessage('取消《年月》的选择');
-                                   }}
-                                   ref={ref => this.yyyyMMDatePicker = ref}
                 />
 
             </View>

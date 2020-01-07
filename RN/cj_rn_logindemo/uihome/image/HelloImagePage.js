@@ -1,4 +1,4 @@
-//ActionLoadingImagePage.js
+//HelloImagePage.js
 import React, { Component } from 'react';
 import {ScrollView, Image} from 'react-native';
 

@@ -1,13 +1,13 @@
 //PickerAllHomePage.js
 import React, { Component } from 'react';
 import {
-    LKNavigationFactory,
-    LKDemoCollectionHomeComponent
-} from '../../commonUI/luckincommonui';
+    CJTSNavigationFactory,
+    CJTSCollectionHomeBasePage
+} from 'cjrn-demo-base';
 
-export default class PickerAllHomePage extends LKDemoCollectionHomeComponent {
+export default class PickerAllHomePage extends CJTSCollectionHomeBasePage {
     static navigationOptions = ({ navigation }) => {
-        return LKNavigationFactory.backPageNavigationOptions({ navigation }, `各种picker选择`)
+        return CJTSNavigationFactory.backPageNavigationOptions({ navigation }, `各种picker选择`)
     };
 
     constructor(props) {
