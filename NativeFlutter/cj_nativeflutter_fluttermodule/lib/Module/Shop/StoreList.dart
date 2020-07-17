@@ -146,19 +146,30 @@ class _StoreListState extends State<StoreList> {
     } on PlatformException catch (e){}
   }
 
-  Future<void> _handleRefresh(bool up) {
-    if (up) {
-      currentPage = 0;
-      _getListAction(false).then((val) {
-        currentPage++;
-        _refreshController.sendBack(up, RefreshStatus.canRefresh);
-      });
-    } else {
-      _getListAction(true).then((val) {
-        currentPage++;
-        _refreshController.sendBack(up, RefreshStatus.canRefresh);
-      });
-    }
+//  Future<void> _handleRefresh(bool up) {
+//    if (up) {
+//      currentPage = 0;
+//      _getListAction(false).then((val) {
+//        currentPage++;
+//        _refreshController.sendBack(up, RefreshStatus.canRefresh);
+//      });
+//    } else {
+//      _getListAction(true).then((val) {
+//        currentPage++;
+//        _refreshController.sendBack(up, RefreshStatus.canRefresh);
+//      });
+//    }
+//  }
+
+  void _handleRefresh(bool up) async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void onRefresh() {
+    _handleRefresh(true);
   }
 
   /**
@@ -193,7 +204,7 @@ class _StoreListState extends State<StoreList> {
             controller: _refreshController,
             enablePullDown: true,
             enablePullUp: true,
-            onRefresh: _handleRefresh,
+            onRefresh: onRefresh,
             child: ListView.separated(
               itemCount: shopModels.length,
               itemBuilder: (BuildContext context, int index) {

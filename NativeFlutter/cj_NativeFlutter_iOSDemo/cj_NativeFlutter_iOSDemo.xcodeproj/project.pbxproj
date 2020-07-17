@@ -308,7 +308,7 @@
 				78255534222A7F5F0091127A /* Resources */,
 				78255599222A843B0091127A /* ShellScript */,
 				46305EC1213A0134B974D122 /* [CP] Copy Pods Resources */,
-				2A15FF7F01E36CD9BAFFF219 /* [CP] Embed Pods Frameworks */,
+				5C6E55FAFA6EFA5339E136BF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,23 +427,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A15FF7F01E36CD9BAFFF219 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		46305EC1213A0134B974D122 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,6 +442,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C6E55FAFA6EFA5339E136BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		78255599222A843B0091127A /* ShellScript */ = {
