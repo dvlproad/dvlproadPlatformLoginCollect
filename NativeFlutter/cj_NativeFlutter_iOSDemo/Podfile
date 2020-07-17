@@ -28,7 +28,9 @@ target 'cj_NativeFlutter_iOSDemo' do
   flutter_application_path = '../cj_nativeflutter_fluttermodule/'
   eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)
   
+  pod 'CJBaseUIKit',  :subspecs => ['UIColor', 'UINavigationBar']
   pod 'CJBaseUtil',   :subspecs => ['CJDataUtil']
-  pod 'CJDemoCommon/CommonUI'
-  pod 'CJDemoModuleLogin/Logic',  :path => '~/Project/Gitee/AppLoginCollect’
+  pod 'CQOverlayKit', :subspecs => ['CQToast', 'CQAlert', 'CQHUD']
+  
+  pod 'CJDemoModuleLogin/Logic'#,  :path => '~/Project/Gitee/AppLoginCollect’
 end

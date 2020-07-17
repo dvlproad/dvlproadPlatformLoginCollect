@@ -37,7 +37,9 @@
         apiSuffix = [apiSuffix substringFromIndex:1];
     }
     NSString *jsonName = [apiSuffix stringByReplacingOccurrencesOfString:@"/" withString:@":"];
-    NSData *responseObject = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:jsonName ofType:nil]];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:jsonName ofType:nil];
+    //BOOL exists = [[NSFileManager new] fileExistsAtPath:filePath];
+    NSData *responseObject = [NSData dataWithContentsOfFile:filePath];
     if (!responseObject) { //不设置会崩溃
         NSDictionary *lackOfLocalResponseDic =
         @{@"status" : @"0",
@@ -62,7 +64,7 @@
         }
         /* // responseDictionary --> responseModel
         CJResponseModel *responseModel = [[CJResponseModel alloc] init];
-        responseModel.status = [responseDictionary[@"status"] integerValue];
+        responseModel.statusCode = [responseDictionary[@"status"] integerValue];
         responseModel.message = responseDictionary[@"message"];
         responseModel.result = responseDictionary[@"result"];
         responseModel.isCacheData = NO;

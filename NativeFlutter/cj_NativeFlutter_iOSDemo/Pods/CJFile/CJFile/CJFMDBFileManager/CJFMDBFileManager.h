@@ -9,7 +9,7 @@
 #import "CJFileManager.h"
 #import "CJFileManager+GetCreatePath.h"
 
-#import <FMDB/FMDB.h>
+#import <fmdb/FMDB.h>
 #import "CJFMDBFileDeleteResult.h"
 
 /**
@@ -19,7 +19,7 @@
     
 }
 @property (nonatomic, copy, readonly) NSString *fileRelativePath;   /**< 当前数据库的相对路径 */
-
+@property (nonatomic, strong, readonly) NSMutableArray<NSString *> *allCreateTableSqls;
 
 #pragma mark - 创建数据库、数据表
 /**
@@ -49,6 +49,9 @@
 - (BOOL)createDatabaseInFileRelativePath:(NSString *)fileRelativePath
                        byCreateTableSqls:(NSArray<NSString *> *)createTableSqls
                          ifExistDoAction:(CJFileExistAction)fileExistAction;
+
+/// 添加数据表
+- (BOOL)addDatabaseTableWithWithCreateTableSqls:(NSArray<NSString *> *)createTableSqls;
 
 
 /**

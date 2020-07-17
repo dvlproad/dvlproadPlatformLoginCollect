@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,8 +24,6 @@
 		7825558A222A81C70091127A /* LoginVCFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825557B222A81C70091127A /* LoginVCFactory.m */; };
 		7825558B222A81C70091127A /* LoginRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825557D222A81C70091127A /* LoginRouter.m */; };
 		7825558C222A81C70091127A /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78255581222A81C70091127A /* AppAssets.xcassets */; };
-		78255596222A82F00091127A /* CJUIKitBaseHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */; };
-		78255597222A82F00091127A /* CJUIKitBaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */; };
 		78255598222A82F00091127A /* CJUIKitBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78255595222A82F00091127A /* CJUIKitBaseViewController.m */; };
 		78F3B7F8222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3B7F3222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m */; };
 		78F3B7F9222CBF11008C18DE /* CJDemoMethodChannelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3B7F4222CBF11008C18DE /* CJDemoMethodChannelFactory.m */; };
@@ -82,12 +80,7 @@
 		7825557F222A81C70091127A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		78255581222A81C70091127A /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppAssets.xcassets; sourceTree = "<group>"; };
 		78255582222A81C70091127A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		7825558F222A82F00091127A /* CJUIKitBaseScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseScrollViewController.h; sourceTree = "<group>"; };
 		78255590222A82F00091127A /* CJUIKitBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseViewController.h; sourceTree = "<group>"; };
-		78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseHomeViewController.m; sourceTree = "<group>"; };
-		78255592222A82F00091127A /* DemoConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoConstant.h; sourceTree = "<group>"; };
-		78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseScrollViewController.m; sourceTree = "<group>"; };
-		78255594222A82F00091127A /* CJUIKitBaseHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUIKitBaseHomeViewController.h; sourceTree = "<group>"; };
 		78255595222A82F00091127A /* CJUIKitBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUIKitBaseViewController.m; sourceTree = "<group>"; };
 		78F3B7F2222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlutterMethodChannel+CJDemoCallNative.h"; sourceTree = "<group>"; };
 		78F3B7F3222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlutterMethodChannel+CJDemoCallFlutter.m"; sourceTree = "<group>"; };
@@ -274,13 +267,8 @@
 		7825558E222A82F00091127A /* CJUIKitBase */ = {
 			isa = PBXGroup;
 			children = (
-				78255594222A82F00091127A /* CJUIKitBaseHomeViewController.h */,
-				78255591222A82F00091127A /* CJUIKitBaseHomeViewController.m */,
-				7825558F222A82F00091127A /* CJUIKitBaseScrollViewController.h */,
-				78255593222A82F00091127A /* CJUIKitBaseScrollViewController.m */,
 				78255590222A82F00091127A /* CJUIKitBaseViewController.h */,
 				78255595222A82F00091127A /* CJUIKitBaseViewController.m */,
-				78255592222A82F00091127A /* DemoConstant.h */,
 			);
 			name = CJUIKitBase;
 			path = ../../../CJUIKitBase;
@@ -445,36 +433,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources.sh",
-				"${PODS_ROOT}/CJBaseEffectKit/CJBaseEffectKit/CJMJRefreshComponent/Resources/cjRefreshArrowDown@2x.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error@2x.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_error@3x.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success@2x.png",
-				"${PODS_ROOT}/CJBaseUIKit/CJBaseUIKit/CJToast/Resources/CJToast_success@3x.png",
-				"${PODS_ROOT}/CJFile/CJFile/CJFMDBFileManager/demofmdb.db",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle",
-				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/cjRefreshArrowDown@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_error@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CJToast_success@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/demofmdb.db",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SAMKeychain.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -526,16 +489,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks.sh",
-				"${PODS_ROOT}/../../cj_nativeflutter_fluttermodule/.ios/Flutter/engine/Flutter.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-cj_NativeFlutter_iOSDemo/Pods-cj_NativeFlutter_iOSDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -550,14 +508,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F3B7F8222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallFlutter.m in Sources */,
-				78255596222A82F00091127A /* CJUIKitBaseHomeViewController.m in Sources */,
 				78255585222A81C70091127A /* LoginChannelModel.m in Sources */,
 				78F3B7FA222CBF11008C18DE /* FlutterMethodChannel+CJDemoCallNative.m in Sources */,
 				78255588222A81C70091127A /* ForgetPasswordViewController.m in Sources */,
 				78255549222A7F600091127A /* main.m in Sources */,
 				78255583222A81C70091127A /* ViewController.m in Sources */,
 				7825558A222A81C70091127A /* LoginVCFactory.m in Sources */,
-				78255597222A82F00091127A /* CJUIKitBaseScrollViewController.m in Sources */,
 				78255598222A82F00091127A /* CJUIKitBaseViewController.m in Sources */,
 				78255587222A81C70091127A /* LoginViewController.m in Sources */,
 				78255584222A81C70091127A /* MainViewController.m in Sources */,

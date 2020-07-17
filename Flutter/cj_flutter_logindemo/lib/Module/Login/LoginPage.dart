@@ -104,6 +104,11 @@ class _MyLoginPageState extends State<MyLoginPage> {
     } on PlatformException {}
   }
 
+  _login2() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ForgetPasswordRoute();
+    }));
+  }
   _login() async {
     try {
 //      Map<String, dynamic> flutterParams = {
@@ -258,8 +263,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
   // 登录按钮
   FlatButton loginButton() {
     return BlueButton(
-      text: "登录", 
-      enable: loginValid, 
+      text: "登录",
+      enable: loginValid,
       enableOnPressed: _login
     );
   }

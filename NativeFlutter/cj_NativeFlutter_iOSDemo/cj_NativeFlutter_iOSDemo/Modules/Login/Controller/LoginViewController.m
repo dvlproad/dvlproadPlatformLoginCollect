@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import <CJBaseUIKit/UIColor+CJHex.h>
 #import <CJBaseUIKit/UINavigationBar+CJChangeBG.h>
+#import <CQOverlayKit/CQToastUtil.h>
+#import <CQOverlayKit/CQHUDUtil.h>
 #import "LoginChannelModel.h"
 #import "LoginRouter.h"
 
@@ -120,10 +122,10 @@
 
 #pragma mark - ButtonEvent
 - (void)loginButtonActionWithUserName:(NSString *)userName password:(NSString *)password {
-    [DemoProgressHUD show];
+    [CQHUDUtil showLoadingHUD];
     [self.loginChannelModel loginWithUserName:userName password:password loginSuccess:^(NSString *successMessage, DemoUser *user) {
-        [DemoProgressHUD dismiss];
-        [DemoToast showMessage:successMessage];
+        [CQHUDUtil dismissLoadingHUD];
+        [CQToastUtil showMessage:successMessage];
         
         if (user.isDefaultPwd) {
             [LoginRouter goChangePasswordViewControllerFrom:self];
@@ -132,8 +134,8 @@
         }
         
     } loginFailure:^(NSString *errorMessage) {
-        [DemoProgressHUD dismiss];
-        [DemoToast showErrorMessage:errorMessage];
+        [CQHUDUtil dismissLoadingHUD];
+        [CQToastUtil showErrorMessage:errorMessage];
     }];
 }
 

@@ -1,1 +1,1 @@
-../../../../../../../../Gitee/AppLoginCollect/CJDemoModuleLogin/ViewModel/RegisterViewModel.h
+../../../CJDemoModuleLogin/CJDemoModuleLogin/ViewModel/RegisterViewModel.h

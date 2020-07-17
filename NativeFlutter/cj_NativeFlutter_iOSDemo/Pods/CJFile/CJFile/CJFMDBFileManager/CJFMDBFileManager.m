@@ -77,6 +77,7 @@
         return NO;
         
     } else {
+        _allCreateTableSqls = [[NSMutableArray alloc] initWithArray:createTableSqls];
         NSLog(@"创建数据库到指定目录%@成功", fileAbsolutePath);
         for (NSString *createTableSql in createTableSqls) {
             BOOL result = [db executeUpdate:createTableSql];
@@ -89,6 +90,34 @@
         
         return YES;
     }
+}
+
+/// 添加数据表
+- (BOOL)addDatabaseTableWithWithCreateTableSqls:(NSArray<NSString *> *)createTableSqls
+{
+    if (self.fileRelativePath == nil) {
+        NSAssert(NO, @"数据库文件不存在!");
+    }
+    
+    [self cancelManagerAnyDatabase];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:self.fileAbsolutePath];
+    if ([db open]) { //执行open的时候，如果数据库不存在则会自动创建
+        for (NSString *createTableSql in createTableSqls) {
+            BOOL result = [db executeUpdate:createTableSql];
+            if (result == YES) {
+                [_allCreateTableSqls addObject:createTableSql];
+            } else {
+                NSLog(@"操作数据表失败:%@", createTableSql);
+            }
+        }
+        
+        [db close];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 /** 完整的描述请参见文件头部 */

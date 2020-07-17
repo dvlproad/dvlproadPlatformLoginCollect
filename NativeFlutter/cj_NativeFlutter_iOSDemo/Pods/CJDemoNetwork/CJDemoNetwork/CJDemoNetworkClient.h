@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CJNetwork/CJNetworkClient+SuccessFailure.h>
+#import <CJNetworkClient/CJNetworkClient+SuccessFailure.h>
+#import <CJNetworkClient/CJNetworkClient+CJDemoApp.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CJDemoNetworkClient : CJNetworkClient {
     
@@ -16,6 +19,11 @@
 + (CJDemoNetworkClient *)sharedInstance;
 
 
-
+- (void)cjdemo_uploadImage:(UIImage *)image
+              settingModel:(CJRequestSettingModel *)settingModel
+             uploadSuccess:(void (^)(NSString *imageUrl, NSString *thumbnailUrl))uploadSuccess
+             uploadFailure:(void (^)(BOOL isRequestFailure, NSString *errorMessage))uploadFailure;
 
 @end
+
+NS_ASSUME_NONNULL_END

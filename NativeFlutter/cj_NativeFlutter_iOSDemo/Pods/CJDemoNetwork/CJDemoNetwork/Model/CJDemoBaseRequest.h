@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CJNetwork/CJRequestSettingModel.h>
+#import <CJNetworkClient/CJRequestSettingModel.h>
 #import "CJDemoResponseModel.h"
 #import "CJDemoNetworkClient.h"
 

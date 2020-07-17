@@ -7,7 +7,7 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-#import <CJNetwork/CJNetworkClient.h>
+#import <CJNetworkClient/CJNetworkClient.h>
 
 @interface CJDemoCryptHTTPSessionManager<CJNetworkCryptHTTPSessionManagerProtocol> : AFHTTPSessionManager
 
