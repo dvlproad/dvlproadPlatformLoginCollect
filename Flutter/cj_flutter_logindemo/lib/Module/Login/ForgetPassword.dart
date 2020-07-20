@@ -1,25 +1,50 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cj_flutter_logindemo/Tool/Adapter.dart';
+
+import '../../CommonUI/TextField/ForgetPasswordTextFieldRowWidgetFactory.dart';
+import '../../CommonUI/TextField/CQTextEditingController.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
-  ForgetPasswordPage({Key key, this.title}) : super(key: key);
+  ForgetPasswordPage({Key key, this.title, this.username}) : super(key: key);
 
   final String title;
+  final String username;
 
   @override
   _ForgetPasswordPageState createState() => new _ForgetPasswordPageState();
 }
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
+  bool userNameValid = false;
+  bool phoneValid = false;
+  bool codeValid = false;
+  bool newPasswordValid = false;
+  bool submitValid = false;
+
+  String userName = "";
+  String phone = "";
+  String code = "";
+  String newPassword1 = "";
+  String newPassword2 = "";
+
+  //定义一个controller
+  TextEditingController _usernameController = new TextEditingController();
   TextEditingController _phoneController = new TextEditingController();
   TextEditingController _codeController = new TextEditingController();
-  TextEditingController _nameController = new TextEditingController();
-  TextEditingController _passController = new TextEditingController();
-  TextEditingController _passAController = new TextEditingController();
+  TextEditingController _newPasswordController = new TextEditingController();
+  TextEditingController _newPasswordConfirmController = new TextEditingController();
+
+  // 控制文本框焦点
+  FocusNode usernameFocusNode = new FocusNode();
+  FocusNode phoneFocusNode = new FocusNode();
+  FocusNode codeFocusNode = new FocusNode();
+  FocusNode newPasswordFocusNode = new FocusNode();
+  FocusNode newPasswordConfirmFocusNode = new FocusNode();
+  FocusScopeNode currentFocusNode;
 
 //  static const eventPlugin = const EventChannel(
 //      "com.dvlproad.ciyouzen/callNativeForgetPassEventChannel");
@@ -27,11 +52,6 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       "com.dvlproad.ciyouzen/callNativeForgetPassMethodChannel");
 
 
-  ///返回键点击
-  static const backMethod = 'back';
-
-  ///提示toast
-  static const toast = 'toast';
 
   ///获取验证码点击
   static const editCode = 'editCode';
@@ -41,326 +61,40 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   var _isPushEnable = false;
 
-  var _barHeigt = 140;
-
-  var _leftWidgetWidth = 340;
-
-  var _name = '';
-  var _phone = '';
-  var _code = '';
-  var _pass = '';
-  var _passAgain = '';
-
-  @override
-  Widget build(BuildContext context) {
-    Adapter()..init(context);
-    return MaterialApp(
-        home: Scaffold(
-            appBar: PreferredSize(child: AppBar(
-              elevation: 0.0,
-              leading: IconButton(
-                  splashColor: Colors.blue,
-                  highlightColor: Colors.blue,
-                  icon: Icon(Icons.arrow_back), onPressed: _pCenterBack),
-              title: new Text('忘记密码',style: new TextStyle(fontSize: Adapter.setFont(55))), centerTitle: true,),
-                preferredSize: Size.fromHeight(
-                    Adapter.setHeight(_barHeigt))
-            ),
-            body:
-
-            new Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: const Color(0xFFF2F2F2),
-                child:
-
-                new ListView(
-                  children: <Widget>[
-                    new Column(
-                      children: <Widget>[
-                        new Container(
-                          width: double.infinity,
-                          color: const Color(0xFFffffff),
-                          child:
-                          Row(
-                            children: <Widget>[
-                              _text('用户名'),
-                              Expanded(
-                                child: TextField(
-                                  autofocus: true,
-                                  controller: _nameController,
-                                  onChanged: _change,
-
-                                  ///是否自动获取焦点
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "请输入本人登陆用户名",
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        _line(),
-                        new Container(
-                          width: double.infinity,
-                          color: const Color(0xFFffffff),
-                          child:
-                          Row(
-                            children: <Widget>[
-                              _text('手机号'),
-                              Expanded(
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  controller: _phoneController,
-                                  onChanged: _change,
-                                  autofocus: true,
-                                  //是否自动获取焦点
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "请输入本人手机号",
-
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        _line(),
-                        new Container(
-                          width: double.infinity,
-                          color: const Color(0xFFffffff),
-                          child:
-                          Row(
-                            children: <Widget>[
-                              _text('验证码'),
-                              Expanded(
-                                child: TextField(
-                                  controller: _codeController,
-                                  onChanged: _change,
-                                  autofocus: true,
-                                  //是否自动获取焦点
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "请输入手机验证码",
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 15),
-                                child: FlatButton(
-                                    child: Text("获取验证码"),
-                                    color: Color(0xff01adfe),
-                                    textColor: Colors.white,
-                                    highlightColor: Color(0xff1393d7),
-                                    disabledColor: Color(0xffd3d3d5),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            5.0)),
-                                    onPressed: () {
-                                      _getCode();
-                                    }
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-
-                        _line(),
-                        new Container(
-                          width: double.infinity,
-                          color: const Color(0xFFffffff),
-                          child:
-                          Row(
-                            children: <Widget>[
-                              _text('新密码'),
-                              Expanded(
-                                child: TextField(
-                                  autofocus: true,
-                                  controller: _passController,
-                                  onChanged: _change,
-
-                                  ///是否自动获取焦点
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "请输入新密码",
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                            ],
-                          ),
-                        ),
-                        _line(),
-                        new Container(
-                          width: double.infinity,
-                          color: const Color(0xFFffffff),
-                          child:
-                          Row(
-                            children: <Widget>[
-                              _text('确认新密码'),
-                              Expanded(
-                                child: TextField(
-                                  autofocus: true,
-                                  controller: _passAController,
-                                  onChanged: _change,
-                                  ///是否自动获取焦点
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "请再输入一遍新密码",
-                                  ),
-                                ),
-                                flex: 3,
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        Row(children: <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25, top: 20, right: 8, bottom: 10),
-                              child: Image(
-                                  image: AssetImage(
-                                      "lib/Resources/login/login_warning.png"),
-                                  width: 20.0,
-                                  height: 20.0)),
-                          new Expanded(
-                            child:
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 0, top: 15, right: 10, bottom: 10),
-                              child: Text(
-                                '密码至少6位，需包含大、小写字母、数字、特殊字符，且至少包含其中三种 ',
-                                style: new TextStyle(color: Colors.grey),),
-
-                            ),
-                          )
-                        ]),
-                        Row(children: <Widget>[
-                          new Expanded(child:
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(
-                                10.0, 15.0, 10.0, 20.0),
-                            child: FlatButton(
-                                child:
-                                new Padding(
-                                  padding: new EdgeInsets.fromLTRB(
-                                      10.0, 15.0, 0.0, 15.0),
-                                  child: new Text("提交"),
-                                ),
-                                color: Color(0xff01adfe),
-                                textColor: Colors.white,
-                                highlightColor: Color(0xff1393d7),
-                                disabledColor: Color(0xffd3d3d5),
-                                //colorBrightness: Brightness.dark, //按钮主题，默认是浅色主题
-                                //splashColor: Colors.grey, //点击时，水波动画中水波的颜色
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        5.0)),
-                                onPressed:
-                                _getPushBtn()
-                            ),
-                          )
-                            ,)
-                        ]),
-                      ],
-                    )
-                  ],
-                )
-            )
-        )
-    );
-  }
-
-  Widget _text(msg) {
-    return
-      new Container(
-          width: Adapter.setWidth(_leftWidgetWidth),
-          color: const Color(0xFFffffff),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 15,
-                top: 10,
-                right: 0,
-                bottom: 10),
-            child: Text(
-                msg, textAlign: TextAlign.left),
-          ));
-  }
-
-  static Widget _line() {
-    return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 0),
-      width: double.infinity,
-      height: 0.5,
-      color: Colors.grey,
-    );
-  }
-
-  StreamSubscription _perseonSub;
-
-  /// 返回键点击事件
-  Future<Null> _pCenterBack() async {
-    Map<String, dynamic> flutterRequest = {};
-    _toNativeMethod(backMethod, flutterRequest);
-  }
-
   @override
   void initState() {
     super.initState();
-    _phoneController = editText(_phone);
-    _nameController = editText(_name);
-    _codeController = editText(_code);
-    _passController = editText(_pass);
-    _passAController = editText(_passAgain);
-    _startPlugin();
+//    _usernameController = editText(userName);
+//    _phoneController = editText(phone);
+//    _codeController = editText(code);
+//    _newPasswordController = editText(newPassword1);
+//    _newPasswordConfirmController = editText(newPassword2);
+
+
+    //监听文本变化方式②设置controller并实现监听
+    _usernameController.addListener(() {
+      var userName = _usernameController.text;
+      print("listen username:" + _usernameController.text);
+//      _updateAllViewState();
+
+//      setState(() => _usernameController.text = userName);
+    });
+
+//    _passwordController.addListener(() {
+//      password = _passwordController.text;
+//      print("listen password:" + _passwordController.text);
+//      _updateAllViewState();
+//    });
   }
 
-  TextEditingController editText(view) {
-    return TextEditingController.fromValue(
-        TextEditingValue(
-          // 设置内容
-            text: '$view',
-            // 保持光标在最后
-            selection: TextSelection.fromPosition(
-                TextPosition(
-                    affinity: TextAffinity.downstream,
-                    offset: "$view".length))));
+  /// 返回键点击事件
+  _goBack() {
+    Navigator.pop(context, 'resultParams');
   }
 
-  Function _getPushBtn() {
-    if (_isPushEnable)
-      return () {
-        _push();
-      };
-
-    return null;
-  }
-
-
-  ///开启EventChannle事件监听
-  void _startPlugin() {
-    if (_perseonSub == null) {
-//      _perseonSub = eventPlugin.receiveBroadcastStream().listen(
-//          _onLisenEvent, onError: _onError);
-    }
-  }
-
-  ///只需要从native传一个用户名进来
-  void _onLisenEvent(Object event) {
-    final jsonResponse = json.decode(event.toString());
-    Out student = new Out.fromJson(jsonResponse);
-    var childBean = student.nativeParams;
-    _updateName(childBean.name);
-  }
-
-  ///获取验证码
+  /// 获取验证码
   _getCode() {
-    print(_nameController.text);
+    print(_usernameController.text);
     if (_phoneController.text.length != 11) {
       Map<String, dynamic> flutterRequest = {
         "flutterParams": {
@@ -378,44 +112,53 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
     }
   }
 
+  /// 点击提交：尝试提交->正式提交
+  Function _trySubmitAction() {
+    if (_isPushEnable)
+      return () {
+        _realSubmitAction();
+      };
 
-  ///提交
-  _push() {
+    return null;
+  }
+
+  // 正式提交
+  _realSubmitAction() {
     ///验证都不为空、
     Map<String, dynamic> flutterRequest = {
       "flutterParams": {
-        "name": _nameController.text,
+        "name": _usernameController.text,
         "phone": _phoneController.text,
         "code": _codeController.text,
-        "pass": _passController.text,
-        "passA": _passAController.text,
+        "pass": _newPasswordController.text,
+        "passA": _newPasswordConfirmController.text,
       }
     };
 
     _toNativeMethod(push, flutterRequest);
   }
 
-  bool isGo() {
-    if (_nameController.text.isEmpty || _phoneController.text.length != 11 ||
-        _codeController.text.length != 6 || _passController.text.isEmpty ||
-        _passAController.text.isEmpty)
-      return false;
-    return true;
-  }
-
 
   ///更新门店
   _updateName(var name) {
-    setState(() => _nameController.text = name);
+    setState(() => _usernameController.text = name);
   }
 
-  _change(var phone) {
-    if (isGo()) {
+  _onChange(var phone) {
+    if (__isGo()) {
       ///合法的输入
       setState(() => _isPushEnable = true);
     } else {
       setState(() => _isPushEnable = false);
     }
+  }
+
+  bool __isGo() {
+    if (_usernameController.text.isEmpty || _phoneController.text.length != 11 ||
+        _codeController.text.length != 6 || _newPasswordController.text.isEmpty ||
+        _newPasswordConfirmController.text.isEmpty)
+      return false;
+    return true;
   }
 
 
@@ -434,6 +177,239 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
     } on PlatformException catch (e) {
       print("_toNativeMethod" + '${e.message}');
     }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    final Object args = ModalRoute.of(context).settings.arguments;
+    print("忘记密码页从登录页中接收到的传值为 = " + args);
+    userName = args;
+    _usernameController.text = userName;
+
+    return Scaffold(
+      appBar: appBar(),
+      body: Stack(
+        alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
+        children: <Widget>[
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: ListView(
+              children: forgetPasswordWidgets(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 导航栏
+  PreferredSize appBar () {
+    return PreferredSize(
+        child: AppBar(
+          elevation: 0.0,
+          leading: _backButton(),
+          title: Text('忘记密码', style: TextStyle(fontSize: 17)),
+          centerTitle: true,
+        ),
+        preferredSize: Size.fromHeight(44)
+    );
+  }
+
+  // 返回按钮
+  IconButton _backButton() {
+    return IconButton(
+        splashColor: Colors.blue,
+        highlightColor: Colors.blue,
+        icon: Icon(Icons.arrow_back),
+        onPressed: _goBack
+    );
+  }
+
+  /// 忘记密码页的整体视图
+  List<Widget> forgetPasswordWidgets() {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    double screenHeight = mediaQuery.size.height;
+    //print("screenHeight = " + screenHeight.toString());
+    double loginIconTop = screenHeight <= 667 ? 80 : 106;
+    double loginIconBottom = screenHeight <= 667 ? 50 : 71;
+    return <Widget>[
+      new Column(
+        children: <Widget>[
+          userNameRowWidget(),            /// 用户名
+          _separateLine(),
+          phoneRowWidget(),               /// 手机号
+          _separateLine(),
+          verifiedCodeRowWidget(),        /// 验证码
+          _separateLine(),
+          newPasswordRowWidget(),         /// 新密码
+          _separateLine(),
+          newPasswordConfirmRowWidget(),  /// 确认新密码
+
+          passwordPromptRowWidget(),      /// 密码提示语
+          submitButtonRowWidget(),        /// 提交按钮
+        ],
+      )
+    ];
+  }
+
+  /// 下划分割线
+  static Widget _separateLine() {
+    return Container(
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 0),
+      width: double.infinity,
+      height: 0.5,
+      color: Colors.grey,
+    );
+  }
+
+  /// 用户名 的行视图
+  Widget userNameRowWidget() {
+    return ForgetPasswordTextFieldRowWidget(
+      title: '用户名',
+      placeholder: '请输入本人登陆用户名',
+      value: userName,
+      keyboardType: TextInputType.text,
+      autofocus: true,
+      controller: _usernameController,
+    );
+  }
+
+  /// 手机号 的行视图
+  Widget phoneRowWidget() {
+    return ForgetPasswordTextFieldRowWidget(
+      title: '手机号',
+      placeholder: '请输入本人手机号',
+      value: '',
+      keyboardType: TextInputType.number,
+      autofocus: true,
+      controller: _phoneController,
+    );
+  }
+
+  /// 验证码 的行视图
+  Widget verifiedCodeRowWidget() {
+    return Container(
+      color: Color(0xFFffffff),
+      child:
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: _verifiedCodeTextField(),
+            flex: 2,
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 15),
+            child: _getVerifiedCodeButton(),
+          )
+        ],
+      ),
+    );
+  }
+  Widget _verifiedCodeTextField() {
+    return ForgetPasswordTextFieldRowWidget(
+      title: '验证码',
+      placeholder: '请输入手机验证码',
+      value: '',
+      keyboardType: TextInputType.number,
+      autofocus: true,
+      controller: _codeController,
+    );
+  }
+  // 获取验证码的按钮
+  FlatButton _getVerifiedCodeButton() {
+    return FlatButton(
+        child: Text("获取验证码"),
+        color: Color(0xff01adfe),
+        textColor: Colors.white,
+        highlightColor: Color(0xff1393d7),
+        disabledColor: Color(0xffd3d3d5),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0)
+        ),
+        onPressed: () {
+          _getCode();
+        }
+    );
+  }
+
+  /// 新密码 的行视图
+  Widget newPasswordRowWidget() {
+    return ForgetPasswordTextFieldRowWidget(
+      title: '新密码',
+      placeholder: '请输入新密码',
+      value: '',
+      keyboardType: TextInputType.number,
+      autofocus: true,
+      controller: _newPasswordController,
+    );
+  }
+
+  /// 确认新密码 的行视图
+  Widget newPasswordConfirmRowWidget() {
+    return ForgetPasswordTextFieldRowWidget(
+      title: '确认新密码',
+      placeholder: '请再输入一遍新密码',
+      value: '',
+      keyboardType: TextInputType.number,
+      autofocus: true,
+      controller: _newPasswordConfirmController,
+    );
+  }
+
+  /// 密码提示语 的行视图
+  Row passwordPromptRowWidget() {
+    return Row(children: <Widget>[
+      Padding(
+          padding: EdgeInsets.only(left: 25, top: 20, right: 8, bottom: 10),
+          child: Image(image: AssetImage("lib/Resources/login/login_warning.png"), width: 20.0, height: 20.0)
+      ),
+      Expanded(
+        flex: 1,
+        child: Padding(
+          padding: EdgeInsets.only(left: 0, top: 15, right: 10, bottom: 10),
+          child: Text('密码至少6位，需包含大、小写字母、数字、特殊字符，且至少包含其中三种 ', style: TextStyle(color: Colors.grey)),
+        ),
+      )
+    ]
+    );
+  }
+
+
+  /// 提交按钮 的行视图
+  Row submitButtonRowWidget() {
+    return Row(children: <Widget>[
+      Expanded(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 20.0),
+            child: _submitButton(),
+          )
+      )
+    ]
+    );
+  }
+
+  // 提交按钮
+  FlatButton _submitButton() {
+    return FlatButton(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 15.0, 0.0, 15.0),
+          child: Text("提交"),
+        ),
+        color: Color(0xff01adfe),
+        textColor: Colors.white,
+        highlightColor: Color(0xff1393d7),
+        disabledColor: Color(0xffd3d3d5),
+        //colorBrightness: Brightness.dark, //按钮主题，默认是浅色主题
+        //splashColor: Colors.grey, //点击时，水波动画中水波的颜色
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0)
+        ),
+        onPressed: _trySubmitAction()
+    );
   }
 }
 

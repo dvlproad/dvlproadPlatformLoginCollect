@@ -111,11 +111,15 @@ class _MyLoginPageState extends State<MyLoginPage> {
     }));
   }
 
+  /// 进入忘记密码（登录页将用户名传递给忘记密码页）
   _goForgetPasswordViewController() {
     try {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ForgetPasswordPage()),
+        MaterialPageRoute(
+            builder: (context) => ForgetPasswordPage(),
+            settings: RouteSettings(arguments: userName),
+        ),
       );
     } on PlatformException {}
   }
@@ -123,6 +127,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appBar: appBar(),
       body: Stack(
         alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
         children: <Widget>[
@@ -215,7 +220,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
             currentFocusNode = FocusScope.of(context);
           }
           currentFocusNode.requestFocus(passwordFocusNode);
-        });
+        }
+        );
   }
 
   // 密码文本框
