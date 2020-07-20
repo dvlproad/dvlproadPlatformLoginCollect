@@ -6,28 +6,13 @@ import 'dart:async';
 
 import 'package:cj_flutter_logindemo/Tool/Adapter.dart';
 
-void main() => runApp(PersonCenter());
 
-class PersonCenter extends StatelessWidget {
-
+class PersonalCenterPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new MyHomePage(),
-    );
-  }
-
-  @override
-  _PersonCenter createState() => _PersonCenter();
+  _PersonalCenterState createState() => new _PersonalCenterState();
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _PersonCenter createState() => new _PersonCenter();
-}
-
-class _PersonCenter extends State<MyHomePage> {
-
+class _PersonalCenterState extends State<PersonalCenterPage> {
 
   static const METHODCHANNEL = "com.dvlproad.ciyouzen/personCenterMethodChannel";
   static const EVENTCHANNEL = "com.dvlproad.ciyouzen/personCenterEventChannel";

@@ -5,36 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cj_flutter_logindemo/Tool/Adapter.dart';
 
-void main() => runApp(ForgetPasswordRoute());
+class ForgetPasswordPage extends StatefulWidget {
+  ForgetPasswordPage({Key key, this.title}) : super(key: key);
 
-class ForgetPasswordRoute extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new MyHomePage(),
-    );
-  }
+  final String title;
 
   @override
-  _ForgetPasswordRoute createState() => _ForgetPasswordRoute();
+  _ForgetPasswordPageState createState() => new _ForgetPasswordPageState();
 }
 
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _ForgetPasswordRoute createState() => new _ForgetPasswordRoute();
-}
-
-class _ForgetPasswordRoute extends State<MyHomePage> {
+class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   TextEditingController _phoneController = new TextEditingController();
   TextEditingController _codeController = new TextEditingController();
   TextEditingController _nameController = new TextEditingController();
   TextEditingController _passController = new TextEditingController();
   TextEditingController _passAController = new TextEditingController();
 
-  static const eventPlugin = const EventChannel(
-      "com.dvlproad.ciyouzen/callNativeForgetPassEventChannel");
+//  static const eventPlugin = const EventChannel(
+//      "com.dvlproad.ciyouzen/callNativeForgetPassEventChannel");
   static const jumpPlugin = const MethodChannel(
       "com.dvlproad.ciyouzen/callNativeForgetPassMethodChannel");
 
@@ -357,8 +345,8 @@ class _ForgetPasswordRoute extends State<MyHomePage> {
   ///开启EventChannle事件监听
   void _startPlugin() {
     if (_perseonSub == null) {
-      _perseonSub = eventPlugin.receiveBroadcastStream().listen(
-          _onLisenEvent, onError: _onError);
+//      _perseonSub = eventPlugin.receiveBroadcastStream().listen(
+//          _onLisenEvent, onError: _onError);
     }
   }
 

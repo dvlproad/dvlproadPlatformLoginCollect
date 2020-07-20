@@ -1,3 +1,4 @@
+import 'package:cj_flutter_logindemo/Module/Main/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'Module/Login/LoginPage.dart';
 import 'Module/Login/ForgetPassword.dart';
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
       ),
         routes: {
           "LoginPage": (context) => MyLoginPage(title: 'Flutter NativeFlutter LoginDemo'),
+          "ForgetPasswordPage": (context) => ForgetPasswordPage(),
+          "MainPage": (context) => MyMainPage(),
+          "PersonalCenterPage": (context) => PersonalCenterPage(),
           "StoreList": (context) => StoreList(),
-          "personCenterRoute": (context) => PersonCenter(),
-          "forgetpasswordroute": (context) => ForgetPasswordRoute(),
         }
 
     );

@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cjdemo_commonwidget/CJDemoButtonFactory.dart';
 import 'package:cjdemo_commonwidget/CJDemoTextFieldFactory.dart';
 import 'ForgetPassword.dart';
+import '../Main/MainPage.dart';
 
 class MyLoginPage extends StatefulWidget {
   MyLoginPage({Key key, this.title}) : super(key: key);
@@ -104,29 +105,18 @@ class _MyLoginPageState extends State<MyLoginPage> {
     } on PlatformException {}
   }
 
-  _login2() {
+  _login() {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ForgetPasswordRoute();
+      return MyMainPage();
     }));
-  }
-  _login() async {
-    try {
-//      Map<String, dynamic> flutterParams = {
-//        "userName": userName,
-//        "password": password
-//      };
-//      await callNativeMethodChannel.invokeMethod('login', callNativeFlutterParams(flutterParams));
-    } on PlatformException {}
   }
 
   _goForgetPasswordViewController() {
     try {
-//      Map<String, dynamic> flutterParams = {
-//        "userName": userName,
-//        "password": password
-//      };
-//      await callNativeMethodChannel.invokeMethod('goForgetPasswordViewController', callNativeFlutterParams(flutterParams));
-      ForgetPasswordRoute();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ForgetPasswordPage()),
+      );
     } on PlatformException {}
   }
 
