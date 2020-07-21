@@ -1,12 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../CommonUI/TextField/ForgetPasswordTextFieldRowWidgetFactory.dart';
-import '../../CommonUI/TextField/CQTextEditingController.dart';
+//import '../../CommonUI/TextField/CQTextEditingController.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   ForgetPasswordPage({Key key, this.title, this.username}) : super(key: key);
@@ -21,20 +17,20 @@ class ForgetPasswordPage extends StatefulWidget {
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   bool userNameValid = false;
   bool phoneValid = false;
-  bool codeValid = false;
+  bool verifiedCodeValid = false;
   bool newPasswordValid = false;
   bool submitValid = false;
 
   String userName = "";
   String phone = "";
-  String code = "";
+  String verifiedCode = "";
   String newPassword1 = "";
   String newPassword2 = "";
 
   //定义一个controller
   TextEditingController _usernameController = new TextEditingController();
   TextEditingController _phoneController = new TextEditingController();
-  TextEditingController _codeController = new TextEditingController();
+  TextEditingController _verifiedCodeController = new TextEditingController();
   TextEditingController _newPasswordController = new TextEditingController();
   TextEditingController _newPasswordConfirmController = new TextEditingController();
 
@@ -46,20 +42,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   FocusNode newPasswordConfirmFocusNode = new FocusNode();
   FocusScopeNode currentFocusNode;
 
-//  static const eventPlugin = const EventChannel(
-//      "com.dvlproad.ciyouzen/callNativeForgetPassEventChannel");
   static const jumpPlugin = const MethodChannel(
       "com.dvlproad.ciyouzen/callNativeForgetPassMethodChannel");
-
-
-
-  ///获取验证码点击
-  static const editCode = 'editCode';
-
-  ///提交点击
-  static const push = 'push';
-
-  var _isPushEnable = false;
 
   @override
   void initState() {
@@ -73,18 +57,31 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
     //监听文本变化方式②设置controller并实现监听
     _usernameController.addListener(() {
-      var userName = _usernameController.text;
+      userName = _usernameController.text;
       print("listen username:" + _usernameController.text);
-//      _updateAllViewState();
-
-//      setState(() => _usernameController.text = userName);
+      _updateAllViewState();
     });
 
-//    _passwordController.addListener(() {
-//      password = _passwordController.text;
-//      print("listen password:" + _passwordController.text);
-//      _updateAllViewState();
-//    });
+    _phoneController.addListener(() {
+      phone = _phoneController.text;
+      print("listen phone:" + _phoneController.text);
+      _updateAllViewState();
+    });
+
+    _verifiedCodeController.addListener(() {
+      verifiedCode = _verifiedCodeController.text;
+      print("listen verifiedCode:" + _verifiedCodeController.text);
+      _updateAllViewState();
+    });
+  }
+
+  void _updateAllViewState() {
+    userNameValid = userName.length > 0;
+    phoneValid = phone.length == 11;
+    verifiedCodeValid = verifiedCode.length == 6;
+    newPasswordValid = newPassword1 == newPassword2 && newPassword1.length > 6 && newPassword1.length < 50;
+    submitValid = userNameValid && phoneValid && verifiedCodeValid && newPasswordValid;
+    setState(() {});
   }
 
   /// 返回键点击事件
@@ -94,8 +91,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   /// 获取验证码
   _getCode() {
-    print(_usernameController.text);
-    if (_phoneController.text.length != 11) {
+    if (!phoneValid) {
       Map<String, dynamic> flutterRequest = {
         "flutterParams": {
           "toast": "请输入11位手机号码"
@@ -108,18 +104,19 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           "phone": _phoneController.text
         }
       };
-      _toNativeMethod(editCode, flutterRequest);
+      _toNativeMethod('editCode', flutterRequest);
     }
   }
 
   /// 点击提交：尝试提交->正式提交
   Function _trySubmitAction() {
-    if (_isPushEnable)
-      return () {
-        _realSubmitAction();
-      };
+    if (!submitValid) {
+      return null;
+    }
 
-    return null;
+    return () {
+      _realSubmitAction();
+    };
   }
 
   // 正式提交
@@ -129,41 +126,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       "flutterParams": {
         "name": _usernameController.text,
         "phone": _phoneController.text,
-        "code": _codeController.text,
+        "code": _verifiedCodeController.text,
         "pass": _newPasswordController.text,
         "passA": _newPasswordConfirmController.text,
       }
     };
 
-    _toNativeMethod(push, flutterRequest);
-  }
-
-
-  ///更新门店
-  _updateName(var name) {
-    setState(() => _usernameController.text = name);
-  }
-
-  _onChange(var phone) {
-    if (__isGo()) {
-      ///合法的输入
-      setState(() => _isPushEnable = true);
-    } else {
-      setState(() => _isPushEnable = false);
-    }
-  }
-
-  bool __isGo() {
-    if (_usernameController.text.isEmpty || _phoneController.text.length != 11 ||
-        _codeController.text.length != 6 || _newPasswordController.text.isEmpty ||
-        _newPasswordConfirmController.text.isEmpty)
-      return false;
-    return true;
-  }
-
-
-  void _onError(Object error) {
-    setState(() {});
+    _toNativeMethod('push', flutterRequest);
   }
 
   /// 和natvie通讯
@@ -231,11 +200,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   /// 忘记密码页的整体视图
   List<Widget> forgetPasswordWidgets() {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    double screenHeight = mediaQuery.size.height;
-    //print("screenHeight = " + screenHeight.toString());
-    double loginIconTop = screenHeight <= 667 ? 80 : 106;
-    double loginIconBottom = screenHeight <= 667 ? 50 : 71;
+//    MediaQueryData mediaQuery = MediaQuery.of(context);
+//    double screenHeight = mediaQuery.size.height;
+//    //print("screenHeight = " + screenHeight.toString());
+//    double loginIconTop = screenHeight <= 667 ? 80 : 106;
+//    double loginIconBottom = screenHeight <= 667 ? 50 : 71;
     return <Widget>[
       new Column(
         children: <Widget>[
@@ -316,7 +285,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       value: '',
       keyboardType: TextInputType.number,
       autofocus: true,
-      controller: _codeController,
+      controller: _verifiedCodeController,
     );
   }
   // 获取验证码的按钮

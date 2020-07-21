@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:ui';
-import 'package:cjdemo_commonwidget/CJDemoButtonFactory.dart';
-import 'package:cjdemo_commonwidget/CJDemoTextFieldFactory.dart';
 
 
 class MyMainPage extends StatefulWidget {
@@ -53,7 +50,6 @@ class _MyMainPageState extends State<MyMainPage> {
     double screenHeight = mediaQuery.size.height;
     //print("screenHeight = " + screenHeight.toString());
     double loginIconTop = screenHeight <= 667 ? 80 : 106;
-    double loginIconBottom = screenHeight <= 667 ? 50 : 71;
     return <Widget>[
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
